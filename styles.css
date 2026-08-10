@@ -8,8 +8,9 @@
      · one typeface for everything, one mono for labels and data
      · a 12-column grid; content is aligned to it, not centred by default
      · hairlines (1px, ~10% black) do the structural work borders used to
-     · colour is restrained — near-black on off-white, coral as a single
-       accent, and one full-bleed black band for contrast
+     · colour is restrained — near-black on off-white, one brand accent
+       (#30AFFF) carrying marks and fills, and two full-bleed panels
+       (black, then brand) for contrast
      · oversized 01–06 numerals carry the scroll narrative
      · shadow appears exactly once, on product screenshots, because a
        screenshot is a physical object on the page
@@ -34,15 +35,29 @@
   --rule-soft:  rgba(21, 23, 26, .07);
   --rule-dark:  rgba(255, 255, 255, .16);
 
-  /* ---- accent, used sparingly ---- */
-  --accent:     #ce3c2b;
-  --accent-ink: #a12b1d;
-  --accent-bg:  #fbeeec;
+  /* ==== brand palette ====================================================
+     Ordered by intended share of the page:
+       1 #30AFFF  primary   2 #92EEFF  secondary
+       3 #D8FFC5  tertiary  4 #C4F7CA  least
+     All four are light — they carry ~1.6:1 to ~2.4:1 against white, well
+     under the 4.5:1 text minimum. So they are used as FILLS, RULES and
+     MARKS, never as small text on paper. Where the accent must be read as
+     type, --accent-ink (a darkened #30AFFF, 4.8:1) stands in for it.
+     ==================================================================== */
+  --brand-1:    #30AFFF;   /* primary  — rules, marks, bars, active state */
+  --brand-2:    #92EEFF;   /* second   — fills, hover washes */
+  --brand-3:    #D8FFC5;   /* third    — data tags */
+  --brand-4:    #C4F7CA;   /* least    — data tags */
 
-  /* muted data hues for tags only */
-  --d-green: #08906c;  --d-green-bg: #e8f6f1;
-  --d-blue:  #2b4d60;  --d-blue-bg:  #eaf3f8;
-  --d-purp:  #7a2ba0;  --d-purp-bg:  #f4ecfa;
+  --accent:     var(--brand-1);
+  --accent-ink: #0a6ba8;   /* readable stand-in for brand-1 as text */
+  --accent-bg:  #e8f6ff;   /* brand-1 at ~8%, for tinted grounds */
+
+  /* data hues for tags, drawn from the palette rather than a second system.
+     Each pairs a palette fill with an ink dark enough to read on it. */
+  --d-green: #2b6b3a;  --d-green-bg: var(--brand-4);
+  --d-blue:  #0a6ba8;  --d-blue-bg:  var(--brand-2);
+  --d-purp:  #4a6b2a;  --d-purp-bg:  var(--brand-3);
 
   /* ---- type ---- */
   --font: "Archivo", "Switzer", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
@@ -142,7 +157,7 @@ h1, h2, h3, h4 {
   transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 .btn--primary { background: var(--ink); color: var(--paper); }
-.btn--primary:hover { background: var(--accent); }
+.btn--primary:hover { background: var(--accent); color: var(--ink); }
 
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
 .btn--ghost:hover { border-color: var(--ink); }
@@ -168,7 +183,7 @@ h1, h2, h3, h4 {
   width: 1.5rem; height: 1.5rem;
   border-radius: 50%;
   background: var(--accent);
-  color: #fff;
+  color: var(--ink);
   display: grid; place-items: center;
   font-family: var(--mono);
   font-size: .5625rem; letter-spacing: 0;
@@ -194,7 +209,7 @@ h1, h2, h3, h4 {
   width: .3125rem; height: .3125rem;
   margin-right: .5rem;
   border-radius: 50%;
-  background: var(--d-green);
+  background: var(--accent);
   vertical-align: .0625em;
 }
 
@@ -290,7 +305,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   color: var(--ink-5);
 }
-.step__label { color: var(--accent); }
+.step__label { color: var(--accent-ink); }
 
 .step h3 {
   font-size: var(--title-m);
@@ -321,7 +336,7 @@ h1, h2, h3, h4 {
 .feature__icon {
   width: 1.25rem; height: 1.25rem;
   display: grid; place-items: center;
-  color: var(--accent);
+  color: var(--accent-ink);
   margin-top: .1875rem;
 }
 .feature__icon svg { width: 1.0625rem; height: 1.0625rem; }
@@ -356,6 +371,9 @@ h1, h2, h3, h4 {
   background: var(--paper-2);
 }
 .screen__dot { width: .4375rem; height: .4375rem; border-radius: 50%; background: var(--ink-5); }
+.screen__dot:nth-child(1) { background: var(--brand-1); }
+.screen__dot:nth-child(2) { background: var(--brand-2); }
+.screen__dot:nth-child(3) { background: var(--brand-4); }
 .screen__title { margin-left: .75rem; color: var(--ink-4); text-transform: none; letter-spacing: .04em; }
 .screen__body { padding: 1.125rem; display: grid; gap: 0; }
 
@@ -388,7 +406,7 @@ h1, h2, h3, h4 {
   display: grid; grid-template-columns: repeat(7, 1fr); gap: .375rem; align-items: end;
   height: 7rem; padding: 1.25rem .5rem 0;
 }
-.bars span { background: var(--ink-5); }
+.bars span { background: var(--brand-2); }
 .bars span:nth-child(3) { background: var(--accent); }
 
 /* ----------------------------------------------------------- channel grid */
@@ -410,7 +428,7 @@ h1, h2, h3, h4 {
 .card p { margin-top: .875rem; font-size: var(--text-s); color: var(--ink-3); line-height: 1.5; }
 
 /* icon accent classes reduced to ink weight — colour is not the hierarchy here */
-.i-coral  { color: var(--accent); }
+.i-coral  { color: var(--accent-ink); }
 .i-blue,
 .i-green,
 .i-purple { color: var(--ink); }
@@ -432,7 +450,7 @@ h1, h2, h3, h4 {
   transition: border-color .2s ease, color .2s ease;
 }
 .chip:hover { border-color: var(--paper); color: var(--paper); }
-.chip--on { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+.chip--on { background: var(--accent); border-color: var(--accent); color: var(--ink); }
 
 /* --------------------------------------------------------------- integrate */
 .logos {
@@ -472,7 +490,7 @@ h1, h2, h3, h4 {
   position: relative;
   transition: color .2s ease;
 }
-.faq summary:hover { color: var(--accent); }
+.faq summary:hover { color: var(--accent-ink); }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
   content: "";
@@ -512,8 +530,15 @@ h1, h2, h3, h4 {
 .cta {
   padding-block: clamp(4rem, 9vw, 8rem);
   text-align: center;
-  border-top: 1px solid var(--ink);
+  background: var(--accent);
 }
+/* ink on #30AFFF is ~7:1; white on it would be 2.4:1, so the panel stays dark-on-bright */
+.cta h2, .cta p { color: var(--ink); }
+.cta p { opacity: .78; }
+.cta .btn--primary { background: var(--ink); color: var(--paper); }
+.cta .btn--primary:hover { background: var(--paper); color: var(--ink); }
+.cta .btn--ghost { border-color: rgba(21, 23, 26, .30); color: var(--ink); }
+.cta .btn--ghost:hover { border-color: var(--ink); }
 .cta h2 {
   font-size: var(--display);
   letter-spacing: -.045em;
@@ -524,7 +549,6 @@ h1, h2, h3, h4 {
   margin-top: 1.75rem;
   font-size: var(--text-xl);
   line-height: 1.45;
-  color: var(--ink-3);
   max-width: 46ch;
   margin-inline: auto;
   letter-spacing: -.015em;
@@ -538,7 +562,7 @@ h1, h2, h3, h4 {
 .footer h4 { color: var(--ink-4); font-weight: 400; }
 .footer ul { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; gap: .75rem; }
 .footer li a { font-size: var(--text-s); color: var(--ink-2); }
-.footer li a:hover { color: var(--accent); }
+.footer li a:hover { color: var(--accent-ink); }
 .footer__bottom {
   margin-top: clamp(3rem, 6vw, 5rem);
   padding-top: 1.5rem;
@@ -652,7 +676,7 @@ h1, h2, h3, h4 {
   display: inline-block;
   transition: color .9s ease;
 }
-.step.is-active .step__digits { color: var(--ink); }
+.step.is-active .step__digits { color: var(--accent); }
 
 /* bar chart grows from its baseline */
 .bars span {

@@ -1,0 +1,33 @@
+# Vivencia EduCloud — marketing site (static, two files)
+# Separate root and hostname from the ERP app at college.187-127-178-100.sslip.io.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name vivencia.187-127-178-100.sslip.io;
+
+    location /.well-known/acme-challenge/ { root /var/www/html; }
+
+    root /var/www/vivencia-site;
+    index index.html;
+
+    location / { try_files $uri $uri.html $uri/ =404; }
+
+    location = /index.html {
+        add_header Cache-Control "no-cache, must-revalidate";
+    }
+    location ~* \.(css|js|svg|woff2?)$ {
+        expires 7d;
+        add_header Cache-Control "public";
+        access_log off;
+    }
+
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css application/javascript image/svg+xml;
+
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
