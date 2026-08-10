@@ -62,6 +62,24 @@
   --brand-tint:  #e4e7fd;
   --on-brand:    #ffffff;
 
+  /* ---- luminous set -------------------------------------------------------
+     Glow is a lighting effect, and lighting only reads against dark. These
+     are the emissive versions of the brand, used exclusively on the dark
+     stages (hero, module band, CTA, footer) where they can actually burn.
+     --brand-lit is deliberately brighter than #2F2FE4 — a glow whose core is
+     the same value as its surroundings reads as a smudge, not a light.
+     -------------------------------------------------------------------- */
+  --brand-lit:   #5b5bff;
+  --brand-hot:   #8f8fff;
+  --ground:      #14123f;   /* the dark stage */
+  --ground-2:    #0e0c2e;
+  --on-ground:   #eceafd;
+  --on-ground-2: #b3b0e4;
+
+  --glow-sm:  0 0 20px rgba(91, 91, 255, .45);
+  --glow-md:  0 0 40px rgba(91, 91, 255, .40), 0 0 90px rgba(47, 47, 228, .30);
+  --glow-lg:  0 0 60px rgba(91, 91, 255, .45), 0 0 140px rgba(47, 47, 228, .38);
+
   /* kept as aliases so existing rules keep meaning something */
   --cyan:        #162e93;
   --cyan-deep:   #1a1953;
@@ -120,7 +138,10 @@
   border-radius: var(--r-sm);
 }
 .btn:focus-visible, .chip:focus-visible { outline-offset: 4px; border-radius: var(--pill); }
-.footer :where(a, button):focus-visible { outline-color: var(--cyan); }
+.hero :where(a, button):focus-visible,
+.band :where(a, button):focus-visible,
+.cta :where(a, button):focus-visible,
+.footer :where(a, button):focus-visible { outline-color: var(--brand-hot); }
 
 /* skip link: first thing in the tab order, invisible until focused */
 .skip {
@@ -201,6 +222,10 @@ h1, h2, h3, h4 {
 }
 .hero + .section::before { display: none; }
 
+/* the first light stage lifts out of the dark hero rather than starting
+   on a hard edge */
+#how { box-shadow: inset 0 90px 90px -90px rgba(20, 18, 63, .55); }
+
 #how          { background: var(--surface); }
 #roles        { background: var(--surface-2); }
 #faq          { background: var(--surface-2); }
@@ -254,14 +279,14 @@ h1, h2, h3, h4 {
 /* primary: vivid but unsaturated lime, lit by coloured ambient light rather
    than a conventional drop shadow */
 .btn--primary {
-  background: var(--brand);
+  background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   color: var(--on-brand);
-  border-color: rgba(22, 46, 147, .35);
-  box-shadow: var(--shadow-brand);
+  border-color: rgba(91, 91, 255, .55);
+  box-shadow: 0 6px 18px rgba(47, 47, 228, .40), var(--glow-sm);
 }
 .btn--primary:hover {
-  background: #4242ee;
-  box-shadow: 0 10px 30px rgba(47, 47, 228, .40);
+  background: linear-gradient(180deg, #7070ff, var(--brand-lit));
+  box-shadow: 0 10px 28px rgba(47, 47, 228, .50), var(--glow-md);
   transform: translateY(-1px);
 }
 
@@ -271,6 +296,18 @@ h1, h2, h3, h4 {
   border-color: rgba(74, 80, 121, .26);
   box-shadow: 0 5px 20px rgba(26, 25, 83, .06);
   backdrop-filter: blur(10px);
+}
+/* on the dark stages the ghost button inverts to a lit outline */
+.hero .btn--ghost, .cta .btn--ghost, .band .btn--ghost {
+  background: rgba(91, 91, 255, .10);
+  color: var(--on-ground);
+  border-color: rgba(143, 143, 255, .45);
+  box-shadow: inset 0 0 20px rgba(91, 91, 255, .12);
+}
+.hero .btn--ghost:hover, .cta .btn--ghost:hover, .band .btn--ghost:hover {
+  background: rgba(91, 91, 255, .18);
+  border-color: var(--brand-hot);
+  box-shadow: inset 0 0 24px rgba(91, 91, 255, .20), var(--glow-sm);
 }
 .btn--ghost:hover {
   background: #fff;
@@ -291,17 +328,17 @@ h1, h2, h3, h4 {
   width: min(70rem, calc(100% - 2 * var(--gutter)));
   height: 3.5rem;
   border-radius: var(--pill);
-  background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(47, 47, 228, .16);
+  background: rgba(255, 255, 255, .82);
+  border: 1px solid rgba(143, 143, 255, .30);
   backdrop-filter: blur(20px) saturate(130%);
-  box-shadow: var(--shadow-nav);
+  box-shadow: var(--shadow-nav), 0 0 40px rgba(91, 91, 255, .28);
   /* pulled back over the hero so the capsule floats in the atmosphere
      instead of sitting on a band of canvas above it */
   margin-bottom: -3.5rem;
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
 .nav--scrolled {
-  background: rgba(255, 255, 255, .84);
+  background: rgba(255, 255, 255, .90);
   box-shadow: 0 10px 34px rgba(26, 25, 83, .10);
 }
 .nav__inner {
@@ -322,8 +359,9 @@ h1, h2, h3, h4 {
 .brand__mark {
   width: 1.5rem; height: 1.5rem;
   border-radius: .4375rem;
-  background: var(--brand);
+  background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   color: var(--on-brand);
+  box-shadow: var(--glow-sm);
   display: grid; place-items: center;
   font-family: var(--mono);
   font-size: .5625rem; font-weight: 500; letter-spacing: 0;
@@ -374,15 +412,12 @@ h1, h2, h3, h4 {
   text-align: center;
   overflow: hidden;   /* clips the bloom, so <body> need not clip anything */
   /* almost white at the top, cool illumination gathering toward the horizon */
+  color: var(--on-ground);
   background:
-    radial-gradient(
-      ellipse at 50% 65%,
-      rgba(47, 47, 228, .16) 0%,
-      rgba(22, 46, 147, .09) 28%,
-      rgba(26, 25, 83, .05) 46%,
-      transparent 70%
-    ),
-    var(--canvas);
+    radial-gradient(ellipse 70% 55% at 50% 92%, rgba(91, 91, 255, .55), transparent 68%),
+    radial-gradient(ellipse 50% 40% at 82% 18%, rgba(47, 47, 228, .45), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 12% 72%, rgba(22, 46, 147, .50), transparent 72%),
+    linear-gradient(180deg, var(--ground-2) 0%, var(--ground) 48%, #1b1856 100%);
 }
 
 /* ---- the atmosphere ------------------------------------------------------
@@ -424,11 +459,15 @@ h1, h2, h3, h4 {
     right 18% / cover no-repeat;
   background: -webkit-image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
     right 18% / cover no-repeat;
-  mix-blend-mode: multiply;
-  opacity: .88;
-  /* the artwork's blue sits lighter than #2F2FE4; a small rotation and a
-     touch of saturation bring it onto the brand rather than beside it */
-  filter: hue-rotate(18deg) saturate(1.15);
+  /* The source is dark rays on white paper. `multiply` was right on a light
+     page; on a dark stage it would blot the whole hero out. Inverting turns
+     the paper black and the rays light, `screen` then discards that black
+     entirely — black is screen's identity — so only the rays survive, and
+     they add light rather than subtract it. The hue rotation carries the
+     inverted orange back round to indigo. */
+  filter: invert(1) hue-rotate(186deg) saturate(1.9) brightness(1.15);
+  mix-blend-mode: screen;
+  opacity: .85;
   /* Hold the headline area clear. The rays are pale, but a display-size
      heading sitting directly on converging lines reads as noise, so the
      centre-top is faded out and the bottom edge is softened into the page. */
@@ -513,7 +552,7 @@ h1, h2, h3, h4 {
   max-width: 41rem;
   font-size: var(--text-xl);
   line-height: 1.6;
-  color: var(--body);
+  color: var(--on-ground-2);
   letter-spacing: -.01em;
   text-wrap: pretty;
 }
@@ -521,7 +560,7 @@ h1, h2, h3, h4 {
 .hero__note {
   margin-top: 3rem;
   font-size: .75rem;
-  color: var(--muted);
+  color: #7f7cc0;
   letter-spacing: .02em;
 }
 
@@ -539,10 +578,10 @@ h1, h2, h3, h4 {
   overflow: hidden;
   padding: 1.5rem 1.375rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .78);
-  border: 1px solid rgba(47, 47, 228, .13);
+  background: rgba(255, 255, 255, .05);
+  border: 1px solid rgba(143, 143, 255, .22);
   backdrop-filter: blur(18px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 18px 50px rgba(10, 8, 40, .45);
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
 /* one coherent internal illumination anchored to the bottom — alternating
@@ -562,8 +601,8 @@ h1, h2, h3, h4 {
 }
 .stat:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: rgba(47, 47, 228, .24);
+  border-color: rgba(143, 143, 255, .45);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 22px 60px rgba(10, 8, 40, .55), var(--glow-md);
 }
 .stat__num {
   position: relative; z-index: 1;
@@ -571,13 +610,14 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.04em;
-  color: var(--heading);
+  color: #ffffff;
+  text-shadow: 0 0 24px rgba(143, 143, 255, .70);
 }
 .stat__label {
   position: relative; z-index: 1;
   margin-top: .75rem;
   font-size: var(--text-s);
-  color: var(--body);
+  color: var(--on-ground-2);
   line-height: 1.5;
   max-width: 22ch;
 }
@@ -803,22 +843,22 @@ h1, h2, h3, h4 {
   display: inline-flex; align-items: center;
   padding: 0 1rem;
   border-radius: var(--pill);
-  background: rgba(255, 255, 255, .7);
-  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(143, 143, 255, .26);
   backdrop-filter: blur(12px);
   font-size: var(--text-s);
   font-weight: 500;
-  color: var(--heading-2);
+  color: var(--on-ground);
   letter-spacing: -.01em;
   transition: background-color .3s var(--ease), border-color .3s var(--ease),
               color .3s var(--ease), transform .3s var(--ease), padding .3s var(--ease);
 }
 .chip:hover { background: #fff; transform: translateY(-1px); border-color: var(--border-live); }
 .chip--on {
-  background: var(--brand);
-  border-color: rgba(22, 46, 147, .35);
+  background: linear-gradient(180deg, var(--brand-lit), var(--brand));
+  border-color: rgba(143, 143, 255, .55);
   color: var(--on-brand);
-  box-shadow: var(--shadow-brand);
+  box-shadow: 0 6px 18px rgba(20, 18, 63, .5), var(--glow-sm);
 }
 
 /* --------------------------------------------------------------------- faq */
@@ -892,13 +932,13 @@ h1, h2, h3, h4 {
   padding: clamp(4rem, 8vw, 7rem) 2rem;
   border-radius: var(--r-xl);
   text-align: center;
+  color: var(--on-ground);
   background:
-    radial-gradient(circle at 50% 100%, rgba(47, 47, 228, .22), rgba(22, 46, 147, .10) 30%,
-                    rgba(26, 25, 83, .05) 52%, transparent 72%),
-    rgba(255, 255, 255, .72);
-  border: 1px solid rgba(47, 47, 228, .13);
-  backdrop-filter: blur(20px);
-  box-shadow: var(--shadow-md);
+    radial-gradient(ellipse 70% 80% at 50% 108%, rgba(91, 91, 255, .60), transparent 68%),
+    radial-gradient(ellipse 50% 60% at 14% 8%, rgba(47, 47, 228, .40), transparent 72%),
+    linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%);
+  border: 1px solid rgba(143, 143, 255, .28);
+  box-shadow: 0 30px 90px rgba(20, 18, 63, .35), var(--glow-lg);
 }
 .cta h2 {
   font-size: var(--title-l);
@@ -906,13 +946,15 @@ h1, h2, h3, h4 {
   line-height: 1.06;
   max-width: 18ch;
   margin-inline: auto;
+  color: #ffffff;
+  text-shadow: 0 0 60px rgba(143, 143, 255, .65);
 }
 .cta p {
   margin: 1.375rem auto 0;
   max-width: 40rem;
   font-size: var(--text-xl);
   line-height: 1.6;
-  color: var(--body);
+  color: var(--on-ground-2);
   letter-spacing: -.01em;
   text-wrap: pretty;
 }
@@ -1048,8 +1090,9 @@ h1, h2, h3, h4 {
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: 0 50%;
-  background: linear-gradient(90deg, var(--brand), var(--cyan));
-  opacity: .65;
+  background: linear-gradient(90deg, var(--brand-lit), var(--brand-hot));
+  opacity: .9;
+  box-shadow: 0 0 12px rgba(91, 91, 255, .8);
   will-change: transform;
 }
 
@@ -1168,6 +1211,7 @@ h1, h2, h3, h4 {
 .chip:hover { padding-left: 1.5rem; }
 .chip:hover::before { opacity: .8; }
 .chip--on::before { color: var(--on-brand); }
+.chip::before { color: var(--brand-hot); }
 
 
 /* the nav gets a tiny indicator dot rather than an underline */
