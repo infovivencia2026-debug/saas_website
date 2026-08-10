@@ -37,8 +37,7 @@
   --heading:     #1a1953;
   --heading-2:   #262a63;
   --body:        #4a5079;
-  --muted:       #6f76a0;
-  --faint:       #a2a7c6;
+  --muted:       #5f6693;   /* darkened from #6F76A0: that read 4.4:1, just under AA */
 
   /* ---- borders: extremely subtle, never structural ---- */
   --border:       #e2e5f5;
@@ -1103,7 +1102,7 @@ h1, h2, h3, h4 {
 }
 .footer__grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: 3rem; }
 .footer__blurb { margin-top: 1rem; font-size: var(--text-s); color: #a7ade0; max-width: 32ch; line-height: 1.6; }
-.footer h4 { color: #8d93c6; font-weight: 500; }
+.footer h4 { color: #9298cc; font-weight: 500; }
 .footer ul { list-style: none; margin: 1.125rem 0 0; padding: 0; display: grid; gap: .75rem; }
 .footer li a { font-size: var(--text-s); color: #ccd0f0; transition: color .25s var(--ease); }
 .footer li a:hover { color: #ffffff; }
@@ -1116,7 +1115,7 @@ h1, h2, h3, h4 {
   gap: 1rem;
   flex-wrap: wrap;
   font-size: var(--text-s);
-  color: #8d93c6;
+  color: #9298cc;
 }
 
 /* --------------------------------------------------------------- responsive */
