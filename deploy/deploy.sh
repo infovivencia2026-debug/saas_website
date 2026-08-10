@@ -19,13 +19,16 @@ cd "$(dirname "$0")/.."
 # them to WebP at ~24KB each on the server, which has ffmpeg. Both are shipped:
 # styles.css uses image-set() so a browser takes the 24KB WebP when it can and
 # the PNG when it cannot — which means BOTH must exist on the server.
+# the style guide is generated from styles.css, so it cannot drift from the site
+./deploy/make-styleguide.py >/dev/null
+
 for img in hero-art.png hero-art.webp footer.png footer.webp; do
   [ -f "$img" ] || { echo "!!! $img missing"; exit 1; }
 done
 
 echo "==> Packing"
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css hero-art.png hero-art.webp footer.png footer.webp
+tar -czf "$TARBALL" index.html styleguide.html styles.css hero-art.png hero-art.webp footer.png footer.webp
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
@@ -54,7 +57,7 @@ echo "==> Verifying"
 ssh "$TARGET" bash -s <<'REMOTE'
 set -euo pipefail
 fail=0
-for path in "" styles.css hero-art.png hero-art.webp footer.png footer.webp; do
+for path in "" styleguide.html styles.css hero-art.png hero-art.webp footer.png footer.webp; do
   code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
           "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"
