@@ -14,13 +14,19 @@ RELEASE="$(date +%Y%m%d-%H%M%S)"
 
 cd "$(dirname "$0")/.."
 
-# HERO.png and deploy/make-mask.py are kept for when a hero image is wanted
-# again — nothing on the page references the mask at the moment, so it is not
-# shipped. Re-add hero-wave.png to the tar line below to bring it back.
+# Source artwork lives in the repo; the shipped assets are derived from it.
+# footer-bg.png is the downscaled footer image — regenerate when the source
+# changes so the two never drift. HERO.png and deploy/make-mask.py are kept
+# for when a hero image is wanted again; nothing references that mask now, so
+# it is not built or shipped.
+if [ footer.png -nt footer-bg.png ]; then
+  echo "==> footer.png changed, regenerating footer-bg.png"
+  ./deploy/make-footer.py
+fi
 
 echo "==> Packing"
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css
+tar -czf "$TARBALL" index.html styles.css footer-bg.png
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
@@ -43,7 +49,7 @@ nginx -t >/dev/null && systemctl reload nginx
 REMOTE
 
 echo "==> Verifying"
-for path in "" styles.css; do
+for path in "" styles.css footer-bg.png; do
   code="$(curl -s -o /dev/null -w '%{http_code}' "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"
   [ "$code" = "200" ] || { echo "!!! /$path returned $code"; exit 1; }
