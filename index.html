@@ -12,18 +12,6 @@
 </head>
 <body>
 
-<!-- ====================================================== loading screen -->
-<div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading">
-  <div class="loader__inner">
-    <div class="loader__wordmark">Vivencia EduCloud</div>
-    <div class="loader__meta">
-      <span class="loader__name">Education ERP</span>
-      <span class="loader__bar" id="loaderBar" aria-hidden="true"></span>
-      <span class="loader__pct" id="loaderPct">0%</span>
-    </div>
-  </div>
-</div>
-
 <!-- ============================================================== nav -->
 <header class="nav" id="nav">
   <div class="container nav__inner">
@@ -701,67 +689,6 @@
 </footer>
 
 <script>
-/* ---------------------------------------------------------------- loader
-   Runs before anything else and is deliberately defensive: the overlay is
-   dismissed on window load, on a hard 3.5s ceiling, and on first user
-   interaction. A loading screen that can trap a visitor is worse than no
-   loading screen, so there are three independent ways out.
-   ------------------------------------------------------------------- */
-(function () {
-  'use strict';
-
-  var loader = document.getElementById('loader');
-  if (!loader) return;
-
-  var bar  = document.getElementById('loaderBar');
-  var pct  = document.getElementById('loaderPct');
-  var done = false;
-
-  document.body.classList.add('is-loading');
-
-  var CELLS = 24;
-  var shown = 0;
-  var start = Date.now();
-
-  /* the bar eases toward 92% on its own, then completes when the page does,
-     so it never sits at 100% while assets are still arriving */
-  var tick = window.setInterval(function () {
-    var elapsed = Date.now() - start;
-    var target = done ? 100 : Math.min(92, 100 * (1 - Math.exp(-elapsed / 900)));
-    shown += (target - shown) * .18;
-
-    var filled = Math.round(shown / 100 * CELLS);
-    if (bar) {
-      bar.textContent =
-        new Array(filled + 1).join('=') +
-        (filled < CELLS ? '>' : '') +
-        new Array(Math.max(0, CELLS - filled) + 1).join('·');
-    }
-    if (pct) pct.textContent = Math.round(shown) + '%';
-
-    if (done && shown > 99.4) { window.clearInterval(tick); finish(); }
-  }, 60);
-
-  function complete() { done = true; }
-
-  function finish() {
-    loader.classList.add('is-done');
-    document.body.classList.remove('is-loading');
-    /* drop it out of the paint tree once the fade has run */
-    window.setTimeout(function () { loader.classList.add('is-gone'); }, 700);
-  }
-
-  if (document.readyState === 'complete') complete();
-  else window.addEventListener('load', complete);
-
-  /* ceiling: never hold the page hostage to a slow font or a dead network */
-  window.setTimeout(complete, 3500);
-  /* and let an impatient visitor out immediately */
-  ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (evt) {
-    window.addEventListener(evt, complete, { once: true, passive: true });
-  });
-})();
-
 (function () {
   'use strict';
 
