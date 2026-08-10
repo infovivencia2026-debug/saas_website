@@ -94,13 +94,27 @@
   --shadow-nav:  0 8px 30px rgba(47, 47, 228, .10), 0 2px 8px rgba(26, 25, 83, .05);
   --shadow-brand: 0 8px 24px rgba(47, 47, 228, .30);
 
-  /* ---- type ---- */
-  --font: "Inter", "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* ---- type ---------------------------------------------------------------
+       Michroma       hero headings — the sci-fi voice
+       Space Grotesk  subheadings, buttons, labels — characterful but readable
+       Inter          body copy — invisible, which is the job
+       IBM Plex Mono  data inside the product panels
 
-  --display:  clamp(2.625rem, 5.6vw, 4.75rem);  /* 42 → 76px */
-  --title-l:  clamp(2rem, 4vw, 3.375rem);       /* 32 → 54px */
-  --title-m:  clamp(1.75rem, 2.8vw, 2.5rem);    /* 28 → 40px */
+     Michroma is a single weight (400), extremely wide, and has no italic. It
+     is rationed to the two largest headings; anything smaller set in it stops
+     being futuristic and becomes illegible. Because it sets roughly a third
+     wider than Inter at the same size, the display step drops accordingly and
+     its tracking goes to zero — the negative tracking that suited Inter jams
+     Michroma's letterforms together.
+     -------------------------------------------------------------------- */
+  --font:         "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --ui-font:      "Space Grotesk", "Inter", sans-serif;
+  --display-font: "Michroma", "Space Grotesk", sans-serif;
+  --mono:         "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --display:  clamp(1.5rem, 3.1vw, 2.75rem);    /* Michroma sets very wide */
+  --title-l:  clamp(1.5rem, 2.6vw, 2.125rem);
+  --title-m:  clamp(1.375rem, 2vw, 1.75rem);
   --title-s:  1.375rem;
   --title-xs: 1.1875rem;
 
@@ -1324,3 +1338,84 @@ h1, h2, h3, h4 {
   .footer li a::before, .step__visual::before, .step__visual::after,
   .pull::after, .row::after { transform: none !important; }
 }
+
+
+/* ==========================================================================
+   Typography system
+   --------------------------------------------------------------------------
+   Placed last on purpose: it states the whole face/tracking/leading system in
+   one block rather than leaving it scattered through rules that were tuned
+   for a different typeface. Everything above sets size, colour and layout;
+   this decides what it is set in.
+   ========================================================================== */
+
+/* ---- Michroma: the two hero-scale headings only ---- */
+.hero h1,
+.cta h2 {
+  font-family: var(--display-font);
+  font-weight: 400;              /* Michroma ships one weight */
+  letter-spacing: 0;
+  line-height: 1.32;             /* wide caps need air or they read as a wall */
+  text-transform: none;
+  max-width: 24ch;
+}
+
+/* ---- Space Grotesk: every other heading, and anything you click ---- */
+h2, h3, h4,
+.btn,
+.nav__link,
+.brand,
+.stat__num,
+.step__digits,
+.feature__title,
+.eyebrow, .step__label, .pull__attr, .footer h4 {
+  font-family: var(--ui-font);
+}
+
+h2, h3, h4 {
+  font-weight: 600;
+  letter-spacing: -.015em;
+  line-height: 1.2;
+}
+.head h2 { font-size: var(--title-l); }
+.step h3 { font-size: var(--title-m); max-width: 22ch; line-height: 1.22; }
+.card h3 { font-size: var(--title-xs); letter-spacing: -.01em; line-height: 1.3; }
+
+.btn { font-weight: 600; letter-spacing: -.005em; }
+.nav__link { font-weight: 500; letter-spacing: -.005em; }
+
+.brand {
+  font-weight: 700;
+  font-size: .9375rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* figures read as figures: one face, one weight, tabular so columns line up */
+.stat__num, .step__digits {
+  font-weight: 700;
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* micro-labels: Space Grotesk tracked out, not the mono */
+.eyebrow, .step__label, .pull__attr, .footer h4 {
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+/* ---- Inter: everything read in sentences ---- */
+body,
+p, li, summary, .row, .stat__label, .feature__body, .footer__blurb {
+  font-family: var(--font);
+}
+p, li { letter-spacing: 0; }
+.hero__sub, .head p, .step__lede, .cta p { letter-spacing: -.004em; }
+
+/* ---- the product panels keep the mono, so they read as an application ---- */
+.screen__title, .tag { font-family: var(--mono); }
+
+/* Michroma has no small sizes worth using; if it fails to load, Space Grotesk
+   is the fallback rather than a serif, so the hero never reflows to something
+   unrelated. */
