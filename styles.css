@@ -170,11 +170,10 @@ h1, h2, h3, h4 {
 
 #how          { background: var(--surface); }
 #roles        { background: var(--surface-2); }
-#integrations { background: var(--surface); }
 #faq          { background: var(--surface-2); }
 
 /* every stage gets ONE concentrated pool of light behind its main visual */
-.section--tight::after, #how::after, #integrations::after {
+.section--tight::after, #how::after {
   content: "";
   position: absolute;
   left: 50%; bottom: 0;
@@ -729,29 +728,6 @@ h1, h2, h3, h4 {
   box-shadow: var(--shadow-brand);
 }
 
-/* --------------------------------------------------------------- integrate */
-.logos {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-}
-.logo {
-  display: grid; place-items: center;
-  padding: 2rem 1rem;
-  border-radius: var(--r-md);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  font-size: var(--text-s);
-  font-weight: 500;
-  color: #55646a;
-  opacity: .8;
-  text-align: center;
-  letter-spacing: -.01em;
-  transition: opacity .3s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease);
-}
-.logo:hover { opacity: 1; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
-
 /* --------------------------------------------------------------------- faq */
 .faq {
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
@@ -909,7 +885,6 @@ h1, h2, h3, h4 {
   .step h3, .step__lede { max-width: none; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .hero__stats { grid-template-columns: repeat(2, 1fr); }
-  .logos { grid-template-columns: repeat(3, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -939,7 +914,6 @@ h1, h2, h3, h4 {
   .hero__cta .btn { min-width: 11rem; }
 
   .grid-4, .hero__stats { grid-template-columns: 1fr; }
-  .logos { grid-template-columns: repeat(2, 1fr); }
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
@@ -979,7 +953,6 @@ h1, h2, h3, h4 {
 /* hover lifts must survive the reveal rule, which ties on specificity */
 .stat.js-reveal.is-in:hover,
 .card.js-reveal.is-in:hover { transform: translate3d(0, -3px, 0); }
-.logo.js-reveal.is-in:hover,
 .chip.js-reveal.is-in:hover { transform: translate3d(0, -1px, 0); }
 
 .bars span {
@@ -1023,13 +996,12 @@ h1, h2, h3, h4 {
 /* .step__visual is deliberately absent here — it is positioned in the steps
    section instead. Listing it would set `position: relative` later in the
    file than the sticky rule at the same specificity, silently overriding it. */
-.btn, .card, .chip, .logo, .stat, .nav__link, .footer li a,
+.btn, .card, .chip, .stat, .nav__link, .footer li a,
 .pull, .row { position: relative; }
 
 .btn::after,
 .card::before, .card::after,
 .chip::before,
-.logo::before, .logo::after,
 .nav__link::after,
 .footer li a::before,
 .step__visual::before, .step__visual::after,
@@ -1080,14 +1052,6 @@ h1, h2, h3, h4 {
 .chip:hover::before { opacity: .8; }
 .chip--on::before { color: var(--brand-ink); }
 
-.logo::before, .logo::after {
-  position: absolute; top: 50%;
-  transform: translateY(-50%);
-  font-size: var(--text-s);
-}
-.logo::before { content: "["; left: 1.125rem; }
-.logo::after  { content: "]"; right: 1.125rem; }
-.logo:hover::before, .logo:hover::after { opacity: .7; }
 
 /* the nav gets a tiny indicator dot rather than an underline */
 .nav__link::after {
@@ -1136,7 +1100,7 @@ h1, h2, h3, h4 {
 
 @media (prefers-reduced-motion: reduce) {
   .btn::after, .card::before, .card::after, .chip::before,
-  .logo::before, .logo::after, .nav__link::after,
+  .nav__link::after,
   .footer li a::before, .step__visual::before, .step__visual::after,
   .pull::after, .row::after { transform: none !important; }
 }
