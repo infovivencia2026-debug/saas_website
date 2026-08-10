@@ -73,8 +73,10 @@
   --brand-hot:   #8f8fff;
   --ground:      #14123f;   /* the dark stage */
   --ground-2:    #0e0c2e;
-  --on-ground:   #eceafd;
-  --on-ground-2: #b3b0e4;
+  --on-ground:   #e3e7ff;   /* outline-button and general text on dark */
+  --on-ground-2: #c1c7e8;   /* supporting paragraphs */
+  --on-ground-3: #7882ae;   /* small secondary text */
+  --on-ground-hi:#f4f6ff;   /* headings — must sit near white on this ground */
 
   --glow-sm:  0 0 20px rgba(91, 91, 255, .45);
   --glow-md:  0 0 40px rgba(91, 91, 255, .40), 0 0 90px rgba(47, 47, 228, .30);
@@ -556,10 +558,10 @@ h1, h2, h3, h4 {
   margin: 2rem auto 0;
   max-width: 56rem;
   font-size: var(--display);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -.045em;
-  color: var(--heading);
+  /* The hero ground is deep navy, so the heading has to live in the
+     #DDE3FF-to-white luminance band. It was inheriting the near-black
+     heading token and disappearing into the background. */
+  color: var(--on-ground-hi);
 }
 .hero__sub {
   margin: 1.5rem auto 0;
@@ -1419,3 +1421,45 @@ p, li { letter-spacing: 0; }
 /* Michroma has no small sizes worth using; if it fails to load, Space Grotesk
    is the fallback rather than a serif, so the hero never reflows to something
    unrelated. */
+
+
+/* ==========================================================================
+   Hero heading treatment
+   --------------------------------------------------------------------------
+   The gradient runs on the second sentence only. Applied to the whole
+   headline it flattens the hierarchy — every word competes — whereas
+   splitting it lets the statement land in near-white and the payoff arrive
+   in the light-streak colours of the background.
+   ========================================================================== */
+
+.hero__accent {
+  display: inline-block;
+  background: linear-gradient(90deg, #9b9fff 0%, #6fb4ff 52%, #53d8ff 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  /* text-shadow cannot render through a transparent fill, so the glow has to
+     come from drop-shadow on the element instead */
+  filter: drop-shadow(0 0 28px rgba(83, 216, 255, .30));
+}
+
+/* If background-clip:text is unavailable the text would render fully
+   transparent — invisible. Paint it a solid mid-tone from the same ramp. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero__accent {
+    color: #8fb6ff;
+    -webkit-text-fill-color: #8fb6ff;
+    background: none;
+    filter: none;
+  }
+}
+
+/* ---- the rest of the type on the dark stages ---- */
+.hero__sub, .cta p, .band .head p { color: var(--on-ground-2); }
+.hero__note { color: var(--on-ground-3); }
+.stat__label { color: var(--on-ground-2); }
+.cta h2 { color: var(--on-ground-hi); }
+
+.btn--primary { color: #ffffff; }
+.hero .btn--ghost, .cta .btn--ghost, .band .btn--ghost { color: var(--on-ground); }
