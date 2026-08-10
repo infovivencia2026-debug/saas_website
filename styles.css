@@ -599,6 +599,8 @@ h1, h2, h3, h4 {
 /* each step's visual sits in its own pool of light, extended past the panel
    edge by the padding/negative-margin pair so the glow is not clipped */
 .step__visual {
+  position: relative;   /* upgraded to sticky at the breakpoint below */
+  align-self: start;    /* a stretched item has no room to travel */
   padding: 2.5rem;
   margin: -2.5rem;
   background: radial-gradient(
@@ -961,9 +963,17 @@ h1, h2, h3, h4 {
 .bars.is-in span { transform: scaleY(1); }
 
 .screen { --p: 0; }
+
+/* The panel holds still while its description scrolls past.
+   Sticky travels within the grid AREA, so the row must be taller than the
+   panel for anything to happen — which is why .step uses align-items: start
+   and .step__visual uses align-self: start. `top` clears the floating nav
+   capsule (3.5rem tall, offset 1rem) with room to spare. */
+@media (min-width: 860px) {
+  .step__visual { position: sticky; top: 6.5rem; }
+}
 @media (min-width: 1101px) {
   .screen { transform: translate3d(0, calc(var(--p) * -8px), 0); }
-  .step__visual { position: sticky; top: 7.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -972,7 +982,6 @@ h1, h2, h3, h4 {
   .js-reveal { opacity: 1; transform: none; }
   .bars span { transform: scaleY(1); }
   .screen { --p: 0; }
-  .step__visual { position: static; }
   .progress { display: none; }
 }
 
@@ -983,8 +992,11 @@ h1, h2, h3, h4 {
    out of the accessibility tree (CSS content is never announced).
    ========================================================================== */
 
+/* .step__visual is deliberately absent here — it is positioned in the steps
+   section instead. Listing it would set `position: relative` later in the
+   file than the sticky rule at the same specificity, silently overriding it. */
 .btn, .card, .chip, .logo, .stat, .nav__link, .footer li a,
-.step__visual, .pull, .row { position: relative; }
+.pull, .row { position: relative; }
 
 .btn::after,
 .card::before, .card::after,
