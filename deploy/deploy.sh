@@ -16,15 +16,16 @@ cd "$(dirname "$0")/.."
 
 # Shipping the source PNGs as-is, by request. They are heavy — hero.png is
 # 1.7MB and footer.png 1.1MB — and ./deploy/optimize-images.sh can re-encode
-# them to WebP at ~24KB each on the server, which has ffmpeg. Switch the two
-# url() references in styles.css to .webp to use those instead.
-for img in hero.png footer.png; do
+# them to WebP at ~24KB each on the server, which has ffmpeg. Both are shipped:
+# styles.css uses image-set() so a browser takes the 24KB WebP when it can and
+# the PNG when it cannot — which means BOTH must exist on the server.
+for img in hero.png footer.png hero.webp footer.webp; do
   [ -f "$img" ] || { echo "!!! $img missing"; exit 1; }
 done
 
 echo "==> Packing"
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css hero.png footer.png
+tar -czf "$TARBALL" index.html styles.css hero.png footer.png hero.webp footer.webp
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
@@ -53,7 +54,7 @@ echo "==> Verifying"
 ssh "$TARGET" bash -s <<'REMOTE'
 set -euo pipefail
 fail=0
-for path in "" styles.css hero.png footer.png; do
+for path in "" styles.css hero.png footer.png hero.webp footer.webp; do
   code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
           "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"

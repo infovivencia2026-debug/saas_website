@@ -5,12 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vivencia — five industry ERP suites on one platform</title>
 <meta name="description" content="Vivencia builds five industry ERP suites on a single registry-driven platform: EduCloud for education, BuildCloud for construction, CargoCloud for logistics, CareCloud for healthcare and PlantCloud for manufacturing.">
+<link rel="canonical" href="https://vivencia.187-127-178-100.sslip.io/">
+<meta name="theme-color" content="#f7fbff">
+
+<!-- shared links render as a card rather than a grey box -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vivencia.187-127-178-100.sslip.io/">
+<meta property="og:title" content="Vivencia — five industry ERP suites on one platform">
+<meta property="og:description" content="Education, construction, logistics, healthcare and manufacturing — each its own product, all sharing one back office.">
+<meta property="og:image" content="https://vivencia.187-127-178-100.sslip.io/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- inline SVG favicon: no request, no binary asset to keep in step -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2330AFFF'/%3E%3Cpath d='M8 10l8 13 8-13' fill='none' stroke='%2306253A' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<a class="skip" href="#top">Skip to content</a>
 
 <!-- ============================================================== nav -->
 <header class="nav" id="nav">
@@ -26,7 +42,7 @@
       </svg>
     </button>
 
-    <nav class="nav__links">
+    <nav class="nav__links" aria-label="Primary">
       <a class="nav__link" href="#how">Suites</a>
       <a class="nav__link" href="#roles">Platform</a>
       <a class="nav__link" href="#modules">Back office</a>
@@ -34,8 +50,7 @@
     </nav>
 
     <div class="nav__actions">
-      <a class="btn btn--ghost btn--sm" href="#demo">Login</a>
-      <a class="btn btn--primary btn--sm" href="#demo">Book a demo</a>
+      <a class="btn btn--primary btn--sm" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=Which%20suite%20are%20you%20interested%20in%3F%20(EduCloud%20%2F%20BuildCloud%20%2F%20CargoCloud%20%2F%20CareCloud%20%2F%20PlantCloud)%0A%0AOrganisation%3A%0ARole%3A%0ARough%20size%20(students%20%2F%20beds%20%2F%20sites%20%2F%20plants)%3A%0A">Book a demo</a>
     </div>
   </div>
 </header>
@@ -59,7 +74,7 @@
     </p>
 
     <div class="hero__cta">
-      <a class="btn btn--primary" href="#demo">Start now</a>
+      <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=Which%20suite%20are%20you%20interested%20in%3F%20(EduCloud%20%2F%20BuildCloud%20%2F%20CargoCloud%20%2F%20CareCloud%20%2F%20PlantCloud)%0A%0AOrganisation%3A%0ARole%3A%0ARough%20size%20(students%20%2F%20beds%20%2F%20sites%20%2F%20plants)%3A%0A">Start now</a>
       <a class="btn btn--ghost" href="#how">See the five suites</a>
     </div>
 
@@ -87,11 +102,11 @@
 </section>
 
 <!-- ========================================================== suites -->
-<section class="section" id="how">
+<section class="section" id="how" aria-labelledby="suites-title">
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">The suites</span>
-      <h2>Five products. One spine.</h2>
+      <h2 id="suites-title">Five products. One spine.</h2>
       <p>Each suite is a real vertical product — its own modules, its own roles, its own
          language on screen. Underneath, all five are declared in one registry and share
          the same table engine, drawer and form behaviour.</p>
@@ -140,10 +155,10 @@
           <div class="screen">
             <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">education / modules</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Admissions CRM</strong><div class="row__meta">Enquiries · Applications · Allotment</div></div><span class="tag tag--green">12 tabs</span></div>
-              <div class="row"><div><strong>Examinations</strong><div class="row__meta">Schemes · Marks · Results · Transcripts</div></div><span class="tag tag--blue">9 tabs</span></div>
-              <div class="row"><div><strong>Finance</strong><div class="row__meta">Fee plans · Invoices · Dues · Scholarships</div></div><span class="tag tag--purple">11 tabs</span></div>
-              <div class="row"><div><strong>Hostel / Housing</strong><div class="row__meta">Blocks · Allotment · Mess · Discipline</div></div><span class="tag tag--gray">7 tabs</span></div>
+              <div class="row"><div><strong>Admissions CRM</strong><div class="row__meta">Enquiries · Applications · Allotment</div></div><span class="tag tag--ok">12 tabs</span></div>
+              <div class="row"><div><strong>Examinations</strong><div class="row__meta">Schemes · Marks · Results · Transcripts</div></div><span class="tag tag--info">9 tabs</span></div>
+              <div class="row"><div><strong>Finance</strong><div class="row__meta">Fee plans · Invoices · Dues · Scholarships</div></div><span class="tag tag--calm">11 tabs</span></div>
+              <div class="row"><div><strong>Hostel / Housing</strong><div class="row__meta">Blocks · Allotment · Mess · Discipline</div></div><span class="tag tag--muted">7 tabs</span></div>
             </div>
           </div>
         </div>
@@ -190,10 +205,10 @@
           <div class="screen">
             <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">construction / projects</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Projects</strong><div class="row__meta">Project master · Sites · WBS · BOQ</div></div><span class="tag tag--blue">4 tabs</span></div>
-              <div class="row"><div><strong>Site Operations</strong><div class="row__meta">DPR · Labour · Progress · Snags</div></div><span class="tag tag--green">6 tabs</span></div>
-              <div class="row"><div><strong>Client Billing</strong><div class="row__meta">RA bills · Certification · Retention</div></div><span class="tag tag--purple">5 tabs</span></div>
-              <div class="row"><div><strong>Quality & Safety</strong><div class="row__meta">Checklists · HSE · Incidents · Permits</div></div><span class="tag tag--gray">6 tabs</span></div>
+              <div class="row"><div><strong>Projects</strong><div class="row__meta">Project master · Sites · WBS · BOQ</div></div><span class="tag tag--info">4 tabs</span></div>
+              <div class="row"><div><strong>Site Operations</strong><div class="row__meta">DPR · Labour · Progress · Snags</div></div><span class="tag tag--ok">6 tabs</span></div>
+              <div class="row"><div><strong>Client Billing</strong><div class="row__meta">RA bills · Certification · Retention</div></div><span class="tag tag--calm">5 tabs</span></div>
+              <div class="row"><div><strong>Quality & Safety</strong><div class="row__meta">Checklists · HSE · Incidents · Permits</div></div><span class="tag tag--muted">6 tabs</span></div>
             </div>
           </div>
         </div>
@@ -240,10 +255,10 @@
           <div class="screen">
             <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">logistics / control tower</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Freight Booking</strong><div class="row__meta">Consignments · Tariffs · Quotations</div></div><span class="tag tag--blue">5 tabs</span></div>
-              <div class="row"><div><strong>Transport Operations</strong><div class="row__meta">Trips · Tracking · POD · Exceptions</div></div><span class="tag tag--green">6 tabs</span></div>
-              <div class="row"><div><strong>Warehouse</strong><div class="row__meta">Inward · Put-away · Picking · Dispatch</div></div><span class="tag tag--purple">6 tabs</span></div>
-              <div class="row"><div><strong>Freight Accounting</strong><div class="row__meta">Carrier bills · Customer billing · Margin</div></div><span class="tag tag--gray">5 tabs</span></div>
+              <div class="row"><div><strong>Freight Booking</strong><div class="row__meta">Consignments · Tariffs · Quotations</div></div><span class="tag tag--info">5 tabs</span></div>
+              <div class="row"><div><strong>Transport Operations</strong><div class="row__meta">Trips · Tracking · POD · Exceptions</div></div><span class="tag tag--ok">6 tabs</span></div>
+              <div class="row"><div><strong>Warehouse</strong><div class="row__meta">Inward · Put-away · Picking · Dispatch</div></div><span class="tag tag--calm">6 tabs</span></div>
+              <div class="row"><div><strong>Freight Accounting</strong><div class="row__meta">Carrier bills · Customer billing · Margin</div></div><span class="tag tag--muted">5 tabs</span></div>
             </div>
           </div>
         </div>
@@ -290,10 +305,10 @@
           <div class="screen">
             <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">healthcare / patient care</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Patient Registry</strong><div class="row__meta">UHID · Registrations · Records · Consent</div></div><span class="tag tag--blue">4 tabs</span></div>
-              <div class="row"><div><strong>Inpatient & Wards</strong><div class="row__meta">Admissions · Beds · Rounds · Discharge</div></div><span class="tag tag--green">6 tabs</span></div>
-              <div class="row"><div><strong>Diagnostics</strong><div class="row__meta">Orders · Samples · Results · Radiology</div></div><span class="tag tag--purple">6 tabs</span></div>
-              <div class="row"><div><strong>Revenue Cycle</strong><div class="row__meta">Estimates · Claims · Denials · Settlements</div></div><span class="tag tag--gray">6 tabs</span></div>
+              <div class="row"><div><strong>Patient Registry</strong><div class="row__meta">UHID · Registrations · Records · Consent</div></div><span class="tag tag--info">4 tabs</span></div>
+              <div class="row"><div><strong>Inpatient & Wards</strong><div class="row__meta">Admissions · Beds · Rounds · Discharge</div></div><span class="tag tag--ok">6 tabs</span></div>
+              <div class="row"><div><strong>Diagnostics</strong><div class="row__meta">Orders · Samples · Results · Radiology</div></div><span class="tag tag--calm">6 tabs</span></div>
+              <div class="row"><div><strong>Revenue Cycle</strong><div class="row__meta">Estimates · Claims · Denials · Settlements</div></div><span class="tag tag--muted">6 tabs</span></div>
             </div>
           </div>
         </div>
@@ -340,10 +355,10 @@
           <div class="screen">
             <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">manufacturing / shop floor</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Product Engineering</strong><div class="row__meta">Items · BOM · Routings · ECO</div></div><span class="tag tag--blue">5 tabs</span></div>
-              <div class="row"><div><strong>Production Planning</strong><div class="row__meta">MPS · MRP · Capacity · Work orders</div></div><span class="tag tag--green">5 tabs</span></div>
-              <div class="row"><div><strong>Shop Floor</strong><div class="row__meta">Job cards · OEE · Downtime · Output</div></div><span class="tag tag--purple">6 tabs</span></div>
-              <div class="row"><div><strong>Product Costing</strong><div class="row__meta">Standard · Actual · Variance · Margin</div></div><span class="tag tag--gray">4 tabs</span></div>
+              <div class="row"><div><strong>Product Engineering</strong><div class="row__meta">Items · BOM · Routings · ECO</div></div><span class="tag tag--info">5 tabs</span></div>
+              <div class="row"><div><strong>Production Planning</strong><div class="row__meta">MPS · MRP · Capacity · Work orders</div></div><span class="tag tag--ok">5 tabs</span></div>
+              <div class="row"><div><strong>Shop Floor</strong><div class="row__meta">Job cards · OEE · Downtime · Output</div></div><span class="tag tag--calm">6 tabs</span></div>
+              <div class="row"><div><strong>Product Costing</strong><div class="row__meta">Standard · Actual · Variance · Margin</div></div><span class="tag tag--muted">4 tabs</span></div>
             </div>
           </div>
         </div>
@@ -354,11 +369,11 @@
 </section>
 
 <!-- ========================================================= platform -->
-<section class="section section--tight" id="roles">
+<section class="section section--tight" id="roles" aria-labelledby="platform-title">
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">The platform</span>
-      <h2>What every suite gets for free</h2>
+      <h2 id="platform-title">What every suite gets for free</h2>
       <p>Building the fifth vertical costs what the second did, because the behaviour that
          makes a product usable is written once and inherited.</p>
     </div>
@@ -405,7 +420,7 @@
   <div class="container">
     <div class="head">
       <span class="eyebrow">Shared back office</span>
-      <h2>Sixteen modules every suite inherits.</h2>
+      <h2 id="backoffice-title">Sixteen modules every suite inherits.</h2>
       <p>Finance, people and procurement do not change because the industry does. They are
          written once and mounted into all five products, so a hospital and a plant close
          their books through the same ledger.</p>
@@ -433,11 +448,11 @@
 </section>
 
 <!-- ============================================================== faq -->
-<section class="section section--tight" id="faq">
+<section class="section section--tight" id="faq" aria-labelledby="faq-title">
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">Questions</span>
-      <h2>The things people ask first</h2>
+      <h2 id="faq-title">The things people ask first</h2>
     </div>
 
     <div class="faq">
@@ -494,15 +509,15 @@
 </section>
 
 <!-- ============================================================== cta -->
-<section class="section" id="demo">
+<section class="section" id="demo" aria-labelledby="cta-title">
   <div class="container">
     <div class="cta">
-      <h2>Pick your industry. Open it in ten minutes.</h2>
+      <h2 id="cta-title">Pick your industry. Open it in ten minutes.</h2>
       <p>Every suite is clickable end to end — switch industry from the top bar and the
          whole application changes with it.</p>
       <div class="hero__cta">
-        <a class="btn btn--primary" href="#top">Start now</a>
-        <a class="btn btn--ghost" href="#top">Book a demo</a>
+        <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=Which%20suite%20are%20you%20interested%20in%3F%20(EduCloud%20%2F%20BuildCloud%20%2F%20CargoCloud%20%2F%20CareCloud%20%2F%20PlantCloud)%0A%0AOrganisation%3A%0ARole%3A%0ARough%20size%20(students%20%2F%20beds%20%2F%20sites%20%2F%20plants)%3A%0A">Start now</a>
+        <a class="btn btn--ghost" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=Which%20suite%20are%20you%20interested%20in%3F%20(EduCloud%20%2F%20BuildCloud%20%2F%20CargoCloud%20%2F%20CareCloud%20%2F%20PlantCloud)%0A%0AOrganisation%3A%0ARole%3A%0ARough%20size%20(students%20%2F%20beds%20%2F%20sites%20%2F%20plants)%3A%0A">Book a demo</a>
       </div>
     </div>
   </div>
@@ -533,15 +548,7 @@
           <li><a href="#roles">Architecture</a></li>
           <li><a href="#modules">Back office</a></li>
           <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#top">About</a></li>
-          <li><a href="#demo">Contact</a></li>
-          <li><a href="#top">Privacy</a></li>
-          <li><a href="#top">Terms</a></li>
+          <li><a href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=Which%20suite%20are%20you%20interested%20in%3F%20(EduCloud%20%2F%20BuildCloud%20%2F%20CargoCloud%20%2F%20CareCloud%20%2F%20PlantCloud)%0A%0AOrganisation%3A%0ARole%3A%0ARough%20size%20(students%20%2F%20beds%20%2F%20sites%20%2F%20plants)%3A%0A">Contact</a></li>
         </ul>
       </div>
     </div>
