@@ -881,3 +881,161 @@ h1, h2, h3, h4 {
 /* small buttons need a tighter well for the arrow than the default 2.75rem */
 .btn--sm { padding-right: 2.25rem; }
 .btn--sm::after { right: 1rem; }
+
+/* ==========================================================================
+   Loading screen — bird in flight
+   --------------------------------------------------------------------------
+   The brief was "ultra detailed" AND "runs on every device", which pull
+   against each other. They are reconciled by putting the detail somewhere
+   that costs nothing per frame:
+
+     DETAIL  = static path geometry. 54 hand-fanned feather paths (9 primaries,
+               7 secondaries and 6 coverts per wing, plus a 5-feather tail).
+               The GPU rasterises this once; adding feathers costs bytes, not
+               frame time.
+     MOTION  = six group transforms. Only `transform` and `opacity` are ever
+               animated, so every frame stays on the compositor — no layout,
+               no repaint, no main-thread work.
+
+   Deliberately absent, because these are what actually kill low-end phones:
+   SVG filters (blur / drop-shadow force CPU rasterisation), canvas or
+   requestAnimationFrame per-feather work, particle systems, and any
+   animation of width / height / top / left.
+
+   Total cost: ~11KB of inline markup, zero network requests, and the whole
+   thing is gone from the accessibility tree and the paint tree once done.
+   ========================================================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  /* only these two properties animate on exit */
+  opacity: 1;
+  transition: opacity .55s ease .1s;
+}
+.loader.is-done { opacity: 0; pointer-events: none; }
+/* removed from the paint tree entirely once faded, not just made transparent */
+.loader.is-gone { display: none; }
+
+/* the page does not scroll behind the loader */
+body.is-loading { overflow: hidden; }
+
+.loader__inner {
+  display: grid;
+  justify-items: center;
+  gap: 2.5rem;
+  padding: var(--gutter);
+  width: min(34rem, 88vw);
+}
+
+.bird {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  /* promote once, up front, so the first flap is not a jank frame */
+  will-change: transform;
+}
+
+/* ---- the flight itself ---------------------------------------------------
+   Three independent, cheap motions composed on separate groups:
+     drift  — the whole bird rises and falls on a long, slow cycle
+     flap   — each wing rotates about its own shoulder
+     body   — a small counter-bob, so the torso lags the wings slightly
+   Rotating about the shoulder needs view-box coordinates, hence
+   transform-box: view-box with an explicit origin per wing.
+   -------------------------------------------------------------------- */
+
+.bird__drift {
+  transform-box: view-box;
+  transform-origin: 210px 150px;
+  animation: bird-drift 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.wing {
+  transform-box: view-box;
+  will-change: transform;
+}
+.wing--near {
+  transform-origin: 208px 116px;
+  animation: flap-near 1.15s cubic-bezier(.45, .05, .35, 1) infinite;
+}
+.wing--far {
+  transform-origin: 212px 120px;
+  /* the far wing trails the near one — without this the bird reads as flat */
+  animation: flap-far 1.15s cubic-bezier(.45, .05, .35, 1) infinite;
+  animation-delay: -.07s;
+}
+.bird__body {
+  transform-box: view-box;
+  transform-origin: 210px 140px;
+  animation: body-bob 1.15s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes bird-drift {
+  0%, 100% { transform: translateY(-10px) rotate(-1.5deg); }
+  50%      { transform: translateY(10px)  rotate(1.5deg); }
+}
+/* the downstroke is fast and the recovery slow, which is what makes a flap
+   read as a flap rather than as a windscreen wiper */
+@keyframes flap-near {
+  0%   { transform: rotate(-34deg); }
+  38%  { transform: rotate(26deg); }
+  55%  { transform: rotate(30deg); }
+  100% { transform: rotate(-34deg); }
+}
+@keyframes flap-far {
+  0%   { transform: rotate(30deg); }
+  38%  { transform: rotate(-22deg); }
+  55%  { transform: rotate(-26deg); }
+  100% { transform: rotate(30deg); }
+}
+@keyframes body-bob {
+  0%, 100% { transform: translateY(3px) rotate(.8deg); }
+  45%      { transform: translateY(-3px) rotate(-.8deg); }
+}
+
+/* ---- the caption line, in the site's mono label voice ---- */
+.loader__meta {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.loader__name { white-space: nowrap; }
+.loader__pct { color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* an ASCII progress bar, same vocabulary as the hover marks */
+.loader__bar {
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--accent);
+  text-align: left;
+}
+
+/* ---- accessibility and low-power fallbacks ---- */
+@media (prefers-reduced-motion: reduce) {
+  .bird__drift, .wing, .bird__body { animation: none !important; }
+  /* held mid-downstroke, so the still frame still reads as flight */
+  .wing--near { transform: rotate(-8deg); }
+  .wing--far  { transform: rotate(6deg); }
+  .loader { transition: none; }
+}
+
+@media (max-width: 720px) {
+  .loader__inner { gap: 2rem; }
+  .loader__meta { grid-template-columns: 1fr auto; }
+  /* the ASCII bar is the first thing to go when the line gets tight */
+  .loader__bar { display: none; }
+}
