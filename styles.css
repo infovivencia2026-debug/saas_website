@@ -329,8 +329,8 @@ h1, h2, h3, h4 {
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: clamp(30rem, 74vh, 44rem);
-  padding-block: clamp(7rem, 11vw, 10rem) clamp(7rem, 12vw, 11rem);
+  min-height: clamp(38rem, 90vh, 54rem);
+  padding-block: clamp(7rem, 11vw, 10rem) clamp(14rem, 30vw, 26rem);
   text-align: center;
   overflow: hidden;   /* clips the bloom, so <body> need not clip anything */
   /* almost white at the top, cool illumination gathering toward the horizon */
@@ -355,6 +355,43 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: -1;
   pointer-events: none;
+}
+
+/* ---- the hero artwork ----------------------------------------------------
+   hero.png is a luminous horizon — a cyan/lime arc, an orbit ring and a light
+   point — rendered on a near-white ground. That ground is opaque, so painting
+   it straight onto the tinted canvas would leave a visible rectangle.
+
+   `mix-blend-mode: multiply` solves it without touching the file: white
+   multiplies to whatever is beneath, so the paper disappears and only the arc
+   survives. A radial mask then feathers the edges, so there is no boundary at
+   any corner. The image keeps its own colour rather than being tinted, which
+   is right here — it was authored in this palette already.
+   ----------------------------------------------------------------------- */
+.hero__art {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(88rem, 128%);
+  aspect-ratio: 1668 / 943;
+  transform: translateX(-50%);
+  background: url("hero.png") center bottom / 100% auto no-repeat;
+  mix-blend-mode: multiply;
+  -webkit-mask-image:
+    radial-gradient(ellipse 72% 78% at 50% 72%, #000 52%, transparent 82%),
+    linear-gradient(180deg, transparent 0%, #000 22%);
+          mask-image:
+    radial-gradient(ellipse 72% 78% at 50% 72%, #000 52%, transparent 82%),
+    linear-gradient(180deg, transparent 0%, #000 22%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  animation: art-float 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes art-float {
+  0%, 100% { transform: translateX(-50%) translateY(5px); }
+  50%      { transform: translateX(-50%) translateY(-5px); }
 }
 
 /* environmental bloom, sitting in the air rather than on the planet */
@@ -849,7 +886,7 @@ h1, h2, h3, h4 {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("footer-bg.png") center / cover no-repeat;
+  background: url("footer.png") center / cover no-repeat;
 }
 .footer::after {
   content: "";
@@ -908,7 +945,9 @@ h1, h2, h3, h4 {
   .nav__actions .btn--ghost { display: none; }
 
   /* the horizon must stay large on phones — a small circle loses the effect */
-  .hero { padding-bottom: clamp(4rem, 14vw, 6rem); min-height: auto; }
+  .hero { padding-bottom: clamp(10rem, 46vw, 15rem); min-height: auto; }
+  /* the horizon must stay wide on phones — shrinking it loses the effect */
+  .hero__art { width: 168%; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }

@@ -14,19 +14,17 @@ RELEASE="$(date +%Y%m%d-%H%M%S)"
 
 cd "$(dirname "$0")/.."
 
-# Source artwork lives in the repo; the shipped assets are derived from it.
-# footer-bg.png is the downscaled footer image — regenerate when the source
-# changes so the two never drift. HERO.png and deploy/make-mask.py are kept
-# for when a hero image is wanted again; nothing references that mask now, so
-# it is not built or shipped.
-if [ footer.png -nt footer-bg.png ]; then
-  echo "==> footer.png changed, regenerating footer-bg.png"
-  ./deploy/make-footer.py
-fi
+# Shipping the source PNGs as-is, by request. They are heavy — hero.png is
+# 1.7MB and footer.png 1.1MB — and ./deploy/optimize-images.sh can re-encode
+# them to WebP at ~24KB each on the server, which has ffmpeg. Switch the two
+# url() references in styles.css to .webp to use those instead.
+for img in hero.png footer.png; do
+  [ -f "$img" ] || { echo "!!! $img missing"; exit 1; }
+done
 
 echo "==> Packing"
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css footer-bg.png
+tar -czf "$TARBALL" index.html styles.css hero.png footer.png
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
@@ -49,11 +47,20 @@ nginx -t >/dev/null && systemctl reload nginx
 REMOTE
 
 echo "==> Verifying"
-for path in "" styles.css footer-bg.png; do
-  code="$(curl -s -o /dev/null -w '%{http_code}' "https://vivencia.187-127-178-100.sslip.io/$path")"
+# Verify from the server, not from here. This workstation's outbound 443 is
+# not always reachable, and a network fault on the operator's machine must not
+# be reported as a broken deploy.
+ssh "$TARGET" bash -s <<'REMOTE'
+set -euo pipefail
+fail=0
+for path in "" styles.css hero.png footer.png; do
+  code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+          "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"
-  [ "$code" = "200" ] || { echo "!!! /$path returned $code"; exit 1; }
+  [ "$code" = "200" ] || fail=1
 done
+exit $fail
+REMOTE
 
 echo "==> Live: https://vivencia.187-127-178-100.sslip.io/  (release $RELEASE)"
 echo "    Roll back:  ssh $TARGET 'rm -rf $ROOT && mv $ROOT.prev $ROOT && systemctl reload nginx'"
