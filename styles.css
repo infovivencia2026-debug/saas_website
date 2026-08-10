@@ -367,8 +367,8 @@ h1, h2, h3, h4 {
   position: absolute;
   left: 50%;
   bottom: 0;
-  width: min(100rem, 132%);
-  height: clamp(18rem, 42vw, 34rem);
+  width: min(90rem, 124%);
+  height: clamp(15rem, 34vw, 28rem);
   transform: translateX(-50%);
   background: linear-gradient(
     170deg,
@@ -378,9 +378,11 @@ h1, h2, h3, h4 {
     var(--lime) 88%,
     var(--green) 100%
   );
-  -webkit-mask: url("hero-wave.png") center 34% / cover no-repeat;
-          mask: url("hero-wave.png") center 34% / cover no-repeat;
-  opacity: .9;
+  -webkit-mask: url("hero-wave.png") center bottom / 100% auto no-repeat;
+          mask: url("hero-wave.png") center bottom / 100% auto no-repeat;
+  -webkit-mask-mode: alpha;
+          mask-mode: alpha;
+  opacity: .92;
   animation: wave-float 12s ease-in-out infinite;
   will-change: transform;
 }
@@ -391,7 +393,7 @@ h1, h2, h3, h4 {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--canvas) 0%, rgba(247, 251, 255, 0) 34%);
+  background: linear-gradient(180deg, var(--canvas) 0%, rgba(247, 251, 255, 0) 18%);
   pointer-events: none;
 }
 
@@ -944,7 +946,7 @@ h1, h2, h3, h4 {
 
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-bottom: clamp(13rem, 52vw, 18rem); min-height: auto; }
-  .hero__wave { width: 175%; height: clamp(12rem, 46vw, 18rem); }
+  .hero__wave { width: 150%; height: clamp(9rem, 38vw, 14rem); }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }

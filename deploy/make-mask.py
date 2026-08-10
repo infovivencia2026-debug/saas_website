@@ -51,8 +51,26 @@ for _ in range(H):
                 line[x] = (line[x] + pr) & 255
     rows.append(bytes(line)); prev = line
 
+# Crop to the ink. HERO.png carries a wide margin of blank paper (the top
+# ~31% is empty), and a CSS `cover` mask on a wide, short box will happily
+# land inside that emptiness and render nothing at all. Cropping here means
+# the mask is all artwork, so no combination of mask-size and mask-position
+# can show a blank band.
+def row_ink(y):
+    r = rows[y]
+    return sum(255 - ((r[x*4]*299 + r[x*4+1]*587 + r[x*4+2]*114) // 1000)
+               for x in range(0, W, 4)) / (len(range(0, W, 4)) * 255)
+
+inked = [y for y in range(H) if row_ink(y) > 0.01]
+if not inked:
+    sys.exit('HERO.png appears to be blank')
+pad = 8
+top, bot = max(0, inked[0] - pad), min(H - 1, inked[-1] + pad)
+CH = bot - top + 1
+print(f'  ink rows {inked[0]}..{inked[-1]} of {H} -> cropping to {W}x{CH}')
+
 out = bytearray()
-for y in range(H):
+for y in range(top, bot + 1):
     out.append(0)                                   # filter: none
     r = rows[y]
     for x in range(W):
@@ -65,8 +83,8 @@ def chunk(tag, data):
             + struct.pack('>I', zlib.crc32(tag + data) & 0xffffffff))
 
 dst.write_bytes(b'\x89PNG\r\n\x1a\n'
-                + chunk(b'IHDR', struct.pack('>IIBBBBB', W, H, 8, 4, 0, 0, 0))
+                + chunk(b'IHDR', struct.pack('>IIBBBBB', W, CH, 8, 4, 0, 0, 0))
                 + chunk(b'IDAT', zlib.compress(bytes(out), 9))
                 + chunk(b'IEND', b''))
-print(f'{dst.name}: {W}x{H}, {len(dst.read_bytes())//1024}KB '
+print(f'{dst.name}: {W}x{CH}, {len(dst.read_bytes())//1024}KB '
       f'(source {len(d)//1024}KB)')
