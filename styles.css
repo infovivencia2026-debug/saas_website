@@ -1315,12 +1315,7 @@ h1, h2, h3, h4 {
 
 .footer .brand { color: #ffffff; }
 
-.footer li a::before {
-  content: "->";
-  position: absolute; left: -1.375rem; top: 50%;
-  transform: translate(-3px, -50%);
-}
-.footer li a:hover::before { opacity: .7; transform: translate(0, -50%); }
+
 
 .step__visual::before, .step__visual::after {
   content: "+";
@@ -1476,3 +1471,102 @@ p, li { letter-spacing: 0; }
 
 .btn--primary { color: #ffffff; }
 .hero .btn--ghost, .cta .btn--ghost, .band .btn--ghost { color: var(--on-ground); }
+
+
+/* ==========================================================================
+   Coordinate lock
+   --------------------------------------------------------------------------
+   Targeting brackets fly in from outside a text link, overshoot by a pixel,
+   and lock. Chosen over the scramble/morph family because those mutate the
+   text itself — which breaks find-in-page and makes screen readers announce
+   nonsense — and because this page already speaks in registration marks, so
+   brackets extend the existing vocabulary instead of adding a second one.
+
+   Mechanics that matter:
+     · the brackets sit in the element's padding, absolutely positioned, so
+       nothing reflows when they appear
+     · animation, not transition, so the overshoot-and-settle reads as a
+       mechanism locking rather than a fade
+     · pure transform/opacity, so it stays on the compositor
+     · the crosshair ticks are the same two pseudo-elements' box-shadows, so
+       the whole effect costs no extra DOM
+   ========================================================================== */
+
+.nav__link, .footer li a, .faq summary { position: relative; }
+
+.nav__link::before, .nav__link::after,
+.footer li a::before, .footer li a::after {
+  font-family: var(--mono);
+  font-size: .8em;
+  line-height: 1;
+  color: var(--brand-hot);
+  position: absolute;
+  top: 50%;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 8px rgba(143, 143, 255, .8);
+}
+
+.nav__link::before,  .footer li a::before { content: "["; left: -.6rem; }
+.nav__link::after,   .footer li a::after  { content: "]"; right: -.6rem; }
+
+.nav__link:hover::before, .nav__link:focus-visible::before,
+.footer li a:hover::before, .footer li a:focus-visible::before {
+  animation: lock-left .34s var(--ease) forwards;
+}
+.nav__link:hover::after, .nav__link:focus-visible::after,
+.footer li a:hover::after, .footer li a:focus-visible::after {
+  animation: lock-right .34s var(--ease) forwards;
+}
+
+@keyframes lock-left {
+  0%   { opacity: 0; transform: translate(-9px, -50%) scaleY(.4); }
+  55%  { opacity: 1; transform: translate(2px, -50%)  scaleY(1.15); }
+  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+}
+@keyframes lock-right {
+  0%   { opacity: 0; transform: translate(9px, -50%)  scaleY(.4); }
+  55%  { opacity: 1; transform: translate(-2px, -50%) scaleY(1.15); }
+  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+}
+
+/* the acquiring tick: a hairline that sweeps under the word and holds */
+.nav__link::after, .footer li a::after { box-shadow: none; }
+.nav__link:hover, .footer li a:hover { color: var(--on-ground-hi); }
+
+.nav__link { background-image: linear-gradient(90deg, var(--brand-hot), var(--brand-hot)); }
+.footer li a { background-image: linear-gradient(90deg, var(--brand-hot), var(--brand-hot)); }
+.nav__link, .footer li a {
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size .34s var(--ease), color .25s var(--ease);
+}
+.nav__link:hover, .nav__link:focus-visible,
+.footer li a:hover, .footer li a:focus-visible { background-size: 100% 1px; }
+
+/* the FAQ rows lock from the left only — a full bracket pair would collide
+   with the +/- control on the right */
+.faq summary::before {
+  content: "[";
+  position: absolute;
+  left: -.75rem; top: 50%;
+  font-family: var(--mono);
+  font-size: .8em;
+  color: var(--brand);
+  opacity: 0;
+  transform: translate(-9px, -50%);
+  pointer-events: none;
+}
+.faq summary:hover::before, .faq summary:focus-visible::before {
+  animation: lock-left .34s var(--ease) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__link::before, .nav__link::after,
+  .footer li a::before, .footer li a::after,
+  .faq summary::before { animation: none !important; }
+  .nav__link:hover::before, .nav__link:hover::after,
+  .footer li a:hover::before, .footer li a:hover::after,
+  .faq summary:hover::before { opacity: 1; transform: translate(0, -50%); }
+}
