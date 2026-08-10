@@ -344,9 +344,14 @@ h1, h2, h3, h4 {
   width: min(70rem, calc(100% - 2 * var(--gutter)));
   height: 3.5rem;
   border-radius: var(--pill);
-  background: rgba(255, 255, 255, .82);
-  border: 1px solid rgba(143, 143, 255, .30);
-  backdrop-filter: blur(20px) saturate(130%);
+  /* The nav is a dark-stage object, not a light one. It launches over the
+     dark hero and then travels across the light sections, so making it white
+     meant it agreed with the page for two screens and fought it for the rest.
+     A deep indigo capsule reads as deliberate on both grounds and keeps the
+     same glass-and-glow rules as the hero, band, CTA and footer. */
+  background: rgba(20, 18, 63, .62);
+  border: 1px solid rgba(143, 143, 255, .28);
+  backdrop-filter: blur(22px) saturate(160%);
   box-shadow: var(--shadow-nav), 0 0 40px rgba(91, 91, 255, .28);
   /* pulled back over the hero so the capsule floats in the atmosphere
      instead of sitting on a band of canvas above it */
@@ -354,8 +359,9 @@ h1, h2, h3, h4 {
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
 .nav--scrolled {
-  background: rgba(255, 255, 255, .90);
-  box-shadow: 0 10px 34px rgba(26, 25, 83, .10);
+  background: rgba(14, 12, 46, .82);
+  border-color: rgba(143, 143, 255, .40);
+  box-shadow: 0 10px 34px rgba(10, 8, 40, .45), 0 0 44px rgba(91, 91, 255, .30);
 }
 .nav__inner {
   display: flex;
@@ -370,7 +376,7 @@ h1, h2, h3, h4 {
   display: flex; align-items: center; gap: .5rem;
   padding-left: .75rem;
   font-weight: 600; font-size: .9375rem; letter-spacing: -.02em;
-  color: var(--heading);
+  color: var(--on-ground-hi);
 }
 .brand__mark {
   width: 1.5rem; height: 1.5rem;
@@ -396,12 +402,16 @@ h1, h2, h3, h4 {
 
 /* the outlined pill, then the pale-lime CTA */
 .nav__actions .btn--ghost {
-  background: rgba(255, 255, 255, .55);
-  border-color: #d4d8ee;
-  color: var(--heading);
+  background: rgba(91, 91, 255, .10);
+  border-color: rgba(143, 143, 255, .42);
+  color: var(--on-ground);
   box-shadow: none;
 }
-.nav__actions .btn--ghost:hover { background: #eef0ff; }
+.nav__actions .btn--ghost:hover {
+  background: rgba(91, 91, 255, .20);
+  border-color: var(--brand-hot);
+  box-shadow: var(--glow-sm);
+}
 .nav__actions .btn--primary {
   background: var(--brand-soft);
   color: var(--brand-deep);
@@ -410,7 +420,7 @@ h1, h2, h3, h4 {
 }
 .nav__actions .btn--primary:hover { background: var(--brand-tint); box-shadow: var(--shadow-brand); }
 
-.nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--heading-2); }
+.nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--on-ground); }
 
 /* ----------------------------------------------------------------- hero */
 .hero {
@@ -1143,10 +1153,10 @@ h1, h2, h3, h4 {
     padding: 1.25rem;
     gap: 1rem;
     border-radius: var(--r-lg);
-    background: rgba(255, 255, 255, .92);
-    border: 1px solid var(--border-glass);
-    backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-md);
+    background: rgba(14, 12, 46, .94);
+    border: 1px solid rgba(143, 143, 255, .28);
+    backdrop-filter: blur(22px);
+    box-shadow: 0 20px 50px rgba(10, 8, 40, .55), 0 0 44px rgba(91, 91, 255, .22);
     margin-left: 0;
   }
   .nav__actions .btn--ghost { display: none; }
@@ -1290,6 +1300,8 @@ h1, h2, h3, h4 {
 
 
 /* the nav gets a tiny indicator dot rather than an underline */
+.nav :where(a, button):focus-visible { outline-color: var(--brand-hot); }
+
 .nav__link::after {
   content: "";
   position: absolute;
@@ -1297,7 +1309,8 @@ h1, h2, h3, h4 {
   width: .25rem; height: .25rem;
   margin-left: -.125rem;
   border-radius: 50%;
-  background: var(--brand);
+  background: var(--brand-hot);
+  box-shadow: 0 0 10px rgba(143, 143, 255, .9);
 }
 .nav__link:hover::after { opacity: 1; }
 
@@ -1392,6 +1405,7 @@ h2, h3, h4 {
   letter-spacing: .04em;
   text-transform: uppercase;
 }
+.nav .brand, .footer .brand { color: var(--on-ground-hi); }
 
 /* figures read as figures: one face, one weight, tabular so columns line up */
 .stat__num, .step__digits {
