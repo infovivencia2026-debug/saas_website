@@ -1083,19 +1083,6 @@ h1, h2, h3, h4 {
    Motion — subtle, slow, and always on transform/opacity only
    ========================================================================== */
 
-.progress {
-  position: absolute;
-  left: 1.25rem; right: 1.25rem; bottom: .375rem;
-  height: 2px;
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-  background: linear-gradient(90deg, var(--brand-lit), var(--brand-hot));
-  opacity: .9;
-  box-shadow: 0 0 12px rgba(91, 91, 255, .8);
-  will-change: transform;
-}
-
 .js-reveal {
   opacity: 0;
   transform: translate3d(0, 20px, 0);
@@ -1143,10 +1130,7 @@ h1, h2, h3, h4 {
   .js-reveal { opacity: 1; transform: none; }
   .bars span { transform: scaleY(1); }
   .screen { --p: 0; }
-  .progress { display: none; }
-}
-
-/* ==========================================================================
+  /* ==========================================================================
    ASCII hover marks — carried over, retuned for the light canvas
    Kept because they are the site's established hover language; recoloured to
    the deep lime so they read as intent rather than decoration, and they stay

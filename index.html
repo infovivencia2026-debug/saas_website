@@ -581,11 +581,6 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced || !('IntersectionObserver' in window)) return;
 
-  /* ------------------------------------------------------ scroll progress */
-  var progress = document.createElement('div');
-  progress.className = 'progress';
-  nav.appendChild(progress);
-
   /* ------------------------------------------------------------- reveals */
   /* [selector, variant, stagger in ms] — applied at runtime so a
      no-JS page never has hidden content. */
@@ -677,11 +672,7 @@
     ticking = true;
 
     window.requestAnimationFrame(function () {
-      var doc = document.documentElement;
-      var scrolled = window.scrollY || doc.scrollTop;
-      var max = doc.scrollHeight - window.innerHeight;
-
-      progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(scrolled / max, 1) : 0) + ')';
+      var scrolled = window.scrollY || document.documentElement.scrollTop;
       nav.classList.toggle('nav--scrolled', scrolled > 8);
 
       /* -1 when the screen is entering from the bottom, +1 when it is leaving */
