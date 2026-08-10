@@ -355,55 +355,54 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-.hero__globe {
+/* ---- the hero artwork ----------------------------------------------------
+   HERO.png is a halftone wave on an opaque white ground, so it cannot be
+   dropped straight onto a tinted canvas — the white would punch a rectangle
+   through the atmosphere. Instead hero-wave.png carries its luminance as an
+   ALPHA MASK (ink opaque, paper transparent), and the mask is filled with the
+   brand gradient. That means the artwork is tinted by the theme rather than
+   fighting it, has no rectangular edge, and recolours by editing one gradient.
+   ----------------------------------------------------------------------- */
+.hero__wave {
   position: absolute;
   left: 50%;
-  bottom: clamp(-46rem, -52vw, -30rem);
-  width: min(72rem, 165vw);
-  aspect-ratio: 1;
+  bottom: 0;
+  width: min(100rem, 132%);
+  height: clamp(18rem, 42vw, 34rem);
   transform: translateX(-50%);
-  border-radius: 50%;
-  background:
-    /* cyan rim light on the right, mint aurora lower-left, neutral crown */
-    radial-gradient(circle at 72% 18%, rgba(48, 175, 255, .42), transparent 46%),
-    radial-gradient(circle at 24% 28%, rgba(146, 238, 255, .38), transparent 44%),
-    radial-gradient(circle at 40% 44%, rgba(216, 255, 197, .18), transparent 40%),
-    radial-gradient(circle at 50% 6%, rgba(255, 255, 255, .94), transparent 40%),
-    linear-gradient(170deg, #f2f9ff 0%, #dcefff 42%, #cfe8fb 72%, #e6f5ff 100%);
-  box-shadow:
-    /* atmospheric rim, then the bloom the planet throws into the air */
-    inset 0 3px 0 rgba(255, 255, 255, .95),
-    inset 0 -40px 90px rgba(48, 175, 255, .20),
-    0 -2px 0 rgba(255, 255, 255, .9),
-    0 -18px 70px rgba(48, 175, 255, .26);
-  /* feather the lower flanks so no hard circle edge survives */
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 74%);
-          mask-image: radial-gradient(circle at 50% 50%, #000 62%, transparent 74%);
-  animation: globe-float 11s ease-in-out infinite;
+  background: linear-gradient(
+    170deg,
+    var(--brand) 0%,
+    #5ec2ff 34%,
+    var(--cyan) 62%,
+    var(--lime) 88%,
+    var(--green) 100%
+  );
+  -webkit-mask: url("hero-wave.png") center 34% / cover no-repeat;
+          mask: url("hero-wave.png") center 34% / cover no-repeat;
+  opacity: .9;
+  animation: wave-float 12s ease-in-out infinite;
   will-change: transform;
 }
 
-/* faint landmass suggestion + orbit arc, visible only if you look for it */
-.hero__globe::before {
+/* the crests fade out toward the top so the artwork dissolves into the
+   atmosphere instead of ending on a hard line */
+.hero__wave::after {
   content: "";
   position: absolute;
-  inset: 6%;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse 22% 9% at 34% 22%, rgba(45, 110, 150, .20), transparent 70%),
-    radial-gradient(ellipse 16% 7% at 62% 16%, rgba(45, 110, 150, .16), transparent 70%),
-    radial-gradient(ellipse 12% 6% at 48% 32%, rgba(45, 110, 150, .12), transparent 70%);
+  inset: 0;
+  background: linear-gradient(180deg, var(--canvas) 0%, rgba(247, 251, 255, 0) 34%);
+  pointer-events: none;
 }
-.hero__globe::after {
-  content: "";
-  position: absolute;
-  inset: -4%;
-  border-radius: 50%;
-  border: 1px solid rgba(76, 129, 145, .08);
+
+@keyframes wave-float {
+  0%, 100% { transform: translateX(-50%) translateY(4px); }
+  50%      { transform: translateX(-50%) translateY(-4px); }
 }
 
 /* environmental bloom, sitting in the air rather than on the planet */
 .hero__glow { position: absolute; border-radius: 50%; filter: blur(110px); }
+/* the pool of light the artwork sits in */
 .hero__glow--cyan {
   width: min(44rem, 80vw); height: 19rem;
   right: 5%; bottom: 1.25rem;
@@ -417,10 +416,6 @@ h1, h2, h3, h4 {
   animation: bloom 11s ease-in-out infinite reverse;
 }
 
-@keyframes globe-float {
-  0%, 100% { transform: translateX(-50%) translateY(-4px); }
-  50%      { transform: translateX(-50%) translateY(4px); }
-}
 @keyframes bloom {
   0%, 100% { opacity: 1; }
   50%      { opacity: .93; }
@@ -949,7 +944,7 @@ h1, h2, h3, h4 {
 
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-bottom: clamp(13rem, 52vw, 18rem); min-height: auto; }
-  .hero__globe { width: 185vw; bottom: -68vw; }
+  .hero__wave { width: 175%; height: clamp(12rem, 46vw, 18rem); }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }

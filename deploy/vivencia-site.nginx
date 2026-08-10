@@ -16,7 +16,7 @@ server {
     location = /index.html {
         add_header Cache-Control "no-cache, must-revalidate";
     }
-    location ~* \.(css|js|svg|woff2?)$ {
+    location ~* \.(css|js|svg|png|jpe?g|webp|avif|woff2?)$ {
         expires 7d;
         add_header Cache-Control "public";
         access_log off;
