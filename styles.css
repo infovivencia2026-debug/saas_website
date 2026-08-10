@@ -120,7 +120,10 @@ body {
   background: var(--canvas);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  /* NOTE: no `overflow-x: hidden` here. It computes overflow-y to `auto`,
+     which turns <body> into a scroll container and silently breaks
+     `position: sticky` for every descendant — including the step visuals.
+     Horizontal bleed is clipped at the element that causes it instead. */
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -327,10 +330,10 @@ h1, h2, h3, h4 {
 .hero {
   position: relative;
   isolation: isolate;
-  min-height: clamp(38rem, 92vh, 56rem);
-  padding-block: clamp(7rem, 11vw, 10rem) clamp(16rem, 30vw, 26rem);
+  min-height: clamp(30rem, 74vh, 44rem);
+  padding-block: clamp(7rem, 11vw, 10rem) clamp(7rem, 12vw, 11rem);
   text-align: center;
-  overflow: hidden;
+  overflow: hidden;   /* clips the bloom, so <body> need not clip anything */
   /* almost white at the top, cool illumination gathering toward the horizon */
   background:
     radial-gradient(
@@ -353,53 +356,6 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-}
-
-/* ---- the hero artwork ----------------------------------------------------
-   HERO.png is a halftone wave on an opaque white ground, so it cannot be
-   dropped straight onto a tinted canvas — the white would punch a rectangle
-   through the atmosphere. Instead hero-wave.png carries its luminance as an
-   ALPHA MASK (ink opaque, paper transparent), and the mask is filled with the
-   brand gradient. That means the artwork is tinted by the theme rather than
-   fighting it, has no rectangular edge, and recolours by editing one gradient.
-   ----------------------------------------------------------------------- */
-.hero__wave {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  width: min(90rem, 124%);
-  height: clamp(15rem, 34vw, 28rem);
-  transform: translateX(-50%);
-  background: linear-gradient(
-    170deg,
-    var(--brand) 0%,
-    #5ec2ff 34%,
-    var(--cyan) 62%,
-    var(--lime) 88%,
-    var(--green) 100%
-  );
-  -webkit-mask: url("hero-wave.png") center bottom / 100% auto no-repeat;
-          mask: url("hero-wave.png") center bottom / 100% auto no-repeat;
-  -webkit-mask-mode: alpha;
-          mask-mode: alpha;
-  opacity: .92;
-  animation: wave-float 12s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* the crests fade out toward the top so the artwork dissolves into the
-   atmosphere instead of ending on a hard line */
-.hero__wave::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, var(--canvas) 0%, rgba(247, 251, 255, 0) 18%);
-  pointer-events: none;
-}
-
-@keyframes wave-float {
-  0%, 100% { transform: translateX(-50%) translateY(4px); }
-  50%      { transform: translateX(-50%) translateY(-4px); }
 }
 
 /* environmental bloom, sitting in the air rather than on the planet */
@@ -563,7 +519,9 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   gap: clamp(2.5rem, 5vw, 5rem);
-  align-items: center;
+  /* start, not center: a centred grid item is exactly as tall as its content,
+     so a sticky child would have no distance to travel */
+  align-items: start;
 }
 .step:nth-child(even) .step__visual { order: -1; }
 
@@ -945,8 +903,7 @@ h1, h2, h3, h4 {
   .nav__actions .btn--ghost { display: none; }
 
   /* the horizon must stay large on phones — a small circle loses the effect */
-  .hero { padding-bottom: clamp(13rem, 52vw, 18rem); min-height: auto; }
-  .hero__wave { width: 150%; height: clamp(9rem, 38vw, 14rem); }
+  .hero { padding-bottom: clamp(4rem, 14vw, 6rem); min-height: auto; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }

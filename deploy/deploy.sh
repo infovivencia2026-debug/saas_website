@@ -14,16 +14,13 @@ RELEASE="$(date +%Y%m%d-%H%M%S)"
 
 cd "$(dirname "$0")/.."
 
-# HERO.png is the source artwork; hero-wave.png is the alpha mask derived from
-# it. Regenerate the mask if the source is newer, so the two never drift.
-if [ HERO.png -nt hero-wave.png ]; then
-  echo "==> HERO.png changed, regenerating hero-wave.png"
-  ./deploy/make-mask.py
-fi
+# HERO.png and deploy/make-mask.py are kept for when a hero image is wanted
+# again — nothing on the page references the mask at the moment, so it is not
+# shipped. Re-add hero-wave.png to the tar line below to bring it back.
 
 echo "==> Packing"
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css hero-wave.png
+tar -czf "$TARBALL" index.html styles.css
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
@@ -46,7 +43,7 @@ nginx -t >/dev/null && systemctl reload nginx
 REMOTE
 
 echo "==> Verifying"
-for path in "" styles.css hero-wave.png; do
+for path in "" styles.css; do
   code="$(curl -s -o /dev/null -w '%{http_code}' "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"
   [ "$code" = "200" ] || { echo "!!! /$path returned $code"; exit 1; }
