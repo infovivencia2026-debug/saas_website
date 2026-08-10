@@ -15,97 +15,9 @@
 <!-- ====================================================== loading screen -->
 <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Loading">
   <div class="loader__inner">
-    <svg class="bird" viewBox="0 0 420 300" role="img" aria-label="A bird in flight">
-      <g class="bird__drift">
-
-        <!-- far wing: drawn first so the body overlaps it, and tinted back
-             so the two wings read at different depths -->
-        <g class="wing wing--far">
-          <g transform="translate(212,120) scale(-1,1) rotate(-4)">
-        <path class="f" transform="rotate(-14.0)" d="M0,0 C18.7,-10.1 77.6,-12.5 133.8,-1.7 C82.9,5.5 21.4,6.9 0,0 Z" fill="#92EEFF" opacity=".9"/>
-        <path class="f" transform="rotate(-8.6)" d="M0,0 C18.2,-9.8 75.2,-12.2 129.7,-1.6 C80.4,5.3 20.8,6.7 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(-3.2)" d="M0,0 C17.6,-9.6 72.9,-11.8 125.7,-1.6 C77.9,5.2 20.1,6.5 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(2.2)" d="M0,0 C17.0,-9.3 70.5,-11.5 121.6,-1.5 C75.4,5.0 19.5,6.4 0,0 Z" fill="#92EEFF" opacity=".9"/>
-        <path class="f" transform="rotate(7.6)" d="M0,0 C16.5,-9.1 68.2,-11.2 117.6,-1.5 C72.9,4.9 18.8,6.2 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(13.0)" d="M0,0 C15.9,-8.8 65.8,-10.9 113.5,-1.4 C70.4,4.8 18.2,6.0 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(18.4)" d="M0,0 C15.3,-8.5 63.5,-10.5 109.5,-1.4 C67.9,4.6 17.5,5.8 0,0 Z" fill="#92EEFF" opacity=".9"/>
-        <path class="f" transform="rotate(23.8)" d="M0,0 C14.8,-8.3 61.1,-10.2 105.4,-1.4 C65.4,4.5 16.9,5.6 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(29.2)" d="M0,0 C14.2,-8.0 58.8,-9.9 101.4,-1.3 C62.9,4.3 16.2,5.5 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(34.0)" d="M0,0 C12.2,-9.0 50.5,-11.1 87.1,-1.5 C54.0,4.9 13.9,6.1 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(41.2)" d="M0,0 C11.5,-8.6 47.8,-10.6 82.4,-1.4 C51.1,4.7 13.2,5.9 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(48.4)" d="M0,0 C10.9,-8.2 45.0,-10.2 77.6,-1.4 C48.1,4.5 12.4,5.6 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(55.6)" d="M0,0 C10.2,-7.9 42.3,-9.7 72.9,-1.3 C45.2,4.3 11.7,5.4 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(62.8)" d="M0,0 C9.5,-7.5 39.5,-9.2 68.1,-1.2 C42.2,4.0 10.9,5.1 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(70.0)" d="M0,0 C8.9,-7.1 36.7,-8.8 63.4,-1.2 C39.3,3.8 10.1,4.8 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(77.2)" d="M0,0 C8.2,-6.7 34.0,-8.3 58.6,-1.1 C36.3,3.6 9.4,4.6 0,0 Z" fill="#414a50" opacity=".55"/>
-        <path class="f" transform="rotate(6.0)" d="M0,0 C7.1,-7.9 29.6,-9.7 51.0,-1.3 C31.6,4.3 8.2,5.4 0,0 Z" fill="#414a50" opacity=".5"/>
-        <path class="f" transform="rotate(17.5)" d="M0,0 C6.7,-7.5 27.9,-9.2 48.0,-1.2 C29.8,4.0 7.7,5.1 0,0 Z" fill="#414a50" opacity=".5"/>
-        <path class="f" transform="rotate(29.0)" d="M0,0 C6.3,-7.1 26.1,-8.8 45.1,-1.2 C27.9,3.8 7.2,4.8 0,0 Z" fill="#414a50" opacity=".5"/>
-        <path class="f" transform="rotate(40.5)" d="M0,0 C5.9,-6.7 24.4,-8.3 42.1,-1.1 C26.1,3.6 6.7,4.6 0,0 Z" fill="#414a50" opacity=".5"/>
-        <path class="f" transform="rotate(52.0)" d="M0,0 C5.5,-6.4 22.7,-7.9 39.1,-1.0 C24.2,3.4 6.3,4.3 0,0 Z" fill="#414a50" opacity=".5"/>
-        <path class="f" transform="rotate(63.5)" d="M0,0 C5.1,-6.0 20.9,-7.4 36.1,-1.0 C22.4,3.2 5.8,4.1 0,0 Z" fill="#414a50" opacity=".5"/>
-          </g>
-        </g>
-
-        <g class="bird__body">
-          <!-- tail -->
-          <g transform="translate(146,146) rotate(172)">
-        <path class="f" transform="rotate(-16.0)" d="M0,0 C8.4,-7.2 34.8,-8.9 60.0,-1.2 C37.2,3.9 9.6,4.9 0,0 Z" fill="#2b3237" opacity=".95"/>
-        <path class="f" transform="rotate(-8.0)" d="M0,0 C9.4,-7.2 38.9,-8.9 67.0,-1.2 C41.5,3.9 10.7,4.9 0,0 Z" fill="#2b3237" opacity=".95"/>
-        <path class="f" transform="rotate(0.0)" d="M0,0 C10.4,-7.2 42.9,-8.9 74.0,-1.2 C45.9,3.9 11.8,4.9 0,0 Z" fill="#2b3237" opacity=".95"/>
-        <path class="f" transform="rotate(8.0)" d="M0,0 C9.4,-7.2 38.9,-8.9 67.0,-1.2 C41.5,3.9 10.7,4.9 0,0 Z" fill="#2b3237" opacity=".95"/>
-        <path class="f" transform="rotate(16.0)" d="M0,0 C8.4,-7.2 34.8,-8.9 60.0,-1.2 C37.2,3.9 9.6,4.9 0,0 Z" fill="#2b3237" opacity=".95"/>
-          </g>
-
-          <!-- torso: a single continuous path from tail root to nape -->
-          <path d="M150,144 C168,120 196,106 226,104 C256,102 278,110 292,120
-                   C300,126 300,134 292,138 C272,148 240,158 210,160
-                   C186,162 162,156 150,144 Z" fill="#15171a"/>
-          <!-- breast highlight, one shade up so the body is not a flat blob -->
-          <path d="M186,152 C206,158 236,152 262,142 C244,154 214,162 194,158 Z"
-                fill="#414a50" opacity=".85"/>
-
-          <!-- head, beak, eye -->
-          <path d="M286,116 C300,108 316,108 326,114 C334,119 334,127 326,132
-                   C314,139 296,138 288,131 Z" fill="#15171a"/>
-          <path d="M326,118 L366,124 L326,131 Z" fill="#D8FFC5"/>
-          <path d="M326,124 L366,124 L326,127 Z" fill="#2b3237" opacity=".5"/>
-          <circle cx="312" cy="121" r="3.4" fill="#30AFFF"/>
-          <circle cx="313" cy="120" r="1.2" fill="#15171a"/>
-        </g>
-
-        <!-- near wing, on top of the body -->
-        <g class="wing wing--near">
-          <g transform="translate(208,116) rotate(-6)">
-        <path class="f" transform="rotate(-14.0)" d="M0,0 C21.3,-11.5 88.2,-14.2 152.0,-1.9 C94.2,6.2 24.3,7.8 0,0 Z" fill="#30AFFF" opacity=".9"/>
-        <path class="f" transform="rotate(-8.6)" d="M0,0 C20.6,-11.2 85.5,-13.8 147.4,-1.8 C91.4,6.0 23.6,7.6 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(-3.2)" d="M0,0 C20.0,-10.9 82.8,-13.4 142.8,-1.8 C88.5,5.9 22.8,7.4 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(2.2)" d="M0,0 C19.3,-10.6 80.2,-13.1 138.2,-1.7 C85.7,5.7 22.1,7.2 0,0 Z" fill="#30AFFF" opacity=".9"/>
-        <path class="f" transform="rotate(7.6)" d="M0,0 C18.7,-10.3 77.5,-12.7 133.6,-1.7 C82.8,5.6 21.4,7.0 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(13.0)" d="M0,0 C18.1,-10.0 74.8,-12.3 129.0,-1.6 C80.0,5.4 20.6,6.8 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(18.4)" d="M0,0 C17.4,-9.7 72.2,-12.0 124.4,-1.6 C77.1,5.2 19.9,6.6 0,0 Z" fill="#30AFFF" opacity=".9"/>
-        <path class="f" transform="rotate(23.8)" d="M0,0 C16.8,-9.4 69.5,-11.6 119.8,-1.5 C74.3,5.1 19.2,6.4 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(29.2)" d="M0,0 C16.1,-9.1 66.8,-11.2 115.2,-1.5 C71.4,4.9 18.4,6.2 0,0 Z" fill="#15171a" opacity="1"/>
-        <path class="f" transform="rotate(34.0)" d="M0,0 C13.9,-10.2 57.4,-12.6 99.0,-1.7 C61.4,5.5 15.8,7.0 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(41.2)" d="M0,0 C13.1,-9.8 54.3,-12.1 93.6,-1.6 C58.0,5.3 15.0,6.7 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(48.4)" d="M0,0 C12.3,-9.3 51.2,-11.6 88.2,-1.5 C54.7,5.1 14.1,6.4 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(55.6)" d="M0,0 C11.6,-8.9 48.0,-11.0 82.8,-1.5 C51.3,4.8 13.2,6.1 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(62.8)" d="M0,0 C10.8,-8.5 44.9,-10.5 77.4,-1.4 C48.0,4.6 12.4,5.8 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(70.0)" d="M0,0 C10.1,-8.1 41.8,-10.0 72.0,-1.3 C44.6,4.4 11.5,5.5 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(77.2)" d="M0,0 C9.3,-7.6 38.6,-9.5 66.6,-1.3 C41.3,4.1 10.7,5.2 0,0 Z" fill="#2b3237" opacity="1"/>
-        <path class="f" transform="rotate(6.0)" d="M0,0 C8.1,-8.9 33.6,-11.0 58.0,-1.5 C36.0,4.8 9.3,6.1 0,0 Z" fill="#15171a" opacity=".92"/>
-        <path class="f" transform="rotate(17.5)" d="M0,0 C7.6,-8.5 31.7,-10.5 54.6,-1.4 C33.9,4.6 8.7,5.8 0,0 Z" fill="#15171a" opacity=".92"/>
-        <path class="f" transform="rotate(29.0)" d="M0,0 C7.2,-8.1 29.7,-10.0 51.2,-1.3 C31.7,4.4 8.2,5.5 0,0 Z" fill="#15171a" opacity=".92"/>
-        <path class="f" transform="rotate(40.5)" d="M0,0 C6.7,-7.6 27.7,-9.5 47.8,-1.3 C29.6,4.1 7.6,5.2 0,0 Z" fill="#15171a" opacity=".92"/>
-        <path class="f" transform="rotate(52.0)" d="M0,0 C6.2,-7.2 25.8,-8.9 44.4,-1.2 C27.5,3.9 7.1,4.9 0,0 Z" fill="#15171a" opacity=".92"/>
-        <path class="f" transform="rotate(63.5)" d="M0,0 C5.7,-6.8 23.8,-8.4 41.0,-1.1 C25.4,3.7 6.6,4.6 0,0 Z" fill="#15171a" opacity=".92"/>
-          </g>
-        </g>
-
-      </g>
-    </svg>
+    <div class="loader__wordmark">Vivencia EduCloud</div>
     <div class="loader__meta">
-      <span class="loader__name">Vivencia EduCloud</span>
+      <span class="loader__name">Education ERP</span>
       <span class="loader__bar" id="loaderBar" aria-hidden="true"></span>
       <span class="loader__pct" id="loaderPct">0%</span>
     </div>
