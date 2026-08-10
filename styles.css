@@ -934,12 +934,23 @@ h1, h2, h3, h4 {
 .band .head p { color: var(--body); }
 .band .eyebrow { color: var(--body); }
 
-.modules { margin-top: clamp(2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: .5rem; }
+/* Sixteen modules, set as a 4x4 matrix rather than a ragged wrap. A flex
+   wrap gave sixteen different pill widths and an uneven last row, which read
+   as a tag cloud; a grid makes every cell the same size, so the group reads
+   as an inventory — and the shape itself states the count. */
+.modules {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .625rem;
+}
 .chip {
-  height: 2.375rem;
-  display: inline-flex; align-items: center;
-  padding: 0 1rem;
-  border-radius: var(--pill);
+  min-height: 3rem;
+  display: flex; align-items: center;
+  /* the caret's space is reserved at rest, so hovering cannot shift the
+     label — the previous rule animated padding and the text jumped */
+  padding: .625rem 1rem .625rem 2rem;
+  border-radius: var(--r-md);
   background: rgba(255, 255, 255, .06);
   border: 1px solid rgba(143, 143, 255, .26);
   backdrop-filter: blur(12px);
@@ -1137,6 +1148,7 @@ h1, h2, h3, h4 {
   .step:nth-child(even) .step__visual { order: 0; }
   .step h3, .step__lede { max-width: none; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .modules { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .hero__stats { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1170,6 +1182,8 @@ h1, h2, h3, h4 {
   .hero__cta .btn { min-width: 11rem; }
 
   .grid-4, .hero__stats { grid-template-columns: 1fr; }
+  .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
+  .chip { font-size: .75rem; padding-left: 1.75rem; min-height: 2.75rem; }
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
@@ -1289,10 +1303,11 @@ h1, h2, h3, h4 {
 
 .chip::before {
   content: ">";
-  position: absolute; left: .5rem; top: 50%;
-  transform: translateY(-50%);
+  position: absolute; left: .9375rem; top: 50%;
+  transform: translate(-3px, -50%);
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
 }
-.chip:hover { padding-left: 1.5rem; }
+.chip:hover::before { transform: translate(0, -50%); }
 .chip:hover::before { opacity: .8; }
 .chip--on::before { color: var(--on-brand); }
 .chip::before { color: var(--brand-hot); }
