@@ -26,52 +26,55 @@
 
 :root {
   /* ---- canvas & surfaces ---- */
-  --canvas:      #f7fbff;   /* primary page ground */
+  --canvas:      #f7f8ff;   /* primary page ground, tinted toward the brand */
   --surface:     #ffffff;   /* alternate stage */
-  --surface-2:   #f1f8ff;   /* soft blue stage */
-  --surface-3:   #eaf4ff;
-  --tint:        #f1f8ff;
+  --surface-2:   #f1f3ff;   /* soft indigo stage */
+  --surface-3:   #e9ecff;
+  --tint:        #f1f3ff;
 
-  /* ---- text ---- */
-  --heading:     #101828;
-  --heading-2:   #1d2939;
-  --body:        #344054;
-  --muted:       #667085;
-  --faint:       #98a2b3;
+  /* ---- text: the darkest brand colour doubles as the heading ink, which is
+     what makes a three-colour palette feel deliberate rather than decorated */
+  --heading:     #1a1953;
+  --heading-2:   #262a63;
+  --body:        #4a5079;
+  --muted:       #6f76a0;
+  --faint:       #a2a7c6;
 
   /* ---- borders: extremely subtle, never structural ---- */
-  --border:       #dde8f2;
-  --border-2:     rgba(48, 175, 255, .12);
-  --border-glass: rgba(48, 175, 255, .13);
-  --border-live:  rgba(48, 175, 255, .28);
+  --border:       #e2e5f5;
+  --border-2:     rgba(47, 47, 228, .12);
+  --border-glass: rgba(47, 47, 228, .13);
+  --border-live:  rgba(47, 47, 228, .30);
 
   /* ---- accents ------------------------------------------------------------
-     Budget, enforced by where each one is allowed to appear:
-       #30AFFF  65-70%  every pool of light, marks, active state, primary CTA
-       #92EEFF  20-25%  the second stop of every gradient, secondary fills
-       #D8FFC5   8-10%  a single tag, one bar, the announcement chip
-       #C4F7CA   tiny   highlights only
-     Keeping the greens to the last two rows is what stops the page drifting
-     green while still carrying warmth.
+       #2F2FE4  primary   — CTAs, marks, active state, every pool of light
+       #162E93  secondary — hovers, second gradient stop, chart mass
+       #1A1953  deepest   — heading ink, the dark footer ground, third stop
+
+     All three are dark enough to carry white text (7.9:1, 11.9:1, 15.4:1),
+     which is the opposite of the previous palette and lets the primary CTA
+     be a solid brand fill with white type rather than dark-on-bright.
      -------------------------------------------------------------------- */
-  --brand:       #30afff;
-  --brand-deep:  #0e86cc;   /* readable as text/marks: 4.6:1 on white */
-  --brand-soft:  #e7f6ff;
-  --brand-ink:   #06253a;   /* dark ink for use ON #30AFFF, ~6.4:1 */
+  --brand:       #2f2fe4;
+  --brand-deep:  #162e93;
+  --brand-dark:  #1a1953;
+  --brand-soft:  #eef0ff;
+  --brand-tint:  #e4e7fd;
+  --on-brand:    #ffffff;
 
-  --cyan:        #92eeff;
-  --cyan-deep:   #2fa8cc;
-  --cyan-soft:   #eafbff;
+  /* kept as aliases so existing rules keep meaning something */
+  --cyan:        #162e93;
+  --cyan-deep:   #1a1953;
+  --cyan-soft:   #e9ecff;
+  --lime:        #e4e7fd;
+  --green:       #d7dcfb;
+  --near-black:  #1a1953;
 
-  --lime:        #d8ffc5;
-  --green:       #c4f7ca;
-  --near-black:  #101828;
-
-  /* ---- shadows: soft, low-opacity, blue-tinted rather than black ---- */
-  --shadow-sm:   0 8px 30px rgba(16, 24, 40, .05);
-  --shadow-md:   0 30px 80px rgba(48, 175, 255, .08), 0 8px 30px rgba(16, 24, 40, .05);
-  --shadow-nav:  0 8px 30px rgba(48, 175, 255, .10), 0 2px 8px rgba(16, 24, 40, .04);
-  --shadow-brand: 0 8px 24px rgba(48, 175, 255, .28);
+  /* ---- shadows: soft, low-opacity, indigo-tinted rather than black ---- */
+  --shadow-sm:   0 8px 30px rgba(26, 25, 83, .07);
+  --shadow-md:   0 30px 80px rgba(47, 47, 228, .10), 0 8px 30px rgba(26, 25, 83, .06);
+  --shadow-nav:  0 8px 30px rgba(47, 47, 228, .10), 0 2px 8px rgba(26, 25, 83, .05);
+  --shadow-brand: 0 8px 24px rgba(47, 47, 228, .30);
 
   /* ---- type ---- */
   --font: "Inter", "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
@@ -194,7 +197,7 @@ h1, h2, h3, h4 {
   position: absolute;
   left: 8%; right: 8%; top: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(48, 175, 255, .14), transparent);
+  background: linear-gradient(90deg, transparent, rgba(47, 47, 228, .14), transparent);
 }
 .hero + .section::before { display: none; }
 
@@ -213,9 +216,9 @@ h1, h2, h3, h4 {
   pointer-events: none;
   background: radial-gradient(
     circle at 50% 100%,
-    rgba(48, 175, 255, .18),
-    rgba(146, 238, 255, .10) 32%,
-    rgba(216, 255, 197, .06) 54%,
+    rgba(47, 47, 228, .13),
+    rgba(22, 46, 147, .06) 32%,
+    rgba(26, 25, 83, .03) 54%,
     transparent 72%
   );
 }
@@ -252,26 +255,26 @@ h1, h2, h3, h4 {
    than a conventional drop shadow */
 .btn--primary {
   background: var(--brand);
-  color: var(--brand-ink);
-  border-color: rgba(14, 134, 204, .22);
+  color: var(--on-brand);
+  border-color: rgba(22, 46, 147, .35);
   box-shadow: var(--shadow-brand);
 }
 .btn--primary:hover {
-  background: #4cbaff;
-  box-shadow: 0 10px 30px rgba(48, 175, 255, .38);
+  background: #4242ee;
+  box-shadow: 0 10px 30px rgba(47, 47, 228, .40);
   transform: translateY(-1px);
 }
 
 .btn--ghost {
   background: rgba(255, 255, 255, .76);
-  color: #243137;
-  border-color: rgba(104, 128, 138, .28);
-  box-shadow: 0 5px 20px rgba(29, 55, 66, .05);
+  color: var(--heading-2);
+  border-color: rgba(74, 80, 121, .26);
+  box-shadow: 0 5px 20px rgba(26, 25, 83, .06);
   backdrop-filter: blur(10px);
 }
 .btn--ghost:hover {
   background: #fff;
-  border-color: rgba(80, 110, 120, .36);
+  border-color: rgba(47, 47, 228, .38);
   transform: translateY(-1px);
 }
 
@@ -289,7 +292,7 @@ h1, h2, h3, h4 {
   height: 3.5rem;
   border-radius: var(--pill);
   background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(130, 155, 165, .18);
+  border: 1px solid rgba(47, 47, 228, .16);
   backdrop-filter: blur(20px) saturate(130%);
   box-shadow: var(--shadow-nav);
   /* pulled back over the hero so the capsule floats in the atmosphere
@@ -299,7 +302,7 @@ h1, h2, h3, h4 {
 }
 .nav--scrolled {
   background: rgba(255, 255, 255, .84);
-  box-shadow: 0 10px 34px rgba(28, 62, 75, .09);
+  box-shadow: 0 10px 34px rgba(26, 25, 83, .10);
 }
 .nav__inner {
   display: flex;
@@ -320,7 +323,7 @@ h1, h2, h3, h4 {
   width: 1.5rem; height: 1.5rem;
   border-radius: .4375rem;
   background: var(--brand);
-  color: var(--brand-ink);
+  color: var(--on-brand);
   display: grid; place-items: center;
   font-family: var(--mono);
   font-size: .5625rem; font-weight: 500; letter-spacing: 0;
@@ -340,18 +343,18 @@ h1, h2, h3, h4 {
 /* the outlined pill, then the pale-lime CTA */
 .nav__actions .btn--ghost {
   background: rgba(255, 255, 255, .55);
-  border-color: #cbd5d9;
-  color: #142126;
+  border-color: #d4d8ee;
+  color: var(--heading);
   box-shadow: none;
 }
-.nav__actions .btn--ghost:hover { background: #f1f6f8; }
+.nav__actions .btn--ghost:hover { background: #eef0ff; }
 .nav__actions .btn--primary {
   background: var(--brand-soft);
-  color: #0a4f77;
-  border-color: rgba(48, 175, 255, .24);
+  color: var(--brand-deep);
+  border-color: rgba(47, 47, 228, .16);
   box-shadow: none;
 }
-.nav__actions .btn--primary:hover { background: #d5efff; box-shadow: var(--shadow-brand); }
+.nav__actions .btn--primary:hover { background: var(--brand-tint); box-shadow: var(--shadow-brand); }
 
 .nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--heading-2); }
 
@@ -374,9 +377,9 @@ h1, h2, h3, h4 {
   background:
     radial-gradient(
       ellipse at 50% 65%,
-      rgba(48, 175, 255, .24) 0%,
-      rgba(146, 238, 255, .16) 28%,
-      rgba(216, 255, 197, .10) 46%,
+      rgba(47, 47, 228, .16) 0%,
+      rgba(22, 46, 147, .09) 28%,
+      rgba(26, 25, 83, .05) 46%,
       transparent 70%
     ),
     var(--canvas);
@@ -422,7 +425,10 @@ h1, h2, h3, h4 {
   background: -webkit-image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
     right 18% / cover no-repeat;
   mix-blend-mode: multiply;
-  opacity: .9;
+  opacity: .88;
+  /* the artwork's blue sits lighter than #2F2FE4; a small rotation and a
+     touch of saturation bring it onto the brand rather than beside it */
+  filter: hue-rotate(18deg) saturate(1.15);
   /* Hold the headline area clear. The rays are pale, but a display-size
      heading sitting directly on converging lines reads as noise, so the
      centre-top is faded out and the bottom edge is softened into the page. */
@@ -449,13 +455,13 @@ h1, h2, h3, h4 {
 .hero__glow--cyan {
   width: min(44rem, 80vw); height: 19rem;
   right: 5%; bottom: 1.25rem;
-  background: rgba(48, 175, 255, .26);
+  background: rgba(47, 47, 228, .18);
   animation: bloom 9s ease-in-out infinite;
 }
 .hero__glow--brand {
   width: min(31rem, 62vw); height: 15rem;
   left: 7%; bottom: .625rem;
-  background: rgba(146, 238, 255, .22);
+  background: rgba(22, 46, 147, .12);
   animation: bloom 11s ease-in-out infinite reverse;
 }
 
@@ -473,7 +479,7 @@ h1, h2, h3, h4 {
   padding: 0 .875rem;
   border-radius: var(--pill);
   background: rgba(255, 255, 255, .75);
-  border: 1px solid rgba(120, 145, 155, .16);
+  border: 1px solid rgba(47, 47, 228, .14);
   backdrop-filter: blur(14px);
   color: var(--body);
   letter-spacing: .04em;
@@ -534,7 +540,7 @@ h1, h2, h3, h4 {
   padding: 1.5rem 1.375rem;
   border-radius: var(--r-lg);
   background: rgba(255, 255, 255, .78);
-  border: 1px solid rgba(109, 145, 157, .15);
+  border: 1px solid rgba(47, 47, 228, .13);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow-sm);
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
@@ -544,20 +550,20 @@ h1, h2, h3, h4 {
 .stat::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(48, 175, 255, .18) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(47, 47, 228, .13) 100%);
   pointer-events: none;
 }
 .stat:nth-child(even)::after {
-  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(146, 238, 255, .22) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(22, 46, 147, .12) 100%);
 }
 /* the greens appear once, on the last tile, and nowhere else in this row */
 .stat:last-child::after {
-  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(216, 255, 197, .28) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(26, 25, 83, .12) 100%);
 }
 .stat:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
-  border-color: rgba(109, 145, 157, .26);
+  border-color: rgba(47, 47, 228, .24);
 }
 .stat__num {
   position: relative; z-index: 1;
@@ -623,7 +629,7 @@ h1, h2, h3, h4 {
   letter-spacing: -.02em;
   transition: background-color .5s var(--ease), border-color .5s var(--ease);
 }
-.step.is-active .step__digits { background: #d5efff; border-color: rgba(48, 175, 255, .55); }
+.step.is-active .step__digits { background: var(--brand-tint); border-color: rgba(47, 47, 228, .48); }
 .step__label { color: var(--brand-deep); letter-spacing: .1em; }
 
 .step h3 { font-size: var(--title-m); letter-spacing: -.032em; line-height: 1.12; max-width: 18ch; }
@@ -645,7 +651,7 @@ h1, h2, h3, h4 {
   border-radius: .8125rem;
   background: var(--brand-soft);
   border: 1px solid var(--border-live);
-  color: #0d3a56;
+  color: var(--brand-deep);
 }
 .feature__icon svg { width: 1.125rem; height: 1.125rem; }
 .feature__title { font-weight: 500; font-size: var(--text-l); color: var(--heading); letter-spacing: -.02em; }
@@ -657,7 +663,7 @@ h1, h2, h3, h4 {
   padding: 1.5rem 1.75rem;
   border-radius: var(--r-lg);
   background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(48, 175, 255, .13);
+  border: 1px solid rgba(47, 47, 228, .13);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-sm);
   font-size: var(--title-xs);
@@ -673,12 +679,12 @@ h1, h2, h3, h4 {
 .screen {
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(48, 175, 255, .13);
+  border: 1px solid rgba(47, 47, 228, .13);
   overflow: hidden;
   backdrop-filter: blur(20px);
   box-shadow:
-    0 30px 80px rgba(48, 175, 255, .08),
-    0 8px 30px rgba(16, 24, 40, .05);
+    0 30px 80px rgba(47, 47, 228, .09),
+    0 8px 30px rgba(26, 25, 83, .06);
 }
 
 /* each step's visual sits in its own pool of light, extended past the panel
@@ -690,9 +696,9 @@ h1, h2, h3, h4 {
   margin: -2.5rem;
   background: radial-gradient(
     circle at 50% 100%,
-    rgba(48, 175, 255, .22),
-    rgba(146, 238, 255, .12) 30%,
-    rgba(216, 255, 197, .07) 52%,
+    rgba(47, 47, 228, .15),
+    rgba(22, 46, 147, .07) 30%,
+    rgba(26, 25, 83, .04) 52%,
     transparent 72%
   );
 }
@@ -733,9 +739,9 @@ h1, h2, h3, h4 {
 }
 /* Four states, four palette colours. The old coral and purple were the only
    hues on the page outside the system; they are gone. */
-.tag--ok    { background: var(--lime);       color: #3f6b2c; border-color: rgba(140, 200, 110, .34); }
-.tag--info  { background: var(--brand-soft); color: #0a5f92; border-color: rgba(48, 175, 255, .26); }
-.tag--calm  { background: var(--cyan-soft);  color: #146a86; border-color: rgba(146, 238, 255, .55); }
+.tag--ok    { background: var(--lime);       color: var(--brand); border-color: rgba(47, 47, 228, .18); }
+.tag--info  { background: var(--brand-soft); color: var(--brand-deep); border-color: rgba(47, 47, 228, .18); }
+.tag--calm  { background: var(--cyan-soft);  color: var(--heading-2); border-color: rgba(22, 46, 147, .18); }
 .tag--muted { background: var(--surface-2);  color: var(--body); border-color: var(--border); }
 
 .bars {
@@ -757,12 +763,12 @@ h1, h2, h3, h4 {
   padding: 2rem;
   border-radius: var(--r-lg);
   background: rgba(255, 255, 255, .86);
-  border: 1px solid #e3ecef;
+  border: 1px solid #e2e5f5;
   box-shadow: var(--shadow-sm);
   min-height: 14rem;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
-.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(48, 175, 255, .30); }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(47, 47, 228, .24); }
 .card__icon {
   width: 3rem; height: 3rem;
   display: grid; place-items: center;
@@ -770,20 +776,20 @@ h1, h2, h3, h4 {
   border-radius: .8125rem;
   background: var(--brand-soft);
   border: 1px solid var(--border-live);
-  color: #0d3a56;
+  color: var(--brand-deep);
 }
 .card h3 { font-size: var(--title-xs); letter-spacing: -.025em; }
 .card p { margin-top: .75rem; font-size: var(--text-m); color: var(--body); line-height: 1.6; }
 
-.i-coral, .i-blue, .i-green, .i-purple { color: #0d3a56; }
+.i-coral, .i-blue, .i-green, .i-purple { color: var(--brand-deep); }
 
 /* ------------------------------------------------------------- modules band */
 /* the dark band is gone — a black field would break the luminous canvas.
    It becomes the page's most tinted surface instead. */
 .band {
   background:
-    radial-gradient(circle at 50% 108%, rgba(48, 175, 255, .26), rgba(146, 238, 255, .14) 30%,
-                    rgba(216, 255, 197, .08) 52%, transparent 72%),
+    radial-gradient(circle at 50% 108%, rgba(47, 47, 228, .18), rgba(22, 46, 147, .08) 30%,
+                    rgba(26, 25, 83, .04) 52%, transparent 72%),
     linear-gradient(180deg, var(--surface-2), #e9f4ff);
   color: var(--body);
 }
@@ -810,8 +816,8 @@ h1, h2, h3, h4 {
 .chip:hover { background: #fff; transform: translateY(-1px); border-color: var(--border-live); }
 .chip--on {
   background: var(--brand);
-  border-color: rgba(14, 134, 204, .22);
-  color: var(--brand-ink);
+  border-color: rgba(22, 46, 147, .35);
+  color: var(--on-brand);
   box-shadow: var(--shadow-brand);
 }
 
@@ -822,7 +828,7 @@ h1, h2, h3, h4 {
   margin-inline: auto;
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(48, 175, 255, .13);
+  border: 1px solid rgba(47, 47, 228, .13);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-md);
   padding-inline: 2rem;
@@ -887,10 +893,10 @@ h1, h2, h3, h4 {
   border-radius: var(--r-xl);
   text-align: center;
   background:
-    radial-gradient(circle at 50% 100%, rgba(48, 175, 255, .35), rgba(146, 238, 255, .18) 30%,
-                    rgba(216, 255, 197, .10) 52%, transparent 72%),
+    radial-gradient(circle at 50% 100%, rgba(47, 47, 228, .22), rgba(22, 46, 147, .10) 30%,
+                    rgba(26, 25, 83, .05) 52%, transparent 72%),
     rgba(255, 255, 255, .72);
-  border: 1px solid rgba(48, 175, 255, .13);
+  border: 1px solid rgba(47, 47, 228, .13);
   backdrop-filter: blur(20px);
   box-shadow: var(--shadow-md);
 }
@@ -927,8 +933,8 @@ h1, h2, h3, h4 {
   position: relative;
   isolation: isolate;
   padding-block: clamp(5rem, 9vw, 8rem) 2.5rem;
-  background: #050b12;
-  color: #b8c7d4;
+  background: var(--brand-dark);
+  color: #b9bee4;
   overflow: hidden;
 }
 .footer::before {
@@ -936,6 +942,10 @@ h1, h2, h3, h4 {
   position: absolute;
   inset: 0;
   z-index: -2;
+  /* footer.png was authored in cyan and green. Rather than commission new
+     art, rotate its hue into the indigo family so it belongs to this palette
+     — the streak geometry is what matters, not its original colour. */
+  filter: hue-rotate(52deg) saturate(.85);
   background:
     image-set(url("footer.webp") type("image/webp"), url("footer.png") type("image/png"))
     center / cover no-repeat;
@@ -948,14 +958,14 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(180deg, #f7fbff 0%, rgba(5, 11, 18, .72) 26%, rgba(5, 11, 18, .90) 100%),
-    linear-gradient(90deg, rgba(5, 11, 18, .10) 0%, rgba(5, 11, 18, .55) 52%, rgba(5, 11, 18, .82) 100%);
+    linear-gradient(180deg, var(--canvas) 0%, rgba(26, 25, 83, .74) 26%, rgba(26, 25, 83, .92) 100%),
+    linear-gradient(90deg, rgba(26, 25, 83, .12) 0%, rgba(26, 25, 83, .58) 52%, rgba(26, 25, 83, .84) 100%);
 }
 .footer__grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: 3rem; }
-.footer__blurb { margin-top: 1rem; font-size: var(--text-s); color: #93a6b6; max-width: 32ch; line-height: 1.6; }
-.footer h4 { color: #7f93a5; font-weight: 500; }
+.footer__blurb { margin-top: 1rem; font-size: var(--text-s); color: #a7ade0; max-width: 32ch; line-height: 1.6; }
+.footer h4 { color: #8d93c6; font-weight: 500; }
 .footer ul { list-style: none; margin: 1.125rem 0 0; padding: 0; display: grid; gap: .75rem; }
-.footer li a { font-size: var(--text-s); color: #c2d2df; transition: color .25s var(--ease); }
+.footer li a { font-size: var(--text-s); color: #ccd0f0; transition: color .25s var(--ease); }
 .footer li a:hover { color: #ffffff; }
 .footer__bottom {
   margin-top: clamp(3rem, 5vw, 4rem);
@@ -966,7 +976,7 @@ h1, h2, h3, h4 {
   gap: 1rem;
   flex-wrap: wrap;
   font-size: var(--text-s);
-  color: #8298aa;
+  color: #8d93c6;
 }
 
 /* --------------------------------------------------------------- responsive */
@@ -1133,7 +1143,7 @@ h1, h2, h3, h4 {
   opacity: .5;
 }
 .btn:hover::after { opacity: 1; transform: translate(0, -50%); }
-.btn--primary::after { color: var(--brand-ink); }
+.btn--primary::after { color: var(--on-brand); }
 .btn--ghost::after { color: #56656c; }
 .btn--sm { padding-right: 2.25rem; }
 .btn--sm::after { right: .9375rem; }
@@ -1157,7 +1167,7 @@ h1, h2, h3, h4 {
 }
 .chip:hover { padding-left: 1.5rem; }
 .chip:hover::before { opacity: .8; }
-.chip--on::before { color: var(--brand-ink); }
+.chip--on::before { color: var(--on-brand); }
 
 
 /* the nav gets a tiny indicator dot rather than an underline */
