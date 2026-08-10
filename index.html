@@ -421,30 +421,210 @@
   <div class="container">
     <div class="head">
       <span class="eyebrow">Shared back office</span>
-      <h2 id="backoffice-title">Sixteen modules every suite inherits.</h2>
-      <p>Finance, people and procurement do not change because the industry does. They are
-         written once and mounted into all five products, so a hospital and a plant close
+      <h2 id="backoffice-title">Sixteen modules. One operating core.</h2>
+      <p>Finance, people and procurement shouldn't change because the industry does. The
+         same sixteen modules sit beneath every suite — so a hospital and a plant can close
          their books through the same ledger.</p>
     </div>
 
-    <div class="modules">
-      <span class="chip chip--on">General Ledger</span>
-      <span class="chip">Accounts Payable</span>
-      <span class="chip">Accounts Receivable</span>
-      <span class="chip">Costing & Budgets</span>
-      <span class="chip">Tax & Compliance</span>
-      <span class="chip chip--on">Workforce</span>
-      <span class="chip">Time & Attendance</span>
-      <span class="chip">Payroll & Benefits</span>
-      <span class="chip">Talent</span>
-      <span class="chip">Sourcing</span>
-      <span class="chip chip--on">Purchasing</span>
-      <span class="chip">Orders & Quotations</span>
-      <span class="chip chip--on">Analytics</span>
-      <span class="chip">Administration</span>
-      <span class="chip">Integrations</span>
-      <span class="chip">Settings</span>
-    </div>
+      <div class="orbit" id="orbit">
+        <div class="orbit__stage" aria-hidden="true">
+          <div class="orbit__bloom"></div>
+          <div class="orbit__track orbit__track--1"></div>
+          <div class="orbit__track orbit__track--2"></div>
+          <div class="orbit__track orbit__track--3"></div>
+
+      <ul class="ring ring--cw" style="--p:200s" role="list">
+        <li class="node" style="--a:0.00deg;--r:8.5rem;--sd:-0.00s;--sp:200s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Analytics" data-group="Operations" data-desc="Every module reports into one warehouse.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Analytics</span>
+          </button>
+        </li>
+        <li class="node" style="--a:90.00deg;--r:8.5rem;--sd:-50.00s;--sp:200s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Administration" data-group="Operations" data-desc="Roles, permissions and org structure.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Administration</span>
+          </button>
+        </li>
+        <li class="node" style="--a:180.00deg;--r:8.5rem;--sd:-100.00s;--sp:200s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Integrations" data-group="Operations" data-desc="Payments, messaging and device feeds.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Integrations</span>
+          </button>
+        </li>
+        <li class="node" style="--a:270.00deg;--r:8.5rem;--sd:-150.00s;--sp:200s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Settings" data-group="Operations" data-desc="Fiscal calendar, numbering, localisation.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Settings</span>
+          </button>
+        </li>
+      </ul>
+      <ul class="ring ring--ccw" style="--p:260s" role="list">
+        <li class="node" style="--a:0.00deg;--r:13.0rem;--sd:-260.00s;--sp:260s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="General Ledger" data-group="Finance" data-desc="One ledger shared across every suite.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">General Ledger</span>
+          </button>
+        </li>
+        <li class="node" style="--a:72.00deg;--r:13.0rem;--sd:-208.00s;--sp:260s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Accounts Payable" data-group="Finance" data-desc="Vendor bills verified before they are paid.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Accounts Payable</span>
+          </button>
+        </li>
+        <li class="node" style="--a:144.00deg;--r:13.0rem;--sd:-156.00s;--sp:260s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Accounts Receivable" data-group="Finance" data-desc="Invoices, ageing and collection in one place.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Accounts Receivable</span>
+          </button>
+        </li>
+        <li class="node" style="--a:216.00deg;--r:13.0rem;--sd:-104.00s;--sp:260s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Costing &amp; Budgets" data-group="Finance" data-desc="Budget against actual, per cost centre.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Costing &amp; Budgets</span>
+          </button>
+        </li>
+        <li class="node" style="--a:288.00deg;--r:13.0rem;--sd:-52.00s;--sp:260s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Tax &amp; Compliance" data-group="Finance" data-desc="Statutory filings from the same records.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Tax &amp; Compliance</span>
+          </button>
+        </li>
+      </ul>
+      <ul class="ring ring--cw" style="--p:320s" role="list">
+        <li class="node" style="--a:0.00deg;--r:17.5rem;--sd:-0.00s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Workforce" data-group="People" data-desc="Every employee record, across all five suites.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Workforce</span>
+          </button>
+        </li>
+        <li class="node" style="--a:51.43deg;--r:17.5rem;--sd:-45.71s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Time &amp; Attendance" data-group="People" data-desc="Shifts, rosters and hours worked.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Time &amp; Attendance</span>
+          </button>
+        </li>
+        <li class="node" style="--a:102.86deg;--r:17.5rem;--sd:-91.43s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Payroll &amp; Benefits" data-group="People" data-desc="Pay runs computed from attendance.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Payroll &amp; Benefits</span>
+          </button>
+        </li>
+        <li class="node" style="--a:154.29deg;--r:17.5rem;--sd:-137.14s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Talent" data-group="People" data-desc="Recruitment, onboarding and appraisal.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Talent</span>
+          </button>
+        </li>
+        <li class="node" style="--a:205.71deg;--r:17.5rem;--sd:-182.86s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Sourcing" data-group="Procurement" data-desc="Vendors, rate contracts and comparatives.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Sourcing</span>
+          </button>
+        </li>
+        <li class="node" style="--a:257.14deg;--r:17.5rem;--sd:-228.57s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Purchasing" data-group="Procurement" data-desc="Requisition to purchase order to receipt.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Purchasing</span>
+          </button>
+        </li>
+        <li class="node" style="--a:308.57deg;--r:17.5rem;--sd:-274.29s;--sp:320s">
+          <span class="node__conn" aria-hidden="true"></span>
+          <button class="node__btn" type="button"
+                  data-name="Orders &amp; Quotations" data-group="Procurement" data-desc="Quotes out, orders in, one pipeline.">
+            <span class="node__dot" aria-hidden="true"></span>
+            <span class="node__label">Orders &amp; Quotations</span>
+          </button>
+        </li>
+      </ul>
+
+          <div class="orbit__core">
+            <span>Shared</span>
+            <span>Back Office</span>
+          </div>
+        </div>
+
+        <!-- the readout. aria-live so the detail is announced on focus, and the
+             orbit itself is aria-hidden because the list below is the real
+             content — sixteen rotating labels are decoration, not structure -->
+        <div class="orbit__detail" id="orbitDetail" aria-live="polite">
+          <span class="orbit__detail-name">Shared back office</span>
+          <span class="orbit__detail-group">Sixteen modules</span>
+          <span class="orbit__detail-desc">Hover or tab through a module to see what it carries.</span>
+        </div>
+      </div>
+
+      <!-- the complete list: the accessible source of truth, and what the
+           component becomes on phones and under reduced motion -->
+      <div class="reel">
+        <div class="reel__track" data-speed="26">
+          <h3 class="reel__group">Finance</h3>
+          <ul class="reel__items" role="list">
+            <li><span class="reel__chip">General Ledger</span></li>
+            <li><span class="reel__chip">Accounts Payable</span></li>
+            <li><span class="reel__chip">Accounts Receivable</span></li>
+            <li><span class="reel__chip">Costing &amp; Budgets</span></li>
+            <li><span class="reel__chip">Tax &amp; Compliance</span></li>
+          </ul>
+        </div>
+        <div class="reel__track" data-speed="34">
+          <h3 class="reel__group">People</h3>
+          <ul class="reel__items" role="list">
+            <li><span class="reel__chip">Workforce</span></li>
+            <li><span class="reel__chip">Time &amp; Attendance</span></li>
+            <li><span class="reel__chip">Payroll &amp; Benefits</span></li>
+            <li><span class="reel__chip">Talent</span></li>
+          </ul>
+        </div>
+        <div class="reel__track" data-speed="30">
+          <h3 class="reel__group">Procurement</h3>
+          <ul class="reel__items" role="list">
+            <li><span class="reel__chip">Sourcing</span></li>
+            <li><span class="reel__chip">Purchasing</span></li>
+            <li><span class="reel__chip">Orders &amp; Quotations</span></li>
+          </ul>
+        </div>
+        <div class="reel__track" data-speed="38">
+          <h3 class="reel__group">Operations</h3>
+          <ul class="reel__items" role="list">
+            <li><span class="reel__chip">Analytics</span></li>
+            <li><span class="reel__chip">Administration</span></li>
+            <li><span class="reel__chip">Integrations</span></li>
+            <li><span class="reel__chip">Settings</span></li>
+          </ul>
+        </div>
+      </div>
   </div>
 </section>
 
@@ -592,7 +772,6 @@
     ['.step__text > *',                                               'up',    60],
     ['.step__visual',                                                 'side',   0],
     ['.grid-4 .card',                                                 'scale', 90],
-    ['.modules .chip',                                                'pop',   22],
     ['.faq details',                                                  'up',    50],
     ['.cta',                                                          'scale',  0],
     ['.footer__grid > *',                                             'up',    70]
@@ -639,6 +818,58 @@
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
 
   document.querySelectorAll('.js-reveal').forEach(function (el) { revealer.observe(el); });
+
+  /* ---------------------------------------------------- orbital module system */
+  var orbit = document.getElementById('orbit');
+  if (orbit) {
+    var detail = document.getElementById('orbitDetail');
+    var dName = detail.querySelector('.orbit__detail-name');
+    var dGroup = detail.querySelector('.orbit__detail-group');
+    var dDesc = detail.querySelector('.orbit__detail-desc');
+    var REST = { name: 'Shared back office', group: 'Sixteen modules',
+                 desc: 'Hover or tab through a module to see what it carries.' };
+
+    function show(btn) {
+      var node = btn ? btn.closest('.node') : null;
+      orbit.querySelectorAll('.node.is-active').forEach(function (n) { n.classList.remove('is-active'); });
+      if (node) node.classList.add('is-active');
+      dName.textContent  = btn ? btn.dataset.name  : REST.name;
+      dGroup.textContent = btn ? btn.dataset.group : REST.group;
+      dDesc.textContent  = btn ? btn.dataset.desc  : REST.desc;
+    }
+
+    orbit.querySelectorAll('.node__btn').forEach(function (btn) {
+      btn.addEventListener('mouseenter', function () { show(btn); });
+      btn.addEventListener('focus', function () { show(btn); });
+    });
+    orbit.addEventListener('mouseleave', function () { show(null); });
+    orbit.addEventListener('focusout', function (e) {
+      if (!orbit.contains(e.relatedTarget)) show(null);
+    });
+  }
+
+  /* the mobile reel drifts at a different slow speed per track, and yields
+     the moment the user touches it — auto-motion that fights a swipe is
+     worse than none */
+  document.querySelectorAll('.reel__track').forEach(function (track) {
+    var list = track.querySelector('.reel__items');
+    var pxPerSec = 1000 / Number(track.dataset.speed || 30);
+    var paused = false, last = null;
+
+    ['pointerdown', 'wheel', 'touchstart'].forEach(function (evt) {
+      list.addEventListener(evt, function () { paused = true; }, { passive: true });
+    });
+
+    function step(ts) {
+      if (last != null && !paused && list.scrollWidth > list.clientWidth + 4) {
+        list.scrollLeft += pxPerSec * (ts - last) / 1000;
+        if (list.scrollLeft >= list.scrollWidth - list.clientWidth - 1) list.scrollLeft = 0;
+      }
+      last = ts;
+      window.requestAnimationFrame(step);
+    }
+    if (!reduced) window.requestAnimationFrame(step);
+  });
 
   /* the oversized numeral inks in while its chapter holds the viewport */
   var chapter = new IntersectionObserver(function (entries) {

@@ -154,7 +154,7 @@
   outline-offset: 3px;
   border-radius: var(--r-sm);
 }
-.btn:focus-visible, .chip:focus-visible { outline-offset: 4px; border-radius: var(--pill); }
+.btn:focus-visible { outline-offset: 4px; border-radius: var(--pill); }
 .hero :where(a, button):focus-visible,
 .band :where(a, button):focus-visible,
 .cta :where(a, button):focus-visible,
@@ -937,40 +937,6 @@ h1, h2, h3, h4 {
 .band .head p { color: var(--body); }
 .band .eyebrow { color: var(--body); }
 
-/* Sixteen modules, set as a 4x4 matrix rather than a ragged wrap. A flex
-   wrap gave sixteen different pill widths and an uneven last row, which read
-   as a tag cloud; a grid makes every cell the same size, so the group reads
-   as an inventory — and the shape itself states the count. */
-.modules {
-  margin-top: clamp(2rem, 4vw, 3rem);
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .625rem;
-}
-.chip {
-  min-height: 3rem;
-  display: flex; align-items: center;
-  /* the caret's space is reserved at rest, so hovering cannot shift the
-     label — the previous rule animated padding and the text jumped */
-  padding: .625rem 1rem .625rem 2rem;
-  border-radius: var(--r-md);
-  background: rgba(255, 255, 255, .06);
-  border: 1px solid rgba(114, 164, 255, .26);
-  backdrop-filter: blur(12px);
-  font-size: var(--text-s);
-  font-weight: 500;
-  color: var(--on-ground);
-  letter-spacing: -.01em;
-  transition: background-color .3s var(--ease), border-color .3s var(--ease),
-              color .3s var(--ease), transform .3s var(--ease), padding .3s var(--ease);
-}
-.chip:hover { background: #fff; transform: translateY(-1px); border-color: var(--border-live); }
-.chip--on {
-  background: linear-gradient(180deg, var(--brand-lit), var(--brand));
-  border-color: rgba(114, 164, 255, .55);
-  color: var(--on-brand);
-  box-shadow: 0 6px 18px rgba(7, 21, 47, .5), var(--glow-sm);
-}
 
 /* --------------------------------------------------------------------- faq */
 .faq {
@@ -1150,7 +1116,6 @@ h1, h2, h3, h4 {
   .step:nth-child(even) .step__visual { order: 0; }
   .step h3, .step__lede { max-width: none; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
-  .modules { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .hero__stats { grid-template-columns: repeat(2, 1fr); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1184,8 +1149,6 @@ h1, h2, h3, h4 {
   .hero__cta .btn { min-width: 11rem; }
 
   .grid-4, .hero__stats { grid-template-columns: 1fr; }
-  .modules { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; }
-  .chip { font-size: .75rem; padding-left: 1.75rem; min-height: 2.75rem; }
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
@@ -1213,7 +1176,6 @@ h1, h2, h3, h4 {
 /* hover lifts must survive the reveal rule, which ties on specificity */
 .stat.js-reveal.is-in:hover,
 .card.js-reveal.is-in:hover { transform: translate3d(0, -3px, 0); }
-.chip.js-reveal.is-in:hover { transform: translate3d(0, -1px, 0); }
 
 .bars span {
   transform: scaleY(0);
@@ -1256,12 +1218,11 @@ h1, h2, h3, h4 {
 /* .step__visual is deliberately absent here — it is positioned in the steps
    section instead. Listing it would set `position: relative` later in the
    file than the sticky rule at the same specificity, silently overriding it. */
-.btn, .card, .chip, .stat, .nav__link, .footer li a,
+.btn, .card, .stat, .nav__link, .footer li a,
 .pull, .row { position: relative; }
 
 .btn::after,
 .card::before, .card::after,
-.chip::before,
 .nav__link::after,
 .footer li a::before,
 .step__visual::before, .step__visual::after,
@@ -1303,16 +1264,6 @@ h1, h2, h3, h4 {
 }
 .card:hover::before, .card:hover::after { opacity: .55; transform: none; }
 
-.chip::before {
-  content: ">";
-  position: absolute; left: .9375rem; top: 50%;
-  transform: translate(-3px, -50%);
-  transition: opacity .3s var(--ease), transform .3s var(--ease);
-}
-.chip:hover::before { transform: translate(0, -50%); }
-.chip:hover::before { opacity: .8; }
-.chip--on::before { color: var(--on-brand); }
-.chip::before { color: var(--brand-hot); }
 
 
 /* the nav gets a tiny indicator dot rather than an underline */
@@ -1359,7 +1310,7 @@ h1, h2, h3, h4 {
 .row:hover::after { opacity: .6; transform: translate(0, -50%); }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn::after, .card::before, .card::after, .chip::before,
+  .btn::after, .card::before, .card::after,
   .nav__link::after,
   .footer li a::before, .step__visual::before, .step__visual::after,
   .pull::after, .row::after { transform: none !important; }
@@ -1586,4 +1537,268 @@ p, li { letter-spacing: 0; }
   .nav__link:hover::before, .nav__link:hover::after,
   .footer li a:hover::before, .footer li a:hover::after,
   .faq summary:hover::before { opacity: 1; transform: translate(0, -50%); }
+}
+
+
+/* ==========================================================================
+   Orbital module system
+   --------------------------------------------------------------------------
+   Sixteen labels shown at once is a wall, so the component never shows them
+   at equal strength. Modules travel three concentric tracks around a core
+   that never moves, and each one brightens only as it crosses the reading
+   zone on the right — three to five are legible at any moment, the rest are
+   nodes.
+
+   The spotlight is pure CSS. Rotation is linear and constant, so a module's
+   angle is a function of time; each node runs the same opacity keyframe with
+   a negative delay derived from its starting angle, which makes it peak
+   exactly as it crosses the zone. No per-frame JavaScript, no measurement.
+
+   The rotating diagram is aria-hidden. The real content is the grouped list
+   below it, which is also what the component becomes on phones and under
+   reduced motion — sixteen orbiting labels are decoration, not structure.
+   ========================================================================== */
+
+.orbit {
+  position: relative;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: 2rem;
+  align-items: center;
+}
+
+.orbit__stage {
+  position: relative;
+  aspect-ratio: 1;
+  width: min(42rem, 100%);
+  margin-inline: auto;
+}
+
+/* a bloom behind the core sets hierarchy without turning it into a wheel of light */
+.orbit__bloom {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 62%; height: 62%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(36, 107, 253, .30), transparent 68%);
+  filter: blur(28px);
+}
+
+.orbit__track {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(114, 164, 255, .10);
+}
+.orbit__track--1 { width: 17rem;  height: 17rem; }
+.orbit__track--2 { width: 26rem;  height: 26rem; }
+.orbit__track--3 { width: 35rem;  height: 35rem; }
+
+.orbit__core {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 9.5rem; height: 9.5rem;
+  border-radius: 50%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .1rem;
+  text-align: center;
+  border: 1px solid rgba(114, 164, 255, .55);
+  background: radial-gradient(circle at 50% 30%, rgba(36, 107, 253, .22), rgba(7, 21, 47, .85));
+  box-shadow: inset 0 0 30px rgba(36, 107, 253, .22), 0 0 40px rgba(36, 107, 253, .18);
+  font-family: var(--ui-font);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--on-ground-hi);
+}
+
+/* ---- the rings ---- */
+.ring {
+  position: absolute;
+  inset: 0;
+  margin: 0; padding: 0;
+  list-style: none;
+  animation: ring-spin var(--p) linear infinite;
+}
+.ring--ccw { animation-direction: reverse; }
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+
+.node {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  transform: rotate(var(--a)) translate(var(--r));
+}
+
+/* the connector runs back down the radius to the core; in the node's own
+   frame the centre is exactly along -x, so no trigonometry is needed */
+.node__conn {
+  position: absolute;
+  right: 0; top: 0;
+  width: var(--r);
+  height: 1px;
+  transform-origin: 100% 50%;
+  background: linear-gradient(90deg, transparent, rgba(36, 107, 253, .85));
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+}
+
+.node__btn {
+  position: absolute;
+  left: 0; top: 0;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .375rem .625rem;
+  border: 0;
+  border-radius: var(--pill);
+  background: transparent;
+  color: var(--on-ground-3);
+  white-space: nowrap;
+  cursor: pointer;
+  /* counter-rotate the node's own placement, then counter-spin the ring, so
+     labels stay upright while their positions travel */
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--a)));
+  animation: ring-spin var(--p) linear infinite reverse;
+  transform-origin: 50% 50%;
+}
+.ring--ccw .node__btn { animation-direction: normal; }
+
+.node__dot {
+  width: .4375rem; height: .4375rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+  box-shadow: 0 0 0 3px rgba(114, 164, 255, .10);
+}
+.node__label {
+  font-family: var(--ui-font);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+
+/* the reading zone: each node peaks as it crosses the right of the orbit */
+.node__btn { animation-name: ring-spin, spotlight; animation-duration: var(--p), var(--sp);
+             animation-timing-function: linear, linear; animation-iteration-count: infinite, infinite;
+             animation-delay: 0s, var(--sd); }
+@keyframes spotlight {
+  0%   { color: var(--brand-500); }
+  12%  { color: var(--brand-500); }
+  30%  { color: var(--on-ground-3); }
+  70%  { color: var(--on-ground-3); }
+  88%  { color: var(--brand-500); }
+  100% { color: var(--brand-500); }
+}
+.node__label { animation: label-fade var(--sp) linear infinite; animation-delay: var(--sd); }
+@keyframes label-fade {
+  0%   { opacity: 1; }
+  14%  { opacity: 1; }
+  30%  { opacity: .18; }
+  70%  { opacity: .18; }
+  86%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* ---- interaction: the whole system stops, one module lights ---- */
+.orbit:hover .ring,
+.orbit:hover .node__btn,
+.orbit:hover .node__label,
+.orbit:focus-within .ring,
+.orbit:focus-within .node__btn,
+.orbit:focus-within .node__label { animation-play-state: paused; }
+
+.node__btn:hover, .node__btn:focus-visible {
+  color: var(--brand-500);
+  background: rgba(36, 107, 253, .14);
+  outline: none;
+}
+.node__btn:hover .node__label,
+.node__btn:focus-visible .node__label { opacity: 1; }
+.node__btn:focus-visible { box-shadow: 0 0 0 2px var(--brand-400); }
+.node.is-active .node__conn { opacity: 1; }
+.node.is-active .node__dot { box-shadow: 0 0 0 4px rgba(36, 107, 253, .22), 0 0 14px rgba(67, 133, 255, .9); }
+
+/* ---- the readout ---- */
+.orbit__detail {
+  display: grid;
+  gap: .5rem;
+  align-content: center;
+  padding: 1.5rem;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(114, 164, 255, .22);
+  background: rgba(255, 255, 255, .04);
+  min-height: 9rem;
+}
+.orbit__detail-name {
+  font-family: var(--ui-font);
+  font-size: .8125rem; font-weight: 600;
+  letter-spacing: .13em; text-transform: uppercase;
+  color: var(--on-ground-hi);
+}
+.orbit__detail-group {
+  font-family: var(--mono);
+  font-size: .6875rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--brand-400);
+}
+.orbit__detail-desc { font-size: var(--text-s); color: var(--on-ground-2); line-height: 1.55; }
+
+/* ---- the list: source of truth, and the mobile presentation ---- */
+.reel { display: none; }
+.reel__group {
+  font-family: var(--ui-font);
+  font-size: .6875rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--brand-400);
+  margin-bottom: .625rem;
+}
+.reel__items {
+  display: flex; gap: .5rem;
+  margin: 0; padding: 0 0 .5rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+.reel__items::-webkit-scrollbar { display: none; }
+.reel__chip {
+  display: inline-flex; align-items: center;
+  white-space: nowrap;
+  padding: .625rem .875rem;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(114, 164, 255, .25);
+  background: rgba(255, 255, 255, .06);
+  color: var(--on-ground);
+  font-size: var(--text-s); font-weight: 500;
+  scroll-snap-align: start;
+}
+.reel__track + .reel__track { margin-top: 1.25rem; }
+
+@media (max-width: 1100px) {
+  .orbit { grid-template-columns: 1fr; }
+  .orbit__detail { min-height: auto; }
+}
+
+/* phones: the diagram would be unreadable, so it becomes the reel outright */
+@media (max-width: 720px) {
+  .orbit { display: none; }
+  .reel { display: block; margin-top: 2rem; }
+}
+
+/* reduced motion: nothing rotates. The core holds and the four groups sit
+   around it as static clusters, which is the same information without the
+   mechanism. */
+@media (prefers-reduced-motion: reduce) {
+  .orbit { display: none; }
+  .reel { display: block; margin-top: 2rem; }
+  .reel__items { overflow-x: visible; flex-wrap: wrap; }
 }
