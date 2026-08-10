@@ -644,7 +644,79 @@ h1, h2, h3, h4 {
 .head .eyebrow { letter-spacing: .09em; text-transform: uppercase; font-size: var(--label); }
 
 /* ------------------------------------------------------------------ steps */
-.steps { margin-top: clamp(3.5rem, 7vw, 6rem); display: grid; gap: clamp(4rem, 8vw, 7.5rem); }
+/* ---- the spine ------------------------------------------------------------
+   A vertical line down the centre of the suite chapters, drawn only where the
+   layout is two-column — below 1101px the steps stack and a centre line would
+   run straight through the text.
+
+   Two layers: a dim track for the full run, and a lit fill whose height is
+   driven by --steps-progress, written by the scroll handler. The fill is a
+   gradient that goes transparent at its head, so the light appears to travel
+   rather than a hard bar growing.
+   ------------------------------------------------------------------------ */
+.steps {
+  position: relative;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  display: grid;
+  gap: clamp(4rem, 8vw, 7.5rem);
+  --steps-progress: 0;
+}
+
+@media (min-width: 1101px) {
+  .steps::before,
+  .steps::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    margin-left: -1px;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  /* the track, fading in and out at the ends so it has no hard terminals */
+  .steps::before {
+    top: 0; bottom: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(47, 47, 228, .16) 8%,
+      rgba(47, 47, 228, .16) 92%,
+      transparent 100%
+    );
+  }
+  /* the travelling light */
+  .steps::after {
+    top: 0;
+    height: calc(var(--steps-progress) * 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(91, 91, 255, 0) 0%,
+      var(--brand) 12%,
+      var(--brand-lit) 82%,
+      var(--brand-hot) 100%
+    );
+    box-shadow: 0 0 14px rgba(91, 91, 255, .75), 0 0 40px rgba(47, 47, 228, .45);
+    transition: height .12s linear;
+  }
+
+  /* each chapter marks the spine where it sits */
+  .step { position: relative; }
+  .step::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 3.25rem;
+    width: .5rem; height: .5rem;
+    margin-left: -.25rem;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: 0 0 0 2px rgba(47, 47, 228, .22);
+    transition: background-color .45s var(--ease), box-shadow .45s var(--ease);
+  }
+  .step.is-active::before {
+    background: var(--brand-lit);
+    box-shadow: 0 0 0 3px rgba(91, 91, 255, .22), 0 0 18px rgba(91, 91, 255, .9);
+  }
+}
 
 .step {
   display: grid;
@@ -1130,7 +1202,10 @@ h1, h2, h3, h4 {
   .js-reveal { opacity: 1; transform: none; }
   .bars span { transform: scaleY(1); }
   .screen { --p: 0; }
-  /* ==========================================================================
+  .steps { --steps-progress: 1; }
+}
+
+/* ==========================================================================
    ASCII hover marks — carried over, retuned for the light canvas
    Kept because they are the site's established hover language; recoloured to
    the deep lime so they read as intent rather than decoration, and they stay

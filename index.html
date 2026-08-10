@@ -665,6 +665,7 @@
 
   /* --------------------------------------- scroll-driven: progress + parallax */
   var screens = Array.prototype.slice.call(document.querySelectorAll('.screen'));
+  var steps = document.querySelector('.steps');
   var ticking = false;
 
   function onScroll() {
@@ -675,8 +676,18 @@
       var scrolled = window.scrollY || document.documentElement.scrollTop;
       nav.classList.toggle('nav--scrolled', scrolled > 8);
 
-      /* -1 when the screen is entering from the bottom, +1 when it is leaving */
       var vh = window.innerHeight;
+
+      /* the spine fills as the reading line passes each chapter. Measured
+         against the viewport's midpoint rather than its top, so the light
+         sits where the eye is rather than running ahead of it. */
+      if (steps) {
+        var r = steps.getBoundingClientRect();
+        var p = (vh * 0.5 - r.top) / r.height;
+        steps.style.setProperty('--steps-progress', Math.max(0, Math.min(1, p)).toFixed(4));
+      }
+
+      /* -1 when the screen is entering from the bottom, +1 when it is leaving */
       screens.forEach(function (s) {
         var r = s.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) return;
