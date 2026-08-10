@@ -704,3 +704,180 @@ h1, h2, h3, h4 {
   .progress { display: none; }
   .step__digits { color: var(--ink-5); }
 }
+
+/* ==========================================================================
+   ASCII hover marks
+   --------------------------------------------------------------------------
+   Every interactive surface answers the cursor with a mark drawn in the mono
+   face — crop marks, brackets, arrows, carets. These are print-shop motifs
+   (registration and crop marks are Swiss to the bone), so they extend the
+   editorial system rather than sit on top of it.
+
+   Rules kept throughout:
+     · marks are ::before / ::after only, absolutely positioned, so nothing
+       reflows when they appear — no layout shift on hover
+     · they are aria-hidden by construction (CSS content is not read as
+       content by screen readers in any supported browser)
+     · colour is --accent for marks on paper, --ink on brand-filled ground
+     · everything fades on the same .18s ease as the rest of the site
+   ========================================================================== */
+
+.btn,
+.card,
+.chip,
+.logo,
+.stat,
+.nav__link,
+.footer li a,
+.step__visual,
+.pull,
+.row {
+  position: relative;
+}
+
+/* shared look for every mark */
+.btn::after,
+.card::before, .card::after,
+.chip::before,
+.logo::before, .logo::after,
+.stat::before,
+.nav__link::after,
+.footer li a::before,
+.step__visual::before, .step__visual::after,
+.pull::after,
+.row::after {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: 0;
+  line-height: 1;
+  color: var(--accent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+/* ---- buttons: the arrow extends out of the label ---- */
+.btn { padding-right: 2.75rem; }
+.btn::after {
+  content: "->";
+  position: absolute;
+  right: 1.25rem; top: 50%;
+  transform: translate(-4px, -50%);
+  opacity: .55;
+}
+.btn:hover::after { opacity: 1; transform: translate(0, -50%); }
+.btn--primary::after { color: var(--paper); }
+.btn--primary:hover::after { color: var(--ink); }
+.cta .btn--primary::after { color: var(--paper); }
+.cta .btn--primary:hover::after { color: var(--ink); }
+.cta .btn--ghost::after { color: var(--ink); }
+
+/* ---- cards and stats: crop marks at the corners ---- */
+.card::before, .stat::before {
+  content: "+";
+  position: absolute;
+  left: -.375rem; top: 1.5rem;
+  transform: translateY(-4px);
+}
+.card::after {
+  content: "+";
+  position: absolute;
+  right: .5rem; bottom: 0;
+  transform: translateY(4px);
+}
+.card:hover::before, .card:hover::after,
+.stat:hover::before { opacity: 1; transform: none; }
+
+/* ---- chips: a caret leads the label in ---- */
+.chip::before {
+  content: ">";
+  position: absolute;
+  left: .4375rem; top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+}
+.chip { transition: border-color .2s ease, color .2s ease, padding .18s ease; }
+.chip:hover { padding-left: 1.5rem; }
+.chip:hover::before { opacity: 1; }
+.chip--on::before { color: var(--ink); }
+
+/* ---- logo tiles: the name gets bracketed ---- */
+.logo::before, .logo::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-s);
+}
+.logo::before { content: "["; left: 1.25rem; }
+.logo::after  { content: "]"; right: 1.25rem; }
+.logo:hover::before, .logo:hover::after { opacity: 1; }
+
+/* ---- nav and footer links: an underscore, then an arrow ---- */
+.nav__link::after {
+  content: "_";
+  position: absolute;
+  left: 0; bottom: -.375rem;
+}
+.nav__link:hover::after { opacity: 1; }
+
+.footer li a::before {
+  content: "->";
+  position: absolute;
+  left: -1.375rem; top: 50%;
+  transform: translate(-4px, -50%);
+}
+.footer li a { transition: color .2s ease; }
+.footer li a:hover::before { opacity: 1; transform: translate(0, -50%); }
+
+/* ---- product screenshots: registration brackets on the frame ---- */
+.step__visual::before, .step__visual::after {
+  font-size: 1rem;
+  position: absolute;
+}
+.step__visual::before { content: "+"; left: -1.125rem; top: -1.125rem; }
+.step__visual::after  { content: "+"; right: -1.125rem; bottom: -1.125rem; }
+.step__visual:hover::before, .step__visual:hover::after { opacity: .8; }
+
+/* ---- pull quote: a closing mark, set in the margin ---- */
+.pull::after {
+  content: "//";
+  position: absolute;
+  left: -1.75rem; bottom: 0;
+  color: var(--accent);
+}
+.pull:hover::after { opacity: 1; }
+
+/* ---- table rows inside the screenshots ---- */
+.row::after {
+  content: "<";
+  position: absolute;
+  right: -.75rem; top: 50%;
+  transform: translate(-4px, -50%);
+}
+.row:hover::after { opacity: .7; transform: translate(0, -50%); }
+
+/* ---- the FAQ marker becomes ASCII too, replacing the drawn plus ---- */
+.faq summary::before { content: none; }
+.faq summary::after {
+  content: "[+]";
+  width: auto; height: auto;
+  background: none;
+  font-family: var(--mono);
+  font-size: var(--text-s);
+  letter-spacing: 0;
+  color: var(--ink-4);
+  transition: color .18s ease;
+}
+.faq details[open] summary::after { content: "[-]"; }
+.faq summary:hover::after { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn::after, .card::before, .card::after, .chip::before,
+  .logo::before, .logo::after, .stat::before, .nav__link::after,
+  .footer li a::before, .step__visual::before, .step__visual::after,
+  .pull::after, .row::after { transform: none !important; }
+}
+
+/* small buttons need a tighter well for the arrow than the default 2.75rem */
+.btn--sm { padding-right: 2.25rem; }
+.btn--sm::after { right: 1rem; }
