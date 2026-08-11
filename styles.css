@@ -1866,10 +1866,11 @@ h1, h2, h3, h4 {
   }
   .deck__grid::-webkit-scrollbar { display: none; }
   .deck__card {
-    flex: 0 0 min(20rem, 84%);
-    /* start, not centre: centre-snapping leaves the first card half a screen
-       in from the left on load */
+    /* one card per view: the full width of the scrollport, so nothing of the
+       next card shows and each swipe moves exactly one domain */
+    flex: 0 0 100%;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     padding: 1.5rem;
   }
   .deck__ghost { font-size: 5.5rem; }
