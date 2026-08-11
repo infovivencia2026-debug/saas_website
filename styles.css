@@ -1850,18 +1850,73 @@ p, li { letter-spacing: 0; }
 
 
 /* ==========================================================================
-   Link hover: a hairline that sweeps under the word and holds
+   Link hover: glowing brackets
+   --------------------------------------------------------------------------
+   A [ and a ] fly in from outside the word, overshoot by two pixels and lock,
+   lit by a layered text-shadow halo. They are absolutely positioned in the
+   link's own padding, so nothing reflows when they appear, and the effect is
+   two pseudo-elements — no extra DOM.
    ========================================================================== */
 
 .nav__link, .footer li a, .faq summary { position: relative; }
-
+.nav__link, .footer li a { transition: color .25s var(--ease); }
 .nav__link:hover, .footer li a:hover { color: var(--on-ground-hi); }
 
-/* no underline, no mark: the links simply brighten */
-.nav__link, .footer li a { transition: color .25s var(--ease); }
+.nav__link::before, .nav__link::after,
+.footer li a::before, .footer li a::after {
+  position: absolute;
+  top: 50%;
+  font-family: var(--mono);
+  font-size: .95em;
+  font-weight: 500;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  color: var(--brand);
+  text-shadow:
+    0 0 6px rgba(36, 107, 253, .90),
+    0 0 14px rgba(36, 107, 253, .60),
+    0 0 26px rgba(114, 164, 255, .45);
+  transform: translateY(-50%);
+}
+.nav__link::before, .footer li a::before { content: "["; left: -.7rem; }
+.nav__link::after,  .footer li a::after  { content: "]"; right: -.7rem; }
+
+/* the footer sits on midnight, so its brackets take the emissive end */
+.footer li a::before, .footer li a::after {
+  color: var(--brand-hot);
+  text-shadow:
+    0 0 8px rgba(114, 164, 255, .95),
+    0 0 18px rgba(67, 133, 255, .65),
+    0 0 34px rgba(36, 107, 253, .45);
+}
+
+.nav__link:hover::before, .nav__link:focus-visible::before,
+.footer li a:hover::before, .footer li a:focus-visible::before {
+  animation: lock-left .32s var(--ease) forwards;
+}
+.nav__link:hover::after, .nav__link:focus-visible::after,
+.footer li a:hover::after, .footer li a:focus-visible::after {
+  animation: lock-right .32s var(--ease) forwards;
+}
+
+@keyframes lock-left {
+  0%   { opacity: 0; transform: translate(-9px, -50%) scaleY(.5); }
+  58%  { opacity: 1; transform: translate(2px, -50%)  scaleY(1.14); }
+  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+}
+@keyframes lock-right {
+  0%   { opacity: 0; transform: translate(9px, -50%)  scaleY(.5); }
+  58%  { opacity: 1; transform: translate(-2px, -50%) scaleY(1.14); }
+  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .nav__link, .footer li a { transition: color .25s var(--ease); }
+  .nav__link:hover::before, .nav__link:hover::after,
+  .footer li a:hover::before, .footer li a:hover::after {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 
