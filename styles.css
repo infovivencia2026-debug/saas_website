@@ -2045,31 +2045,6 @@ h1, h2, h3, h4 {
 @media (min-width: 1101px) {
   .screen { transform: translate3d(0, calc(var(--p) * -8px), 0); }
 
-  /* The panel runs off the page on its outer side. Where it meets the
-     viewport edge the corners are square and the border is dropped — a
-     rounded corner there would read as the panel stopping short of the edge
-     rather than continuing past it. The inner side keeps its radius.
-
-     The bleed is the gutter plus whatever the centred container leaves over,
-     so it reaches the edge at any width. <body> is overflow-x: clip, so this
-     cannot make the page scroll sideways. */
-  .step__visual { --bleed: calc((100vw - min(100vw, var(--container))) / 2 + var(--gutter)); }
-
-  .step:nth-child(odd) .screen {
-    margin-right: calc(-1 * var(--bleed));
-    border-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .step:nth-child(odd) .screen__bar { border-top-right-radius: 0; }
-
-  .step:nth-child(even) .screen {
-    margin-left: calc(-1 * var(--bleed));
-    border-left: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  .step:nth-child(even) .screen__bar { border-top-left-radius: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2334,7 +2309,12 @@ p, li { letter-spacing: 0; }
 
 /* the section is sized to the viewport, so the diagram is measured against
    whatever height is left after the heading rather than a fixed 42rem */
-#modules { padding-block: var(--section-y); }
+#modules {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(2.5rem, 5vh, 4rem);
+}
 
 .orbit {
   position: relative;
@@ -2569,7 +2549,10 @@ p, li { letter-spacing: 0; }
    row markers and the hover edge. Everything else stays neutral, so the
    colour reads as a label rather than as decoration.
    ------------------------------------------------------------------------ */
-.deck { --gap: 1rem; margin-top: clamp(2rem, 4vw, 3rem); }
+/* The deck is the PHONE presentation only. On any wider screen the orbit is
+   the component and this stays out of the document — the two say the same
+   thing, and showing both made the section twice as long as it needed. */
+.deck { display: none; --gap: 1rem; margin-top: clamp(2rem, 4vw, 3rem); }
 
 .deck__grid {
   display: grid;
@@ -2706,6 +2689,7 @@ p, li { letter-spacing: 0; }
 /* phones: the diagram would be unreadable, so the deck carries it alone */
 @media (max-width: 720px) {
   .orbit { display: none; }
+  .deck  { display: block; }
 }
 
 /* reduced motion: nothing rotates. The core holds and the four groups sit
@@ -2713,6 +2697,7 @@ p, li { letter-spacing: 0; }
    mechanism. */
 @media (prefers-reduced-motion: reduce) {
   .orbit { display: none; }
+  .deck  { display: block; }
 }
 
 /* ==========================================================================
