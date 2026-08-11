@@ -2705,7 +2705,9 @@ p, li { letter-spacing: 0; }
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .deck__list { margin-top: .625rem; }
+  /* the rows sit against the bottom of the square, so three modules and five
+     both look deliberate rather than top-heavy */
+  .deck__list { margin-top: auto; }
   .deck__list li { padding: .3125rem .125rem; font-size: .8125rem; }
   .deck__card { padding: .875rem 1rem 1rem; }
   .deck__ghost { font-size: 3.5rem; right: -.25rem; top: -.75rem; }
@@ -2746,10 +2748,16 @@ p, li { letter-spacing: 0; }
      the same thing one level up. */
   #modules .head p { display: none; }
   #modules .eyebrow { height: 1.75rem; padding: 0 .625rem; font-size: .6875rem; }
-  .deck__grid { align-items: stretch; min-height: 0; min-width: 0; }
-  /* the card fills the space the budget leaves it; its list scrolls only if a
-     very short screen leaves too little */
-  .deck__card { min-height: 0; overflow-y: auto; }
+  /* start, not stretch: stretched cards take the whole deck row and stop
+     being square */
+  .deck__grid { align-items: start; min-height: 0; min-width: 0; }
+  .deck__card {
+    /* a square post: the card is as tall as it is wide, whichever domain it
+       holds, so the four are identical frames */
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+    overflow: hidden;
+  }
 
   .deck__dots {
     display: flex;
