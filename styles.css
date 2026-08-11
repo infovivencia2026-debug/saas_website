@@ -2313,23 +2313,24 @@ p, li { letter-spacing: 0; }
 /* ==========================================================================
    Custom cursor — Breeze
    --------------------------------------------------------------------------
-   The KDE Plasma cursor, in the site's colour: a straight-edged arrow with a
-   tail that kicks out to the right, rounded joins, a solid fill and a
-   contrasting outline, sitting on a soft offset shadow. Over anything
+   A Breeze-style arrow in the site's colour, tail removed: three points,
+   rounded joins, a solid fill and a contrasting outline, on a soft offset
+   shadow. Drawn on a 32px canvas, which is also the size every platform
+   accepts without falling back to the system cursor. Over anything
    interactive the fill and outline swap — cobalt-on-white becomes
    white-on-cobalt — which is how Breeze and Breeze Snow relate to each other.
 
    `paint-order: stroke` puts the outline behind the fill, so the stroke reads
    as a border around the shape rather than eating into it.
 
-   Hotspot is the tip (6 4).
+   Hotspot is the tip (5 3).
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2748%27%20height%3D%2748%27%3E%3Cpath%20d%3D%27M6%204L6%2037.5L14.2%2029.6L19.8%2042.5L25.6%2040L20.2%2027.6L32%2026.8Z%27%20transform%3D%27translate%281.4%201.8%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M6%204L6%2037.5L14.2%2029.6L19.8%2042.5L25.6%2040L20.2%2027.6L32%2026.8Z%27%20fill%3D%27%25231557e8%27%20stroke%3D%27%2523ffffff%27%20stroke-width%3D%272.6%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 6 4, default; }
+  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20fill%3D%27%25231557e8%27%20stroke%3D%27%2523ffffff%27%20stroke-width%3D%272.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, default; }
 
   a, button, summary, label, [role="button"],
   .node__btn, .row, .card, .stat, input, textarea, select {
-    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2748%27%20height%3D%2748%27%3E%3Cpath%20d%3D%27M6%204L6%2037.5L14.2%2029.6L19.8%2042.5L25.6%2040L20.2%2027.6L32%2026.8Z%27%20transform%3D%27translate%281.4%201.8%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M6%204L6%2037.5L14.2%2029.6L19.8%2042.5L25.6%2040L20.2%2027.6L32%2026.8Z%27%20fill%3D%27%2523ffffff%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%272.6%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 6 4, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20fill%3D%27%2523ffffff%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%272.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, pointer;
   }
 
   [disabled], .is-disabled { cursor: not-allowed; }
