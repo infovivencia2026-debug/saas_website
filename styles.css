@@ -2654,6 +2654,43 @@ p, li { letter-spacing: 0; }
   color: #a8c6ff;
 }
 
+/* ---- the orbit -----------------------------------------------------------
+   Its core, readout, tracks and chips were repainted as light glass when the
+   band became a light surface, with white baked into them — the band's token
+   remap cannot reach a hardcoded #ffffff, so each one is restated here. */
+:root[data-theme="dark"] .orbit__core {
+  border-color: rgba(114, 164, 255, .45);
+  background: radial-gradient(circle at 50% 30%, rgba(36, 107, 253, .26), rgba(7, 21, 47, .92));
+  box-shadow: inset 0 0 30px rgba(36, 107, 253, .30), 0 0 50px rgba(36, 107, 253, .26);
+  color: #f2f7ff;
+}
+:root[data-theme="dark"] .orbit__bloom {
+  background: radial-gradient(circle, rgba(36, 107, 253, .38), rgba(36, 107, 253, 0) 70%);
+}
+:root[data-theme="dark"] .orbit__track { border-color: rgba(114, 164, 255, .16); }
+:root[data-theme="dark"] .orbit__detail {
+  border-color: rgba(114, 164, 255, .22);
+  background: rgba(255, 255, 255, .05);
+}
+:root[data-theme="dark"] .orbit__detail-name { color: #f2f7ff; }
+:root[data-theme="dark"] .orbit__detail-group { color: #72a4ff; }
+:root[data-theme="dark"] .orbit__detail-desc { color: #a7bde4; }
+:root[data-theme="dark"] .node__dot { box-shadow: 0 0 0 3px rgba(114, 164, 255, .14); }
+:root[data-theme="dark"] .node.is-active .node__dot {
+  box-shadow: 0 0 0 4px rgba(36, 107, 253, .30), 0 0 14px rgba(114, 164, 255, .95);
+}
+:root[data-theme="dark"] .node__btn:hover,
+:root[data-theme="dark"] .node__btn:focus-visible { background: rgba(114, 164, 255, .16); }
+:root[data-theme="dark"] .node__conn {
+  background: linear-gradient(90deg, rgba(36, 107, 253, 0), rgba(114, 164, 255, .9));
+}
+:root[data-theme="dark"] .reel__chip {
+  border-color: rgba(114, 164, 255, .25);
+  background: rgba(255, 255, 255, .06);
+  color: #dbe7ff;
+}
+:root[data-theme="dark"] .reel__group { color: #72a4ff; }
+
 /* the footer is already midnight; it only needs to stop being lighter than
    the page above it */
 :root[data-theme="dark"] .footer { background: #04091a; }
