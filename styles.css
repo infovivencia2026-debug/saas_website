@@ -272,11 +272,17 @@ h1, h2, h3, h4 {
      .85, and the scroll animation starting at .45 — which landed the dots at
      roughly 11% against near-white, i.e. invisible. The alpha now lives in
      the dot colour alone. */
+  /* Four layers: the fine dot mesh, a heavier dot on every third crossing,
+     and a ruled grid behind both — the ruling is pitched at 42px so its
+     intersections land exactly on the heavy dots rather than cutting between
+     them. Painted front to back, so the dots sit on top of the lines. */
   background-image:
     radial-gradient(rgba(21, 87, 232, .58) 1.3px, transparent 1.3px),
-    radial-gradient(rgba(16, 42, 140, .30) 1.5px, transparent 1.5px);
-  background-size: 14px 14px, 42px 42px;
-  background-position: 0 0, 7px 7px;
+    radial-gradient(rgba(16, 42, 140, .34) 1.7px, transparent 1.7px),
+    linear-gradient(90deg, rgba(21, 87, 232, .13) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(21, 87, 232, .13) 1px, transparent 1px);
+  background-size: 14px 14px, 42px 42px, 42px 42px, 42px 42px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
   /* oversized so it can drift without exposing an edge */
   inset: -3rem 0;
   -webkit-mask-image: radial-gradient(ellipse 82% 74% at 50% 44%, #000 34%, transparent 88%);
@@ -309,10 +315,12 @@ h1, h2, h3, h4 {
   animation: lens-wander 32s ease-in-out infinite alternate;
   transition: opacity .4s var(--ease);
   background-image:
-    radial-gradient(rgba(21, 87, 232, .85) 1.5px, transparent 1.5px),
-    radial-gradient(rgba(36, 107, 253, .5) 1.2px, transparent 1.2px);
-  background-size: 14px 14px, 42px 42px;
-  background-position: 0 0, 7px 7px;
+    radial-gradient(rgba(21, 87, 232, .95) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(16, 42, 140, .70) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(21, 87, 232, .30) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(21, 87, 232, .30) 1px, transparent 1px);
+  background-size: 14px 14px, 42px 42px, 42px 42px, 42px 42px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
           mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
 }
@@ -323,7 +331,9 @@ h1, h2, h3, h4 {
      dots stay on the grid and only their brightness appears to travel */
   background-position:
     calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
-    calc(11rem - var(--mx, 0px) + 7px) calc(11rem - var(--my, 0px) + 7px);
+    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
+    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
+    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px));
   transform: translate3d(var(--mx, 50vw), var(--my, 34vh), 0);
 }
 
