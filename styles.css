@@ -1737,7 +1737,14 @@ h1, h2, h3, h4 {
 
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
-  /* on a phone the tight family crowds the type; the wide arcs carry it */
+
+  /* The field is cropped hard on a narrow screen, so the same stroke reads
+     much heavier — it sits behind the headline rather than beside it. These
+     are screen pixels (non-scaling-stroke), so they thin regardless of how
+     far the viewBox is scaled up. */
+  .flow__lines { stroke-width: .5; opacity: .6; }
+  .flow__pulse { stroke-width: .9; opacity: .6; }
+  .flow__pulse--b { stroke-width: .7; opacity: .45; }
 
   .hero h1 { max-width: none; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
