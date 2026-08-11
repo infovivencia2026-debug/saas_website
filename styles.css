@@ -2313,30 +2313,22 @@ p, li { letter-spacing: 0; }
 /* ==========================================================================
    Custom cursor
    --------------------------------------------------------------------------
-   A cobalt ring, drawn as an SVG data URI rather than a JS-driven follower
-   element. A follower has to be repositioned every frame and always trails
-   the real pointer by a frame or two; a cursor image is composited by the OS
-   and costs nothing. Each one carries a white halo underneath so it stays
+   A cobalt triangle, drawn as an SVG data URI rather than a JS-driven
+   follower element. A follower has to be repositioned every frame and always
+   trails the real pointer; a cursor image is composited by the OS and costs
+   nothing. Both triangles carry a white outline underneath so they stay
    visible on the footer's midnight as well as on the light canvas.
 
-   Hotspots are declared at the centre of each glyph, so the ring surrounds
-   what it is pointing at instead of hanging below and right of it.
+   The hotspot is the tip (2 2), not the centre — a triangle points, and it
+   has to point at exactly what the pointer is over.
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2726%27%20height%3D%2726%27%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2713%27%20r%3D%278.5%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.85%27%20stroke-width%3D%273.5%27%2F%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2713%27%20r%3D%278.5%27%20fill%3D%27none%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.6%27%2F%3E%3Ccircle%20cx%3D%2713%27%20cy%3D%2713%27%20r%3D%271.7%27%20fill%3D%27%25231557e8%27%2F%3E%3C%2Fsvg%3E") 13 13, auto; }
+  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2726%27%20height%3D%2730%27%3E%3Cpath%20d%3D%27M2%202L2%2024L17%2014Z%27%20fill%3D%27%2523ffffff%27%20fill-opacity%3D%27.9%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.9%27%20stroke-width%3D%273.5%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M2%202L2%2024L17%2014Z%27%20fill%3D%27%2523dce9ff%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.7%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E") 2 2, default; }
 
-  a, button, summary, label, [role="button"], .node__btn, .row, .card, .stat {
-    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2730%27%20height%3D%2730%27%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2710%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.85%27%20stroke-width%3D%273.5%27%2F%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2710%27%20fill%3D%27%25231557e8%27%20fill-opacity%3D%27.18%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.8%27%2F%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%272.6%27%20fill%3D%27%25231557e8%27%2F%3E%3Cpath%20d%3D%27M15%201.5v3M15%2025.5v3M1.5%2015h3M25.5%2015h3%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.6%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") 15 15, pointer;
+  a, button, summary, label, [role="button"],
+  .node__btn, .row, .card, .stat, input, textarea, select {
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2728%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M2%202L2%2025L18%2014.5Z%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.9%27%20stroke-width%3D%273.8%27%20stroke-linejoin%3D%27round%27%2F%3E%3Cpath%20d%3D%27M2%202L2%2025L18%2014.5Z%27%20fill%3D%27%25231557e8%27%20stroke%3D%27%2523102a8c%27%20stroke-width%3D%271.5%27%20stroke-linejoin%3D%27round%27%2F%3E%3C%2Fsvg%3E") 2 2, pointer;
   }
 
-  p, li, h1, h2, h3, h4, blockquote, .pull, .row__meta, .feature__body {
-    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2716%27%20height%3D%2726%27%3E%3Cpath%20d%3D%27M8%203v20M4.5%203h7M4.5%2023h7%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.8%27%20stroke-width%3D%273.4%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M8%203v20M4.5%203h7M4.5%2023h7%27%20fill%3D%27none%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") 8 13, text;
-  }
-
-  a p, a li, button p, .row p, .card p, .feature p, summary {
-    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2730%27%20height%3D%2730%27%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2710%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.85%27%20stroke-width%3D%273.5%27%2F%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%2710%27%20fill%3D%27%25231557e8%27%20fill-opacity%3D%27.18%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.8%27%2F%3E%3Ccircle%20cx%3D%2715%27%20cy%3D%2715%27%20r%3D%272.6%27%20fill%3D%27%25231557e8%27%2F%3E%3Cpath%20d%3D%27M15%201.5v3M15%2025.5v3M1.5%2015h3M25.5%2015h3%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.6%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") 15 15, pointer;
-  }
-
-  input, textarea, select { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2716%27%20height%3D%2726%27%3E%3Cpath%20d%3D%27M8%203v20M4.5%203h7M4.5%2023h7%27%20fill%3D%27none%27%20stroke%3D%27%2523ffffff%27%20stroke-opacity%3D%27.8%27%20stroke-width%3D%273.4%27%20stroke-linecap%3D%27round%27%2F%3E%3Cpath%20d%3D%27M8%203v20M4.5%203h7M4.5%2023h7%27%20fill%3D%27none%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%271.5%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fsvg%3E") 8 13, text; }
   [disabled], .is-disabled { cursor: not-allowed; }
 }
