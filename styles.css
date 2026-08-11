@@ -1980,6 +1980,32 @@ h1, h2, h3, h4 {
 }
 @media (min-width: 1101px) {
   .screen { transform: translate3d(0, calc(var(--p) * -8px), 0); }
+
+  /* The panel runs off the page on its outer side. Where it meets the
+     viewport edge the corners are square and the border is dropped — a
+     rounded corner there would read as the panel stopping short of the edge
+     rather than continuing past it. The inner side keeps its radius.
+
+     The bleed is the gutter plus whatever the centred container leaves over,
+     so it reaches the edge at any width. <body> is overflow-x: clip, so this
+     cannot make the page scroll sideways. */
+  .step__visual { --bleed: calc((100vw - min(100vw, var(--container))) / 2 + var(--gutter)); }
+
+  .step:nth-child(odd) .screen {
+    margin-right: calc(-1 * var(--bleed));
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .step:nth-child(odd) .screen__bar { border-top-right-radius: 0; }
+
+  .step:nth-child(even) .screen {
+    margin-left: calc(-1 * var(--bleed));
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .step:nth-child(even) .screen__bar { border-top-left-radius: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
