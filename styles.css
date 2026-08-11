@@ -1071,13 +1071,13 @@ h1, h2, h3, h4 {
      the mock rather than inside it. Six stops so the falloff is gradual
      instead of stepping, and it ends on zero-alpha cobalt rather than
      `transparent`, which would drag the ramp through grey. */
-  /* Three layers, tight to wide, painted front to back:
+  /* Three layers, tight to wide, painted front to back. The whole stack has
+     been walked down the ramp — it now reads as the panel's shadow with a
+     little colour in it, rather than as a light source:
 
-       1. a small hot core in --brand-400, right under the mock
-       2. a mid spread in --brand-600 carrying the body of the light
-       3. a wide, dark --brand-900 base that reads as the shadow the panel
-          sits in — without it the light hangs in the air with nothing
-          grounding it
+       1. a restrained --brand-700 core under the mock
+       2. a --brand-900 mid spread
+       3. a wide near-black base carrying most of the weight
 
      Every centre and radius is chosen so each ramp reaches zero before it
      reaches an edge of this box. The panel's own bottom sits at ~64% of the
@@ -1085,22 +1085,22 @@ h1, h2, h3, h4 {
      off in a straight line. */
   background:
     radial-gradient(ellipse 24% 17% at 50% 64%,
-      rgba(114, 164, 255, .34) 0%,
-      rgba(114, 164, 255, .16) 40%,
-      rgba(114, 164, 255, .04) 70%,
-      rgba(114, 164, 255, 0) 94%),
+      rgba(21, 87, 232, .16) 0%,
+      rgba(21, 87, 232, .08) 40%,
+      rgba(21, 87, 232, .02) 70%,
+      rgba(21, 87, 232, 0) 94%),
     radial-gradient(ellipse 37% 27% at 50% 65%,
-      rgba(36, 107, 253, .26) 0%,
-      rgba(36, 107, 253, .15) 34%,
-      rgba(36, 107, 253, .06) 58%,
-      rgba(36, 107, 253, .02) 76%,
-      rgba(36, 107, 253, 0) 94%),
+      rgba(16, 42, 140, .16) 0%,
+      rgba(16, 42, 140, .09) 34%,
+      rgba(16, 42, 140, .04) 58%,
+      rgba(16, 42, 140, .012) 76%,
+      rgba(16, 42, 140, 0) 94%),
     radial-gradient(ellipse 46% 33% at 50% 63%,
-      rgba(16, 42, 140, .20) 0%,
-      rgba(16, 42, 140, .13) 30%,
-      rgba(16, 42, 140, .06) 52%,
-      rgba(16, 42, 140, .02) 72%,
-      rgba(16, 42, 140, 0) 94%);
+      rgba(7, 21, 47, .18) 0%,
+      rgba(7, 21, 47, .11) 30%,
+      rgba(7, 21, 47, .05) 52%,
+      rgba(7, 21, 47, .018) 72%,
+      rgba(7, 21, 47, 0) 94%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
