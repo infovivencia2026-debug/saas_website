@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vivencia — the school ERP, from admissions to alumni</title>
-<meta name="description" content="Vivencia is one school ERP: admissions, academics, examinations, fees and campus life on a single student record, with finance, staff and procurement sharing the same back office.">
+<title>Vivencia — one institutional system: 54 modules, 496 capabilities</title>
+<meta name="description" content="54 connected modules and 496 capabilities on one institutional record — admissions, academics, attendance, examinations, fees, people and campus operations, connected rather than separate.">
 <link rel="canonical" href="https://vivencia.187-127-178-100.sslip.io/">
 <meta name="theme-color" content="#14123f">
 
 <!-- shared links render as a card rather than a grey box -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vivencia.187-127-178-100.sslip.io/">
-<meta property="og:title" content="Vivencia — the school ERP, from admissions to alumni">
-<meta property="og:description" content="Admissions, academics, examinations, fees and campus life on one student record — with one shared back office underneath.">
+<meta property="og:title" content="Vivencia — one institutional system">
+<meta property="og:description" content="54 connected modules. 496 capabilities. One institutional record.">
 <meta property="og:image" content="https://vivencia.187-127-178-100.sslip.io/hero-art.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -37,10 +37,8 @@
 </script>
 </head>
 <body>
-
 <a class="skip" href="#top">Skip to content</a>
 
-<!-- theme switch. Light is the default; the choice is remembered. -->
 <button class="theme" id="themeToggle" type="button" aria-pressed="false"
         aria-label="Switch to dark mode" title="Dark mode">
   <span class="theme__track" aria-hidden="true">
@@ -57,13 +55,9 @@
   </span>
 </button>
 
-<!-- ============================================================== nav -->
 <header class="nav" id="nav">
   <div class="container nav__inner">
-    <a class="brand" href="#top">
-      <span class="brand__mark">V</span>
-      Vivencia
-    </a>
+    <a class="brand" href="#top"><span class="brand__mark">V</span>Vivencia</a>
 
     <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -72,33 +66,28 @@
     </button>
 
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="#how">Modules</a>
-      <a class="nav__link" href="#roles">Platform</a>
-      <a class="nav__link" href="#modules">Back office</a>
-      <a class="nav__link" href="#faq">FAQ</a>
+      <a class="nav__link" href="#scale">Modules</a>
+      <a class="nav__link" href="#how">Workflows</a>
+      <a class="nav__link" href="#campus">Campus</a>
+      <a class="nav__link" href="#security">Security</a>
     </nav>
 
     <div class="nav__actions">
-      <a class="btn btn--primary btn--sm" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=School%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Book a demo</a>
+      <a class="btn btn--primary btn--sm" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Book a demo</a>
     </div>
   </div>
 </header>
 
-<!-- ============================================================= hero -->
+
 <section class="hero" id="top">
-  <!-- environmental lighting: the hero's pool of light, drawn in CSS so it
-       costs no requests and no images -->
   <div class="hero__atmos" aria-hidden="true">
     <span class="hero__glow hero__glow--cyan"></span>
     <span class="hero__glow hero__glow--lime"></span>
     <span class="hero__art"></span>
   </div>
 
-    <!-- The field, as first drawn: two families of quarter arcs springing
-         from the right edge — one from the bottom corner, one from the top —
-         plus three short rules anchoring the type column on the left. -->
-    <svg class="flow" viewBox="0 0 1440 720" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
-      <defs>
+  <svg class="flow" viewBox="0 0 1440 720" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+    <defs>
         <g id="arcset">
           <path d="M1440 530 A 190 190 0 0 1 1250 720"/>
           <path d="M1440 472 A 248 248 0 0 1 1192 720"/>
@@ -130,318 +119,558 @@
            as travelling rather than sitting still -->
       <use href="#arcset" class="flow__pulse"/>
       <use href="#arcset" class="flow__pulse flow__pulse--b"/>
-    </svg>
-  <div class="container">
+  </svg>
 
-    <h1>One school ERP.
-      <span class="hero__accent">Every desk in the building.</span></h1>
+  <div class="container">
+    <h1>Know what's happening across your institution.
+      <span class="hero__accent">Without asking five people.</span></h1>
 
     <p class="hero__sub">
-      Admissions, academics, examinations, fees and campus life on a single student record —
-      with finance, staff and procurement running underneath on the same shared back office.
+      Admissions knows one thing. Accounts knows another. Teachers have their own records.
+      Administration has another spreadsheet. Vivencia brings it together — from the first
+      admission enquiry to the final certificate.
     </p>
 
     <div class="hero__cta">
-      <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=School%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Start now</a>
-      <a class="btn btn--ghost" href="#how">See the modules</a>
+      <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">See Vivencia in action</a>
+      <a class="btn btn--ghost" href="#scale">Explore all modules</a>
     </div>
 
-    <p class="hero__note">No card. No install. Opens in the browser.</p>
+    <p class="hero__note">No card. No install. Open it in your browser.</p>
 
     <div class="hero__stats">
       <div class="stat">
-        <div class="stat__num">49</div>
-        <div class="stat__label">Modules, from the enquiry form to the transfer certificate</div>
+        <div class="stat__num">54</div>
+        <div class="stat__label">Connected modules, not fifty-four separate tools</div>
       </div>
       <div class="stat">
-        <div class="stat__num">13</div>
-        <div class="stat__label">Roles, from class teacher to principal, each with its own screen</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">16</div>
-        <div class="stat__label">Shared back-office modules the whole school runs on</div>
+        <div class="stat__num">496</div>
+        <div class="stat__label">Capabilities across admissions, academics, money and campus</div>
       </div>
       <div class="stat">
         <div class="stat__num">1</div>
-        <div class="stat__label">Registry defining every module, tab and column</div>
+        <div class="stat__label">Institutional record every department reads and writes</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">9</div>
+        <div class="stat__label">Domains, from enquiry to alumni history</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========================================================== suites -->
-<section class="section" id="how" aria-labelledby="suites-title">
-  <!-- the lens: a disc of brighter dots that follows the pointer -->
+
+<section class="section section--tight" id="problem" aria-labelledby="problem-title">
+  <div class="container">
+    <div class="head head--center">
+      <span class="eyebrow">The problem</span>
+      <h2 id="problem-title">Your institution already has the information. The problem is finding it.</h2>
+      <p>A parent calls about an unpaid fee. Nothing is necessarily missing — it is just
+         sitting in four places, with four people, in four different formats.</p>
+    </div>
+
+    <ol class="trail" role="list">
+      <li><span class="trail__who">Accounts</span><span class="trail__what">checks the ledger</span></li>
+      <li><span class="trail__who">The class teacher</span><span class="trail__what">checks attendance</span></li>
+      <li><span class="trail__who">Transport</span><span class="trail__what">checks another system</span></li>
+      <li><span class="trail__who">Administration</span><span class="trail__what">calls someone else</span></li>
+    </ol>
+
+    <div class="pull pull--center">
+      It's not missing. It's scattered — and every authorized team ends up rebuilding the
+      same answer from a different corner of it.
+      <div class="pull__attr">One student · One record · Every department</div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section band" id="record" aria-labelledby="record-title">
+  <div class="plate" aria-hidden="true">
+    <span class="plate__c plate__c--tl"></span>
+    <span class="plate__c plate__c--tr"></span>
+    <span class="plate__c plate__c--bl"></span>
+    <span class="plate__c plate__c--br"></span>
+    <span class="plate__scale"></span>
+    <span class="plate__stamp">1 / 1</span>
+  </div>
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">The moment it clicks</span>
+      <h2 id="record-title">Enter it once. Let the institution use it everywhere.</h2>
+      <p>An applicant becomes a student — and the student does not have to be rebuilt at
+         every department that needs them.</p>
+    </div>
+
+    <ol class="chain" role="list">
+      <li><span class="chain__i">01</span>The student appears in their section</li>
+      <li><span class="chain__i">02</span>Their fee plan is assigned</li>
+      <li><span class="chain__i">03</span>Their timetable knows where they belong</li>
+      <li><span class="chain__i">04</span>Attendance knows their roll</li>
+      <li><span class="chain__i">05</span>Transport knows their route</li>
+      <li><span class="chain__i">06</span>Examinations know their subjects</li>
+      <li><span class="chain__i">07</span>The parent sees the same student</li>
+      <li><span class="chain__i">08</span>And years later, that record becomes alumni history</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section" id="how" aria-labelledby="how-title">
   <span class="dotlens" aria-hidden="true"></span>
   <div class="container">
     <div class="head head--center">
-      <span class="eyebrow">The school</span>
-      <h2 id="suites-title">Five offices. One student record.</h2>
-      <p>Admissions, academics, examinations, accounts and campus life each get the screens
-         they actually work in. Underneath, all five are declared in one registry and share
-         the same table engine, drawer and form behaviour — so nothing is entered twice.</p>
+      <span class="eyebrow">The work</span>
+      <h2 id="how-title">Five offices. One institutional record.</h2>
+      <p>Admissions, academics, attendance, examinations and fees each get the screens they
+         actually work in — reading and writing the same student underneath.</p>
     </div>
 
     <div class="steps">
 
-      <!-- 01 -->
       <article class="step">
         <div class="step__text">
           <div class="step__num"><span class="step__digits">01</span><span class="step__label">Admissions</span></div>
-          <h3>Enquiry to enrolled, without re-typing a form.</h3>
-          <p class="step__lede">The admission season end to end: enquiries, forms, document checklists, entrance results and seat allotment — with the enrolled student carried straight into academics and fees.</p>
+          <h3>A new admission should create a student. Not more data entry.</h3>
+          <p class="step__lede">The entire funnel from first enquiry to enrollment — leads, applications, entrance tests, interviews, offers, documents and campaigns. Once admitted, what was collected becomes the student's institutional record.</p>
 
           <ul class="features">
             <li class="feature">
               <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
               <div>
-                <div class="feature__title">Enquiries and follow-up</div>
-                <p class="feature__body">Walk-ins, calls and online forms in one pipeline, with follow-ups that do not get lost.</p>
+                <div class="feature__title">Leads and applications</div>
+                <p class="feature__body">Walk-ins, calls and online forms in one funnel, with follow-ups that do not get lost.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
               <div>
-                <div class="feature__title">Documents and verification</div>
-                <p class="feature__body">Birth certificate, transfer certificate, photographs — checked against a list, not a memory.</p>
+                <div class="feature__title">Tests, interviews, offers</div>
+                <p class="feature__body">Entrance scores, interview panels and offer letters against the same application.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               <div>
-                <div class="feature__title">Seat allotment</div>
-                <p class="feature__body">Section strength against applications, so no class quietly runs over.</p>
+                <div class="feature__title">Documents and enrollment</div>
+                <p class="feature__body">The checklist that turns an offer into a roll number, a section and a fee plan.</p>
               </div>
             </li>
           </ul>
 
           <div class="pull">
-            An admission closed here becomes a roll number, a fee plan and a seat in a section — in one step, not three.
-            <div class="pull__attr">Vivencia · Admissions · 12 tabs</div>
+            The office finishes the admission. The rest of the institution can begin.
+            <div class="pull__attr">Vivencia · Admissions · 8 capabilities</div>
           </div>
         </div>
 
         <div class="step__visual">
           <div class="screen">
-            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">school / admissions</span></div>
+            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">admissions / funnel</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Enquiries</strong><div class="row__meta">Source · Follow-up · Status</div></div><span class="tag tag--ok">4 tabs</span></div>
+              <div class="row"><div><strong>Leads</strong><div class="row__meta">Source · Campaign · Follow-up</div></div><span class="tag tag--ok">4 tabs</span></div>
               <div class="row"><div><strong>Applications</strong><div class="row__meta">Forms · Documents · Verification</div></div><span class="tag tag--info">4 tabs</span></div>
               <div class="row"><div><strong>Entrance &amp; interview</strong><div class="row__meta">Schedules · Scores · Shortlist</div></div><span class="tag tag--calm">2 tabs</span></div>
-              <div class="row"><div><strong>Allotment</strong><div class="row__meta">Class · Section · Roll number</div></div><span class="tag tag--muted">2 tabs</span></div>
+              <div class="row"><div><strong>Enrollment</strong><div class="row__meta">Offers · Section · Roll number</div></div><span class="tag tag--muted">2 tabs</span></div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- 02 -->
       <article class="step">
         <div class="step__text">
           <div class="step__num"><span class="step__digits">02</span><span class="step__label">Academics</span></div>
-          <h3>The timetable, and everything that hangs off it.</h3>
-          <p class="step__lede">Classes, sections, subjects and teacher load in one grid — with daily attendance, substitutions, homework and the lesson record all reading from it.</p>
+          <h3>When the timetable changes, everyone affected should know.</h3>
+          <p class="step__lede">Programs, subjects, sections, teachers, rooms, periods and substitutions live in one academic structure — so a change at the source is a change everyone sees.</p>
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
               <div>
-                <div class="feature__title">Timetable and teacher load</div>
-                <p class="feature__body">The class grid with clashes surfaced on the cell, not discovered in week two.</p>
+                <div class="feature__title">Timetable and allocation</div>
+                <p class="feature__body">The class grid with faculty load and room clashes surfaced on the cell.</p>
               </div>
             </li>
             <li class="feature">
               <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
               <div>
-                <div class="feature__title">Attendance and substitutions</div>
-                <p class="feature__body">Period-wise or day-wise, with an absent teacher covered from the same screen.</p>
+                <div class="feature__title">Curriculum and lesson plans</div>
+                <p class="feature__body">Syllabus, coverage and the academic calendar against the sections that follow them.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               <div>
-                <div class="feature__title">Homework and lesson record</div>
-                <p class="feature__body">What was set and what was covered, visible to parents the same evening.</p>
+                <div class="feature__title">Electives and substitutions</div>
+                <p class="feature__body">An absent teacher covered from the same screen the timetable lives on.</p>
               </div>
             </li>
           </ul>
 
           <div class="pull">
-            Attendance marked in the second period is the attendance the parent sees at lunchtime.
-            <div class="pull__attr">Vivencia · Academics · 11 tabs</div>
+            A teacher shouldn't have to discover a timetable change through a WhatsApp message.
+            <div class="pull__attr">Vivencia · Academics · 8 capabilities</div>
           </div>
         </div>
 
         <div class="step__visual">
           <div class="screen">
-            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">school / academics</span></div>
+            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">academics / structure</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Timetable</strong><div class="row__meta">Classes · Sections · Subjects · Load</div></div><span class="tag tag--info">4 tabs</span></div>
-              <div class="row"><div><strong>Attendance</strong><div class="row__meta">Daily · Period · Leave · Substitutions</div></div><span class="tag tag--ok">4 tabs</span></div>
-              <div class="row"><div><strong>Lesson record</strong><div class="row__meta">Syllabus · Coverage · Homework</div></div><span class="tag tag--calm">3 tabs</span></div>
-              <div class="row"><div><strong>Discipline</strong><div class="row__meta">Remarks · Merits · Parent notes</div></div><span class="tag tag--muted">2 tabs</span></div>
+              <div class="row"><div><strong>Timetable</strong><div class="row__meta">Periods · Rooms · Faculty load</div></div><span class="tag tag--info">4 tabs</span></div>
+              <div class="row"><div><strong>Curriculum</strong><div class="row__meta">Programs · Subjects · Outcomes</div></div><span class="tag tag--ok">4 tabs</span></div>
+              <div class="row"><div><strong>Lesson plans</strong><div class="row__meta">Syllabus · Coverage · Homework</div></div><span class="tag tag--calm">3 tabs</span></div>
+              <div class="row"><div><strong>Substitutions</strong><div class="row__meta">Absences · Cover · History</div></div><span class="tag tag--muted">2 tabs</span></div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- 03 -->
       <article class="step">
         <div class="step__text">
-          <div class="step__num"><span class="step__digits">03</span><span class="step__label">Examinations</span></div>
-          <h3>Marks in once, and the report card does the arithmetic.</h3>
-          <p class="step__lede">Exam schemes, seating and invigilation, mark entry, grading and results — with report cards and transcripts printed from the same marks, not re-keyed from them.</p>
+          <div class="step__num"><span class="step__digits">03</span><span class="step__label">Attendance</span></div>
+          <h3>Attendance should tell you more than who was absent.</h3>
+          <p class="step__lede">Mark it period by period, track late arrivals, handle corrections and connect attendance devices — then see the patterns before they become problems.</p>
 
           <ul class="features">
+            <li class="feature">
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <div>
+                <div class="feature__title">Period and daily marking</div>
+                <p class="feature__body">Student and faculty attendance, marked where the teacher already is.</p>
+              </div>
+            </li>
             <li class="feature">
               <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span>
               <div>
-                <div class="feature__title">Schemes and schedules</div>
-                <p class="feature__body">Weightings, grade bands and the exam calendar defined once per term.</p>
+                <div class="feature__title">Devices and corrections</div>
+                <p class="feature__body">Biometric and RFID feeds, with a correction trail rather than an overwrite.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h6a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
               <div>
-                <div class="feature__title">Mark entry and moderation</div>
-                <p class="feature__body">Subject teachers enter, the exam office moderates, and the trail is kept.</p>
-              </div>
-            </li>
-            <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="14" height="11" rx="2"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></span>
-              <div>
-                <div class="feature__title">Report cards and transcripts</div>
-                <p class="feature__body">Printed from the marks on record, in the school's own format.</p>
+                <div class="feature__title">Patterns, not totals</div>
+                <p class="feature__body">Late arrivals, early departures and the absences that are becoming a habit.</p>
               </div>
             </li>
           </ul>
 
           <div class="pull">
-            A subject the year group is failing shows up in week three, not on results day.
-            <div class="pull__attr">Vivencia · Examinations · 9 tabs</div>
+            A pattern you discover today is more useful than a report you discover next month.
+            <div class="pull__attr">Vivencia · Attendance · 7 capabilities</div>
           </div>
         </div>
 
         <div class="step__visual">
           <div class="screen">
-            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">school / examinations</span></div>
+            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">attendance / today</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Exam schemes</strong><div class="row__meta">Terms · Weightings · Grade bands</div></div><span class="tag tag--info">3 tabs</span></div>
-              <div class="row"><div><strong>Seating &amp; invigilation</strong><div class="row__meta">Halls · Seating · Duty roster</div></div><span class="tag tag--ok">2 tabs</span></div>
-              <div class="row"><div><strong>Marks</strong><div class="row__meta">Entry · Moderation · Lock</div></div><span class="tag tag--calm">2 tabs</span></div>
-              <div class="row"><div><strong>Results</strong><div class="row__meta">Report cards · Ranks · Transcripts</div></div><span class="tag tag--muted">2 tabs</span></div>
+              <div class="row"><div><strong>Student attendance</strong><div class="row__meta">Daily · Period · Leave</div></div><span class="tag tag--ok">4 tabs</span></div>
+              <div class="row"><div><strong>Faculty attendance</strong><div class="row__meta">Present · On duty · Leave</div></div><span class="tag tag--info">3 tabs</span></div>
+              <div class="row"><div><strong>Devices</strong><div class="row__meta">Biometric · RFID · Sync</div></div><span class="tag tag--calm">2 tabs</span></div>
+              <div class="row"><div><strong>Corrections</strong><div class="row__meta">Requests · Approvals · Trail</div></div><span class="tag tag--muted">2 tabs</span></div>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- 04 -->
       <article class="step">
         <div class="step__text">
-          <div class="step__num"><span class="step__digits">04</span><span class="step__label">Fees</span></div>
-          <h3>Fee plan to receipt, with dues visible before they age.</h3>
-          <p class="step__lede">Fee heads, instalment plans, concessions and scholarships, counter and online collection, and a dues list the office can act on rather than reconstruct.</p>
+          <div class="step__num"><span class="step__digits">04</span><span class="step__label">Examinations</span></div>
+          <h3>Marks should become answers. Not another spreadsheet.</h3>
+          <p class="step__lede">Plan assessments, create examinations, assign rooms and invigilators, enter marks, publish results and generate transcripts from one workflow.</p>
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
               <div>
-                <div class="feature__title">Fee plans and concessions</div>
-                <p class="feature__body">Heads, instalments, sibling and staff concessions, applied by rule rather than by hand.</p>
+                <div class="feature__title">Schemes and question banks</div>
+                <p class="feature__body">Weightings and grade bands defined once, per term and per programme.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 19a2 2 0 0 0 1.8 3h12.4A2 2 0 0 0 20 19L15 8V2"/><path d="M8 2h8"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
               <div>
-                <div class="feature__title">Collection and receipts</div>
-                <p class="feature__body">Counter, cheque, UPI or gateway — one receipt series, reconciled daily.</p>
+                <div class="feature__title">Halls, seating, invigilation</div>
+                <p class="feature__body">Hall tickets, seating plans and duty rosters from the same enrolment.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+              <div>
+                <div class="feature__title">Results and transcripts</div>
+                <p class="feature__body">Gradebook, revaluation, SGPA/CGPA and transcripts off the marks on record.</p>
+              </div>
+            </li>
+          </ul>
+
+          <div class="pull">
+            Then ask the question that matters: who needs attention before the final result?
+            <div class="pull__attr">Vivencia · Examinations · 11 capabilities</div>
+          </div>
+        </div>
+
+        <div class="step__visual">
+          <div class="screen">
+            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">examinations / cycle</span></div>
+            <div class="screen__body">
+              <div class="row"><div><strong>Assessment schemes</strong><div class="row__meta">Terms · Weightings · Grades</div></div><span class="tag tag--info">3 tabs</span></div>
+              <div class="row"><div><strong>Hall tickets &amp; seating</strong><div class="row__meta">Halls · Seating · Invigilation</div></div><span class="tag tag--ok">3 tabs</span></div>
+              <div class="row"><div><strong>Marks</strong><div class="row__meta">Entry · Moderation · Lock</div></div><span class="tag tag--calm">3 tabs</span></div>
+              <div class="row"><div><strong>Results</strong><div class="row__meta">Gradebook · Revaluation · Transcripts</div></div><span class="tag tag--muted">2 tabs</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="step__text">
+          <div class="step__num"><span class="step__digits">05</span><span class="step__label">Fees</span></div>
+          <h3>Know what came in. Know what's still due. Now.</h3>
+          <p class="step__lede">Fee demand, invoices, receipts, partial payments, discounts and scholarships — with a student ledger underneath that every number traces back to.</p>
+
+          <ul class="features">
+            <li class="feature">
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+              <div>
+                <div class="feature__title">Demand and collection</div>
+                <p class="feature__body">Counter, cheque, UPI or gateway, reconciled against one receipt series.</p>
+              </div>
+            </li>
+            <li class="feature">
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+              <div>
+                <div class="feature__title">Discounts and scholarships</div>
+                <p class="feature__body">Sibling, staff, merit and aid applied by rule rather than by hand.</p>
+              </div>
+            </li>
+            <li class="feature">
+              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
               <div>
                 <div class="feature__title">Dues and reminders</div>
-                <p class="feature__body">Ageing by class and by term, with reminders that go out from the same list.</p>
+                <p class="feature__body">Ageing by class and term, with reminders sent from the same list.</p>
               </div>
             </li>
           </ul>
 
           <div class="pull">
-            The dues list is the ledger filtered, not a spreadsheet somebody rebuilds each Monday.
-            <div class="pull__attr">Vivencia · Fees · 11 tabs</div>
+            The dues list shouldn't be recreated. It should already exist.
+            <div class="pull__attr">Vivencia · Fees · 11 capabilities</div>
           </div>
         </div>
 
         <div class="step__visual">
           <div class="screen">
-            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">school / fees</span></div>
+            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">fees / ledger</span></div>
             <div class="screen__body">
-              <div class="row"><div><strong>Fee structure</strong><div class="row__meta">Heads · Instalments · Class-wise</div></div><span class="tag tag--info">3 tabs</span></div>
-              <div class="row"><div><strong>Concessions</strong><div class="row__meta">Sibling · Staff · Merit · Aid</div></div><span class="tag tag--ok">2 tabs</span></div>
-              <div class="row"><div><strong>Collection</strong><div class="row__meta">Counter · Online · Receipts · Refunds</div></div><span class="tag tag--calm">4 tabs</span></div>
-              <div class="row"><div><strong>Dues</strong><div class="row__meta">Ageing · Reminders · Defaulters</div></div><span class="tag tag--muted">2 tabs</span></div>
+              <div class="row"><div><strong>Fee demand</strong><div class="row__meta">Heads · Instalments · Class-wise</div></div><span class="tag tag--info">3 tabs</span></div>
+              <div class="row"><div><strong>Collection</strong><div class="row__meta">Counter · Online · Receipts</div></div><span class="tag tag--ok">4 tabs</span></div>
+              <div class="row"><div><strong>Student ledger</strong><div class="row__meta">Charges · Payments · Balance</div></div><span class="tag tag--calm">2 tabs</span></div>
+              <div class="row"><div><strong>Defaulters</strong><div class="row__meta">Ageing · Reminders · Refunds</div></div><span class="tag tag--muted">3 tabs</span></div>
             </div>
           </div>
         </div>
       </article>
-
-      <!-- 05 -->
-      <article class="step">
-        <div class="step__text">
-          <div class="step__num"><span class="step__digits">05</span><span class="step__label">Campus life</span></div>
-          <h3>Hostel, transport and library on the same roll.</h3>
-          <p class="step__lede">Rooms and wardens, bus routes and stops, library issues and returns, the infirmary log and the gate register — the parts of the day that happen outside the classroom.</p>
-
-          <ul class="features">
-            <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-              <div>
-                <div class="feature__title">Hostel and mess</div>
-                <p class="feature__body">Blocks, rooms and allotment, with the mess register and night attendance.</p>
-              </div>
-            </li>
-            <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9"/><path d="M12 12l4-3"/></svg></span>
-              <div>
-                <div class="feature__title">Transport</div>
-                <p class="feature__body">Routes, stops and vehicles, with each student mapped to a pick-up point.</p>
-              </div>
-            </li>
-            <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span>
-              <div>
-                <div class="feature__title">Library and infirmary</div>
-                <p class="feature__body">Issues, returns and fines; visits, medication given and the parent informed.</p>
-              </div>
-            </li>
-          </ul>
-
-          <div class="pull">
-            A child who did not board the bus is a flagged row that evening, not a phone call at nine.
-            <div class="pull__attr">Vivencia · Campus life · 10 tabs</div>
-          </div>
-        </div>
-
-        <div class="step__visual">
-          <div class="screen">
-            <div class="screen__bar"><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__dot"></span><span class="screen__title">school / campus life</span></div>
-            <div class="screen__body">
-              <div class="row"><div><strong>Hostel</strong><div class="row__meta">Blocks · Rooms · Allotment · Mess</div></div><span class="tag tag--info">4 tabs</span></div>
-              <div class="row"><div><strong>Transport</strong><div class="row__meta">Routes · Stops · Vehicles · Passes</div></div><span class="tag tag--ok">3 tabs</span></div>
-              <div class="row"><div><strong>Library</strong><div class="row__meta">Catalogue · Issues · Returns · Fines</div></div><span class="tag tag--calm">2 tabs</span></div>
-              <div class="row"><div><strong>Infirmary</strong><div class="row__meta">Visits · Medication · Parent alerts</div></div><span class="tag tag--muted">1 tab</span></div>
-            </div>
-          </div>
-        </div>
-      </article>
-
     </div>
   </div>
 </section>
 
-<!-- ========================================================= platform -->
-<section class="section section--tight" id="roles" aria-labelledby="platform-title">
-  <!-- abstract field: rings, a rotated square and a dot grid, all drawn in CSS
-       so the section carries some geometry without another request -->
+<section class="section band" id="scale" aria-labelledby="scale-title">
+  <div class="plate" aria-hidden="true">
+    <span class="plate__c plate__c--tl"></span>
+    <span class="plate__c plate__c--tr"></span>
+    <span class="plate__c plate__c--bl"></span>
+    <span class="plate__c plate__c--br"></span>
+    <span class="plate__scale"></span>
+    <span class="plate__stamp">54 / 54</span>
+  </div>
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">The scale</span>
+      <h2 id="scale-title">How much of your institution can Vivencia run?</h2>
+      <p>Fifty-four modules and four hundred and ninety-six capabilities — and they are not
+         496 disconnected tools. They are one connected system.</p>
+    </div>
+
+    <div class="deck">
+      <div class="deck__grid" id="reelDeck">
+          <article class="deck__card" data-domain="finance">
+            <span class="deck__ghost" aria-hidden="true">01</span>
+            <div class="deck__meta">
+              <span class="deck__index">01 / 09</span>
+              <span class="deck__count">9 modules</span>
+            </div>
+            <h3 class="deck__title">Admissions &amp; Students</h3>
+            <p class="deck__lede">Enquiry to certificate, on one student identity.</p>
+            <ul class="deck__list" role="list">
+              <li><span>CRM</span></li>
+              <li><span>Applications</span></li>
+              <li><span>Enrollment</span></li>
+              <li><span>Student 360</span></li>
+              <li><span>Guardians</span></li>
+              <li><span>Documents</span></li>
+              <li><span>Promotions</span></li>
+              <li><span>Transfers</span></li>
+              <li><span>Certificates</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="people">
+            <span class="deck__ghost" aria-hidden="true">02</span>
+            <div class="deck__meta">
+              <span class="deck__index">02 / 09</span>
+              <span class="deck__count">8 modules</span>
+            </div>
+            <h3 class="deck__title">Teaching &amp; Academics</h3>
+            <p class="deck__lede">The structure the teaching day is built on.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Curriculum</span></li>
+              <li><span>Timetable</span></li>
+              <li><span>Attendance</span></li>
+              <li><span>LMS</span></li>
+              <li><span>Homework</span></li>
+              <li><span>Examinations</span></li>
+              <li><span>Report Cards</span></li>
+              <li><span>OBE</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="procure">
+            <span class="deck__ghost" aria-hidden="true">03</span>
+            <div class="deck__meta">
+              <span class="deck__index">03 / 09</span>
+              <span class="deck__count">7 modules</span>
+            </div>
+            <h3 class="deck__title">Money &amp; Administration</h3>
+            <p class="deck__lede">Fees in, salaries and suppliers out, on one ledger.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Fees</span></li>
+              <li><span>Finance</span></li>
+              <li><span>Scholarships</span></li>
+              <li><span>Payroll</span></li>
+              <li><span>Procurement</span></li>
+              <li><span>Inventory</span></li>
+              <li><span>Assets</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="ops">
+            <span class="deck__ghost" aria-hidden="true">04</span>
+            <div class="deck__meta">
+              <span class="deck__index">04 / 09</span>
+              <span class="deck__count">7 modules</span>
+            </div>
+            <h3 class="deck__title">People</h3>
+            <p class="deck__lede">The employee journey from recruitment to payroll.</p>
+            <ul class="deck__list" role="list">
+              <li><span>HR</span></li>
+              <li><span>Faculty</span></li>
+              <li><span>Recruitment</span></li>
+              <li><span>Workload</span></li>
+              <li><span>Leave</span></li>
+              <li><span>Performance</span></li>
+              <li><span>Payroll</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="finance">
+            <span class="deck__ghost" aria-hidden="true">05</span>
+            <div class="deck__meta">
+              <span class="deck__index">05 / 09</span>
+              <span class="deck__count">8 modules</span>
+            </div>
+            <h3 class="deck__title">Campus</h3>
+            <p class="deck__lede">Everything that happens outside the classroom.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Transport</span></li>
+              <li><span>Hostel</span></li>
+              <li><span>Library</span></li>
+              <li><span>Clinic</span></li>
+              <li><span>Facilities</span></li>
+              <li><span>Front Office</span></li>
+              <li><span>Cafeteria</span></li>
+              <li><span>Events</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="people">
+            <span class="deck__ghost" aria-hidden="true">06</span>
+            <div class="deck__meta">
+              <span class="deck__index">06 / 09</span>
+              <span class="deck__count">6 modules</span>
+            </div>
+            <h3 class="deck__title">Student Life</h3>
+            <p class="deck__lede">The parts of a student that are not marks.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Counseling</span></li>
+              <li><span>Discipline</span></li>
+              <li><span>Health</span></li>
+              <li><span>Sports</span></li>
+              <li><span>Clubs</span></li>
+              <li><span>Activities</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="procure">
+            <span class="deck__ghost" aria-hidden="true">07</span>
+            <div class="deck__meta">
+              <span class="deck__index">07 / 09</span>
+              <span class="deck__count">5 modules</span>
+            </div>
+            <h3 class="deck__title">Institutional Growth</h3>
+            <p class="deck__lede">What the institution is judged on.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Placements</span></li>
+              <li><span>Alumni</span></li>
+              <li><span>Research</span></li>
+              <li><span>Accreditation</span></li>
+              <li><span>Quality</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="ops">
+            <span class="deck__ghost" aria-hidden="true">08</span>
+            <div class="deck__meta">
+              <span class="deck__index">08 / 09</span>
+              <span class="deck__count">6 modules</span>
+            </div>
+            <h3 class="deck__title">Operations</h3>
+            <p class="deck__lede">How work moves between departments.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Communication</span></li>
+              <li><span>Forms</span></li>
+              <li><span>Helpdesk</span></li>
+              <li><span>Approvals</span></li>
+              <li><span>Documents</span></li>
+              <li><span>Analytics</span></li>
+            </ul>
+          </article>
+          <article class="deck__card" data-domain="finance">
+            <span class="deck__ghost" aria-hidden="true">09</span>
+            <div class="deck__meta">
+              <span class="deck__index">09 / 09</span>
+              <span class="deck__count">5 modules</span>
+            </div>
+            <h3 class="deck__title">Platform &amp; Control</h3>
+            <p class="deck__lede">Who may see what, and on which campus.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Security</span></li>
+              <li><span>Integrations</span></li>
+              <li><span>Configuration</span></li>
+              <li><span>Multi-campus</span></li>
+              <li><span>Data Management</span></li>
+            </ul>
+          </article>
+        </div>
+      <div class="deck__dots" id="reelDots">
+          <button class="deck__dot is-on" type="button" aria-label="Go to Admissions and Students"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Teaching and Academics"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Money and Administration"></button>
+          <button class="deck__dot" type="button" aria-label="Go to People"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Campus"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Student Life"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Institutional Growth"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Operations"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Platform and Control"></button>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" id="insight" aria-labelledby="insight-title">
   <div class="shapes" aria-hidden="true">
     <span class="shapes__ring shapes__ring--lg"></span>
     <span class="shapes__ring shapes__ring--sm"></span>
@@ -453,363 +682,134 @@
   </div>
   <div class="container">
     <div class="head head--center">
-      <span class="eyebrow">The platform</span>
-      <h2 id="platform-title">What every office gets for free</h2>
-      <p>The behaviour that makes software usable — searching, sorting, filtering, saving —
-         is written once and inherited, so the fee counter and the exam office work the
-         same way and neither needs its own training day.</p>
+      <span class="eyebrow">The principal's view</span>
+      <h2 id="insight-title">Stop managing through updates. Start managing through visibility.</h2>
+      <p>Everyday institutional activity, turned into the answers leadership actually asks for.</p>
+    </div>
+
+    <ul class="asks" role="list">
+      <li>How many admissions converted?</li>
+      <li>Who was absent today?</li>
+      <li>Which fees are overdue?</li>
+      <li>Which subjects are underperforming?</li>
+      <li>Which faculty are overloaded?</li>
+      <li>Which approvals are waiting?</li>
+      <li>What's happening across campuses?</li>
+    </ul>
+
+    <div class="head head--center" style="margin-top:2.5rem">
+      <h3 class="asks__title">Reports &amp; analytics</h3>
+    </div>
+    <ul class="chips" role="list"><li>Student Performance</li><li>Academic Risk</li><li>Subject Performance</li><li>Faculty Performance</li><li>Admission Funnel</li><li>Fee Collection</li><li>Outstanding Fees</li><li>Transport Usage</li><li>Hostel Occupancy</li><li>Library Usage</li></ul>
+  </div>
+</section>
+
+<section class="section section--tight" id="roles" aria-labelledby="roles-title">
+  <div class="container">
+    <div class="head head--center">
+      <span class="eyebrow">For the people using it</span>
+      <h2 id="roles-title">Powerful software is useless if people avoid using it.</h2>
+      <p>Vivencia doesn't make every department learn a different product. Search, tables,
+         filters, forms and approvals behave the same way wherever you are — so someone
+         collecting a fee, marking attendance or receiving inventory is doing the same
+         four things in a different vocabulary.</p>
     </div>
 
     <div class="grid-4">
       <div class="card">
-        <div class="card__icon i-coral" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
-        <h3>One table engine</h3>
-        <p>Search, multi-column sort, filter, pagination, row selection and bulk actions —
-           identical in a fee register, an attendance sheet and a transport roll.</p>
-        <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
-            <rect x=".5" y=".5" width="219" height="15" rx="3" class="v-head"/>
-            <path d="M96 4.5v7M150 4.5v7" class="v-rule"/>
-            <path d="M8 8h18M104 8h30M158 8h14" class="v-th"/>
-            <rect x="0" y="20" width="220" height="15" rx="3" class="v-sel"/>
-            <rect x="7" y="24" width="7" height="7" rx="1.5" class="v-box v-box--on"/>
-            <path d="M8.6 27.6l1.6 1.6 3-3.2" class="v-tick"/>
-            <path d="M20 27.5h44M104 27.5h22M158 27.5h34" class="v-td"/>
-            <rect x="7" y="43" width="7" height="7" rx="1.5" class="v-box"/>
-            <path d="M20 46.5h52M104 46.5h30M158 46.5h26" class="v-td"/>
-            <rect x="7" y="61" width="7" height="7" rx="1.5" class="v-box"/>
-            <path d="M20 64.5h38M104 64.5h18M158 64.5h40" class="v-td"/>
-          </svg>
-        </div>
+        <div class="card__icon i-blue" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>Learn it once</h3>
+        <p>One table engine, one drawer, one form pattern. Identical in a fee register, an
+           attendance sheet and a stock receipt.</p>
       </div>
       <div class="card">
-        <div class="card__icon i-blue" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 4.5v11L12 22 3 17.5v-11z"/><path d="M12 22V12l9-4.5"/><path d="M3 7.5L12 12"/></svg>
-        </div>
-        <h3>Roles that scope the app</h3>
-        <p>Switching role changes the sidebar, the command palette and the landing screen.
-           A class teacher and the accounts clerk never meet each other's modules.</p>
-        <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
-            <rect x=".5" y=".5" width="63" height="71" rx="4" class="v-rail v-rail--on"/>
-            <path d="M10 13h30M10 26h38M10 39h24M10 52h34" class="v-td"/>
-            <rect x="6" y="21.5" width="46" height="9" rx="2" class="v-chip"/>
-            <rect x="78.5" y=".5" width="63" height="71" rx="4" class="v-rail"/>
-            <path d="M88 13h36M88 26h22M88 39h34M88 52h28" class="v-td"/>
-            <rect x="84" y="47.5" width="46" height="9" rx="2" class="v-chip"/>
-            <rect x="156.5" y=".5" width="63" height="71" rx="4" class="v-rail"/>
-            <path d="M166 13h24M166 26h34M166 39h30M166 52h20" class="v-td"/>
-            <rect x="162" y="8.5" width="46" height="9" rx="2" class="v-chip"/>
-          </svg>
-        </div>
+        <div class="card__icon i-coral" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Nobody sees all 496</h3>
+        <p>A teacher sees what a teacher needs. Accounts sees finance. HR sees employees.
+           One platform does not mean one screen for everyone.</p>
       </div>
       <div class="card">
-        <div class="card__icon i-green" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
-        </div>
-        <h3>A registry, not a rebuild</h3>
-        <p>A module is a config entry: typed columns in a compact DSL, or a bespoke view
-           when the tab genuinely needs one.</p>
-        <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
-            <path d="M6 8h4M6 22h4M6 36h4M6 50h4M6 64h4" class="v-gutter"/>
-            <path d="M20 8h34" class="v-key"/><path d="M60 8h26" class="v-val"/>
-            <path d="M28 22h30" class="v-key"/><path d="M64 22h44" class="v-val"/>
-            <path d="M28 36h24" class="v-key"/><path d="M58 36h34" class="v-val"/>
-            <path d="M28 50h38" class="v-key"/><path d="M72 50h20" class="v-val"/>
-            <path d="M20 64h28" class="v-key"/>
-            <rect x="130.5" y="12.5" width="82" height="47" rx="5" class="v-out"/>
-            <path d="M140 26h30M140 36h50M140 46h38" class="v-td"/>
-            <path d="M104 36h20m0 0l-5-4m5 4l-5 4" class="v-arrow"/>
-          </svg>
-        </div>
+        <div class="card__icon i-green" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>Parents and students</h3>
+        <p>A controlled view of attendance, progress, communication and meetings — from the
+           same system staff use, not yesterday's export.</p>
       </div>
       <div class="card">
-        <div class="card__icon i-purple" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg>
-        </div>
+        <div class="card__icon i-purple" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
         <h3>Desk, tablet or phone</h3>
-        <p>Fixed sidebar and wide tables in the office; a drawer, single-column tiles and
-           stacked cards for a teacher marking attendance on a phone.</p>
-        <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
-            <rect x=".5" y="4.5" width="118" height="60" rx="4" class="v-out"/>
-            <path d="M28.5 5v59" class="v-rule"/>
-            <path d="M8 16h13M8 26h13M8 36h13" class="v-td"/>
-            <path d="M38 18h70M38 30h56M38 42h70M38 54h44" class="v-td"/>
-            <rect x="130.5" y="8.5" width="46" height="56" rx="4" class="v-out"/>
-            <path d="M138 20h31M138 32h31M138 44h20" class="v-td"/>
-            <rect x="188.5" y="14.5" width="30" height="50" rx="4" class="v-out v-out--on"/>
-            <path d="M195 26h17M195 36h17M195 46h11" class="v-td"/>
-          </svg>
-        </div>
+        <p>Fixed sidebar and wide tables in the office; a drawer and stacked cards for a
+           teacher marking attendance in the corridor.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ====================================================== back office -->
-<section class="section band" id="modules">
-  <!-- the drawing frame: a hairline rectangle with corner brackets and a
-       ruled scale, so the division reads as a technical plate -->
-  <div class="plate" aria-hidden="true">
-    <span class="plate__c plate__c--tl"></span>
-    <span class="plate__c plate__c--tr"></span>
-    <span class="plate__c plate__c--bl"></span>
-    <span class="plate__c plate__c--br"></span>
-    <span class="plate__scale"></span>
-    <span class="plate__stamp">16 / 16</span>
-  </div>
+<section class="section" id="campus" aria-labelledby="campus-title">
   <div class="container">
     <div class="head">
-      <span class="eyebrow">Shared back office</span>
-      <h2 id="backoffice-title">Sixteen modules. One operating core.</h2>
-      <p>A school is also a payroll, a purchase register and a set of books. The same
-         sixteen modules sit beneath every office — so the fee counter and the salary run
-         close through the same ledger.</p>
+      <span class="eyebrow">Campus</span>
+      <h2 id="campus-title">The institution doesn't stop outside the classroom.</h2>
+      <p>Transport, hostel, library, health and facilities — with the same student identity
+         following them through all of it.</p>
     </div>
 
-      <div class="orbit" id="orbit">
-        <div class="orbit__stage">
-          <div class="orbit__bloom"></div>
-          <div class="orbit__track orbit__track--1"></div>
-          <div class="orbit__track orbit__track--2"></div>
-          <div class="orbit__track orbit__track--3"></div>
-
-      <ul class="ring ring--cw" style="--p:60.00s" role="list">
-        <li class="node" style="--a:0.00deg;--r:8.5em;--sd:-0.00s;--sp:60.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Analytics" data-group="Operations" data-desc="Every module reports into one warehouse.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Analytics</span>
-          </button>
-        </li>
-        <li class="node" style="--a:90.00deg;--r:8.5em;--sd:-15.00s;--sp:60.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Administration" data-group="Operations" data-desc="Roles, permissions and org structure.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Administration</span>
-          </button>
-        </li>
-        <li class="node" style="--a:180.00deg;--r:8.5em;--sd:-30.00s;--sp:60.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Integrations" data-group="Operations" data-desc="Payments, messaging and device feeds.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Integrations</span>
-          </button>
-        </li>
-        <li class="node" style="--a:270.00deg;--r:8.5em;--sd:-45.00s;--sp:60.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Settings" data-group="Operations" data-desc="Fiscal calendar, numbering, localisation.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Settings</span>
-          </button>
-        </li>
-      </ul>
-      <ul class="ring ring--ccw" style="--p:78.00s" role="list">
-        <li class="node" style="--a:0.00deg;--r:13.0em;--sd:-78.00s;--sp:78.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="General Ledger" data-group="Finance" data-desc="One ledger behind fees, salaries and purchases.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">General Ledger</span>
-          </button>
-        </li>
-        <li class="node" style="--a:72.00deg;--r:13.0em;--sd:-62.40s;--sp:78.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Accounts Payable" data-group="Finance" data-desc="Vendor bills verified before they are paid.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Accounts Payable</span>
-          </button>
-        </li>
-        <li class="node" style="--a:144.00deg;--r:13.0em;--sd:-46.80s;--sp:78.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Accounts Receivable" data-group="Finance" data-desc="Invoices, ageing and collection in one place.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Accounts Receivable</span>
-          </button>
-        </li>
-        <li class="node" style="--a:216.00deg;--r:13.0em;--sd:-31.20s;--sp:78.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Costing &amp; Budgets" data-group="Finance" data-desc="Budget against actual, per cost centre.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Costing &amp; Budgets</span>
-          </button>
-        </li>
-        <li class="node" style="--a:288.00deg;--r:13.0em;--sd:-15.60s;--sp:78.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Tax &amp; Compliance" data-group="Finance" data-desc="Statutory filings from the same records.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Tax &amp; Compliance</span>
-          </button>
-        </li>
-      </ul>
-      <ul class="ring ring--cw" style="--p:96.00s" role="list">
-        <li class="node" style="--a:0.00deg;--r:17.5em;--sd:-0.00s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Workforce" data-group="People" data-desc="Every teacher and staff record, in one place.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Workforce</span>
-          </button>
-        </li>
-        <li class="node" style="--a:51.43deg;--r:17.5em;--sd:-13.71s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Time &amp; Attendance" data-group="People" data-desc="Shifts, rosters and hours worked.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Time &amp; Attendance</span>
-          </button>
-        </li>
-        <li class="node" style="--a:102.86deg;--r:17.5em;--sd:-27.43s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Payroll &amp; Benefits" data-group="People" data-desc="Pay runs computed from attendance.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Payroll &amp; Benefits</span>
-          </button>
-        </li>
-        <li class="node" style="--a:154.29deg;--r:17.5em;--sd:-41.14s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Talent" data-group="People" data-desc="Recruitment, onboarding and appraisal.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Talent</span>
-          </button>
-        </li>
-        <li class="node" style="--a:205.71deg;--r:17.5em;--sd:-54.86s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Sourcing" data-group="Procurement" data-desc="Vendors, rate contracts and comparatives.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Sourcing</span>
-          </button>
-        </li>
-        <li class="node" style="--a:257.14deg;--r:17.5em;--sd:-68.57s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Purchasing" data-group="Procurement" data-desc="Requisition to purchase order to receipt.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Purchasing</span>
-          </button>
-        </li>
-        <li class="node" style="--a:308.57deg;--r:17.5em;--sd:-82.29s;--sp:96.00s">
-          <span class="node__conn" aria-hidden="true"></span>
-          <button class="node__btn" type="button"
-                  data-name="Orders &amp; Quotations" data-group="Procurement" data-desc="Quotes out, orders in, one pipeline.">
-            <span class="node__dot" aria-hidden="true"></span>
-            <span class="node__label">Orders &amp; Quotations</span>
-          </button>
-        </li>
-      </ul>
-
-          <div class="orbit__core">
-            <span>Shared</span>
-            <span>Back Office</span>
-          </div>
-        </div>
-
-        <!-- the readout. aria-live so the detail is announced on focus, and the
-             orbit itself is aria-hidden because the list below is the real
-             content — sixteen rotating labels are decoration, not structure -->
-        <div class="orbit__detail" id="orbitDetail" aria-live="polite">
-          <span class="orbit__detail-name">Shared back office</span>
-          <span class="orbit__detail-group">Sixteen modules</span>
-          <span class="orbit__detail-desc">Hover or tab through a module to see what it carries.</span>
-        </div>
-      </div>
-
-      <!-- the four domains: a 2x2 grid on a wide screen, a snapped deck on a
-           phone. This is the readable source of truth for the sixteen. -->
-      <div class="deck">
-        <div class="deck__grid" id="reelDeck">
-          <article class="deck__card" data-domain="finance">
-            <span class="deck__ghost" aria-hidden="true">01</span>
-            <div class="deck__meta">
-              <span class="deck__index">01 / 04</span>
-              <span class="deck__count">5 modules</span>
-            </div>
-            <h3 class="deck__title">Finance</h3>
-            <p class="deck__lede">Fees in, salaries and suppliers out, on one set of books.</p>
-            <ul class="deck__list" role="list">
-              <li><span>General Ledger</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Accounts Payable</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Accounts Receivable</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Costing &amp; Budgets</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Tax &amp; Compliance</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-            </ul>
-          </article>
-          <article class="deck__card" data-domain="people">
-            <span class="deck__ghost" aria-hidden="true">02</span>
-            <div class="deck__meta">
-              <span class="deck__index">02 / 04</span>
-              <span class="deck__count">4 modules</span>
-            </div>
-            <h3 class="deck__title">People</h3>
-            <p class="deck__lede">Every teacher and staff record, from joining to increment.</p>
-            <ul class="deck__list" role="list">
-              <li><span>Workforce</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Time &amp; Attendance</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Payroll &amp; Benefits</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Talent</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-            </ul>
-          </article>
-          <article class="deck__card" data-domain="procure">
-            <span class="deck__ghost" aria-hidden="true">03</span>
-            <div class="deck__meta">
-              <span class="deck__index">03 / 04</span>
-              <span class="deck__count">3 modules</span>
-            </div>
-            <h3 class="deck__title">Procurement</h3>
-            <p class="deck__lede">Books, uniforms and lab equipment — requested, approved, received.</p>
-            <ul class="deck__list" role="list">
-              <li><span>Sourcing</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Purchasing</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Orders &amp; Quotations</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-            </ul>
-          </article>
-          <article class="deck__card" data-domain="ops">
-            <span class="deck__ghost" aria-hidden="true">04</span>
-            <div class="deck__meta">
-              <span class="deck__index">04 / 04</span>
-              <span class="deck__count">4 modules</span>
-            </div>
-            <h3 class="deck__title">Operations</h3>
-            <p class="deck__lede">The administrative controls the office keeps to itself.</p>
-            <ul class="deck__list" role="list">
-              <li><span>Analytics</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Administration</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Integrations</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-              <li><span>Settings</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
-            </ul>
-          </article>
-        </div>
-        <div class="deck__dots" id="reelDots">
-          <button class="deck__dot is-on" type="button" aria-label="Go to Finance"></button>
-          <button class="deck__dot" type="button" aria-label="Go to People"></button>
-          <button class="deck__dot" type="button" aria-label="Go to Procurement"></button>
-          <button class="deck__dot" type="button" aria-label="Go to Operations"></button>
-        </div>
-      </div>
-
-
+    <div class="grid-4">
+      <div class="card"><h3>Transport</h3><ul class="chips" role="list"><li>Routes</li><li>Stops</li><li>Vehicles</li><li>Drivers</li><li>Attendants</li><li>Students</li><li>GPS</li><li>Maintenance</li></ul></div>
+      <div class="card"><h3>Hostel</h3><ul class="chips" role="list"><li>Buildings</li><li>Rooms</li><li>Beds</li><li>Allocation</li><li>Attendance</li><li>Visitors</li><li>Mess</li><li>Fees</li></ul></div>
+      <div class="card"><h3>Library</h3><ul class="chips" role="list"><li>Catalog</li><li>Members</li><li>Issue/Return</li><li>Reservations</li><li>Renewals</li><li>Fines</li><li>Digital</li></ul></div>
+      <div class="card"><h3>Health</h3><ul class="chips" role="list"><li>Medical Profiles</li><li>Allergies</li><li>Visits</li><li>Medicines</li><li>Vaccinations</li><li>Incidents</li><li>Alerts</li></ul></div>
+    </div>
+    <div class="grid-4" style="margin-top:1rem">
+      <div class="card"><h3>Facilities</h3><ul class="chips" role="list"><li>Buildings</li><li>Labs</li><li>Auditoriums</li><li>Bookings</li><li>Maintenance</li><li>Utilities</li><li>Inspections</li></ul></div>
+      <div class="card"><h3>People</h3><ul class="chips" role="list"><li>Recruitment</li><li>Records</li><li>Faculty</li><li>Leave</li><li>Payroll</li><li>Performance</li><li>Workload</li><li>Clearance</li></ul></div>
+      <div class="card"><h3>Workflows</h3><ul class="chips" role="list"><li>Forms</li><li>Requests</li><li>Approvals</li><li>Helpdesk</li><li>Escalations</li><li>History</li></ul></div>
+      <div class="card"><h3>Security</h3><ul class="chips" role="list"><li>Roles</li><li>Permissions</li><li>Audit Logs</li><li>SSO</li><li>MFA</li><li>IP Rules</li><li>Consent</li></ul></div>
+    </div>
   </div>
 </section>
 
-<!-- ============================================================== faq -->
-<section class="section section--tight" id="faq" aria-labelledby="faq-title">
-  <!-- a field of drawn curves behind the questions; stroke colour and the
-       draw-on animation both live in the stylesheet -->
+<section class="section band" id="workflows" aria-labelledby="wf-title">
+  <div class="container">
+    <div class="head">
+      <span class="eyebrow">Workflows</span>
+      <h2 id="wf-title">&ldquo;Who has this?&rdquo; should not be a workflow.</h2>
+      <p>Requests have owners. Approvals have stages. Escalations have rules. Actions leave
+         history. Forms, requests, approvals, helpdesk tickets and communication run as one
+         structured flow rather than as five inboxes.</p>
+    </div>
+
+    <ol class="chain chain--wide" role="list">
+      <li><span class="chain__i">01</span>Request</li>
+      <li><span class="chain__i">02</span>Review</li>
+      <li><span class="chain__i">03</span>Approve</li>
+      <li><span class="chain__i">04</span>Act</li>
+      <li><span class="chain__i">05</span>Record</li>
+    </ol>
+
+    <div class="pull pull--center">
+      Everyone knows what happens next — and afterwards, what happened.
+      <div class="pull__attr">Vivencia · Approvals · Full audit trail</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" id="security" aria-labelledby="sec-title">
+  <div class="container">
+    <div class="head head--center">
+      <span class="eyebrow">Security</span>
+      <h2 id="sec-title">One system should create more control. Not more access.</h2>
+      <p>Vivencia is built around role-based access and institutional governance: the right
+         person, the right information, the right level of access.</p>
+    </div>
+    <ul class="chips chips--center" role="list">
+      <li>Roles</li><li>Permission Matrix</li><li>Login History</li><li>Active Sessions</li>
+      <li>Audit Logs</li><li>SSO</li><li>MFA</li><li>IP Restrictions</li>
+      <li>Data Access Policies</li><li>Data Masking</li><li>Consent</li><li>Privacy Requests</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" id="bigger" aria-labelledby="big-title">
   <svg class="curves" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
     <path d="M-40 118C220 84 372 226 604 244c232 18 386-118 604-96 130 13 240 74 312 132"/>
     <path d="M-40 214C186 176 356 300 596 322c240 22 400-96 620-72 138 15 250 82 304 140"/>
@@ -821,111 +821,104 @@
   </svg>
   <div class="container">
     <div class="head head--center">
-      <span class="eyebrow">Questions</span>
-      <h2 id="faq-title">The things people ask first</h2>
+      <span class="eyebrow">The bigger question</span>
+      <h2 id="big-title">What disappears when your institution finally runs on one system?</h2>
+    </div>
+
+    <ul class="gone" role="list">
+      <li>Duplicate entry</li>
+      <li>Disconnected spreadsheets</li>
+      <li>Repeated phone calls</li>
+      <li>Reports rebuilt by hand</li>
+      <li>Approvals nobody can locate</li>
+      <li>Different versions of the same student</li>
+      <li>Information trapped inside departments</li>
+      <li class="gone--last">&ldquo;I'll check and get back to you.&rdquo;</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--tight" id="truth" aria-labelledby="truth-title">
+  <div class="container">
+    <div class="head head--center">
+      <span class="eyebrow">Product truth</span>
+      <h2 id="truth-title">See the product as it exists today.</h2>
+      <p>Vivencia is currently a fully navigable front-end prototype. The workflows and the
+         interface can be explored end to end, with data generated in the browser.</p>
     </div>
 
     <div class="faq">
       <details open>
-        <summary>Is this built for schools specifically?</summary>
-        <p>Yes — only schools. The vocabulary on screen is a school's: classes and sections,
-           terms and report cards, roll numbers and transfer certificates. Nothing has been
-           bent out of a generic business product to fit.</p>
+        <summary>What exists right now</summary>
+        <p>The interface layer, complete and clickable: routing, tabs, drawers, modals,
+           search, filter, multi-column sort, pagination, row selection, bulk actions, form
+           validation and drag-and-drop boards. Every screen in this page is real.</p>
       </details>
       <details>
-        <summary>What runs underneath all of it?</summary>
-        <p>Sixteen back-office modules — general ledger, payables, receivables, costing,
-           tax, workforce, attendance, payroll, talent, sourcing, purchasing, orders,
-           analytics, administration, integrations and settings — plus the whole interface
-           layer: tables, drawers, modals, forms, command palette and theming.</p>
+        <summary>What a production deployment adds</summary>
+        <p>Database and APIs behind the registry · Authentication · Permission enforcement ·
+           Payment gateways · Messaging · Biometric and RFID systems · Production
+           integrations.</p>
       </details>
       <details>
-        <summary>Is this a working product or a prototype?</summary>
-        <p>Today it is a front-end prototype. The interface is real and fully clickable —
-           routing, tabs, drawers, modals, search, filter, multi-column sort, pagination,
-           row selection, bulk actions, form validation and drag-and-drop boards all work.
-           The data behind it is generated in the browser, and there is no backend,
-           database or authentication layer yet.</p>
-      </details>
-      <details>
-        <summary>Can it be changed to match how our school works?</summary>
-        <p>A module is usually one registry entry: a list of typed columns written as
-           <code>type:Label@Option,Option</code>. Renaming a field, adding a fee head or
-           changing a grade band is a configuration change, not a rebuild — and it inherits
-           every interface behaviour automatically.</p>
-      </details>
-      <details>
-        <summary>How does role switching work?</summary>
-        <p>Thirteen roles ship with it — class teacher, subject teacher, exam officer,
-           accountant, librarian, warden, transport in-charge, admissions, front office,
-           head of department, vice principal, principal and administrator. The role decides
-           which modules appear and which screen you land on.</p>
-      </details>
-      <details>
-        <summary>Does it work on a phone?</summary>
-        <p>Yes. The office keeps a fixed sidebar and wide tables; a tablet collapses the
-           sidebar and scrolls tables sideways; a phone gets a drawer, single-column tiles
-           and tables rendered as stacked cards — enough for a teacher to mark attendance
-           from the corridor.</p>
-      </details>
-      <details>
-        <summary>What would a real deployment need?</summary>
-        <p>An API and database behind the registry, an authentication and permission layer
-           to enforce what role switching currently only presents, and real integrations —
-           a payment gateway for fees, SMS and email for parents, and biometric or RFID
-           feeds for attendance. The interface layer is the part that exists today.</p>
+        <summary>Why we say so</summary>
+        <p>We'd rather show you exactly what exists than hide behind a roadmap. Everything
+           above is demonstrable in ten minutes, and the parts that are not built yet are
+           named rather than implied.</p>
       </details>
     </div>
   </div>
 </section>
 
-<!-- ============================================================== cta -->
 <section class="section" id="demo" aria-labelledby="cta-title">
   <div class="container">
     <div class="cta">
-      <h2 id="cta-title">See your school in it. Ten minutes.</h2>
-      <p>Every screen is clickable end to end — switch role from the top bar and the whole
-         application changes with it. No card. No install.</p>
+      <h2 id="cta-title">You already run one institution. Your software should too.</h2>
+      <p>See what happens when admissions, students, academics, examinations, finance,
+         people and campus operations stop behaving like separate systems.</p>
       <div class="hero__cta">
-        <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=School%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Start now</a>
-        <a class="btn btn--ghost" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=School%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Book a demo</a>
+        <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Book a Vivencia walkthrough</a>
+        <a class="btn btn--ghost" href="#scale">See the 54 modules</a>
       </div>
+      <p class="cta__coda"><strong>1 institution. 1 system.</strong><br>
+         Ten minutes. No card. No install.</p>
     </div>
   </div>
 </section>
 
-<!-- =========================================================== footer -->
 <footer class="footer">
   <div class="container">
     <div class="footer__grid">
       <div>
         <a class="brand" href="#top"><span class="brand__mark">V</span>Vivencia</a>
-        <p class="footer__blurb">One school ERP — admissions to alumni — built on a
-           registry-driven platform and one shared back office.</p>
+        <p class="footer__blurb">54 connected modules and 496 capabilities on one
+           institutional record — from the first admission enquiry to alumni history.</p>
       </div>
       <div>
         <h4>Modules</h4>
         <ul>
-          <li><a href="#how">Admissions</a></li>
-          <li><a href="#how">Academics</a></li>
-          <li><a href="#how">Examinations</a></li>
-          <li><a href="#how">Fees</a></li>
-          <li><a href="#how">Campus life</a></li>
+          <li><a href="#scale">Admissions &amp; Students</a></li>
+          <li><a href="#scale">Teaching &amp; Academics</a></li>
+          <li><a href="#scale">Money &amp; Administration</a></li>
+          <li><a href="#scale">Campus</a></li>
+          <li><a href="#scale">Platform &amp; Control</a></li>
         </ul>
       </div>
       <div>
         <h4>Platform</h4>
         <ul>
-          <li><a href="#roles">Architecture</a></li>
-          <li><a href="#modules">Back office</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20demo%20request&body=School%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Contact</a></li>
+          <li><a href="#insight">Reports</a></li>
+          <li><a href="#workflows">Workflows</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#truth">Product truth</a></li>
+          <li><a href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Contact</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer__bottom">
       <span>© 2026 Vivencia</span>
+      <span>54 modules · 496 capabilities · 1 institutional record</span>
     </div>
   </div>
 </footer>
