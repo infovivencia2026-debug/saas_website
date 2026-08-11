@@ -24,8 +24,19 @@ for img in hero-art.png hero-art.webp; do
 done
 
 echo "==> Packing"
+# Cache-bust the stylesheet. nginx serves .css with `expires 7d`, so without a
+# per-release URL a returning visitor keeps the stylesheet they already have —
+# index.html is no-cache, so they get NEW markup against OLD styles, which is
+# worse than either alone. The href is rewritten in the shipped copy only; the
+# file in the repo keeps its plain name.
+STAGE="$(mktemp -d)"
+cp index.html styles.css hero-art.png hero-art.webp "$STAGE/"
+sed -i "s|href=\"styles.css\"|href=\"styles.css?v=$RELEASE\"|" "$STAGE/index.html"
+grep -q "styles.css?v=$RELEASE" "$STAGE/index.html" || { echo "!!! cache-bust rewrite failed"; exit 1; }
+
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" index.html styles.css hero-art.png hero-art.webp
+tar -czf "$TARBALL" -C "$STAGE" index.html styles.css hero-art.png hero-art.webp
+rm -rf "$STAGE"
 
 echo "==> Uploading to $TARGET"
 scp -q "$TARBALL" "$TARGET:/tmp/vivencia-$RELEASE.tar.gz"
