@@ -92,7 +92,8 @@
   --near-black:  #0a1d42;
 
   /* ---- shadows ---- */
-  /* how far the hero panel sits off the viewport edge */
+  /* how far the nav capsule sits off the viewport edge (the hero itself is
+     full bleed; this is only the bar's own inset) */
   --hero-inset:  clamp(.75rem, 1.4vw, 1.25rem);
   /* extra air above the nav capsule; the hero starts level with it, so its
      height has to give the same amount back */
@@ -376,7 +377,7 @@ h1, h2, h3, h4 {
   /* at rest the capsule sits a clear step below the hero panel's top edge,
      not flush against the viewport */
   margin-top: calc(var(--hero-inset) + var(--nav-gap));
-  width: min(70rem, calc(100% - 2 * var(--gutter) - 2 * var(--hero-inset)));
+  width: min(70rem, calc(100% - 2 * var(--gutter)));
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
   border-radius: 1rem;
@@ -406,11 +407,10 @@ h1, h2, h3, h4 {
     inset 0 -1px 0 rgba(21, 87, 232, .06),
     0 10px 30px rgba(16, 42, 140, .10),
     0 2px 8px rgba(7, 21, 47, .05);
-  /* Pulled back over the hero so the capsule floats in the atmosphere
-     instead of sitting on a band of canvas above it. This margin collapses
-     against the hero's top margin, so the inset has to be added back or the
-     nav rides up out of the panel and onto the canvas. */
-  margin-bottom: calc(-3.5rem - var(--hero-inset));
+  /* The capsule floats over a full-bleed hero, so it has to give back its own
+     height AND its top offset — otherwise the hero starts below the bar
+     instead of behind it. */
+  margin-bottom: calc(-3.5rem - var(--hero-inset) - var(--nav-gap));
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -506,18 +506,11 @@ h1, h2, h3, h4 {
      not size it to a viewport that the address bar then eats. The nav is
      pulled up over it, so subtract nothing for that. Content is centred in
      whatever is left above the horizon. */
-  /* the hero is an inset panel, not a full-bleed field: it sits off every
-     edge by --hero-inset (declared on :root, because the nav's overlap has
-     to account for it too) and the height is reduced to match, so the first
-     screen still ends exactly at the fold */
-  /* Less air above than at the sides: the nav capsule already carries the
-     top spacing, and this margin collapses with the nav's negative one, so a
-     zero here still lands the panel's top edge --nav-gap below the viewport
-     rather than flush against it. */
-  margin: 0 var(--hero-inset) var(--hero-inset);
-  border-radius: clamp(1.25rem, 2.6vw, 2rem);
-  min-height: calc(100vh - var(--hero-inset) - var(--nav-gap));
-  min-height: calc(100svh - var(--hero-inset) - var(--nav-gap));
+  /* full bleed: no margin, no radius, the first screen edge to edge */
+  margin: 0;
+  border-radius: 0;
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   align-content: center;
   padding-block: clamp(6rem, 10vw, 8rem) clamp(5rem, 9vw, 8rem);
@@ -1513,7 +1506,7 @@ h1, h2, h3, h4 {
 
 @media (max-width: 720px) {
   .nav { top: .625rem; height: 3.25rem; border-radius: .875rem;
-         margin-bottom: calc(-3.25rem - var(--hero-inset)); }
+         margin-bottom: calc(-3.25rem - var(--hero-inset) - var(--nav-gap)); }
   .nav__links { display: none; }
   .nav__toggle { display: block; margin-left: auto; }
   .nav--open .nav__links {
