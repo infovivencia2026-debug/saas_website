@@ -641,7 +641,12 @@ h1, h2, h3, h4 {
    ----------------------------------------------------------------------- */
 .hero__atmos {
   position: absolute;
-  inset: 0;
+  /* The box is pushed out well past the panel on three sides. The gradient
+     below has to finish INSIDE this box — a background cannot paint beyond
+     its own bounds, so anything still opaque when it reaches an edge is cut
+     off in a straight line. Giving it room to spread is what lets the ramp
+     complete instead of being clipped. */
+  inset: -8% -18% -16%;
   z-index: -1;
   pointer-events: none;
 }
@@ -1067,13 +1072,14 @@ h1, h2, h3, h4 {
      instead of stepping, and it ends on zero-alpha cobalt rather than
      `transparent`, which would drag the ramp through grey. */
   background: radial-gradient(
-    ellipse 92% 72% at 50% 100%,
+    ellipse 46% 58% at 50% 88%,
     rgba(36, 107, 253, .34) 0%,
-    rgba(36, 107, 253, .24) 18%,
-    rgba(36, 107, 253, .14) 36%,
-    rgba(36, 107, 253, .06) 56%,
-    rgba(36, 107, 253, .02) 74%,
-    rgba(36, 107, 253, 0) 90%
+    rgba(36, 107, 253, .25) 16%,
+    rgba(36, 107, 253, .15) 32%,
+    rgba(36, 107, 253, .08) 48%,
+    rgba(36, 107, 253, .035) 64%,
+    rgba(36, 107, 253, .012) 80%,
+    rgba(36, 107, 253, 0) 96%
   );
 }
 .screen__bar {
