@@ -1742,6 +1742,12 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
+  /* one column: at this width the brand blurb and two link lists were sharing
+     a 170px column each */
+  .footer__grid { grid-template-columns: 1fr; gap: 2.25rem; }
+}
+
+@media (max-width: 720px) {
   /* ---- the phone type scale ---------------------------------------------
      Set on the tokens, not on a dozen components. The desktop scale is built
      from vw clamps that assume a wide measure: at 390px they collapse to
@@ -1787,7 +1793,7 @@ h1, h2, h3, h4 {
   .nav__actions .btn--ghost { display: none; }
 
   /* the horizon must stay large on phones — a small circle loses the effect */
-  .hero { padding-block: 6rem 4rem; min-height: 100svh; }
+  .hero { padding-block: 5rem 3rem; min-height: 100svh; }
 
   /* The field is cropped hard on a narrow screen, so the same stroke reads
      much heavier — it sits behind the headline rather than beside it. These
@@ -1908,7 +1914,6 @@ h1, h2, h3, h4 {
   .hero__stats { grid-template-columns: 1fr; }
   .hero__cta { flex-direction: column; align-items: stretch; }
   .hero__cta .btn { width: 100%; min-width: 0; }
-  .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer__bottom { flex-direction: column; gap: .5rem; }
 }
 
@@ -2794,17 +2799,22 @@ p, li { letter-spacing: 0; }
     display: flex;
     justify-content: center;   /* the run of dots is centred under the deck */
     align-items: center;
-    gap: .5rem;
-    margin: 1rem auto 0;       /* one declaration: the shorthand below used to
-                                  wipe the top margin set above it */
+    gap: 0;                    /* the dots' own padding is the spacing now */
+    margin: .25rem auto 0;
     padding: 0;
     width: 100%;
   }
   .deck__dot {
+    /* 8px of dot, 44px of target: the padding is the hit area and
+       background-clip keeps the paint on the content box, so it stays a
+       small dot while being reliably tappable */
     width: .5rem; height: .5rem;
-    padding: 0; border: 0;
+    padding: 1.125rem;
+    box-sizing: content-box;
+    background-clip: content-box;
+    border: 0;
     border-radius: 50%;
-    background: var(--brand);
+    background-color: var(--brand);
     opacity: .22;
     transition: opacity .3s var(--ease), transform .3s var(--ease);
   }
