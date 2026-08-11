@@ -93,29 +93,36 @@
     <span class="hero__glow hero__glow--lime"></span>
     <span class="hero__art"></span>
 
-    <!-- the clouds, drawn rather than rendered: one outline reused at four
-         sizes, each with three nested contours like a hand-drawn plate -->
-    <svg class="clouds" viewBox="0 0 1440 720" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-      <defs>
-        <path id="cl" d="M18 78C2 78-4 60 12 55 8 36 30 24 46 35 53 12 88 6 100 28 113 14 138 17 142 37 163 30 180 44 174 60 190 61 192 78 176 78Z"/>
-        <g id="cloud">
-          <use href="#cl"/>
-          <use href="#cl" transform="translate(96 47) scale(.78) translate(-96 -47)" opacity=".7"/>
-          <use href="#cl" transform="translate(96 47) scale(.54) translate(-96 -47)" opacity=".45"/>
-        </g>
-      </defs>
-
-      <g class="clouds__a"><use href="#cloud" transform="translate(120 96) scale(1.9)"/></g>
-      <g class="clouds__b"><use href="#cloud" transform="translate(840 44) scale(1.25)"/></g>
-      <g class="clouds__c"><use href="#cloud" transform="translate(1010 330) scale(2.5)"/></g>
-      <g class="clouds__d"><use href="#cloud" transform="translate(210 470) scale(1.5)"/></g>
-
-      <!-- drawn wind: a few long strokes running with the clouds -->
-      <g class="clouds__wind">
-        <path d="M96 250c120-26 214 22 336 0"/>
-        <path d="M150 286c96-18 168 16 262 0"/>
-        <path d="M900 566c130-28 232 24 364 0"/>
-        <path d="M946 600c104-20 182 18 284 0"/>
+    <!-- The field, as first drawn: two families of quarter arcs springing
+         from the right edge — one from the bottom corner, one from the top —
+         plus three short rules anchoring the type column on the left. -->
+    <svg class="flow" viewBox="0 0 1440 720" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
+      <g class="flow__wide">
+        <path d="M1440 530 A 190 190 0 0 1 1250 720" style="--i:0"/>
+        <path d="M1440 472 A 248 248 0 0 1 1192 720" style="--i:1"/>
+        <path d="M1440 404 A 316 316 0 0 1 1124 720" style="--i:2"/>
+        <path d="M1440 325 A 395 395 0 0 1 1045 720" style="--i:3"/>
+        <path d="M1440 232 A 488 488 0 0 1 952 720" style="--i:4"/>
+        <path d="M1440 124 A 596 596 0 0 1 844 720" style="--i:5"/>
+        <path d="M1440 -3 A 723 723 0 0 1 717 720" style="--i:6"/>
+        <path d="M1440 -151 A 871 871 0 0 1 569 720" style="--i:7"/>
+        <path d="M1440 -325 A 1045 1045 0 0 1 395 720" style="--i:8"/>
+        <path d="M1440 -528 A 1248 1248 0 0 1 192 720" style="--i:9"/>
+        <path d="M1440 -766 A 1486 1486 0 0 1 -46 720" style="--i:10"/>
+      </g>
+      <g class="flow__tight">
+        <path d="M1440 120 A 120 120 0 0 0 1320 0" style="--i:0"/>
+        <path d="M1440 169 A 169 169 0 0 0 1271 0" style="--i:1"/>
+        <path d="M1440 230 A 230 230 0 0 0 1210 0" style="--i:2"/>
+        <path d="M1440 307 A 307 307 0 0 0 1133 0" style="--i:3"/>
+        <path d="M1440 404 A 404 404 0 0 0 1036 0" style="--i:4"/>
+        <path d="M1440 527 A 527 527 0 0 0 913 0" style="--i:5"/>
+        <path d="M1440 682 A 682 682 0 0 0 758 0" style="--i:6"/>
+      </g>
+      <g class="flow__rules">
+        <path d="M0 224h360"/>
+        <path d="M0 268h228"/>
+        <path d="M0 604h300"/>
       </g>
     </svg>
   </div>

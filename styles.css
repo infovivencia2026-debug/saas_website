@@ -648,72 +648,62 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-/* ---- the drawn sky -------------------------------------------------------
-   The clouds are drawn, not rendered: one outline defined once and reused at
-   four sizes, each carrying three nested contours so it reads as a plate from
-   a drawing rather than a photograph or a blur. The old turbulence fields are
-   gone; what is left of .hero__art is a soft tint for the outlines to sit on.
+/* ---- the arc field -------------------------------------------------------
+   Concentric hairline arcs sweeping out of the right edge in two families,
+   one from each corner, so they interleave rather than nest. The hero content
+   is set hard left against them — the composition is the console-login one:
+   flat white ground, type on the left, geometry running off the right.
    ----------------------------------------------------------------------- */
 .hero__art {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 48% at 68% 26%, rgba(114, 164, 255, .20), rgba(114, 164, 255, 0) 72%),
-    radial-gradient(ellipse 52% 44% at 18% 74%, rgba(168, 198, 255, .22), rgba(168, 198, 255, 0) 74%);
+    radial-gradient(ellipse 58% 62% at 96% 72%, rgba(114, 164, 255, .22), rgba(114, 164, 255, 0) 70%),
+    radial-gradient(ellipse 44% 40% at 88% 8%, rgba(168, 198, 255, .20), rgba(168, 198, 255, 0) 74%);
 }
 
-.clouds {
+.flow {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   fill: none;
-  stroke: var(--brand-600);
-  /* a fine line: non-scaling-stroke below keeps this in screen pixels, so it
-     stays hairline-thin however far the viewBox is scaled up */
-  stroke-width: .9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  opacity: .6;
-  /* the outlines are drawn in a hand, not a machine: a fine dash keeps the
-     line from reading as a vector rectangle boundary */
+  stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
+  /* ONE mask, not two composited. `mask-composite` has two incompatible
+     syntaxes (`intersect` vs the -webkit- `source-in`), and declaring both
+     can resolve to an empty mask — which hides the field completely. A single
+     gradient cannot fail that way: strongest where the arcs spring from the
+     right edge, dissolving as they sweep left across the type. */
+  -webkit-mask-image: radial-gradient(ellipse 118% 135% at 100% 52%, #000 30%, rgba(0,0,0,.55) 64%, transparent 98%);
+          mask-image: radial-gradient(ellipse 118% 135% at 100% 52%, #000 30%, rgba(0,0,0,.55) 64%, transparent 98%);
 }
-.clouds use { stroke: var(--brand-600); }
-.clouds__wind path { stroke: var(--brand-500); stroke-width: .7; opacity: .6; }
+.flow__wide  path { stroke: var(--brand-700); stroke-width: 1.6; opacity: .7; }
+.flow__tight path { stroke: var(--brand-600); stroke-width: 1.4; opacity: .55; }
+.flow__rules path { stroke: var(--brand-700); stroke-width: 1.8; opacity: .5; }
 
-/* each bank drifts at its own pace, the nearest fastest */
-.clouds__a { animation: cloud-x 76s linear infinite; }
-.clouds__b { animation: cloud-x 104s linear infinite reverse; }
-.clouds__c { animation: cloud-x 58s linear infinite; }
-.clouds__d { animation: cloud-x 88s linear infinite reverse; }
-.clouds__wind { animation: cloud-x 64s linear infinite; opacity: .9; }
-@keyframes cloud-x {
-  from { transform: translate3d(-3%, 0, 0); }
-  50%  { transform: translate3d(3%, 0, 0); }
-  to   { transform: translate3d(-3%, 0, 0); }
+/* each arc inks in from the edge, innermost first */
+.flow path {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: flow-ink 1.8s var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 90ms);
 }
+.flow__tight path { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
+.flow__rules path { animation-delay: 1s; }
+@keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
-/* The outlines ink themselves in on arrival. The drift already lives on the
-   parent <g>, so these only carry the draw — stacking a second animation here
-   would mean re-declaring the parent's duration, and `inherit` is not valid
-   inside an animation-duration list. */
-.clouds use, .clouds__wind path {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: cloud-ink 2.4s var(--ease) forwards;
-}
-.clouds__b use { animation-delay: .15s; }
-.clouds__c use { animation-delay: .30s; }
-.clouds__d use { animation-delay: .45s; }
-.clouds__wind path { animation-delay: .6s; }
-@keyframes cloud-ink { to { stroke-dashoffset: 0; } }
+/* The arcs' radii are not a geometric series, so the outward drift that the
+   circle version used cannot loop seamlessly here — the field is drawn once
+   and then holds, as it did originally. */
+
+/* and the whole field breathes, very slowly */
+/* No perpetual breathing here. An infinite transform on a group of ~20
+   non-scaling strokes repaints the whole field every frame for motion nobody
+   asked for; the one-shot ink above is the effect that mattered. */
 
 @media (prefers-reduced-motion: reduce) {
-  .clouds g, .clouds use, .clouds__wind path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
+  .flow path { animation: none; stroke-dashoffset: 0; }
 }
 
 /* The blooms the field sits in. ::before, not ::after: a parent's ::after
@@ -1709,7 +1699,7 @@ h1, h2, h3, h4 {
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
   /* on a phone the tight family crowds the type; the wide arcs carry it */
-  .clouds__b, .clouds__d { display: none; }
+  .flow__tight, .flow__rules { display: none; }
   .hero h1 { max-width: none; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
@@ -2659,9 +2649,7 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .clouds { stroke: #4385ff; opacity: .5; }
-:root[data-theme="dark"] .clouds use { stroke: #4385ff; }
-:root[data-theme="dark"] .clouds__wind path { stroke: #72a4ff; }
+:root[data-theme="dark"] .flow path { stroke: #4385ff; opacity: .50; }
 :root[data-theme="dark"] #how::before {
   background-image:
     radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
