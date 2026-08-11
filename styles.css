@@ -646,7 +646,7 @@ h1, h2, h3, h4 {
      its own bounds, so anything still opaque when it reaches an edge is cut
      off in a straight line. Giving it room to spread is what lets the ramp
      complete instead of being clipped. */
-  inset: -8% -18% -16%;
+  inset: -8% -18% -60%;
   z-index: -1;
   pointer-events: none;
 }
@@ -1071,10 +1071,14 @@ h1, h2, h3, h4 {
      the mock rather than inside it. Six stops so the falloff is gradual
      instead of stepping, and it ends on zero-alpha cobalt rather than
      `transparent`, which would drag the ramp through grey. */
+  /* Centre and radii chosen so the ramp reaches zero on every side before it
+     reaches an edge of this box. The panel's own bottom sits at ~64% of the
+     box, so the source is just under the mock, and the 60% of extra room
+     below is what lets the light finish instead of being cut off. */
   background: radial-gradient(
-    ellipse 46% 58% at 50% 88%,
-    rgba(36, 107, 253, .34) 0%,
-    rgba(36, 107, 253, .25) 16%,
+    ellipse 44% 34% at 50% 64%,
+    rgba(36, 107, 253, .32) 0%,
+    rgba(36, 107, 253, .24) 16%,
     rgba(36, 107, 253, .15) 32%,
     rgba(36, 107, 253, .08) 48%,
     rgba(36, 107, 253, .035) 64%,
