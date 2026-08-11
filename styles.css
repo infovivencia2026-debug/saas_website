@@ -391,10 +391,21 @@ h1, h2, h3, h4 {
   --on-ground-2:  var(--heading-2);
   --on-ground-3:  var(--muted);
   --on-ground-hi: var(--heading);
-  background: rgba(255, 255, 255, .72);
-  border: 1px solid rgba(21, 87, 232, .14);
-  backdrop-filter: blur(22px) saturate(160%);
-  box-shadow: 0 8px 30px rgba(16, 42, 140, .09), 0 2px 8px rgba(7, 21, 47, .05);
+  /* Frosted, properly: a thinner wash so the page actually shows through,
+     a heavier blur to break it up, and saturate/brightness so what comes
+     through stays colourful instead of going grey. The inset highlight is
+     the lit top edge that sells it as glass rather than as a tint. */
+  background: rgba(255, 255, 255, .55);
+  border: 1px solid rgba(255, 255, 255, .65);
+  outline: 1px solid rgba(21, 87, 232, .10);
+  outline-offset: -1px;
+  -webkit-backdrop-filter: blur(30px) saturate(185%) brightness(1.05);
+          backdrop-filter: blur(30px) saturate(185%) brightness(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .85),
+    inset 0 -1px 0 rgba(21, 87, 232, .06),
+    0 10px 30px rgba(16, 42, 140, .10),
+    0 2px 8px rgba(7, 21, 47, .05);
   /* Pulled back over the hero so the capsule floats in the atmosphere
      instead of sitting on a band of canvas above it. This margin collapses
      against the hero's top margin, so the inset has to be added back or the
@@ -402,10 +413,20 @@ h1, h2, h3, h4 {
   margin-bottom: calc(-3.5rem - var(--hero-inset));
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav { background: rgba(255, 255, 255, .93); }
+  .nav--open .nav__links { background: rgba(255, 255, 255, .97); }
+}
+
 .nav--scrolled {
-  background: rgba(255, 255, 255, .88);
-  border-color: rgba(21, 87, 232, .22);
-  box-shadow: 0 12px 34px rgba(16, 42, 140, .13), 0 2px 10px rgba(7, 21, 47, .06);
+  /* scrolled: a touch denser, since it now sits over content rather than the
+     hero's own light ground */
+  background: rgba(255, 255, 255, .70);
+  border-color: rgba(255, 255, 255, .80);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .92),
+    0 14px 36px rgba(16, 42, 140, .14),
+    0 2px 10px rgba(7, 21, 47, .06);
 }
 .nav__inner {
   display: flex;
@@ -1502,10 +1523,11 @@ h1, h2, h3, h4 {
     padding: 1.25rem;
     gap: 1rem;
     border-radius: var(--r-lg);
-    background: rgba(255, 255, 255, .96);
-    border: 1px solid rgba(21, 87, 232, .16);
-    backdrop-filter: blur(22px);
-    box-shadow: 0 20px 50px rgba(16, 42, 140, .16);
+    background: rgba(255, 255, 255, .82);
+    border: 1px solid rgba(255, 255, 255, .70);
+    -webkit-backdrop-filter: blur(30px) saturate(185%);
+            backdrop-filter: blur(30px) saturate(185%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 20px 50px rgba(16, 42, 140, .16);
     margin-left: 0;
   }
   .nav__actions .btn--ghost { display: none; }
