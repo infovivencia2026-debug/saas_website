@@ -1583,6 +1583,9 @@ p, li { letter-spacing: 0; }
   margin: 0; padding: 0;
   list-style: none;
   animation: ring-spin var(--p) linear infinite;
+  /* each ring is a full-size transparent box stacked on the last, so without
+     this the outermost one captures every click aimed at the inner two */
+  pointer-events: none;
 }
 .ring--ccw { animation-direction: reverse; }
 @keyframes ring-spin { to { transform: rotate(360deg); } }
@@ -1620,6 +1623,7 @@ p, li { letter-spacing: 0; }
   color: var(--on-ground-3);
   white-space: nowrap;
   cursor: pointer;
+  pointer-events: auto;
   /* counter-rotate the node's own placement, then counter-spin the ring, so
      labels stay upright while their positions travel. The counter-spin has to
      carry the centring translate in every keyframe — animating a bare
