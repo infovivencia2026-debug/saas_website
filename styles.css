@@ -426,13 +426,24 @@ h1, h2, h3, h4 {
   border-color: var(--brand-hot);
   box-shadow: var(--glow-sm);
 }
+/* The CTA belongs to the capsule, not to the page: an emissive cobalt block
+   that glows against the indigo, with the bar's corner radius rather than a
+   full pill, and sized to leave an even margin inside the 3.5rem bar. */
 .nav__actions .btn--primary {
-  background: var(--brand-soft);
-  color: var(--brand-deep);
-  border-color: rgba(21, 87, 232, .16);
-  box-shadow: none;
+  height: 2.375rem;
+  padding: 0 1.125rem;
+  border-radius: .625rem;
+  background: linear-gradient(180deg, var(--brand-lit), var(--brand));
+  color: #ffffff;
+  border-color: rgba(114, 164, 255, .45);
+  box-shadow: 0 4px 14px rgba(7, 21, 47, .35), 0 0 18px rgba(36, 107, 253, .35);
 }
-.nav__actions .btn--primary:hover { background: var(--brand-tint); box-shadow: var(--shadow-brand); }
+.nav__actions .btn--primary:hover {
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-lit));
+  border-color: var(--brand-hot);
+  box-shadow: 0 6px 20px rgba(7, 21, 47, .40), 0 0 28px rgba(36, 107, 253, .55);
+}
+.nav__actions .btn--ghost { border-radius: .625rem; }
 
 .nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--on-ground); }
 
