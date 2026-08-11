@@ -1817,12 +1817,24 @@ h1, h2, h3, h4 {
 .hero h1,
 .cta h2 {
   font-family: var(--display-font);
-  font-weight: 400;              /* Michroma ships one weight */
-  letter-spacing: 0;
-  line-height: 1.32;             /* wide caps need air or they read as a wall */
+  /* Michroma ships one weight, so `font-weight: 700` here would either do
+     nothing or trigger the browser's synthetic bold, which smears the
+     letterforms unevenly. Stroking the glyphs in their own colour thickens
+     every stem by the same amount instead — a real weight increase, not a
+     simulated one. */
+  font-weight: 400;
+  -webkit-text-stroke: .026em currentColor;
+  paint-order: stroke fill;
+  letter-spacing: .004em;        /* the stroke eats into the sidebearings */
+  line-height: 1.34;
   text-transform: none;
   max-width: 24ch;
 }
+
+/* The accent line is gradient-filled, so its fill is transparent and a
+   currentColor stroke would outline nothing. It takes the deep end of the
+   ramp instead, which keeps the gradient inside a solid cobalt letterform. */
+.hero__accent { -webkit-text-stroke: .026em var(--brand-700); }
 
 /* ---- Space Grotesk: every other heading, and anything you click ---- */
 h2, h3, h4,
