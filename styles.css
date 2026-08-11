@@ -959,6 +959,15 @@ h1, h2, h3, h4 {
 }
 .step:nth-child(even) .step__visual { order: -1; }
 
+/* Odd chapters put the panel on the right, so its outer edge is the right
+   one; even chapters flip it. Below 1100px the layout is a single column and
+   there is no outer side, so the light comes from the right throughout. */
+.step:nth-child(odd)  .step__visual { --glow-x: 100%; }
+.step:nth-child(even) .step__visual { --glow-x: 0%; }
+@media (max-width: 1100px) {
+  .step:nth-child(even) .step__visual { --glow-x: 100%; }
+}
+
 .step__num { display: flex; align-items: center; gap: .875rem; margin-bottom: 1.5rem; }
 .step__digits {
   display: grid; place-items: center;
@@ -1054,16 +1063,16 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* The light hugs the panel's edges instead of pooling underneath it: two
-     side glows carrying most of the weight, and a faint halo running right
-     around the border. Hollow through the middle, where the mock sits — a
-     wash behind white chrome only greys it. */
+  /* The light comes from one side only — the outer one, away from the page's
+     centre line — plus a faint halo around the border. Hollow through the
+     middle, where the mock sits: a wash behind white chrome only greys it.
+     The side is set per chapter below, because the panels alternate. */
   background:
-    radial-gradient(ellipse 22% 62% at 0% 50%,   rgba(36, 107, 253, .26), rgba(36, 107, 253, 0) 76%),
-    radial-gradient(ellipse 22% 62% at 100% 50%, rgba(36, 107, 253, .26), rgba(36, 107, 253, 0) 76%),
+    radial-gradient(ellipse 26% 66% at var(--glow-x, 100%) 50%,
+      rgba(36, 107, 253, .30), rgba(36, 107, 253, 0) 78%),
     radial-gradient(ellipse 74% 62% at 50% 50%,
-      rgba(21, 87, 232, 0) 52%,
-      rgba(21, 87, 232, .13) 74%,
+      rgba(21, 87, 232, 0) 54%,
+      rgba(21, 87, 232, .10) 76%,
       rgba(67, 133, 255, 0) 94%);
 }
 .screen__bar {
