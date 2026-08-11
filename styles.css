@@ -1056,12 +1056,22 @@ h1, h2, h3, h4 {
 }
 .pull__attr { display: block; margin-top: .875rem; color: var(--muted); letter-spacing: .09em; }
 
-/* ---- product surfaces ---- */
-/* the contained feature panel — translucent, blue-lit, never hard-bordered */
+/* ---- product surfaces ----------------------------------------------------
+   The panel is framed the way a console screenshot is on a product page: one
+   continuous rounded edge, a hairline border that follows it the whole way
+   round, and the chrome inside clipped to the same curve rather than meeting
+   it at a square corner.
+
+   The inner radius is the outer radius MINUS the border width. A child that
+   repeats the parent's radius sits a pixel proud of the curve at each corner,
+   which is exactly where a frame looks unfinished.
+   ------------------------------------------------------------------------ */
 .screen {
-  border-radius: var(--r-xl);
+  --screen-radius: var(--r-xl);
+  --screen-border: 1px;
+  border-radius: var(--screen-radius);
   background: rgba(255, 255, 255, .92);
-  border: 1px solid rgba(21, 87, 232, .13);
+  border: var(--screen-border) solid rgba(21, 87, 232, .13);
   overflow: hidden;
   box-shadow:
     0 30px 80px rgba(21, 87, 232, .09),
@@ -1151,6 +1161,8 @@ h1, h2, h3, h4 {
   /* Cobalt chrome, but soft: a translucent wash rather than a solid slab, so
      the panel's own glass shows through, and only a few points of gradient
      from top to bottom — just enough to give the bar a light source. */
+  border-radius: calc(var(--screen-radius) - var(--screen-border))
+                 calc(var(--screen-radius) - var(--screen-border)) 0 0;
   border-bottom: 1px solid rgba(21, 87, 232, .22);
   background: linear-gradient(180deg, rgba(67, 133, 255, .80), rgba(36, 107, 253, .86));
 }
