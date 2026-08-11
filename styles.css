@@ -92,6 +92,9 @@
   --near-black:  #0a1d42;
 
   /* ---- shadows ---- */
+  /* how far the hero panel sits off the viewport edge */
+  --hero-inset:  clamp(.75rem, 1.4vw, 1.25rem);
+
   --shadow-sm:   0 8px 30px rgba(7, 21, 47, .07);
   --shadow-md:   0 30px 80px rgba(21, 87, 232, .10), 0 8px 30px rgba(7, 21, 47, .07);
   --shadow-nav:  0 8px 30px rgba(21, 87, 232, .12), 0 2px 8px rgba(7, 21, 47, .06);
@@ -341,7 +344,10 @@ h1, h2, h3, h4 {
   top: 1rem;
   z-index: 50;
   margin-inline: auto;
-  width: min(70rem, calc(100% - 2 * var(--gutter)));
+  /* at rest the capsule starts level with the hero panel's top edge, not
+     flush against the viewport */
+  margin-top: var(--hero-inset);
+  width: min(70rem, calc(100% - 2 * var(--gutter) - 2 * var(--hero-inset)));
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
   border-radius: 1rem;
@@ -354,9 +360,11 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(114, 164, 255, .26);
   backdrop-filter: blur(22px) saturate(160%);
   box-shadow: var(--shadow-nav), 0 0 40px rgba(36, 107, 253, .28);
-  /* pulled back over the hero so the capsule floats in the atmosphere
-     instead of sitting on a band of canvas above it */
-  margin-bottom: -3.5rem;
+  /* Pulled back over the hero so the capsule floats in the atmosphere
+     instead of sitting on a band of canvas above it. This margin collapses
+     against the hero's top margin, so the inset has to be added back or the
+     nav rides up out of the panel and onto the canvas. */
+  margin-bottom: calc(-3.5rem - var(--hero-inset));
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
 .nav--scrolled {
@@ -432,9 +440,9 @@ h1, h2, h3, h4 {
      pulled up over it, so subtract nothing for that. Content is centred in
      whatever is left above the horizon. */
   /* the hero is an inset panel, not a full-bleed field: it sits off every
-     edge by --hero-inset and the height is reduced to match, so the first
+     edge by --hero-inset (declared on :root, because the nav's overlap has
+     to account for it too) and the height is reduced to match, so the first
      screen still ends exactly at the fold */
-  --hero-inset: clamp(.75rem, 1.4vw, 1.25rem);
   margin: var(--hero-inset);
   border-radius: clamp(1.25rem, 2.6vw, 2rem);
   min-height: calc(100vh - var(--hero-inset) * 2);
@@ -1152,7 +1160,8 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
-  .nav { top: .625rem; height: 3.25rem; border-radius: .875rem; }
+  .nav { top: .625rem; height: 3.25rem; border-radius: .875rem;
+         margin-bottom: calc(-3.25rem - var(--hero-inset)); }
   .nav__links { display: none; }
   .nav__toggle { display: block; margin-left: auto; }
   .nav--open .nav__links {
