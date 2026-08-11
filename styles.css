@@ -91,6 +91,31 @@
   --green:       #e7efff;
   --near-black:  #0a1d42;
 
+  /* ---- one surface recipe ------------------------------------------------
+     Every raised thing on the page — cards, figures, the FAQ, pull quotes,
+     product panels, the orbit readout — is the same surface at the same
+     border and the same two-layer shadow. They had drifted to five different
+     whites (.70 to .92), three border alphas and three shadows, which is why
+     the page read as several designs sharing a palette.
+
+     Shadows are neutral, not blue: a tinted shadow reads as a glow, and only
+     the deliberate light pools should glow.
+     -------------------------------------------------------------------- */
+  --panel:         rgba(255, 255, 255, .88);
+  --panel-solid:   #ffffff;
+  --panel-border:  rgba(21, 87, 232, .14);
+  --panel-border-2:rgba(21, 87, 232, .28);
+  --panel-shadow:  0 1px 2px rgba(16, 42, 140, .05), 0 14px 40px rgba(16, 42, 140, .09);
+  --panel-shadow-2:0 1px 2px rgba(16, 42, 140, .06), 0 20px 52px rgba(16, 42, 140, .13);
+
+  /* ---- one line recipe for every drawn field ----------------------------
+     The arcs, the abstract shapes, the FAQ curves, the spec plate and the
+     orbit tracks are all hairlines in the same cobalt at the same weight.
+     -------------------------------------------------------------------- */
+  --line:          rgba(21, 87, 232, .30);
+  --line-soft:     rgba(21, 87, 232, .16);
+  --line-w:        .8px;
+
   /* ---- shadows ---- */
   /* how far the nav capsule sits off the viewport edge (the hero itself is
      full bleed; this is only the bar's own inset) */
@@ -425,10 +450,10 @@ h1, h2, h3, h4 {
 }
 
 .btn--ghost {
-  background: rgba(255, 255, 255, .76);
+  background: var(--panel);
   color: var(--heading-2);
-  border-color: rgba(67, 86, 121, .26);
-  box-shadow: 0 5px 20px rgba(7, 21, 47, .06);
+  border-color: var(--panel-border);
+  box-shadow: var(--panel-shadow);
 }
 /* on the dark stages the ghost button inverts to a lit outline */
 .cta .btn--ghost, .band .btn--ghost {
@@ -443,8 +468,8 @@ h1, h2, h3, h4 {
   box-shadow: inset 0 0 24px rgba(36, 107, 253, .20), var(--glow-sm);
 }
 .btn--ghost:hover {
-  background: #fff;
-  border-color: rgba(21, 87, 232, .38);
+  background: var(--panel-solid);
+  border-color: var(--panel-border-2);
   transform: translateY(-1px) scale(1.04);
 }
 
@@ -685,7 +710,7 @@ h1, h2, h3, h4 {
    `-dashoffset` are inherited properties, so both layers below can reference
    the same <g> and style it differently through the <use> element — the
    geometry is written once and drawn twice. */
-.flow__lines { stroke: var(--brand-700); stroke-width: .8; opacity: .8; }
+.flow__lines { stroke: var(--line); stroke-width: var(--line-w); }
 
 /* The pulse: a short dash chasing along the same arcs. Motion on a line that
    is already in place, rather than the line itself moving — the arcs are
@@ -773,8 +798,8 @@ h1, h2, h3, h4 {
   height: 2.125rem;
   padding: 0 .875rem;
   border-radius: var(--pill);
-  background: rgba(255, 255, 255, .88);
-  border: 1px solid rgba(21, 87, 232, .14);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
   color: var(--body);
   letter-spacing: .04em;
   text-transform: none;
@@ -827,9 +852,9 @@ h1, h2, h3, h4 {
   border-radius: var(--r-lg);
   /* opaque enough not to need a backdrop filter: four blurred surfaces in the
      hero cost more than they showed */
-  background: rgba(255, 255, 255, .86);
-  border: 1px solid rgba(21, 87, 232, .16);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .90), 0 14px 40px rgba(16, 42, 140, .10);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   /* slower than the page's default: a card this size lifting in .35s reads
      as a pop, in .55s as a settle */
   transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease);
@@ -849,9 +874,9 @@ h1, h2, h3, h4 {
    amount, so it grows in place rather than travelling in any direction. The
    border and shadow step up by the same small degree the other panels use. */
 .stat:hover {
-  transform: scale(1.022);
-  border-color: rgba(21, 87, 232, .24);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 16px 44px rgba(16, 42, 140, .11);
+  transform: scale(1.015);
+  border-color: var(--panel-border-2);
+  box-shadow: var(--panel-shadow-2);
 }
 @media (prefers-reduced-motion: reduce) { .stat:hover { transform: none; } }
 .stat__num {
@@ -995,7 +1020,7 @@ h1, h2, h3, h4 {
   width: 2.5rem; height: 2.5rem;
   border-radius: var(--r-md);
   background: var(--brand-soft);
-  border: 1px solid var(--border-live);
+  border: 1px solid var(--panel-border);
   font-size: .9375rem;
   font-weight: 500;
   color: var(--heading);
@@ -1023,7 +1048,7 @@ h1, h2, h3, h4 {
   display: grid; place-items: center;
   border-radius: var(--r-md);
   background: var(--brand-soft);
-  border: 1px solid var(--border-live);
+  border: 1px solid var(--panel-border);
   color: var(--brand-deep);
 }
 .feature__icon svg { width: 1.125rem; height: 1.125rem; }
@@ -1035,9 +1060,9 @@ h1, h2, h3, h4 {
   margin-top: 2.25rem;
   padding: 1.5rem 1.75rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .86);
-  border: 1px solid rgba(21, 87, 232, .13);
-  box-shadow: var(--shadow-sm);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   font-size: var(--title-xs);
   line-height: 1.45;
   letter-spacing: -.022em;
@@ -1060,16 +1085,14 @@ h1, h2, h3, h4 {
   --screen-radius: 1.125rem;
   --screen-border: 1px;
   border-radius: var(--screen-radius);
-  background: var(--surface);
-  border: var(--screen-border) solid var(--border);
+  background: var(--panel-solid);
+  border: var(--screen-border) solid var(--panel-border);
   overflow: hidden;
   /* Two shadows doing separate jobs: a tight one that reads as the edge
      lifting off the page, and a wide soft one for the height. Neutral rather
      than blue-tinted — a coloured shadow reads as a glow, and a product panel
      should look photographed, not lit. */
-  box-shadow:
-    0 1px 2px rgba(16, 42, 140, .06),
-    0 16px 44px rgba(16, 42, 140, .10);
+  box-shadow: var(--panel-shadow);
 }
 
 /* each step's visual sits in its own pool of light, extended past the panel
@@ -1181,8 +1204,8 @@ h1, h2, h3, h4 {
   border-radius: var(--r-md);
   /* the rows are records, so they are drawn as records: a visible edge and a
      faint surface at rest, not just text on the panel */
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, .70);
+  border: 1px solid var(--panel-border);
+  background: transparent;
   font-size: var(--text-s);
   transition: background-color .55s var(--ease), border-color .55s var(--ease),
               transform .55s var(--ease), box-shadow .55s var(--ease);
@@ -1210,10 +1233,12 @@ h1, h2, h3, h4 {
 }
 /* Four states, four palette colours. The old coral and purple were the only
    hues on the page outside the system; they are gone. */
-.tag--ok    { background: #dce9ff; color: #1557e8; border-color: rgba(21, 87, 232, .22); }
-.tag--info  { background: #edf4ff; color: #123db5; border-color: rgba(18, 61, 181, .18); }
-.tag--calm  { background: #e7efff; color: #29466f; border-color: rgba(41, 70, 111, .14); }
-.tag--muted { background: #f2f6ff; color: #536684; border-color: var(--border); }
+/* One family at four strengths, not four separately mixed colours: the same
+   cobalt, stepped down in tint and ink together. */
+.tag--ok    { background: rgba(21, 87, 232, .12); color: var(--brand-700); border-color: rgba(21, 87, 232, .22); }
+.tag--info  { background: rgba(21, 87, 232, .09); color: var(--brand-800); border-color: rgba(21, 87, 232, .17); }
+.tag--calm  { background: rgba(21, 87, 232, .06); color: var(--heading-2);  border-color: rgba(21, 87, 232, .13); }
+.tag--muted { background: rgba(21, 87, 232, .04); color: var(--muted);      border-color: var(--panel-border); }
 
 /* ----------------------------------------------------------- feature grid */
 /* ---- abstract field ------------------------------------------------------
@@ -1234,7 +1259,7 @@ h1, h2, h3, h4 {
 
 .shapes__ring {
   border-radius: 50%;
-  border: 1px solid rgba(21, 87, 232, .16);
+  border: var(--line-w) solid var(--line-soft);
 }
 .shapes__ring--lg {
   width: 34rem; height: 34rem;
@@ -1244,13 +1269,13 @@ h1, h2, h3, h4 {
 .shapes__ring--sm {
   width: 15rem; height: 15rem;
   right: -4rem; bottom: 2rem;
-  border-color: rgba(21, 87, 232, .20);
+  border-color: var(--line);
 }
 
 .shapes__square {
   width: 11rem; height: 11rem;
   right: 6%; top: 3rem;
-  border: 1px solid rgba(21, 87, 232, .18);
+  border: var(--line-w) solid var(--line-soft);
   border-radius: var(--r-xl);
   transform: rotate(24deg);
 }
@@ -1258,7 +1283,7 @@ h1, h2, h3, h4 {
 /* dot grids, drawn as a repeating radial gradient rather than 60 elements */
 .shapes__dots {
   width: 11rem; height: 7rem;
-  background-image: radial-gradient(rgba(21, 87, 232, .30) 1px, transparent 1px);
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
   background-size: 1.125rem 1.125rem;
   -webkit-mask-image: linear-gradient(90deg, #000, transparent);
           mask-image: linear-gradient(90deg, #000, transparent);
@@ -1281,9 +1306,9 @@ h1, h2, h3, h4 {
   width: 20rem; height: 20rem;
   left: 46%; top: -9rem;
   border-radius: 50%;
-  border: 1px solid transparent;
-  border-top-color: rgba(21, 87, 232, .22);
-  border-right-color: rgba(21, 87, 232, .22);
+  border: var(--line-w) solid transparent;
+  border-top-color: var(--line-soft);
+  border-right-color: var(--line-soft);
   transform: rotate(-18deg);
 }
 
@@ -1354,9 +1379,9 @@ h1, h2, h3, h4 {
   flex-direction: column;
   padding: 2rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .90);
-  border: 1px solid #dee8fa;
-  box-shadow: var(--shadow-sm);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   min-height: 14rem;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
@@ -1371,9 +1396,8 @@ h1, h2, h3, h4 {
 .card, .stat, .row { transform-origin: 50% 50%; }
 .card:hover {
   transform: scale(1.015);
-  /* elevated, not glossy */
-  box-shadow: 0 20px 60px rgba(16, 42, 140, .08);
-  border-color: rgba(21, 87, 232, .32);
+  box-shadow: var(--panel-shadow-2);
+  border-color: var(--panel-border-2);
 }
 .card__icon {
   width: 3rem; height: 3rem;
@@ -1403,7 +1427,7 @@ h1, h2, h3, h4 {
   inset: clamp(1rem, 2.5vh, 2rem) clamp(1rem, 3vw, 2.5rem);
   z-index: 0;
   pointer-events: none;
-  border: 1px solid rgba(21, 87, 232, .14);
+  border: var(--line-w) solid var(--line-soft);
   border-radius: var(--r-lg);
 }
 .plate__c {
@@ -1423,7 +1447,7 @@ h1, h2, h3, h4 {
   left: -1px; top: 22%; bottom: 22%;
   width: 7px;
   background: repeating-linear-gradient(180deg,
-    rgba(21, 87, 232, .38) 0 1px, transparent 1px 11px);
+    var(--line) 0 1px, transparent 1px 11px);
 }
 .plate__stamp {
   position: absolute;
@@ -1498,12 +1522,12 @@ h1, h2, h3, h4 {
   z-index: 0;
   pointer-events: none;
   fill: none;
-  stroke: rgba(21, 87, 232, .22);
-  stroke-width: 1.25;
+  stroke: var(--line-soft);
+  stroke-width: var(--line-w);
   -webkit-mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
           mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
 }
-.curves__counter { stroke: rgba(36, 107, 253, .14); }
+.curves__counter { stroke: var(--line-soft); opacity: .6; }
 
 /* the curves draw themselves in when the section arrives */
 .curves path {
@@ -1530,9 +1554,9 @@ h1, h2, h3, h4 {
   max-width: 52rem;
   margin-inline: auto;
   border-radius: var(--r-xl);
-  background: rgba(255, 255, 255, .86);
-  border: 1px solid rgba(21, 87, 232, .13);
-  box-shadow: var(--shadow-md);
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
   padding-inline: 2rem;
 }
 .faq details + details { border-top: 1px solid var(--border); }
@@ -1937,7 +1961,7 @@ h1, h2, h3, h4 {
    scale: the change was being overridden here. */
 /* Restated at this specificity, or `.js-reveal.is-in { transform: none }`
    beats them — it ties on specificity and wins on order. */
-.stat.js-reveal.is-in:hover { transform: scale(1.022); }
+.stat.js-reveal.is-in:hover { transform: scale(1.015); }
 .card.js-reveal.is-in:hover { transform: scale(1.015); }
 @media (prefers-reduced-motion: reduce) {
   .stat.js-reveal.is-in:hover,
@@ -2270,7 +2294,7 @@ p, li { letter-spacing: 0; }
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(21, 87, 232, .16);
+  border: var(--line-w) solid var(--line-soft);
 }
 .orbit__track--1 { width: 17em;  height: 17em; }
 .orbit__track--2 { width: 26em;  height: 26em; }
@@ -2433,8 +2457,9 @@ p, li { letter-spacing: 0; }
   align-content: center;
   padding: 1.5rem;
   border-radius: var(--r-lg);
-  border: 1px solid rgba(21, 87, 232, .20);
-  background: rgba(255, 255, 255, .70);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  box-shadow: var(--panel-shadow);
   min-height: 9rem;
 }
 .orbit__detail-name {
@@ -2473,8 +2498,8 @@ p, li { letter-spacing: 0; }
   white-space: nowrap;
   padding: .625rem .875rem;
   border-radius: var(--r-md);
-  border: 1px solid rgba(21, 87, 232, .20);
-  background: rgba(255, 255, 255, .70);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
   color: var(--on-ground);
   font-size: var(--text-s); font-weight: 500;
   scroll-snap-align: start;
@@ -2626,6 +2651,16 @@ p, li { letter-spacing: 0; }
   --brand-soft:  rgba(36, 107, 253, .14);
   --brand-tint:  rgba(36, 107, 253, .22);
 
+  --panel:        rgba(16, 32, 64, .72);
+  --panel-solid:  #0d1b38;
+  --panel-border: rgba(122, 160, 224, .18);
+  --panel-border-2: rgba(114, 164, 255, .40);
+  --panel-shadow:   0 1px 2px rgba(0, 0, 0, .40), 0 14px 40px rgba(0, 0, 0, .45);
+  --panel-shadow-2: 0 1px 2px rgba(0, 0, 0, .45), 0 20px 52px rgba(0, 0, 0, .55);
+
+  --line:      rgba(114, 164, 255, .32);
+  --line-soft: rgba(114, 164, 255, .18);
+
   --shadow-sm:   0 8px 30px rgba(0, 0, 0, .45);
   --shadow-md:   0 30px 80px rgba(0, 0, 0, .55), 0 8px 30px rgba(0, 0, 0, .40);
 }
@@ -2680,22 +2715,6 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .nav .brand { color: var(--heading); }
 :root[data-theme="dark"] .nav__toggle { color: var(--heading-2); }
 
-:root[data-theme="dark"] .card,
-:root[data-theme="dark"] .stat,
-:root[data-theme="dark"] .faq,
-:root[data-theme="dark"] .screen {
-  background: rgba(16, 32, 64, .72);
-  border-color: rgba(122, 160, 224, .18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 14px 40px rgba(0, 0, 0, .45);
-}
-:root[data-theme="dark"] .card:hover {
-  border-color: rgba(114, 164, 255, .42);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
-}
-:root[data-theme="dark"] .stat:hover {
-  border-color: rgba(114, 164, 255, .34);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 16px 44px rgba(0, 0, 0, .5);
-}
 :root[data-theme="dark"] .row {
   background: rgba(122, 160, 224, .06);
   border-color: rgba(122, 160, 224, .16);
@@ -2749,7 +2768,6 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .flow__lines { stroke: #4385ff; opacity: .55; }
 :root[data-theme="dark"] .flow__pulse { stroke: #72a4ff; }
 :root[data-theme="dark"] .flow__pulse--b { stroke: #a8c6ff; }
 :root[data-theme="dark"] #how::before {
@@ -2762,15 +2780,7 @@ p, li { letter-spacing: 0; }
     radial-gradient(rgba(114, 164, 255, .85) .6px, transparent .6px),
     radial-gradient(rgba(168, 198, 255, .6) .85px, transparent .85px);
 }
-:root[data-theme="dark"] .curves { stroke: rgba(114, 164, 255, .20); }
-:root[data-theme="dark"] .curves__counter { stroke: rgba(67, 133, 255, .14); }
-:root[data-theme="dark"] .shapes__ring,
-:root[data-theme="dark"] .shapes__square,
-:root[data-theme="dark"] .shapes__arc { border-color: rgba(114, 164, 255, .18); }
-:root[data-theme="dark"] .shapes__dots { background-image: radial-gradient(rgba(114, 164, 255, .28) 1px, transparent 1px); }
-:root[data-theme="dark"] .plate { border-color: rgba(114, 164, 255, .18); }
 :root[data-theme="dark"] .plate__c { border-color: #72a4ff; }
-:root[data-theme="dark"] .plate__scale { background: repeating-linear-gradient(180deg, rgba(114,164,255,.42) 0 1px, transparent 1px 11px); }
 :root[data-theme="dark"] .plate__stamp { background: #0b1a36; color: #72a4ff; }
 
 /* the theme switch itself */
@@ -2798,9 +2808,6 @@ p, li { letter-spacing: 0; }
 }
 
 /* the window mock's shadow was mixed for a light page */
-:root[data-theme="dark"] .screen {
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .5), 0 8px 30px rgba(0, 0, 0, .35);
-}
 :root[data-theme="dark"] .step__digits { color: var(--heading); }
 :root[data-theme="dark"] .feature__icon { color: #a8c6ff; }
 :root[data-theme="dark"] .step__label { color: #72a4ff; }
@@ -2823,7 +2830,6 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .orbit__bloom {
   background: radial-gradient(circle, rgba(36, 107, 253, .38), rgba(36, 107, 253, 0) 70%);
 }
-:root[data-theme="dark"] .orbit__track { border-color: rgba(114, 164, 255, .16); }
 :root[data-theme="dark"] .orbit__detail {
   border-color: rgba(114, 164, 255, .22);
   background: rgba(255, 255, 255, .05);
