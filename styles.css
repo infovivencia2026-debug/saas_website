@@ -252,8 +252,8 @@ h1, h2, h3, h4 {
   /* not a flat sheet: a tinted field with two blooms and a faint cobalt grid,
      so the chapters travel over something */
   background:
-    radial-gradient(ellipse 46% 38% at 88% 12%, rgba(36, 107, 253, .12), transparent 70%),
-    radial-gradient(ellipse 52% 42% at 6% 62%, rgba(114, 164, 255, .14), transparent 72%),
+    radial-gradient(ellipse 46% 38% at 88% 12%, rgba(36, 107, 253, .12), rgba(36, 107, 253, 0) 70%),
+    radial-gradient(ellipse 52% 42% at 6% 62%, rgba(114, 164, 255, .14), rgba(114, 164, 255, 0) 72%),
     linear-gradient(180deg, #ffffff 0%, #f4f8ff 38%, #eaf2ff 72%, #f7faff 100%);
 }
 #how::before {
@@ -367,7 +367,7 @@ h1, h2, h3, h4 {
     rgba(36, 107, 253, .20) 0%,
     rgba(114, 164, 255, .10) 34%,
     rgba(114, 164, 255, .04) 56%,
-    transparent 76%
+    rgba(114, 164, 255, 0) 76%
   );
 }
 
@@ -656,8 +656,8 @@ h1, h2, h3, h4 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 58% 62% at 96% 72%, rgba(114, 164, 255, .22), transparent 70%),
-    radial-gradient(ellipse 44% 40% at 88% 8%, rgba(168, 198, 255, .20), transparent 74%);
+    radial-gradient(ellipse 58% 62% at 96% 72%, rgba(114, 164, 255, .22), rgba(114, 164, 255, 0) 70%),
+    radial-gradient(ellipse 44% 40% at 88% 8%, rgba(168, 198, 255, .20), rgba(168, 198, 255, 0) 74%);
 }
 
 .flow {
@@ -700,9 +700,9 @@ h1, h2, h3, h4 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 52% 46% at 74% 22%, rgba(36, 107, 253, .22), transparent 70%),
-    radial-gradient(ellipse 46% 40% at 16% 76%, rgba(67, 133, 255, .18), transparent 72%),
-    radial-gradient(ellipse 70% 52% at 50% 108%, rgba(21, 87, 232, .16), transparent 68%);
+    radial-gradient(ellipse 52% 46% at 74% 22%, rgba(36, 107, 253, .22), rgba(36, 107, 253, 0) 70%),
+    radial-gradient(ellipse 46% 40% at 16% 76%, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%),
+    radial-gradient(ellipse 70% 52% at 50% 108%, rgba(21, 87, 232, .16), rgba(21, 87, 232, 0) 68%);
 }
 
 @keyframes cloud-drift {
@@ -719,12 +719,12 @@ h1, h2, h3, h4 {
 .hero__glow--cyan {
   width: min(44rem, 80vw); height: 19rem;
   right: 5%; bottom: 1.25rem;
-  background: radial-gradient(closest-side, rgba(21, 87, 232, .16), transparent 72%);
+  background: radial-gradient(closest-side, rgba(21, 87, 232, .16), rgba(21, 87, 232, 0) 72%);
 }
 .hero__glow--brand {
   width: min(31rem, 62vw); height: 15rem;
   left: 7%; bottom: .625rem;
-  background: radial-gradient(closest-side, rgba(67, 133, 255, .12), transparent 72%);
+  background: radial-gradient(closest-side, rgba(67, 133, 255, .12), rgba(67, 133, 255, 0) 72%);
 }
 
 /* ---- announcement pill ---- */
@@ -896,10 +896,10 @@ h1, h2, h3, h4 {
     top: 0; bottom: 0;
     background: linear-gradient(
       180deg,
-      transparent 0%,
+      rgba(21, 87, 232, 0) 0%,
       rgba(21, 87, 232, .16) 8%,
       rgba(21, 87, 232, .16) 92%,
-      transparent 100%
+      rgba(21, 87, 232, 0) 100%
     );
   }
   /* the travelling light */
@@ -1035,12 +1035,16 @@ h1, h2, h3, h4 {
      wash; the ramp is cobalt the whole way down now. */
   padding: 3.25rem;
   margin: -3.25rem;
+  /* belt and braces: the ramp already ends inside the box, and this feathers
+     the box itself so no straight edge can ever appear at its bounds */
+  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
+          mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
   background: radial-gradient(
     ellipse 72% 58% at 50% 88%,
     rgba(21, 87, 232, .16) 0%,
     rgba(36, 107, 253, .10) 34%,
     rgba(67, 133, 255, .05) 58%,
-    transparent 78%
+    rgba(67, 133, 255, 0) 78%
   );
 }
 .screen__bar {
@@ -1168,7 +1172,7 @@ h1, h2, h3, h4 {
   width: 26rem; height: 26rem;
   left: 18%; bottom: -12rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(36, 107, 253, .12), transparent 72%);
+  background: radial-gradient(circle, rgba(36, 107, 253, .12), rgba(36, 107, 253, 0) 72%);
 }
 
 /* a quarter-arc: one visible border edge on a circle */
@@ -1346,7 +1350,7 @@ h1, h2, h3, h4 {
 .band {
   background:
     radial-gradient(circle at 50% 108%, rgba(21, 87, 232, .18), rgba(67, 133, 255, .08) 30%,
-                    rgba(7, 21, 47, .04) 52%, transparent 72%),
+                    rgba(7, 21, 47, .04) 52%, rgba(7, 21, 47, 0) 72%),
     linear-gradient(180deg, var(--surface-2), #e9f4ff);
   color: var(--body);
 }
@@ -1482,7 +1486,7 @@ h1, h2, h3, h4 {
   text-align: center;
   color: var(--on-ground);
   background:
-    radial-gradient(ellipse 46% 62% at 50% 104%, rgba(36, 107, 253, .68), rgba(67, 133, 255, .30) 46%, transparent 72%),
+    radial-gradient(ellipse 46% 62% at 50% 104%, rgba(36, 107, 253, .68), rgba(67, 133, 255, .30) 46%, rgba(67, 133, 255, 0) 72%),
     linear-gradient(180deg, var(--ground) 0%, var(--ground-2) 100%);
   border: 1px solid rgba(114, 164, 255, .28);
   box-shadow: 0 30px 90px rgba(7, 21, 47, .35), var(--glow-lg);
@@ -2084,7 +2088,7 @@ p, li { letter-spacing: 0; }
   width: 62%; height: 62%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(36, 107, 253, .26), transparent 74%);
+  background: radial-gradient(circle, rgba(36, 107, 253, .26), rgba(36, 107, 253, 0) 74%);
 }
 
 .orbit__track {
