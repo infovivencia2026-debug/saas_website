@@ -1438,7 +1438,7 @@ h1, h2, h3, h4 {
      only thing separating the footer from the section above it */
   background: var(--ground-2);
   border-top: 1px solid rgba(114, 164, 255, .22);
-  color: #c4d4f4;
+  color: #ffffff;
   /* the haze layer is inset -20%; without this it overflows the page and
      leaves a strip of canvas below the footer */
   overflow: hidden;
@@ -1481,10 +1481,10 @@ h1, h2, h3, h4 {
 
 .footer__grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: clamp(3rem, 5vw, 4.5rem); }
 .footer .brand { font-size: 1.375rem; }
-.footer__blurb { margin-top: 1.125rem; font-size: 1rem; color: #9fb3da; max-width: 36ch; line-height: 1.65; }
-.footer h4 { color: #879cc6; font-weight: 500; font-size: .9375rem; letter-spacing: .02em; }
+.footer__blurb { margin-top: 1.125rem; font-size: 1rem; color: rgba(255, 255, 255, .82); max-width: 36ch; line-height: 1.65; }
+.footer h4 { color: rgba(255, 255, 255, .64); font-weight: 500; font-size: .9375rem; letter-spacing: .02em; }
 .footer ul { list-style: none; margin: 1.375rem 0 0; padding: 0; display: grid; gap: 1rem; }
-.footer li a { font-size: 1.0625rem; color: #cbd9f5; transition: color .25s var(--ease); }
+.footer li a { font-size: 1.0625rem; color: #ffffff; transition: color .25s var(--ease); }
 .footer li a:hover { color: #ffffff; }
 .footer__bottom {
   margin-top: clamp(3rem, 5vw, 4rem);
@@ -1495,7 +1495,7 @@ h1, h2, h3, h4 {
   gap: 1rem;
   flex-wrap: wrap;
   font-size: var(--text-s);
-  color: #879cc6;
+  color: rgba(255, 255, 255, .62);
 }
 
 /* --------------------------------------------------------------- responsive */
@@ -1773,7 +1773,7 @@ h2, h3, h4 {
   text-transform: uppercase;
 }
 .nav .brand { color: var(--heading); }
-.footer .brand { color: var(--on-ground-hi); }
+.footer .brand { color: #ffffff; }
 
 /* figures read as figures: one face, one weight, tabular so columns line up */
 .stat__num, .step__digits {
