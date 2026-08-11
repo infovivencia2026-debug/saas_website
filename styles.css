@@ -2686,25 +2686,32 @@ p, li { letter-spacing: 0; }
     padding: 1.125rem 1.25rem 1.25rem;
     border-radius: var(--r-lg);
   }
-  .deck__meta { margin-bottom: .625rem; }
-  .deck__title { font-size: 1.1875rem; }
-  .deck__lede { margin-top: .25rem; font-size: var(--text-s); line-height: 1.45; max-width: none; }
-  .deck__list { margin-top: .875rem; }
-  .deck__list li { padding: .4375rem .125rem; font-size: var(--text-m); }
+  .deck__meta { margin-bottom: .5rem; }
+  .deck__title { font-size: 1.0625rem; }
+  .deck__lede { margin-top: .25rem; font-size: .8125rem; line-height: 1.4; max-width: none; }
+  .deck__list { margin-top: .75rem; }
+  .deck__list li { padding: .375rem .125rem; font-size: .875rem; }
   .deck__ghost { font-size: 3.5rem; right: -.25rem; top: -.75rem; }
 
   /* the whole division fits one screen: heading, one card, dots — nothing
      below the fold to discover by accident */
+  /* A height budget for the division: the section is exactly one screen, the
+     heading and dots take what they need, and the deck is capped at the rest.
+     Nothing is left to overflow past the fold. */
   #modules {
     min-height: 100svh;
+    grid-template-rows: auto minmax(0, 1fr) auto;
     align-content: center;
-    padding-block: clamp(1.5rem, 5vh, 2.5rem);
+    padding-block: clamp(1.25rem, 4vh, 2rem);
   }
   #modules .head { max-width: none; }
   #modules .head h2 { font-size: clamp(1.25rem, 5.2vw, 1.5rem); }
   #modules .head p { font-size: var(--text-s); line-height: 1.5; }
   #modules .plate { display: none; }   /* the frame costs height it cannot earn */
-  .deck { margin-top: 1.25rem; }
+  .deck { margin-top: 1rem; }
+  .deck__grid { align-items: stretch; }
+  /* the tallest card decides, and it may not exceed the space left over */
+  .deck__card { max-height: calc(100svh - 17rem); overflow: hidden; }
 
   .deck__dots {
     display: flex;
