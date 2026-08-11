@@ -474,11 +474,9 @@ h1, h2, h3, h4 {
   overflow: hidden;   /* clips the bloom to the rounded corners */
   /* almost white at the top, cool illumination gathering toward the horizon */
   color: var(--on-ground);
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 92%, rgba(36, 107, 253, .60), transparent 68%),
-    radial-gradient(ellipse 50% 40% at 82% 18%, rgba(21, 87, 232, .48), transparent 70%),
-    radial-gradient(ellipse 60% 45% at 12% 72%, rgba(67, 133, 255, .34), transparent 72%),
-    linear-gradient(180deg, var(--ground-2) 0%, var(--ground) 48%, var(--ground-3) 100%);
+  /* the photo sits in .hero__art above this; the stage is only what shows
+     through the scrim at the edges */
+  background: linear-gradient(180deg, var(--ground-2) 0%, var(--ground) 48%, var(--ground-3) 100%);
 }
 
 /* ---- the atmosphere ------------------------------------------------------
@@ -493,55 +491,41 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-/* ---- the hero artwork ----------------------------------------------------
-   hero.png is a luminous horizon — a cyan/lime arc, an orbit ring and a light
-   point — rendered on a near-white ground. That ground is opaque, so painting
-   it straight onto the tinted canvas would leave a visible rectangle.
+/* ---- the hero photo ------------------------------------------------------
+   hero-art.png shown as itself: a full-bleed photograph of the ray fan, no
+   inversion, no blend trick, no mask cut out of the middle. It was previously
+   inverted and screen-blended so only abstract streaks survived on the dark
+   ground; now the picture is the hero and the ground sits on top of it as a
+   scrim instead of underneath it as a stage.
 
-   `mix-blend-mode: multiply` solves it without touching the file: white
-   multiplies to whatever is beneath, so the paper disappears and only the arc
-   survives. A radial mask then feathers the edges, so there is no boundary at
-   any corner. The image keeps its own colour rather than being tinted, which
-   is right here — it was authored in this palette already.
+   The convergence point is measured at 99% across and 16% down, so the image
+   is anchored right: `cover` will crop the empty left of the frame at narrow
+   aspect ratios and keep the focal point on screen.
    ----------------------------------------------------------------------- */
 .hero__art {
   position: absolute;
   inset: 0;
-  /* The artwork is a perspective ray fan: measured convergence at 99% across
-     and 16% down, top fifth empty, energy filling everything below. So it is
-     placed full-bleed with the vanishing point held at the right edge, rather
-     than anchored to the fold like a horizon would be.
-
-     `cover` with a right anchor keeps that convergence on screen at every
-     aspect ratio — it is the composition's focal point, and losing it to a
-     crop would leave anonymous diagonal streaks. */
   background:
     image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
     right 18% / cover no-repeat;
   background: -webkit-image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
     right 18% / cover no-repeat;
-  /* The source is dark rays on white paper. `multiply` was right on a light
-     page; on a dark stage it would blot the whole hero out. Inverting turns
-     the paper black and the rays light, `screen` then discards that black
-     entirely — black is screen's identity — so only the rays survive, and
-     they add light rather than subtract it. The hue rotation carries the
-     inverted orange back round to indigo. */
-  filter: invert(1) hue-rotate(200deg) saturate(1.75) brightness(1.18);
-  mix-blend-mode: screen;
-  opacity: .85;
-  /* Hold the headline area clear. The rays are pale, but a display-size
-     heading sitting directly on converging lines reads as noise, so the
-     centre-top is faded out and the bottom edge is softened into the page. */
-  -webkit-mask-image:
-    radial-gradient(120% 68% at 42% 26%, transparent 34%, #000 72%),
-    linear-gradient(180deg, #000 0%, #000 82%, transparent 99%);
-          mask-image:
-    radial-gradient(120% 68% at 42% 26%, transparent 34%, #000 72%),
-    linear-gradient(180deg, #000 0%, #000 82%, transparent 99%);
-  -webkit-mask-composite: source-in;
-          mask-composite: intersect;
   animation: art-float 16s ease-in-out infinite;
   will-change: transform;
+}
+
+/* The scrim. The photo is blue on near-white and the hero type is light, so
+   the picture has to be carried down to a legible ground — heaviest behind
+   the centred headline, lighter at the right where the rays converge, so the
+   composition still reads through. */
+.hero__atmos::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 78% 62% at 46% 44%, rgba(7, 21, 47, .90), rgba(7, 21, 47, .58) 58%, transparent 82%),
+    linear-gradient(180deg, rgba(7, 21, 47, .86) 0%, rgba(10, 29, 66, .62) 42%, rgba(7, 21, 47, .88) 100%),
+    linear-gradient(90deg, rgba(7, 21, 47, .70) 0%, rgba(7, 21, 47, .34) 55%, rgba(7, 21, 47, .52) 100%);
 }
 
 @keyframes art-float {
