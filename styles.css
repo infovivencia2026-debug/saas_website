@@ -916,7 +916,88 @@ h1, h2, h3, h4 {
 .bars span:nth-child(6) { background: var(--green); opacity: .9; }
 
 /* ----------------------------------------------------------- feature grid */
+/* ---- abstract field ------------------------------------------------------
+   The platform section is four cards on an empty plane, so it gets a quiet
+   geometry behind them: two outlined rings, a rotated square, two dot grids,
+   one soft bloom and an arc. Everything is CSS — no request, no asset to keep
+   in step — and everything is far enough behind the cards not to compete
+   with the text sitting on top of it.
+   ------------------------------------------------------------------------ */
+.shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shapes > * { position: absolute; display: block; }
+
+.shapes__ring {
+  border-radius: 50%;
+  border: 1px solid rgba(21, 87, 232, .16);
+}
+.shapes__ring--lg {
+  width: 34rem; height: 34rem;
+  left: -12rem; top: -8rem;
+  box-shadow: inset 0 0 0 1px rgba(21, 87, 232, .05);
+}
+.shapes__ring--sm {
+  width: 15rem; height: 15rem;
+  right: -4rem; bottom: 2rem;
+  border-color: rgba(21, 87, 232, .20);
+}
+
+.shapes__square {
+  width: 11rem; height: 11rem;
+  right: 6%; top: 3rem;
+  border: 1px solid rgba(21, 87, 232, .18);
+  border-radius: 1.5rem;
+  transform: rotate(24deg);
+}
+
+/* dot grids, drawn as a repeating radial gradient rather than 60 elements */
+.shapes__dots {
+  width: 11rem; height: 7rem;
+  background-image: radial-gradient(rgba(21, 87, 232, .30) 1px, transparent 1px);
+  background-size: 1.125rem 1.125rem;
+  -webkit-mask-image: linear-gradient(90deg, #000, transparent);
+          mask-image: linear-gradient(90deg, #000, transparent);
+}
+.shapes__dots--l { left: 4%;  bottom: 3.5rem; }
+.shapes__dots--r { right: 3%; top: 45%;
+  -webkit-mask-image: linear-gradient(270deg, #000, transparent);
+          mask-image: linear-gradient(270deg, #000, transparent);
+}
+
+.shapes__blob {
+  width: 26rem; height: 26rem;
+  left: 18%; bottom: -12rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(36, 107, 253, .14), transparent 66%);
+  filter: blur(30px);
+}
+
+/* a quarter-arc: one visible border edge on a circle */
+.shapes__arc {
+  width: 20rem; height: 20rem;
+  left: 46%; top: -9rem;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-top-color: rgba(21, 87, 232, .22);
+  border-right-color: rgba(21, 87, 232, .22);
+  transform: rotate(-18deg);
+}
+
+@media (max-width: 900px) {
+  .shapes__square, .shapes__dots--r, .shapes__arc { display: none; }
+}
+
+/* the section's own content sits above the field */
+#roles .container { position: relative; z-index: 1; }
+
 .grid-4 {
+  position: relative;
+  z-index: 1;
   margin-top: clamp(3rem, 5vw, 4rem);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
