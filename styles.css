@@ -1850,36 +1850,44 @@ h1, h2, h3, h4 {
   .step:nth-child(even) .screen__body { padding-left: calc(.75rem + var(--gutter)); }
 
   /* the domains become a swipeable deck, one card per screen */
+  /* A post carousel, the way a phone already teaches people to read one:
+     each domain is a single full-bleed portrait card, edge to edge, one per
+     swipe, with dots underneath.
+
+     Flex rather than grid — `grid-auto-flow: column` still honoured the
+     2-column template underneath it, which laid the four cards out 2x2
+     inside a scrollport one card wide. */
   .deck__grid {
-    /* Flex, not grid: `grid-auto-flow: column` still honours the 2-column
-       template underneath it, so the four cards were laying out 2x2 inside a
-       scrollport barely wider than one card — which is why only the last two
-       were reachable. A flex row cannot do that. */
     display: flex;
-    /* each card is its own height; stretched to the tallest they leave a
-       block of empty surface under the shorter domains */
-    align-items: flex-start;
+    gap: 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
     margin-inline: calc(-1 * var(--gutter));
-    padding: .25rem var(--gutter) 1.25rem;
+    padding: 0;
   }
   .deck__grid::-webkit-scrollbar { display: none; }
   .deck__card {
-    /* one card per view: the full width of the scrollport, so nothing of the
-       next card shows and each swipe moves exactly one domain */
+    /* one full-bleed card per swipe, in a post's 4:5 portrait */
     flex: 0 0 100%;
+    aspect-ratio: 4 / 5;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding: 1.5rem;
+    padding: 1.75rem var(--gutter);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
-  .deck__ghost { font-size: 5.5rem; }
+  /* the list takes whatever height the card has left, so every card fills its
+     frame instead of leaving a gap under the shorter domains */
+  .deck__list { margin-top: auto; }
+  .deck__ghost { font-size: 7.5rem; right: -.5rem; top: -1.25rem; }
 
   .deck__dots {
     display: flex;
+    margin-top: 1rem;
     justify-content: center;   /* the run of dots is centred under the deck */
     align-items: center;
     gap: .5rem;
