@@ -835,8 +835,15 @@ h1, h2, h3, h4 {
 .stat:nth-child(even)::after {
   background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(67, 133, 255, .09) 100%);
 }
-/* The stat cards have no hover state. They are figures, not controls —
-   nothing happens when you click one, so nothing should suggest otherwise. */
+/* The card swells from its own centre — every edge moves outward by the same
+   amount, so it grows in place rather than travelling in any direction. The
+   border and shadow step up by the same small degree the other panels use. */
+.stat:hover {
+  transform: scale(1.022);
+  border-color: rgba(21, 87, 232, .24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 16px 44px rgba(16, 42, 140, .11);
+}
+@media (prefers-reduced-motion: reduce) { .stat:hover { transform: none; } }
 .stat__num {
   position: relative; z-index: 1;
   font-size: clamp(2rem, 3vw, 2.75rem);
@@ -1842,8 +1849,12 @@ h1, h2, h3, h4 {
    { transform: none }` beats them — it ties on specificity and wins on order.
    This is why the stat cards kept lifting after their hover was changed to a
    scale: the change was being overridden here. */
+/* Restated at this specificity, or `.js-reveal.is-in { transform: none }`
+   beats them — it ties on specificity and wins on order. */
+.stat.js-reveal.is-in:hover { transform: scale(1.022); }
 .card.js-reveal.is-in:hover { transform: scale(1.015); }
 @media (prefers-reduced-motion: reduce) {
+  .stat.js-reveal.is-in:hover,
   .card.js-reveal.is-in:hover { transform: none; }
 }
 
@@ -2602,6 +2613,10 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .card:hover {
   border-color: rgba(114, 164, 255, .42);
   box-shadow: 0 20px 60px rgba(0, 0, 0, .55);
+}
+:root[data-theme="dark"] .stat:hover {
+  border-color: rgba(114, 164, 255, .34);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 16px 44px rgba(0, 0, 0, .5);
 }
 :root[data-theme="dark"] .row {
   background: rgba(122, 160, 224, .06);
