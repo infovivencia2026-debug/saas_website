@@ -2452,8 +2452,16 @@ p, li { letter-spacing: 0; }
   color: var(--brand);
   transition: background-color .45s var(--ease), border-color .45s var(--ease), color .45s var(--ease);
 }
-.theme__sun, .theme__moon { position: relative; z-index: 1; transition: opacity .35s var(--ease); }
-.theme__moon { opacity: .35; }
+.theme__sun, .theme__moon {
+  position: relative; z-index: 1;
+  transition: opacity .35s var(--ease), color .35s var(--ease);
+}
+/* whichever icon the knob is sitting under goes white — cobalt on cobalt is
+   invisible, which is exactly where the active icon always sits */
+.theme__sun  { color: #ffffff; opacity: 1; }
+.theme__moon { opacity: .55; }
+.theme[aria-pressed="true"] .theme__sun  { color: inherit; }
+.theme[aria-pressed="true"] .theme__moon { color: #ffffff; }
 /* the knob slides under whichever icon is active */
 .theme__knob {
   position: absolute;
@@ -2470,7 +2478,7 @@ p, li { letter-spacing: 0; }
 .theme:focus-visible .theme__track { box-shadow: 0 0 0 3px rgba(36, 107, 253, .35); }
 
 .theme[aria-pressed="true"] .theme__knob { transform: translateX(2.125rem); }
-.theme[aria-pressed="true"] .theme__sun  { opacity: .35; }
+.theme[aria-pressed="true"] .theme__sun  { opacity: .55; }
 .theme[aria-pressed="true"] .theme__moon { opacity: 1; }
 
 @media (max-width: 720px) { .theme__track { width: 4.25rem; height: 2.125rem; } }
