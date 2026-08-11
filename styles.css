@@ -647,6 +647,7 @@ h1, h2, h3, h4 {
   z-index: -1;
   pointer-events: none;
 }
+.hero > .container { position: relative; z-index: 1; }
 
 /* ---- the arc field -------------------------------------------------------
    Concentric hairline arcs sweeping out of the right edge in two families,
@@ -663,24 +664,22 @@ h1, h2, h3, h4 {
 }
 
 .flow {
+  /* A direct child of .hero at z-index 0, NOT inside .hero__atmos. The
+     atmosphere sits at z-index -1, which stacks the field in the negative
+     layer along with two glows and a tint painting over it; out here the
+     arcs sit plainly above the hero's background and below its content. */
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
   fill: none;
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
-  /* ONE mask, not two composited. `mask-composite` has two incompatible
-     syntaxes (`intersect` vs the -webkit- `source-in`), and declaring both
-     can resolve to an empty mask — which hides the field completely. A single
-     gradient cannot fail that way: strongest where the arcs spring from the
-     right edge, dissolving as they sweep left across the type. */
-  -webkit-mask-image: radial-gradient(ellipse 118% 135% at 100% 52%, #000 30%, rgba(0,0,0,.55) 64%, transparent 98%);
-          mask-image: radial-gradient(ellipse 118% 135% at 100% 52%, #000 30%, rgba(0,0,0,.55) 64%, transparent 98%);
 }
-.flow__wide  path { stroke: var(--brand-700); stroke-width: 1.6; opacity: .7; }
-.flow__tight path { stroke: var(--brand-600); stroke-width: 1.4; opacity: .55; }
-.flow__rules path { stroke: var(--brand-700); stroke-width: 1.8; opacity: .5; }
+.flow__wide  path { stroke: var(--brand-700); stroke-width: 1.5; }
+.flow__tight path { stroke: var(--brand-600); stroke-width: 1.3; }
+.flow__rules path { stroke: var(--brand-700); stroke-width: 1.6; }
 
 /* each arc inks in from the edge, innermost first */
 .flow path {
