@@ -446,10 +446,14 @@ h1, h2, h3, h4 {
      edge by --hero-inset (declared on :root, because the nav's overlap has
      to account for it too) and the height is reduced to match, so the first
      screen still ends exactly at the fold */
-  margin: var(--hero-inset);
+  /* Less air above than at the sides: the nav capsule already carries the
+     top spacing, and this margin collapses with the nav's negative one, so a
+     zero here still lands the panel's top edge --nav-gap below the viewport
+     rather than flush against it. */
+  margin: 0 var(--hero-inset) var(--hero-inset);
   border-radius: clamp(1.25rem, 2.6vw, 2rem);
-  min-height: calc(100vh - var(--hero-inset) * 2 - var(--nav-gap));
-  min-height: calc(100svh - var(--hero-inset) * 2 - var(--nav-gap));
+  min-height: calc(100vh - var(--hero-inset) - var(--nav-gap));
+  min-height: calc(100svh - var(--hero-inset) - var(--nav-gap));
   display: grid;
   align-content: center;
   padding-block: clamp(6rem, 10vw, 8rem) clamp(5rem, 9vw, 8rem);
