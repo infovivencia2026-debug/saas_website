@@ -1851,9 +1851,11 @@ h1, h2, h3, h4 {
 
   /* the domains become a swipeable deck, one card per screen */
   .deck__grid {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: min(20rem, 84%);
+    /* Flex, not grid: `grid-auto-flow: column` still honours the 2-column
+       template underneath it, so the four cards were laying out 2x2 inside a
+       scrollport barely wider than one card — which is why only the last two
+       were reachable. A flex row cannot do that. */
+    display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -1863,7 +1865,13 @@ h1, h2, h3, h4 {
     padding: .25rem var(--gutter) 1.25rem;
   }
   .deck__grid::-webkit-scrollbar { display: none; }
-  .deck__card { scroll-snap-align: center; padding: 1.5rem; }
+  .deck__card {
+    flex: 0 0 min(20rem, 84%);
+    /* start, not centre: centre-snapping leaves the first card half a screen
+       in from the left on load */
+    scroll-snap-align: start;
+    padding: 1.5rem;
+  }
   .deck__ghost { font-size: 5.5rem; }
 
   .deck__dots {
