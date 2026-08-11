@@ -679,20 +679,41 @@ h1, h2, h3, h4 {
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
 }
-/* one weight, one colour: three families drawn at three weights read as
-   three unrelated drawings sharing a frame */
-.flow path { stroke: var(--brand-700); stroke-width: .8; opacity: .8; }
-.flow__tight path { opacity: .6; }
+/* One weight, one colour for the drawn field. `stroke-dasharray` and
+   `-dashoffset` are inherited properties, so both layers below can reference
+   the same <g> and style it differently through the <use> element — the
+   geometry is written once and drawn twice. */
+.flow__lines { stroke: var(--brand-700); stroke-width: .8; opacity: .8; }
 
-/* each arc inks in from the edge, innermost first */
-.flow path {
+/* The pulse: a short dash chasing along the same arcs. Motion on a line that
+   is already in place, rather than the line itself moving — the arcs are
+   concentric, so translating or rotating them would either look static or
+   break their geometry. Two passes at different speeds and offsets keep it
+   from reading as a metronome. */
+.flow__pulse {
+  stroke: var(--brand-500);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: .85;
+  stroke-dasharray: 70 1100;
+  animation: flow-run 7s linear infinite;
+}
+.flow__pulse--b {
+  stroke: var(--brand-400);
+  stroke-width: 1.2;
+  opacity: .6;
+  stroke-dasharray: 40 1130;
+  animation-duration: 11s;
+  animation-delay: -3.5s;
+}
+@keyframes flow-run { to { stroke-dashoffset: -1170; } }
+
+/* the field still inks itself in once on arrival */
+.flow__lines {
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
   animation: flow-ink 1.8s var(--ease) forwards;
-  animation-delay: calc(var(--i, 0) * 90ms);
 }
-.flow__tight path { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
-.flow__rules path { animation-delay: 1s; }
 @keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
 /* The arcs' radii are not a geometric series, so the outward drift that the
@@ -705,7 +726,8 @@ h1, h2, h3, h4 {
    asked for; the one-shot ink above is the effect that mattered. */
 
 @media (prefers-reduced-motion: reduce) {
-  .flow path { animation: none; stroke-dashoffset: 0; }
+  .flow__lines { animation: none; stroke-dashoffset: 0; }
+  .flow__pulse { display: none; }
 }
 
 /* The blooms the field sits in. ::before, not ::after: a parent's ::after
@@ -1718,7 +1740,7 @@ h1, h2, h3, h4 {
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
   /* on a phone the tight family crowds the type; the wide arcs carry it */
-  .flow__tight, .flow__rules { display: none; }
+
   .hero h1 { max-width: none; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
@@ -2671,7 +2693,9 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .flow path { stroke: #4385ff; opacity: .50; }
+:root[data-theme="dark"] .flow__lines { stroke: #4385ff; opacity: .55; }
+:root[data-theme="dark"] .flow__pulse { stroke: #72a4ff; }
+:root[data-theme="dark"] .flow__pulse--b { stroke: #a8c6ff; }
 :root[data-theme="dark"] #how::before {
   background-image:
     radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
