@@ -23,10 +23,39 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<!-- Applied before first paint: reading this after the stylesheet would show
+     a light frame first and then repaint dark. Light is the default; only an
+     explicit choice is honoured, so the system preference does not override
+     it. -->
+<script>
+  (function () {
+    var t = 'light';
+    try { t = localStorage.getItem('vivencia-theme') || 'light'; } catch (e) {}
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
 </head>
 <body>
 
 <a class="skip" href="#top">Skip to content</a>
+
+<!-- theme switch. Light is the default; the choice is remembered. -->
+<button class="theme" id="themeToggle" type="button" aria-pressed="false"
+        aria-label="Switch to dark mode" title="Dark mode">
+  <span class="theme__track" aria-hidden="true">
+    <svg class="theme__sun" width="15" height="15" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="4.2"/>
+      <path d="M12 1.8v2.4M12 19.8v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M1.8 12h2.4M19.8 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/>
+    </svg>
+    <svg class="theme__moon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
+    </svg>
+    <span class="theme__knob"></span>
+  </span>
+</button>
 
 <!-- ============================================================== nav -->
 <header class="nav" id="nav">
@@ -1136,6 +1165,23 @@
       lensRect = null;
     });
     window.addEventListener('scroll', function () { lensRect = null; }, { passive: true });
+  }
+
+  /* ---------------------------------------------------------------- theme */
+  var themeBtn = document.getElementById('themeToggle');
+  if (themeBtn) {
+    function applyTheme(mode) {
+      document.documentElement.setAttribute('data-theme', mode);
+      var dark = mode === 'dark';
+      themeBtn.setAttribute('aria-pressed', String(dark));
+      themeBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      themeBtn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
+    }
+    themeBtn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('vivencia-theme', next); } catch (e) {}
+    });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
