@@ -962,10 +962,10 @@ h1, h2, h3, h4 {
 /* Odd chapters put the panel on the right of the row, so it is lit from its
    right edge; even chapters sit on the left and are lit from the left. Below
    1100px the layout is a single column, so it settles on the right. */
-.step:nth-child(odd)  .step__visual { --glow-x: 100%; }
-.step:nth-child(even) .step__visual { --glow-x: 0%; }
+.step:nth-child(odd)  .step__visual { --glow-dir: 270deg; }  /* lit from the right */
+.step:nth-child(even) .step__visual { --glow-dir: 90deg;  }  /* lit from the left  */
 @media (max-width: 1100px) {
-  .step:nth-child(even) .step__visual { --glow-x: 100%; }
+  .step:nth-child(even) .step__visual { --glow-dir: 270deg; }
 }
 
 .step__num { display: flex; align-items: center; gap: .875rem; margin-bottom: 1.5rem; }
@@ -1063,16 +1063,22 @@ h1, h2, h3, h4 {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* One edge, nothing else. The halo that used to run around the border is
-     gone — that was what made the light read as coming from every side. The
-     edge is set per chapter below, because the panels alternate: the light is
-     always on the same side the panel itself sits on. */
-  background: radial-gradient(
-    ellipse 24% 68% at var(--glow-x, 100%) 50%,
-    rgba(36, 107, 253, .32),
-    rgba(36, 107, 253, .12) 42%,
-    rgba(36, 107, 253, 0) 80%
+  /* One edge, diffusing inward. A linear ramp rather than an ellipse: the
+     ellipse tapered top and bottom, so the light stopped short of the panel's
+     corners instead of running the full height of its edge. This meets the
+     border at full strength down its whole side and thins out across the
+     panel, with the mask below softening the two ends so it still has no
+     hard terminals. */
+  background: linear-gradient(
+    var(--glow-dir, 270deg),
+    rgba(36, 107, 253, .34) 0%,
+    rgba(36, 107, 253, .20) 18%,
+    rgba(36, 107, 253, .08) 44%,
+    rgba(36, 107, 253, .02) 68%,
+    rgba(36, 107, 253, 0) 88%
   );
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 86%, transparent 100%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
