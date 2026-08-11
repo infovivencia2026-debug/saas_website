@@ -526,16 +526,18 @@ h1, h2, h3, h4 {
   height: 100%;
   fill: none;
   stroke: var(--brand-600);
-  stroke-width: 1.6;
+  /* a fine line: non-scaling-stroke below keeps this in screen pixels, so it
+     stays hairline-thin however far the viewBox is scaled up */
+  stroke-width: .9;
   stroke-linecap: round;
   stroke-linejoin: round;
-  opacity: .5;
+  opacity: .6;
   /* the outlines are drawn in a hand, not a machine: a fine dash keeps the
      line from reading as a vector rectangle boundary */
   vector-effect: non-scaling-stroke;
 }
 .clouds use { stroke: var(--brand-600); }
-.clouds__wind path { stroke: var(--brand-500); stroke-width: 1.2; opacity: .55; }
+.clouds__wind path { stroke: var(--brand-500); stroke-width: .7; opacity: .6; }
 
 /* each bank drifts at its own pace, the nearest fastest */
 .clouds__a { animation: cloud-x 76s linear infinite; }
