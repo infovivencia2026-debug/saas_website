@@ -1859,13 +1859,21 @@ p, li { letter-spacing: 0; }
    ========================================================================== */
 
 .nav__link, .footer li a, .faq summary { position: relative; }
-.nav__link, .footer li a { transition: color .25s var(--ease); }
+.nav__link, .footer li a { display: inline-block; line-height: 1.3; transition: color .25s var(--ease); }
 .nav__link:hover, .footer li a:hover { color: var(--on-ground-hi); }
 
 .nav__link::before, .nav__link::after,
 .footer li a::before, .footer li a::after {
+  /* Centred by stretching the pseudo to the link's full height and centring
+     the glyph inside it, rather than by top:50% + translateY(-50%). The
+     latter centres the pseudo's BOX on the line box — which, with the link's
+     line-height, is taller than the text — so the bracket sat low against
+     the letters. This way the glyph itself is centred on the word. */
   position: absolute;
-  top: 50%;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
   font-family: var(--mono);
   font-size: .95em;
   font-weight: 500;
@@ -1877,7 +1885,6 @@ p, li { letter-spacing: 0; }
     0 0 6px rgba(36, 107, 253, .90),
     0 0 14px rgba(36, 107, 253, .60),
     0 0 26px rgba(114, 164, 255, .45);
-  transform: translateY(-50%);
 }
 .nav__link::before, .footer li a::before { content: "["; left: -.7rem; }
 .nav__link::after,  .footer li a::after  { content: "]"; right: -.7rem; }
@@ -1901,14 +1908,14 @@ p, li { letter-spacing: 0; }
 }
 
 @keyframes lock-left {
-  0%   { opacity: 0; transform: translate(-9px, -50%) scaleY(.5); }
-  58%  { opacity: 1; transform: translate(2px, -50%)  scaleY(1.14); }
-  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+  0%   { opacity: 0; transform: translateX(-9px) scaleY(.5); }
+  58%  { opacity: 1; transform: translateX(2px)  scaleY(1.14); }
+  100% { opacity: 1; transform: translateX(0)    scaleY(1); }
 }
 @keyframes lock-right {
-  0%   { opacity: 0; transform: translate(9px, -50%)  scaleY(.5); }
-  58%  { opacity: 1; transform: translate(-2px, -50%) scaleY(1.14); }
-  100% { opacity: 1; transform: translate(0, -50%)    scaleY(1); }
+  0%   { opacity: 0; transform: translateX(9px)  scaleY(.5); }
+  58%  { opacity: 1; transform: translateX(-2px) scaleY(1.14); }
+  100% { opacity: 1; transform: translateX(0)    scaleY(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
