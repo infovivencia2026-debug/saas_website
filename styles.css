@@ -161,7 +161,6 @@
   border-radius: var(--r-sm);
 }
 .btn:focus-visible { outline-offset: 4px; border-radius: var(--pill); }
-.hero :where(a, button):focus-visible,
 .band :where(a, button):focus-visible,
 .cta :where(a, button):focus-visible,
 .footer :where(a, button):focus-visible { outline-color: var(--brand-hot); }
@@ -320,13 +319,13 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(10px);
 }
 /* on the dark stages the ghost button inverts to a lit outline */
-.hero .btn--ghost, .cta .btn--ghost, .band .btn--ghost {
+.cta .btn--ghost, .band .btn--ghost {
   background: rgba(36, 107, 253, .10);
   color: var(--on-ground);
   border-color: rgba(114, 164, 255, .45);
   box-shadow: inset 0 0 20px rgba(36, 107, 253, .12);
 }
-.hero .btn--ghost:hover, .cta .btn--ghost:hover, .band .btn--ghost:hover {
+.cta .btn--ghost:hover, .band .btn--ghost:hover {
   background: rgba(36, 107, 253, .18);
   border-color: var(--brand-hot);
   box-shadow: inset 0 0 24px rgba(36, 107, 253, .20), var(--glow-sm);
@@ -473,10 +472,18 @@ h1, h2, h3, h4 {
   text-align: center;
   overflow: hidden;   /* clips the bloom to the rounded corners */
   /* almost white at the top, cool illumination gathering toward the horizon */
-  color: var(--on-ground);
-  /* the photo sits in .hero__art above this; the stage is only what shows
-     through the scrim at the edges */
-  background: linear-gradient(180deg, var(--ground-2) 0%, var(--ground) 48%, var(--ground-3) 100%);
+  color: var(--body);
+  /* the photo covers this; it only shows at the edges the crop leaves */
+  background: linear-gradient(180deg, #ffffff 0%, #eef4ff 55%, #e4eeff 100%);
+
+  /* The hero used to be the page's first dark stage and everything inside it
+     reads from the --on-ground ramp. With the overlay gone the ground is the
+     near-white artwork, so the ramp is remapped to the ink end rather than
+     every rule being rewritten. */
+  --on-ground:    var(--body);
+  --on-ground-2:  var(--heading-2);
+  --on-ground-3:  var(--muted);
+  --on-ground-hi: var(--heading);
 }
 
 /* ---- the atmosphere ------------------------------------------------------
@@ -514,19 +521,10 @@ h1, h2, h3, h4 {
   will-change: transform;
 }
 
-/* The scrim. The photo is blue on near-white and the hero type is light, so
-   the picture has to be carried down to a legible ground — heaviest behind
-   the centred headline, lighter at the right where the rays converge, so the
-   composition still reads through. */
-.hero__atmos::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 56% at 46% 44%, rgba(7, 21, 47, .72), rgba(7, 21, 47, .34) 60%, transparent 84%),
-    linear-gradient(180deg, rgba(7, 21, 47, .60) 0%, rgba(10, 29, 66, .28) 44%, rgba(7, 21, 47, .62) 100%),
-    linear-gradient(90deg, rgba(7, 21, 47, .46) 0%, rgba(7, 21, 47, .12) 58%, rgba(7, 21, 47, .30) 100%);
-}
+/* No scrim: the photo is shown clean. Which means the hero is now a LIGHT
+   stage — see the token remap on .hero — because the artwork is blue on
+   near-white and light type over it was only ever legible thanks to the
+   overlay that used to sit here. */
 
 @keyframes art-float {
   0%, 100% { transform: scale(1.02) translateY(3px); }
@@ -539,13 +537,13 @@ h1, h2, h3, h4 {
 .hero__glow--cyan {
   width: min(44rem, 80vw); height: 19rem;
   right: 5%; bottom: 1.25rem;
-  background: rgba(21, 87, 232, .18);
+  background: rgba(21, 87, 232, .10);
   animation: bloom 9s ease-in-out infinite;
 }
 .hero__glow--brand {
   width: min(31rem, 62vw); height: 15rem;
   left: 7%; bottom: .625rem;
-  background: rgba(67, 133, 255, .12);
+  background: rgba(67, 133, 255, .07);
   animation: bloom 11s ease-in-out infinite reverse;
 }
 
@@ -605,7 +603,7 @@ h1, h2, h3, h4 {
 .hero__note {
   margin-top: 3rem;
   font-size: .75rem;
-  color: #91a6cf;
+  color: var(--muted);
   letter-spacing: .02em;
 }
 
@@ -623,10 +621,10 @@ h1, h2, h3, h4 {
   overflow: hidden;
   padding: 1.5rem 1.375rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .055);
-  border: 1px solid rgba(114, 164, 255, .22);
+  background: rgba(255, 255, 255, .74);
+  border: 1px solid rgba(21, 87, 232, .16);
   backdrop-filter: blur(18px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 18px 50px rgba(7, 21, 47, .45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .90), 0 14px 40px rgba(16, 42, 140, .10);
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
 /* one coherent internal illumination anchored to the bottom — alternating
@@ -634,16 +632,16 @@ h1, h2, h3, h4 {
 .stat::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(36, 107, 253, .48) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(36, 107, 253, .12) 100%);
   pointer-events: none;
 }
 .stat:nth-child(even)::after {
-  background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(67, 133, 255, .38) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(67, 133, 255, .09) 100%);
 }
 .stat:hover {
   transform: translateY(-3px);
-  border-color: rgba(114, 164, 255, .45);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 22px 60px rgba(7, 21, 47, .55), var(--glow-md);
+  border-color: rgba(21, 87, 232, .32);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), 0 20px 55px rgba(16, 42, 140, .14);
 }
 .stat__num {
   position: relative; z-index: 1;
@@ -651,8 +649,8 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.04em;
-  color: #ffffff;
-  text-shadow: 0 0 24px rgba(114, 164, 255, .70);
+  /* the figures sit on light glass now, so they take ink, not glow */
+  color: var(--heading);
 }
 .stat__label {
   position: relative; z-index: 1;
@@ -1547,22 +1545,22 @@ p, li { letter-spacing: 0; }
 
 .hero__accent {
   display: inline-block;
-  background: linear-gradient(90deg, #a8c6ff 0%, #72a4ff 52%, #55d7ff 100%);
+  background: linear-gradient(90deg, var(--brand-700) 0%, var(--brand-600) 52%, var(--brand-500) 100%);
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
           color: transparent;
   /* text-shadow cannot render through a transparent fill, so the glow has to
      come from drop-shadow on the element instead */
-  filter: drop-shadow(0 0 28px rgba(83, 216, 255, .30));
+  filter: none;   /* the glow belonged to the dark stage */
 }
 
 /* If background-clip:text is unavailable the text would render fully
    transparent — invisible. Paint it a solid mid-tone from the same ramp. */
 @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
   .hero__accent {
-    color: #a8c6ff;
-    -webkit-text-fill-color: #a8c6ff;
+    color: var(--brand-700);
+    -webkit-text-fill-color: var(--brand-700);
     background: none;
     filter: none;
   }
@@ -1577,7 +1575,7 @@ p, li { letter-spacing: 0; }
 .cta h2 { color: var(--on-ground-hi); }
 
 .btn--primary { color: #ffffff; }
-.hero .btn--ghost, .cta .btn--ghost, .band .btn--ghost { color: var(--on-ground); }
+.cta .btn--ghost, .band .btn--ghost { color: var(--on-ground); }
 
 
 /* ==========================================================================
@@ -1588,16 +1586,8 @@ p, li { letter-spacing: 0; }
 
 .nav__link:hover, .footer li a:hover { color: var(--on-ground-hi); }
 
-.nav__link { background-image: linear-gradient(90deg, var(--brand-hot), var(--brand-hot)); }
-.footer li a { background-image: linear-gradient(90deg, var(--brand-hot), var(--brand-hot)); }
-.nav__link, .footer li a {
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  background-size: 0% 1px;
-  transition: background-size .34s var(--ease), color .25s var(--ease);
-}
-.nav__link:hover, .nav__link:focus-visible,
-.footer li a:hover, .footer li a:focus-visible { background-size: 100% 1px; }
+/* no underline, no mark: the links simply brighten */
+.nav__link, .footer li a { transition: color .25s var(--ease); }
 
 @media (prefers-reduced-motion: reduce) {
   .nav__link, .footer li a { transition: color .25s var(--ease); }
@@ -1623,9 +1613,18 @@ p, li { letter-spacing: 0; }
    reduced motion — sixteen orbiting labels are decoration, not structure.
    ========================================================================== */
 
+/* the section is sized to the viewport, so the diagram is measured against
+   whatever height is left after the heading rather than a fixed 42rem */
+#modules {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: clamp(2.5rem, 5vh, 4rem);
+}
+
 .orbit {
   position: relative;
-  margin-top: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(1.25rem, 3vh, 2.5rem);
   display: grid;
   grid-template-columns: minmax(0, 1fr) 18rem;
   gap: 2rem;
@@ -1633,9 +1632,17 @@ p, li { letter-spacing: 0; }
 }
 
 .orbit__stage {
+  /* One knob for the whole diagram. Every radius, track and the core are in
+     em, and the stage's font-size is this size over 42 — so at the original
+     42rem the numbers are unchanged, and below it the entire system scales
+     instead of the nodes overflowing a shrunken stage. */
+  /* no percentages here: this feeds font-size, where % would resolve against
+     the parent's font-size rather than the column width */
+  --size: min(42rem, 56svh, 58vw);
   position: relative;
-  aspect-ratio: 1;
-  width: min(42rem, 100%);
+  width: var(--size);
+  height: var(--size);
+  font-size: calc(var(--size) / 42);
   margin-inline: auto;
 }
 
@@ -1657,15 +1664,15 @@ p, li { letter-spacing: 0; }
   border-radius: 50%;
   border: 1px solid rgba(21, 87, 232, .16);
 }
-.orbit__track--1 { width: 17rem;  height: 17rem; }
-.orbit__track--2 { width: 26rem;  height: 26rem; }
-.orbit__track--3 { width: 35rem;  height: 35rem; }
+.orbit__track--1 { width: 17em;  height: 17em; }
+.orbit__track--2 { width: 26em;  height: 26em; }
+.orbit__track--3 { width: 35em;  height: 35em; }
 
 .orbit__core {
   position: absolute;
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
-  width: 9.5rem; height: 9.5rem;
+  width: 9.5em; height: 9.5em;
   border-radius: 50%;
   display: grid;
   align-content: center;
@@ -1682,6 +1689,8 @@ p, li { letter-spacing: 0; }
   text-transform: uppercase;
   color: var(--on-ground-hi);
 }
+/* the em trick is for geometry only — type stays at its real size */
+.node__btn, .orbit__core span { font-size: .75rem; }
 
 /* ---- the rings ---- */
 .ring {
@@ -1873,6 +1882,10 @@ p, li { letter-spacing: 0; }
 @media (max-width: 1100px) {
   .orbit { grid-template-columns: 1fr; }
   .orbit__detail { min-height: auto; }
+  /* single column: the stage may use the full width, but has to share the
+     screen with the readout below it */
+  .orbit__stage { --size: min(42rem, 46svh, 88vw); }
+  #modules { min-height: auto; }
 }
 
 /* phones: the diagram would be unreadable, so it becomes the reel outright */
