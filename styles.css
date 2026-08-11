@@ -1850,61 +1850,6 @@ h1, h2, h3, h4 {
   .step:nth-child(even) .screen__body { padding-left: calc(.75rem + var(--gutter)); }
 
   /* the domains become a swipeable deck, one card per screen */
-  /* A post carousel, the way a phone already teaches people to read one:
-     each domain is a single full-bleed portrait card, edge to edge, one per
-     swipe, with dots underneath.
-
-     Flex rather than grid — `grid-auto-flow: column` still honoured the
-     2-column template underneath it, which laid the four cards out 2x2
-     inside a scrollport one card wide. */
-  .deck__grid {
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    overscroll-behavior-x: contain;
-    margin-inline: calc(-1 * var(--gutter));
-    padding: 0;
-  }
-  .deck__grid::-webkit-scrollbar { display: none; }
-  .deck__card {
-    /* one full-bleed card per swipe, in a post's 4:5 portrait */
-    flex: 0 0 100%;
-    aspect-ratio: 4 / 5;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    padding: 1.75rem var(--gutter);
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-  }
-  /* the list takes whatever height the card has left, so every card fills its
-     frame instead of leaving a gap under the shorter domains */
-  .deck__list { margin-top: auto; }
-  .deck__ghost { font-size: 7.5rem; right: -.5rem; top: -1.25rem; }
-
-  .deck__dots {
-    display: flex;
-    margin-top: 1rem;
-    justify-content: center;   /* the run of dots is centred under the deck */
-    align-items: center;
-    gap: .5rem;
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-  }
-  .deck__dot {
-    width: .5rem; height: .5rem;
-    padding: 0; border: 0;
-    border-radius: 50%;
-    background: var(--brand);
-    opacity: .22;
-    transition: opacity .3s var(--ease), transform .3s var(--ease);
-  }
-  .deck__dot.is-on { opacity: 1; transform: scale(1.35); }
-
   /* the window mocks are the widest thing on the page */
   .screen__body { padding: .75rem; gap: .375rem; }
   .row { padding: .75rem .8125rem; gap: .625rem; }
@@ -2703,6 +2648,69 @@ p, li { letter-spacing: 0; }
 
 /* the dots are for the phone deck only */
 .deck__dots { display: none; }
+
+/* ---- the phone presentation ----------------------------------------------
+   This block has to come AFTER the rules above, not in the general mobile
+   section further up the file: it overrides the same properties at the same
+   specificity, so source order decides. Sitting earlier, the 2x2 grid won
+   and all four cards rendered stacked. */
+@media (max-width: 720px) {
+  /* A post carousel, the way a phone already teaches people to read one:
+     each domain is a single full-bleed portrait card, edge to edge, one per
+     swipe, with dots underneath.
+
+     Flex rather than grid — `grid-auto-flow: column` still honoured the
+     2-column template underneath it, which laid the four cards out 2x2
+     inside a scrollport one card wide. */
+  .deck__grid {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0;
+  }
+  .deck__grid::-webkit-scrollbar { display: none; }
+  .deck__card {
+    /* one full-bleed card per swipe, in a post's 4:5 portrait */
+    flex: 0 0 100%;
+    aspect-ratio: 4 / 5;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    padding: 1.75rem var(--gutter);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+  /* the list takes whatever height the card has left, so every card fills its
+     frame instead of leaving a gap under the shorter domains */
+  .deck__list { margin-top: auto; }
+  .deck__ghost { font-size: 7.5rem; right: -.5rem; top: -1.25rem; }
+
+  .deck__dots {
+    display: flex;
+    justify-content: center;   /* the run of dots is centred under the deck */
+    align-items: center;
+    gap: .5rem;
+    margin: 1rem auto 0;       /* one declaration: the shorthand below used to
+                                  wipe the top margin set above it */
+    padding: 0;
+    width: 100%;
+  }
+  .deck__dot {
+    width: .5rem; height: .5rem;
+    padding: 0; border: 0;
+    border-radius: 50%;
+    background: var(--brand);
+    opacity: .22;
+    transition: opacity .3s var(--ease), transform .3s var(--ease);
+  }
+  .deck__dot.is-on { opacity: 1; transform: scale(1.35); }
+}
+
 
 @media (max-width: 1100px) {
   .orbit { grid-template-columns: 1fr; }
