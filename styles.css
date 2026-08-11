@@ -2692,6 +2692,19 @@ p, li { letter-spacing: 0; }
   .deck__list li { padding: .4375rem .125rem; font-size: var(--text-m); }
   .deck__ghost { font-size: 3.5rem; right: -.25rem; top: -.75rem; }
 
+  /* the whole division fits one screen: heading, one card, dots — nothing
+     below the fold to discover by accident */
+  #modules {
+    min-height: 100svh;
+    align-content: center;
+    padding-block: clamp(1.5rem, 5vh, 2.5rem);
+  }
+  #modules .head { max-width: none; }
+  #modules .head h2 { font-size: clamp(1.25rem, 5.2vw, 1.5rem); }
+  #modules .head p { font-size: var(--text-s); line-height: 1.5; }
+  #modules .plate { display: none; }   /* the frame costs height it cannot earn */
+  .deck { margin-top: 1.25rem; }
+
   .deck__dots {
     display: flex;
     justify-content: center;   /* the run of dots is centred under the deck */
