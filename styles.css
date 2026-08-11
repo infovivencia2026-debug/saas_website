@@ -2532,14 +2532,15 @@ p, li { letter-spacing: 0; }
   margin-bottom: .625rem;
 }
 .reel__items {
-  display: flex; gap: .5rem;
-  margin: 0; padding: 0 0 .5rem;
+  /* Wrapped, not scrolled. As a horizontal scroller with a hidden scrollbar
+     the last chip in a group sat past the edge with nothing to indicate it —
+     "Settings" was invisible while the heading above promised sixteen
+     modules. Wrapping shows the whole group at once, and the drift script
+     stops on its own because it only runs when the row overflows. */
+  display: flex; flex-wrap: wrap; gap: .5rem;
+  margin: 0; padding: 0;
   list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
 }
-.reel__items::-webkit-scrollbar { display: none; }
 .reel__chip {
   display: inline-flex; align-items: center;
   white-space: nowrap;
@@ -2549,7 +2550,6 @@ p, li { letter-spacing: 0; }
   background: var(--panel);
   color: var(--on-ground);
   font-size: var(--text-s); font-weight: 500;
-  scroll-snap-align: start;
 }
 .reel__track + .reel__track { margin-top: 1.25rem; }
 
@@ -2574,7 +2574,6 @@ p, li { letter-spacing: 0; }
 @media (prefers-reduced-motion: reduce) {
   .orbit { display: none; }
   .reel { display: block; margin-top: 2rem; }
-  .reel__items { overflow-x: visible; flex-wrap: wrap; }
 }
 
 /* ==========================================================================
