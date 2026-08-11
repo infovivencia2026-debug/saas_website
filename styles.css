@@ -142,6 +142,8 @@
   --r-sm: .5rem;
   --r-md: 1rem;
   --r-lg: 1.25rem;
+  --r-xl: 1.5rem;   /* was referenced by .cta but never defined, so that
+                       corner was computing to 0 */
   --r-xl: 1.5rem;
   --pill: 999px;
 
@@ -460,7 +462,7 @@ h1, h2, h3, h4 {
   width: min(70rem, calc(100% - 2 * var(--gutter)));
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
-  border-radius: 1rem;
+  border-radius: var(--r-md);
   /* Light glass. The capsule used to be deep indigo because it launched over
      a dark hero; the hero is now a white ground with drawn arcs, and every
      section below it is a light surface, so an indigo slab was the one dark
@@ -586,7 +588,7 @@ h1, h2, h3, h4 {
 .nav__actions .btn--primary {
   height: 2.375rem;
   padding: 0 1.125rem;
-  border-radius: .625rem;
+  border-radius: var(--r-sm);
   background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   color: #ffffff;
   border-color: rgba(36, 107, 253, .45);
@@ -597,7 +599,7 @@ h1, h2, h3, h4 {
   border-color: var(--brand-600);
   box-shadow: 0 8px 22px rgba(21, 87, 232, .38);
 }
-.nav__actions .btn--ghost { border-radius: .625rem; }
+.nav__actions .btn--ghost { border-radius: var(--r-sm); }
 
 .nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--heading-2); }
 
@@ -677,9 +679,10 @@ h1, h2, h3, h4 {
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
 }
-.flow__wide  path { stroke: var(--brand-700); stroke-width: 1.5; }
-.flow__tight path { stroke: var(--brand-600); stroke-width: 1.3; }
-.flow__rules path { stroke: var(--brand-700); stroke-width: 1.6; }
+/* one weight, one colour: three families drawn at three weights read as
+   three unrelated drawings sharing a frame */
+.flow path { stroke: var(--brand-700); stroke-width: 1.4; }
+.flow__tight path { opacity: .72; }
 
 /* each arc inks in from the edge, innermost first */
 .flow path {
@@ -982,7 +985,7 @@ h1, h2, h3, h4 {
 .step__digits {
   display: grid; place-items: center;
   width: 2.5rem; height: 2.5rem;
-  border-radius: .8125rem;
+  border-radius: var(--r-md);
   background: var(--brand-soft);
   border: 1px solid var(--border-live);
   font-size: .9375rem;
@@ -1010,7 +1013,7 @@ h1, h2, h3, h4 {
 .feature__icon {
   width: 3rem; height: 3rem;
   display: grid; place-items: center;
-  border-radius: .8125rem;
+  border-radius: var(--r-md);
   background: var(--brand-soft);
   border: 1px solid var(--border-live);
   color: var(--brand-deep);
@@ -1038,7 +1041,7 @@ h1, h2, h3, h4 {
 /* ---- product surfaces ---- */
 /* the contained feature panel — translucent, blue-lit, never hard-bordered */
 .screen {
-  border-radius: 1.5rem;
+  border-radius: var(--r-xl);
   background: rgba(255, 255, 255, .92);
   border: 1px solid rgba(21, 87, 232, .13);
   overflow: hidden;
@@ -1152,16 +1155,16 @@ h1, h2, h3, h4 {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, .70);
   font-size: var(--text-s);
-  transition: background-color .3s var(--ease), border-color .3s var(--ease),
-              transform .3s var(--ease), box-shadow .3s var(--ease);
+  transition: background-color .55s var(--ease), border-color .55s var(--ease),
+              transform .55s var(--ease), box-shadow .55s var(--ease);
 }
 /* the row lifts a little under the pointer — enough to read as pickable,
    small enough that the stack doesn't jitter */
 .row:hover {
   background: #ffffff;
   border-color: rgba(21, 87, 232, .38);
-  transform: scale(1.02);
-  box-shadow: var(--shadow-sm, 0 6px 18px rgba(7, 21, 47, .10));
+  transform: scale(1.015);
+  box-shadow: var(--shadow-sm);
 }
 @media (prefers-reduced-motion: reduce) {
   .row:hover { transform: none; }
@@ -1227,7 +1230,7 @@ h1, h2, h3, h4 {
   width: 11rem; height: 11rem;
   right: 6%; top: 3rem;
   border: 1px solid rgba(21, 87, 232, .18);
-  border-radius: 1.5rem;
+  border-radius: var(--r-xl);
   transform: rotate(24deg);
 }
 
@@ -1336,8 +1339,17 @@ h1, h2, h3, h4 {
   min-height: 14rem;
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
+/* Every panel answers the pointer the same way: a 1.5% swell from its own
+   centre over .55s, with the border and shadow stepping up by the same small
+   amount. Cards used to lift, stats scaled, rows scaled further and each ran
+   at its own duration — four different answers to one gesture.
+
+   transform-origin is stated explicitly: the swell has to come from the
+   middle so the panel grows on all four sides evenly, rather than appearing
+   to move in one direction. */
+.card, .stat, .row { transform-origin: 50% 50%; }
 .card:hover {
-  transform: translateY(-3px);
+  transform: scale(1.015);
   /* elevated, not glossy */
   box-shadow: 0 20px 60px rgba(16, 42, 140, .08);
   border-color: rgba(21, 87, 232, .32);
@@ -1346,7 +1358,7 @@ h1, h2, h3, h4 {
   width: 3rem; height: 3rem;
   display: grid; place-items: center;
   margin-bottom: 1.5rem;
-  border-radius: .8125rem;
+  border-radius: var(--r-md);
   background: var(--brand-soft);
   border: 1px solid var(--border-live);
   color: var(--brand-deep);
@@ -1371,7 +1383,7 @@ h1, h2, h3, h4 {
   z-index: 0;
   pointer-events: none;
   border: 1px solid rgba(21, 87, 232, .14);
-  border-radius: 1.25rem;
+  border-radius: var(--r-lg);
 }
 .plate__c {
   position: absolute;
@@ -1496,7 +1508,7 @@ h1, h2, h3, h4 {
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
   max-width: 52rem;
   margin-inline: auto;
-  border-radius: 1.5rem;
+  border-radius: var(--r-xl);
   background: rgba(255, 255, 255, .86);
   border: 1px solid rgba(21, 87, 232, .13);
   box-shadow: var(--shadow-md);
@@ -1840,9 +1852,10 @@ h1, h2, h3, h4 {
    This is why the stat cards kept lifting after their hover was changed to a
    scale: the change was being overridden here. */
 .stat.js-reveal.is-in:hover { transform: scale(1.015); }
-.card.js-reveal.is-in:hover { transform: translate3d(0, -3px, 0); }
+.card.js-reveal.is-in:hover { transform: scale(1.015); }
 @media (prefers-reduced-motion: reduce) {
-  .stat.js-reveal.is-in:hover { transform: none; }
+  .stat.js-reveal.is-in:hover,
+  .card.js-reveal.is-in:hover { transform: none; }
 }
 
 .bars span {
