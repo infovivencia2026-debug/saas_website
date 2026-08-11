@@ -1856,6 +1856,9 @@ h1, h2, h3, h4 {
        scrollport barely wider than one card — which is why only the last two
        were reachable. A flex row cannot do that. */
     display: flex;
+    /* each card is its own height; stretched to the tallest they leave a
+       block of empty surface under the shorter domains */
+    align-items: flex-start;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -2682,6 +2685,13 @@ p, li { letter-spacing: 0; }
   transition: opacity .25s var(--ease), transform .25s var(--ease);
 }
 .deck__list li:hover .deck__chev { opacity: 1; transform: none; }
+
+/* There is no hover on a touch screen, so the chevron would never appear and
+   every row would read as a name with an unexplained gap after it. On touch
+   it is simply always there. */
+@media (hover: none) {
+  .deck__chev { opacity: .55; transform: none; }
+}
 
 /* the dots are for the phone deck only */
 .deck__dots { display: none; }
