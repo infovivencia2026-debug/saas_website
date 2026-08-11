@@ -1821,17 +1821,26 @@ h1, h2, h3, h4 {
   .nav--open .nav__link { padding-block: .375rem; }
   .footer li a { padding-block: .25rem; }
 
-  /* On a phone the panel runs off the right edge only. That edge is squared
-     and loses its border, because a radius there would read as the panel
-     stopping short of the screen rather than continuing past it. The left
-     side stays inside the gutter, so it keeps its border and its corners. */
-  .screen {
+  /* The panel runs off one screen edge, and which edge alternates with the
+     chapter — the same left/right rhythm the two-column layout has on a wide
+     screen, kept rather than flattened when it collapses to one column.
+     The edge it touches is squared and loses its border; the other side stays
+     inside the gutter with its border and its corners. */
+  .step:nth-child(odd) .screen {
     margin-right: calc(-1 * var(--gutter));
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
-  .screen__bar { border-top-right-radius: 0; }
+  .step:nth-child(odd) .screen__bar { border-top-right-radius: 0; }
+
+  .step:nth-child(even) .screen {
+    margin-left: calc(-1 * var(--gutter));
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .step:nth-child(even) .screen__bar { border-top-left-radius: 0; }
 
   /* the window mocks are the widest thing on the page */
   .screen__body { padding: .75rem; gap: .375rem; }
