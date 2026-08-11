@@ -670,6 +670,18 @@ h1, h2, h3, h4 {
   fill: none;
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
+  /* The field is strongest where the arcs spring from the right edge and
+     dissolves as they sweep left across the type — a soft falloff rather
+     than lines of even weight running the full width. Two masks intersect:
+     a horizontal ramp, and a radial one centred on the springing point. */
+  -webkit-mask-image:
+    linear-gradient(270deg, #000 0%, rgba(0,0,0,.75) 34%, rgba(0,0,0,.28) 66%, transparent 96%),
+    radial-gradient(ellipse 96% 120% at 100% 55%, #000 18%, rgba(0,0,0,.5) 58%, transparent 92%);
+          mask-image:
+    linear-gradient(270deg, #000 0%, rgba(0,0,0,.75) 34%, rgba(0,0,0,.28) 66%, transparent 96%),
+    radial-gradient(ellipse 96% 120% at 100% 55%, #000 18%, rgba(0,0,0,.5) 58%, transparent 92%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
 }
 .flow__wide  path { stroke: var(--brand-700); stroke-width: 1.4; opacity: .55; }
 .flow__tight path { stroke: var(--brand-600); stroke-width: 1.2; opacity: .42; }
