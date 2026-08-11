@@ -216,6 +216,10 @@ p { margin: 0; }
 h1, h2, h3, h4 {
   margin: 0;
   color: var(--heading);
+  /* Michroma is an unusually wide face and the display sizes are set in vw;
+     without this a single long word ("underneath", "Examinations") runs past
+     the viewport on a narrow screen instead of breaking. */
+  overflow-wrap: break-word;
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -.04em;
@@ -1736,9 +1740,28 @@ h1, h2, h3, h4 {
   .flow__pulse { stroke-width: .9; opacity: .6; }
   .flow__pulse--b { stroke-width: .7; opacity: .45; }
 
-  .hero h1 { max-width: none; }
-  .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
-  .hero__sub { font-size: var(--text-l); max-width: 88vw; }
+  /* Michroma at 10vw overflowed a 360px screen once the stroke and tracking
+     were added; 7vw fits the longest line ("Every desk in the building.")
+     with room to spare. The stroke and letter-spacing come down with it —
+     both add width, and both are proportionally heavier at small sizes. */
+  .hero h1 {
+    font-size: clamp(1.625rem, 7vw, 2.25rem);
+    line-height: 1.22;
+    max-width: none;
+    -webkit-text-stroke-width: .018em;
+    letter-spacing: 0;
+  }
+  .cta h2 {
+    font-size: clamp(1.5rem, 6.4vw, 2rem);
+    line-height: 1.24;
+    max-width: none;
+    -webkit-text-stroke-width: .018em;
+    letter-spacing: 0;
+  }
+  .hero__sub { font-size: var(--text-m); max-width: none; }
+  .head h2 { font-size: clamp(1.375rem, 5.6vw, 1.75rem); }
+  .step h3 { font-size: clamp(1.25rem, 5.2vw, 1.5rem); max-width: none; }
+  .step__lede { font-size: var(--text-m); max-width: none; }
   .hero__cta .btn { min-width: 11rem; }
 
   .grid-4 { grid-template-columns: 1fr; }
@@ -1752,6 +1775,8 @@ h1, h2, h3, h4 {
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
+  /* the registry example is one long unbroken token */
+  .faq code { overflow-wrap: anywhere; font-size: .8125rem; }
   .cta { border-radius: var(--r-lg); }
 
   /* sections get their air back: 11vw of padding at each end of a phone
@@ -2029,6 +2054,7 @@ h2, h3, h4 {
 /* ---- Inter: everything read in sentences ---- */
 body,
 p, li, summary, .row, .stat__label, .feature__body, .footer__blurb {
+  overflow-wrap: break-word;
   font-family: var(--font);
 }
 p, li { letter-spacing: 0; }
