@@ -1825,9 +1825,15 @@ h1, h2, h3, h4 {
 .js-reveal[data-reveal="pop"]   { transform: translate3d(0, 14px, 0); }
 .js-reveal.is-settled { will-change: auto; transition-delay: 0ms; }
 
-/* hover lifts must survive the reveal rule, which ties on specificity */
-.stat.js-reveal.is-in:hover,
+/* Hover transforms have to be restated at this specificity or `.js-reveal.is-in
+   { transform: none }` beats them — it ties on specificity and wins on order.
+   This is why the stat cards kept lifting after their hover was changed to a
+   scale: the change was being overridden here. */
+.stat.js-reveal.is-in:hover { transform: scale(1.015); }
 .card.js-reveal.is-in:hover { transform: translate3d(0, -3px, 0); }
+@media (prefers-reduced-motion: reduce) {
+  .stat.js-reveal.is-in:hover { transform: none; }
+}
 
 .bars span {
   transform: scaleY(0);
