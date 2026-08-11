@@ -961,7 +961,10 @@ h1, h2, h3, h4 {
   gap: 1rem;
   padding: .875rem 1rem;
   border-radius: var(--r-md);
-  border: 1px solid transparent;
+  /* the rows are records, so they are drawn as records: a visible edge and a
+     faint surface at rest, not just text on the panel */
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, .70);
   font-size: var(--text-s);
   transition: background-color .3s var(--ease), border-color .3s var(--ease),
               transform .3s var(--ease), box-shadow .3s var(--ease);
@@ -969,8 +972,8 @@ h1, h2, h3, h4 {
 /* the row lifts a little under the pointer — enough to read as pickable,
    small enough that the stack doesn't jitter */
 .row:hover {
-  background: var(--surface-2);
-  border-color: var(--border);
+  background: #ffffff;
+  border-color: rgba(21, 87, 232, .38);
   transform: scale(1.02);
   box-shadow: var(--shadow-sm, 0 6px 18px rgba(7, 21, 47, .10));
 }
