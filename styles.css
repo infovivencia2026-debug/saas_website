@@ -281,12 +281,14 @@ h1, h2, h3, h4 {
   height: 26rem;
   transform: translateX(-50%);
   pointer-events: none;
+  /* ellipse, not circle: a circle's radius outruns this box and the wash
+     ends on a straight clipped edge */
   background: radial-gradient(
-    circle at 50% 100%,
-    rgba(36, 107, 253, .20),
-    rgba(114, 164, 255, .10) 32%,
-    rgba(114, 164, 255, .05) 54%,
-    transparent 74%
+    ellipse 68% 78% at 50% 100%,
+    rgba(36, 107, 253, .20) 0%,
+    rgba(114, 164, 255, .10) 34%,
+    rgba(114, 164, 255, .04) 56%,
+    transparent 76%
   );
 }
 
@@ -928,14 +930,22 @@ h1, h2, h3, h4 {
 .step__visual {
   position: relative;   /* upgraded to sticky at the breakpoint below */
   align-self: start;    /* a stretched item has no room to travel */
-  padding: 2.5rem;
-  margin: -2.5rem;
+  /* The pool of light. It has to reach full transparency INSIDE the box or
+     the box clips it and the light ends on four straight edges — which is
+     what a `circle` did here, since its radius ran past the panel. An
+     ellipse sized in percentages of the box cannot outrun it, and the last
+     stop lands at 78% of that, so the falloff is always interior.
+
+     The old mid-stop was a desaturated navy, which greyed the middle of the
+     wash; the ramp is cobalt the whole way down now. */
+  padding: 3.25rem;
+  margin: -3.25rem;
   background: radial-gradient(
-    circle at 50% 100%,
-    rgba(21, 87, 232, .15),
-    rgba(67, 133, 255, .07) 30%,
-    rgba(7, 21, 47, .04) 52%,
-    transparent 72%
+    ellipse 72% 58% at 50% 88%,
+    rgba(21, 87, 232, .16) 0%,
+    rgba(36, 107, 253, .10) 34%,
+    rgba(67, 133, 255, .05) 58%,
+    transparent 78%
   );
 }
 .screen__bar {
