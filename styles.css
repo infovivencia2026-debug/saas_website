@@ -360,15 +360,21 @@ h1, h2, h3, h4 {
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
   border-radius: 1rem;
-  /* The nav is a dark-stage object, not a light one. It launches over the
-     dark hero and then travels across the light sections, so making it white
-     meant it agreed with the page for two screens and fought it for the rest.
-     A deep indigo capsule reads as deliberate on both grounds and keeps the
-     same glass-and-glow rules as the hero, band, CTA and footer. */
-  background: rgba(7, 21, 47, .68);
-  border: 1px solid rgba(114, 164, 255, .26);
+  /* Light glass. The capsule used to be deep indigo because it launched over
+     a dark hero; the hero is now a white sky with drawn clouds, and every
+     section below it is a light surface, so an indigo slab was the one dark
+     object left on the page. It carries the same tokens as the other light
+     glass — the stat cards, the FAQ panel, the window mocks.
+
+     The dark-stage ramp is remapped rather than every child rule rewritten. */
+  --on-ground:    var(--body);
+  --on-ground-2:  var(--heading-2);
+  --on-ground-3:  var(--muted);
+  --on-ground-hi: var(--heading);
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(21, 87, 232, .14);
   backdrop-filter: blur(22px) saturate(160%);
-  box-shadow: var(--shadow-nav), 0 0 40px rgba(36, 107, 253, .28);
+  box-shadow: 0 8px 30px rgba(16, 42, 140, .09), 0 2px 8px rgba(7, 21, 47, .05);
   /* Pulled back over the hero so the capsule floats in the atmosphere
      instead of sitting on a band of canvas above it. This margin collapses
      against the hero's top margin, so the inset has to be added back or the
@@ -377,9 +383,9 @@ h1, h2, h3, h4 {
   transition: box-shadow .4s var(--ease), background-color .4s var(--ease);
 }
 .nav--scrolled {
-  background: rgba(7, 21, 47, .90);
-  border-color: rgba(114, 164, 255, .42);
-  box-shadow: 0 10px 34px rgba(7, 21, 47, .45), 0 0 44px rgba(36, 107, 253, .30);
+  background: rgba(255, 255, 255, .88);
+  border-color: rgba(21, 87, 232, .22);
+  box-shadow: 0 12px 34px rgba(16, 42, 140, .13), 0 2px 10px rgba(7, 21, 47, .06);
 }
 .nav__inner {
   display: flex;
@@ -401,7 +407,7 @@ h1, h2, h3, h4 {
   border-radius: .4375rem;
   background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   color: var(--on-brand);
-  box-shadow: var(--glow-sm);
+  box-shadow: 0 3px 10px rgba(21, 87, 232, .35);
   display: grid; place-items: center;
   font-family: var(--mono);
   font-size: .5625rem; font-weight: 500; letter-spacing: 0;
@@ -411,26 +417,24 @@ h1, h2, h3, h4 {
 .nav__link {
   font-size: var(--text-s);
   font-weight: 500;
-  /* the capsule is a dark stage, so the links take the dark-stage ramp —
-     --body is the slate meant for the light canvas and all but vanished here */
-  color: var(--on-ground);
+  color: var(--body);
   letter-spacing: -.005em;
   transition: color .25s var(--ease);
 }
-.nav__link:hover { color: #ffffff; }
+.nav__link:hover { color: var(--heading); }
 .nav__actions { display: flex; align-items: center; gap: .5rem; }
 
-/* the outlined pill, then the pale-lime CTA */
+/* the outlined pill, then the cobalt CTA */
 .nav__actions .btn--ghost {
-  background: rgba(36, 107, 253, .12);
-  border-color: rgba(114, 164, 255, .42);
-  color: var(--on-ground);
+  background: rgba(36, 107, 253, .07);
+  border-color: rgba(21, 87, 232, .22);
+  color: var(--heading-2);
   box-shadow: none;
 }
 .nav__actions .btn--ghost:hover {
-  background: rgba(36, 107, 253, .20);
-  border-color: var(--brand-hot);
-  box-shadow: var(--glow-sm);
+  background: rgba(36, 107, 253, .12);
+  border-color: rgba(21, 87, 232, .40);
+  box-shadow: none;
 }
 /* The CTA belongs to the capsule, not to the page: an emissive cobalt block
    that glows against the indigo, with the bar's corner radius rather than a
@@ -441,17 +445,17 @@ h1, h2, h3, h4 {
   border-radius: .625rem;
   background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   color: #ffffff;
-  border-color: rgba(114, 164, 255, .45);
-  box-shadow: 0 4px 14px rgba(7, 21, 47, .35), 0 0 18px rgba(36, 107, 253, .35);
+  border-color: rgba(36, 107, 253, .45);
+  box-shadow: 0 6px 16px rgba(21, 87, 232, .28);
 }
 .nav__actions .btn--primary:hover {
   background: linear-gradient(180deg, var(--brand-500), var(--brand-lit));
-  border-color: var(--brand-hot);
-  box-shadow: 0 6px 20px rgba(7, 21, 47, .40), 0 0 28px rgba(36, 107, 253, .55);
+  border-color: var(--brand-600);
+  box-shadow: 0 8px 22px rgba(21, 87, 232, .38);
 }
 .nav__actions .btn--ghost { border-radius: .625rem; }
 
-.nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--on-ground); }
+.nav__toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--heading-2); }
 
 /* ----------------------------------------------------------------- hero */
 .hero {
@@ -1489,10 +1493,10 @@ h1, h2, h3, h4 {
     padding: 1.25rem;
     gap: 1rem;
     border-radius: var(--r-lg);
-    background: rgba(7, 21, 47, .94);
-    border: 1px solid rgba(114, 164, 255, .28);
+    background: rgba(255, 255, 255, .96);
+    border: 1px solid rgba(21, 87, 232, .16);
     backdrop-filter: blur(22px);
-    box-shadow: 0 20px 50px rgba(7, 21, 47, .55), 0 0 44px rgba(36, 107, 253, .22);
+    box-shadow: 0 20px 50px rgba(16, 42, 140, .16);
     margin-left: 0;
   }
   .nav__actions .btn--ghost { display: none; }
@@ -1575,7 +1579,7 @@ h1, h2, h3, h4 {
 .btn, .card, .stat, .nav__link, .footer li a,
 .pull, .row { position: relative; }
 
-.nav :where(a, button):focus-visible { outline-color: var(--brand-hot); }
+.nav :where(a, button):focus-visible { outline-color: var(--brand); }
 
 .footer .brand { color: #ffffff; }
 
@@ -1630,7 +1634,8 @@ h2, h3, h4 {
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.nav .brand, .footer .brand { color: var(--on-ground-hi); }
+.nav .brand { color: var(--heading); }
+.footer .brand { color: var(--on-ground-hi); }
 
 /* figures read as figures: one face, one weight, tabular so columns line up */
 .stat__num, .step__digits {
