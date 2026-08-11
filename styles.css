@@ -1077,9 +1077,11 @@ h1, h2, h3, h4 {
   inset: -8% -18% -60%;
   z-index: -1;
   pointer-events: none;
-  /* Three layers, tight to wide, painted front to back. The whole stack has
-     been walked down the ramp — it now reads as the panel's shadow with a
-     little colour in it, rather than as a light source:
+  /* Three layers, tight to wide, painted front to back — and soft: each one
+     runs seven stops on a gentle curve rather than four steep ones, so the
+     falloff has no shoulder anywhere along it, and the three radii are close
+     enough together that they blend into a single wash instead of reading as
+     three rings. Peak alpha is roughly half what it was.
 
      Deep, but still blue — the stack bottoms out at --brand-900, not at
      black, so it stays part of the palette instead of turning into a grey
@@ -1097,23 +1099,30 @@ h1, h2, h3, h4 {
      box; the extra room below is what lets them finish rather than be cut
      off in a straight line. */
   background:
-    radial-gradient(ellipse 24% 17% at 50% 57%,
-      rgba(21, 87, 232, .26) 0%,
-      rgba(21, 87, 232, .15) 40%,
-      rgba(21, 87, 232, .04) 70%,
-      rgba(21, 87, 232, 0) 94%),
-    radial-gradient(ellipse 37% 26% at 50% 57%,
-      rgba(18, 61, 181, .26) 0%,
-      rgba(18, 61, 181, .16) 34%,
-      rgba(18, 61, 181, .07) 58%,
-      rgba(18, 61, 181, .02) 76%,
-      rgba(18, 61, 181, 0) 94%),
-    radial-gradient(ellipse 46% 32% at 50% 57%,
-      rgba(16, 42, 140, .28) 0%,
-      rgba(16, 42, 140, .18) 30%,
-      rgba(16, 42, 140, .08) 52%,
-      rgba(16, 42, 140, .028) 72%,
-      rgba(16, 42, 140, 0) 94%);
+    radial-gradient(ellipse 30% 21% at 50% 57%,
+      rgba(21, 87, 232, .15) 0%,
+      rgba(21, 87, 232, .115) 22%,
+      rgba(21, 87, 232, .075) 42%,
+      rgba(21, 87, 232, .04) 60%,
+      rgba(21, 87, 232, .016) 76%,
+      rgba(21, 87, 232, .004) 88%,
+      rgba(21, 87, 232, 0) 97%),
+    radial-gradient(ellipse 42% 29% at 50% 57%,
+      rgba(18, 61, 181, .15) 0%,
+      rgba(18, 61, 181, .115) 22%,
+      rgba(18, 61, 181, .075) 42%,
+      rgba(18, 61, 181, .04) 60%,
+      rgba(18, 61, 181, .016) 76%,
+      rgba(18, 61, 181, .004) 88%,
+      rgba(18, 61, 181, 0) 97%),
+    radial-gradient(ellipse 49% 34% at 50% 57%,
+      rgba(16, 42, 140, .16) 0%,
+      rgba(16, 42, 140, .125) 22%,
+      rgba(16, 42, 140, .085) 42%,
+      rgba(16, 42, 140, .045) 60%,
+      rgba(16, 42, 140, .018) 76%,
+      rgba(16, 42, 140, .005) 88%,
+      rgba(16, 42, 140, 0) 97%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
