@@ -1833,6 +1833,11 @@ h1, h2, h3, h4 {
     border-bottom-right-radius: 0;
   }
   .step:nth-child(odd) .screen__bar { border-top-right-radius: 0; }
+  /* the panel runs past the screen edge, so its content has to be padded
+     back by the same amount or the right-hand column is cut off by the
+     viewport rather than by the panel */
+  .step:nth-child(odd) .screen__bar,
+  .step:nth-child(odd) .screen__body { padding-right: calc(.75rem + var(--gutter)); }
 
   .step:nth-child(even) .screen {
     margin-left: calc(-1 * var(--gutter));
@@ -1841,6 +1846,8 @@ h1, h2, h3, h4 {
     border-bottom-left-radius: 0;
   }
   .step:nth-child(even) .screen__bar { border-top-left-radius: 0; }
+  .step:nth-child(even) .screen__bar,
+  .step:nth-child(even) .screen__body { padding-left: calc(.75rem + var(--gutter)); }
 
   /* the domains become a swipeable deck, one card per screen */
   .deck__grid {
