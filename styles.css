@@ -1075,9 +1075,15 @@ h1, h2, h3, h4 {
      been walked down the ramp — it now reads as the panel's shadow with a
      little colour in it, rather than as a light source:
 
-       1. a --brand-900 core under the mock
-       2. a midnight mid spread
-       3. a wide, near-black base carrying most of the weight
+     Deep, but still blue — the stack bottoms out at --brand-900, not at
+     black, so it stays part of the palette instead of turning into a grey
+     drop shadow. All three share a centre at 64% of this box, which is
+     exactly where the panel's bottom border sits, so the brightest point of
+     the light touches the panel rather than floating below it.
+
+       1. a --brand-700 core on the border
+       2. a --brand-800 mid spread
+       3. a wide --brand-900 base carrying most of the weight
 
      Every centre and radius is chosen so each ramp reaches zero before it
      reaches an edge of this box. The panel's own bottom sits at ~64% of the
@@ -1085,22 +1091,22 @@ h1, h2, h3, h4 {
      off in a straight line. */
   background:
     radial-gradient(ellipse 24% 17% at 50% 64%,
-      rgba(16, 42, 140, .26) 0%,
-      rgba(16, 42, 140, .14) 40%,
-      rgba(16, 42, 140, .04) 70%,
-      rgba(16, 42, 140, 0) 94%),
-    radial-gradient(ellipse 37% 27% at 50% 65%,
-      rgba(7, 21, 47, .26) 0%,
-      rgba(7, 21, 47, .16) 34%,
-      rgba(7, 21, 47, .07) 58%,
-      rgba(7, 21, 47, .02) 76%,
-      rgba(7, 21, 47, 0) 94%),
-    radial-gradient(ellipse 46% 33% at 50% 63%,
-      rgba(4, 12, 30, .30) 0%,
-      rgba(4, 12, 30, .19) 30%,
-      rgba(4, 12, 30, .09) 52%,
-      rgba(4, 12, 30, .03) 72%,
-      rgba(4, 12, 30, 0) 94%);
+      rgba(21, 87, 232, .26) 0%,
+      rgba(21, 87, 232, .15) 40%,
+      rgba(21, 87, 232, .04) 70%,
+      rgba(21, 87, 232, 0) 94%),
+    radial-gradient(ellipse 37% 26% at 50% 64%,
+      rgba(18, 61, 181, .26) 0%,
+      rgba(18, 61, 181, .16) 34%,
+      rgba(18, 61, 181, .07) 58%,
+      rgba(18, 61, 181, .02) 76%,
+      rgba(18, 61, 181, 0) 94%),
+    radial-gradient(ellipse 46% 32% at 50% 64%,
+      rgba(16, 42, 140, .28) 0%,
+      rgba(16, 42, 140, .18) 30%,
+      rgba(16, 42, 140, .08) 52%,
+      rgba(16, 42, 140, .028) 72%,
+      rgba(16, 42, 140, 0) 94%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
