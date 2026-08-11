@@ -265,6 +265,8 @@ h1, h2, h3, h4 {
     linear-gradient(90deg, rgba(21, 87, 232, .05) 1px, transparent 1px),
     linear-gradient(180deg, rgba(21, 87, 232, .05) 1px, transparent 1px);
   background-size: 5.5rem 5.5rem;
+  /* oversized so it can drift without exposing an edge */
+  inset: -3rem 0;
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
           mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
   opacity: .8;
@@ -346,7 +348,6 @@ h1, h2, h3, h4 {
   color: var(--heading-2);
   border-color: rgba(67, 86, 121, .26);
   box-shadow: 0 5px 20px rgba(7, 21, 47, .06);
-  backdrop-filter: blur(10px);
 }
 /* on the dark stages the ghost button inverts to a lit outline */
 .cta .btn--ghost, .band .btn--ghost {
@@ -402,8 +403,11 @@ h1, h2, h3, h4 {
   border: 1px solid rgba(255, 255, 255, .65);
   outline: 1px solid rgba(21, 87, 232, .10);
   outline-offset: -1px;
-  -webkit-backdrop-filter: blur(30px) saturate(185%) brightness(1.05);
-          backdrop-filter: blur(30px) saturate(185%) brightness(1.05);
+  /* 30px over a near-white hero blurred nothing — a blurred flat surface is
+     the same flat surface. A shorter radius with real contrast/saturation
+     lift does more work, and the frost itself is drawn in ::before. */
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+          backdrop-filter: blur(14px) saturate(180%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .85),
     inset 0 -1px 0 rgba(21, 87, 232, .06),
@@ -419,6 +423,24 @@ h1, h2, h3, h4 {
   .nav { background: rgba(255, 255, 255, .93); }
   .nav--open .nav__links { background: rgba(255, 255, 255, .97); }
 }
+
+/* the frost: fine white grain plus a sheen from the top edge, clipped to the
+   capsule. This is what reads as glass on a plain backdrop, where a blur on
+   its own is invisible. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, .55) 0%, rgba(255, 255, 255, .10) 42%, rgba(255, 255, 255, 0) 70%),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%3E%3Cfilter%20id%3D%27f%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.9%27%20numOctaves%3D%274%27%20seed%3D%275%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%20.38%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27220%27%20height%3D%27220%27%20filter%3D%27url%28%23f%29%27%2F%3E%3C%2Fsvg%3E");
+  background-size: auto, 110px 110px;
+  opacity: .5;
+}
+.nav__inner { position: relative; z-index: 1; }
 
 .nav--scrolled {
   /* scrolled: a touch denser, since it now sits over content rather than the
@@ -456,7 +478,7 @@ h1, h2, h3, h4 {
   font-size: .5625rem; font-weight: 500; letter-spacing: 0;
 }
 
-.nav__links { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
+.nav__links { display: flex; align-items: center; gap: 1.75rem; margin-left: auto; }
 .nav__link {
   font-size: var(--text-s);
   font-weight: 500;
@@ -564,8 +586,8 @@ h1, h2, h3, h4 {
 .flow {
   position: absolute;
   inset: 0;
-  width: 100%%;
-  height: 100%%;
+  width: 100%;
+  height: 100%;
   fill: none;
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
@@ -586,12 +608,9 @@ h1, h2, h3, h4 {
 @keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
 /* and the whole field breathes, very slowly */
-.flow__wide  { animation: flow-breathe 26s ease-in-out infinite; transform-origin: 100%% 100%%; }
-.flow__tight { animation: flow-breathe 34s ease-in-out infinite reverse; transform-origin: 100%% 0%%; }
-@keyframes flow-breathe {
-  0%%, 100%% { transform: scale(1); }
-  50%%      { transform: scale(1.035); }
-}
+/* No perpetual breathing here. An infinite transform on a group of ~20
+   non-scaling strokes repaints the whole field every frame for motion nobody
+   asked for; the one-shot ink above is the effect that mattered. */
 
 @media (prefers-reduced-motion: reduce) {
   .flow path { animation: none; stroke-dashoffset: 0; }
@@ -615,24 +634,20 @@ h1, h2, h3, h4 {
 }
 
 /* environmental bloom, sitting in the air rather than on the planet */
-.hero__glow { position: absolute; border-radius: 50%; filter: blur(110px); }
+/* These were `filter: blur(110px)` on two large boxes — an enormous offscreen
+   blur, re-rasterised whenever anything near them changed. A radial gradient
+   is the same soft ellipse with no filter pass at all. */
+.hero__glow { position: absolute; border-radius: 50%; }
 /* the pool of light the artwork sits in */
 .hero__glow--cyan {
   width: min(44rem, 80vw); height: 19rem;
   right: 5%; bottom: 1.25rem;
-  background: rgba(21, 87, 232, .10);
-  animation: bloom 9s ease-in-out infinite;
+  background: radial-gradient(closest-side, rgba(21, 87, 232, .16), transparent 72%);
 }
 .hero__glow--brand {
   width: min(31rem, 62vw); height: 15rem;
   left: 7%; bottom: .625rem;
-  background: rgba(67, 133, 255, .07);
-  animation: bloom 11s ease-in-out infinite reverse;
-}
-
-@keyframes bloom {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: .93; }
+  background: radial-gradient(closest-side, rgba(67, 133, 255, .12), transparent 72%);
 }
 
 /* ---- announcement pill ---- */
@@ -643,9 +658,8 @@ h1, h2, h3, h4 {
   height: 2.125rem;
   padding: 0 .875rem;
   border-radius: var(--pill);
-  background: rgba(255, 255, 255, .75);
+  background: rgba(255, 255, 255, .88);
   border: 1px solid rgba(21, 87, 232, .14);
-  backdrop-filter: blur(14px);
   color: var(--body);
   letter-spacing: .04em;
   text-transform: none;
@@ -708,9 +722,10 @@ h1, h2, h3, h4 {
   overflow: hidden;
   padding: 1.5rem 1.375rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .74);
+  /* opaque enough not to need a backdrop filter: four blurred surfaces in the
+     hero cost more than they showed */
+  background: rgba(255, 255, 255, .86);
   border: 1px solid rgba(21, 87, 232, .16);
-  backdrop-filter: blur(18px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .90), 0 14px 40px rgba(16, 42, 140, .10);
   transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
 }
@@ -900,9 +915,8 @@ h1, h2, h3, h4 {
   margin-top: 2.25rem;
   padding: 1.5rem 1.75rem;
   border-radius: var(--r-lg);
-  background: rgba(255, 255, 255, .72);
+  background: rgba(255, 255, 255, .86);
   border: 1px solid rgba(21, 87, 232, .13);
-  backdrop-filter: blur(20px);
   box-shadow: var(--shadow-sm);
   font-size: var(--title-xs);
   line-height: 1.45;
@@ -916,10 +930,9 @@ h1, h2, h3, h4 {
 /* the contained feature panel — translucent, blue-lit, never hard-bordered */
 .screen {
   border-radius: 1.5rem;
-  background: rgba(255, 255, 255, .80);
+  background: rgba(255, 255, 255, .92);
   border: 1px solid rgba(21, 87, 232, .13);
   overflow: hidden;
-  backdrop-filter: blur(20px);
   box-shadow:
     0 30px 80px rgba(21, 87, 232, .09),
     0 8px 30px rgba(7, 21, 47, .06);
@@ -1073,8 +1086,7 @@ h1, h2, h3, h4 {
   width: 26rem; height: 26rem;
   left: 18%; bottom: -12rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(36, 107, 253, .14), transparent 66%);
-  filter: blur(30px);
+  background: radial-gradient(circle, rgba(36, 107, 253, .12), transparent 72%);
 }
 
 /* a quarter-arc: one visible border edge on a circle */
@@ -1322,9 +1334,8 @@ h1, h2, h3, h4 {
   max-width: 52rem;
   margin-inline: auto;
   border-radius: 1.5rem;
-  background: rgba(255, 255, 255, .72);
+  background: rgba(255, 255, 255, .86);
   border: 1px solid rgba(21, 87, 232, .13);
-  backdrop-filter: blur(20px);
   box-shadow: var(--shadow-md);
   padding-inline: 2rem;
 }
@@ -1452,9 +1463,10 @@ h1, h2, h3, h4 {
   z-index: -2;
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27900%27%20height%3D%27600%27%3E%3Cfilter%20id%3D%27h%27%20x%3D%270%27%20y%3D%270%27%20width%3D%27100%25%27%20height%3D%27100%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.011%200.021%27%20numOctaves%3D%275%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.14%20%200%200%200%200%200.42%20%200%200%200%200%200.99%20%200%200%200%20-1.1%200.86%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%279%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27900%27%20height%3D%27600%27%20filter%3D%27url%28%23h%29%27%2F%3E%3C%2Fsvg%3E");
   background-size: cover;
-  mix-blend-mode: screen;
-  opacity: .85;
-  animation: haze-drift 60s ease-in-out infinite alternate;
+  /* `screen` blending plus a 60s transform on a layer inset -20% meant the
+     footer re-composited forever, even parked offscreen. Held still, and the
+     cloud is pre-tinted so it needs no blend mode. */
+  opacity: .55;
 }
 .footer::after {
   content: "";
@@ -1463,16 +1475,8 @@ h1, h2, h3, h4 {
   z-index: -1;
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27260%27%20height%3D%27260%27%3E%3Cfilter%20id%3D%27g%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.82%27%20numOctaves%3D%273%27%20seed%3D%273%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200.5%200%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27260%27%20height%3D%27260%27%20filter%3D%27url%28%23g%29%27%2F%3E%3C%2Fsvg%3E");
   background-size: 260px 260px;
-  mix-blend-mode: overlay;
-  opacity: .35;
+  opacity: .16;
   pointer-events: none;
-}
-@keyframes haze-drift {
-  from { transform: scale(1.05) translate3d(-2%, -1%, 0); }
-  to   { transform: scale(1.18) translate3d(2%, 1%, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .footer::before { animation: none; }
 }
 
 .footer__grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: clamp(3rem, 5vw, 4.5rem); }
@@ -1637,9 +1641,11 @@ h1, h2, h3, h4 {
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
     }
+    /* transform, not background-position: the latter repaints a full-viewport
+       layer on every scroll frame */
     @keyframes grid-drift {
-      from { background-position: 0 -3rem, 0 -3rem; opacity: .5; }
-      to   { background-position: 0 3rem, 0 3rem;   opacity: .95; }
+      from { transform: translate3d(0, -2.5rem, 0); opacity: .45; }
+      to   { transform: translate3d(0, 2.5rem, 0);  opacity: .9; }
     }
 
     /* a scroll-driven reveal replaces the JS one inside this section, so the
@@ -1896,6 +1902,10 @@ p, li { letter-spacing: 0; }
   align-items: center;
 }
 
+/* the diagram runs ~35 infinite animations; parked offscreen it should cost
+   nothing, so the browser is told it may skip it entirely */
+.orbit { content-visibility: auto; contain-intrinsic-size: auto 40rem; }
+
 .orbit__stage {
   /* One knob for the whole diagram. Every radius, track and the core are in
      em, and the stage's font-size is this size over 42 — so at the original
@@ -1918,8 +1928,7 @@ p, li { letter-spacing: 0; }
   width: 62%; height: 62%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(36, 107, 253, .30), transparent 68%);
-  filter: blur(28px);
+  background: radial-gradient(circle, rgba(36, 107, 253, .26), transparent 74%);
 }
 
 .orbit__track {
@@ -2044,14 +2053,9 @@ p, li { letter-spacing: 0; }
              animation-timing-function: linear, linear; animation-iteration-count: infinite, infinite;
              animation-delay: 0s, var(--sd); }
 .ring--ccw .node__btn { animation-name: node-upright-ccw, spotlight; }
-@keyframes spotlight {
-  0%   { color: var(--brand-500); }
-  12%  { color: var(--brand-500); }
-  30%  { color: var(--on-ground-3); }
-  70%  { color: var(--on-ground-3); }
-  88%  { color: var(--brand-500); }
-  100% { color: var(--brand-500); }
-}
+/* colour is a paint property, so animating it on sixteen nodes forever cost a
+   repaint per frame; the label's opacity fade already carries the reading
+   zone, so the nodes just hold their colour */
 .node__label { animation: label-fade var(--sp) linear infinite; animation-delay: var(--sd); }
 @keyframes label-fade {
   0%   { opacity: 1; }

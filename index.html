@@ -995,15 +995,32 @@
       list.addEventListener(evt, function () { paused = true; }, { passive: true });
     });
 
+    /* The reel only exists under 720px. This loop used to run at 60fps on
+       every screen size, doing layout reads against a display:none element
+       forever — pure main-thread cost on desktop, where the reel is never
+       seen. It is now started and stopped by the same media query that shows
+       it, and it also stops whenever the tab is hidden. */
+    var phone = window.matchMedia('(max-width: 720px)');
+    var raf = null;
+
     function step(ts) {
       if (last != null && !paused && list.scrollWidth > list.clientWidth + 4) {
         list.scrollLeft += pxPerSec * (ts - last) / 1000;
         if (list.scrollLeft >= list.scrollWidth - list.clientWidth - 1) list.scrollLeft = 0;
       }
       last = ts;
-      window.requestAnimationFrame(step);
+      raf = window.requestAnimationFrame(step);
     }
-    if (!reduced) window.requestAnimationFrame(step);
+
+    function sync() {
+      var run = phone.matches && !reduced && !document.hidden;
+      if (run && raf == null) { last = null; raf = window.requestAnimationFrame(step); }
+      if (!run && raf != null) { window.cancelAnimationFrame(raf); raf = null; }
+    }
+
+    phone.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    sync();
   });
 
   /* the oversized numeral inks in while its chapter holds the viewport */
