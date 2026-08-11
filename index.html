@@ -136,6 +136,8 @@
 
 <!-- ========================================================== suites -->
 <section class="section" id="how" aria-labelledby="suites-title">
+  <!-- the lens: a disc of brighter dots that follows the pointer -->
+  <span class="dotlens" aria-hidden="true"></span>
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">The suites</span>
@@ -1082,6 +1084,30 @@
 
       ticking = false;
     });
+  }
+
+  /* ------------------------------------------- the dot field's pointer lens */
+  var how = document.getElementById('how');
+  var lens = how && how.querySelector('.dotlens');
+  if (lens && window.matchMedia('(hover: hover)').matches && !reduced) {
+    var lx = 0, ly = 0, lensTick = false;
+
+    how.addEventListener('pointermove', function (e) {
+      /* offsets are read against the section, and only inside the rAF, so a
+         fast mouse cannot force a layout read per event */
+      lx = e.clientX; ly = e.clientY;
+      if (lensTick) return;
+      lensTick = true;
+      window.requestAnimationFrame(function () {
+        var r = how.getBoundingClientRect();
+        lens.style.setProperty('--mx', (lx - r.left) + 'px');
+        lens.style.setProperty('--my', (ly - r.top) + 'px');
+        lensTick = false;
+      });
+    }, { passive: true });
+
+    how.addEventListener('pointerenter', function () { how.classList.add('is-lit'); });
+    how.addEventListener('pointerleave', function () { how.classList.remove('is-lit'); });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });

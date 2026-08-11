@@ -258,9 +258,13 @@ h1, h2, h3, h4 {
 }
 #how::before {
   content: "";
+  /* `.hero + .section::before { display: none }` kills the seam on the first
+     section after the hero — and this is that same pseudo-element, so it has
+     to switch itself back on or the whole dot field never paints */
+  display: block;
   position: absolute;
-  inset: 0;
   pointer-events: none;
+  z-index: 0;
   /* a tight dot field rather than a wide rule grid: one radial gradient
      tiled every 14px, in cobalt, with a second sparser pass in a deeper blue
      so the field has two densities instead of reading as flat texture */
@@ -275,6 +279,42 @@ h1, h2, h3, h4 {
           mask-image: radial-gradient(ellipse 74% 64% at 50% 42%, #000 18%, transparent 82%);
   opacity: .85;
 }
+/* ---- the pointer lens ----------------------------------------------------
+   A disc of the same dot field, brighter and a size up, tracking the cursor.
+   It is a fixed-size element moved with a transform, NOT a full-section mask
+   that follows the mouse — a moving mask repaints the whole viewport every
+   frame, while this only ever repaints its own 22rem box.
+
+   Its background-position is the negative of its own offset, which pins the
+   pattern to the section: the dots stay on the grid while the disc slides
+   over them, so it reads as the field lighting up rather than as a second
+   layer sliding around.
+   ------------------------------------------------------------------------ */
+.dotlens {
+  position: absolute;
+  left: 0; top: 0;
+  width: 22rem; height: 22rem;
+  margin: -11rem 0 0 -11rem;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate3d(var(--mx, -999px), var(--my, -999px), 0);
+  transition: opacity .4s var(--ease);
+  background-image:
+    radial-gradient(rgba(21, 87, 232, .85) 1.5px, transparent 1.5px),
+    radial-gradient(rgba(36, 107, 253, .5) 1.2px, transparent 1.2px);
+  background-size: 14px 14px, 42px 42px;
+  background-position:
+    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
+    calc(11rem - var(--mx, 0px) + 7px) calc(11rem - var(--my, 0px) + 7px);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
+          mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
+}
+#how.is-lit .dotlens { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) { .dotlens { display: none; } }
+@media (hover: none) { .dotlens { display: none; } }
+
 #roles        { background: var(--surface-2); }
 #faq          { background: var(--surface-2); }
 
