@@ -565,7 +565,7 @@
   <div class="container">
     <div class="head">
       <span class="eyebrow">Shared back office</span>
-      <h2 id="backoffice-title">Sixteen modules. One operating core.</h2>
+      <h2 id="backoffice-title">Everything your institution runs on.</h2>
       <p>A school is also a payroll, a purchase register and a set of books. The same
          sixteen modules sit beneath every office — so the fee counter and the salary run
          close through the same ledger.</p>
@@ -729,72 +729,76 @@
         </div>
       </div>
 
-      <!-- the deck: the accessible source of truth for the sixteen modules,
-           and what the component becomes on phones and under reduced motion -->
-      <div class="reel">
-        <div class="reel__deck" id="reelDeck">
-          <article class="reel__card">
-            <div class="reel__head">
-              <span class="reel__index">01 / 04</span>
-              <span class="reel__count">5 modules</span>
+      <!-- the four domains: a 2x2 grid on a wide screen, a snapped deck on a
+           phone. This is the readable source of truth for the sixteen. -->
+      <div class="deck">
+        <div class="deck__grid" id="reelDeck">
+          <article class="deck__card" data-domain="finance">
+            <span class="deck__ghost" aria-hidden="true">01</span>
+            <div class="deck__meta">
+              <span class="deck__index">01 / 04</span>
+              <span class="deck__count">5 modules</span>
             </div>
-            <h3 class="reel__group">Finance</h3>
-            <p class="reel__lede">Fees in, salaries and suppliers out, on one set of books.</p>
-            <ul class="reel__list" role="list">
-              <li>General Ledger</li>
-              <li>Accounts Payable</li>
-              <li>Accounts Receivable</li>
-              <li>Costing &amp; Budgets</li>
-              <li>Tax &amp; Compliance</li>
+            <h3 class="deck__title">Finance</h3>
+            <p class="deck__lede">Fees in, salaries and suppliers out, on one set of books.</p>
+            <ul class="deck__list" role="list">
+              <li><span>General Ledger</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Accounts Payable</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Accounts Receivable</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Costing &amp; Budgets</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Tax &amp; Compliance</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
             </ul>
           </article>
-          <article class="reel__card">
-            <div class="reel__head">
-              <span class="reel__index">02 / 04</span>
-              <span class="reel__count">4 modules</span>
+          <article class="deck__card" data-domain="people">
+            <span class="deck__ghost" aria-hidden="true">02</span>
+            <div class="deck__meta">
+              <span class="deck__index">02 / 04</span>
+              <span class="deck__count">4 modules</span>
             </div>
-            <h3 class="reel__group">People</h3>
-            <p class="reel__lede">Every teacher and staff record, from joining to increment.</p>
-            <ul class="reel__list" role="list">
-              <li>Workforce</li>
-              <li>Time &amp; Attendance</li>
-              <li>Payroll &amp; Benefits</li>
-              <li>Talent</li>
+            <h3 class="deck__title">People</h3>
+            <p class="deck__lede">Every teacher and staff record, from joining to increment.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Workforce</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Time &amp; Attendance</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Payroll &amp; Benefits</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Talent</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
             </ul>
           </article>
-          <article class="reel__card">
-            <div class="reel__head">
-              <span class="reel__index">03 / 04</span>
-              <span class="reel__count">3 modules</span>
+          <article class="deck__card" data-domain="procure">
+            <span class="deck__ghost" aria-hidden="true">03</span>
+            <div class="deck__meta">
+              <span class="deck__index">03 / 04</span>
+              <span class="deck__count">3 modules</span>
             </div>
-            <h3 class="reel__group">Procurement</h3>
-            <p class="reel__lede">Books, uniforms, lab equipment — requested, approved, received.</p>
-            <ul class="reel__list" role="list">
-              <li>Sourcing</li>
-              <li>Purchasing</li>
-              <li>Orders &amp; Quotations</li>
+            <h3 class="deck__title">Procurement</h3>
+            <p class="deck__lede">Books, uniforms and lab equipment — requested, approved, received.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Sourcing</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Purchasing</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Orders &amp; Quotations</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
             </ul>
           </article>
-          <article class="reel__card">
-            <div class="reel__head">
-              <span class="reel__index">04 / 04</span>
-              <span class="reel__count">4 modules</span>
+          <article class="deck__card" data-domain="ops">
+            <span class="deck__ghost" aria-hidden="true">04</span>
+            <div class="deck__meta">
+              <span class="deck__index">04 / 04</span>
+              <span class="deck__count">4 modules</span>
             </div>
-            <h3 class="reel__group">Operations</h3>
-            <p class="reel__lede">The controls the office keeps to itself.</p>
-            <ul class="reel__list" role="list">
-              <li>Analytics</li>
-              <li>Administration</li>
-              <li>Integrations</li>
-              <li>Settings</li>
+            <h3 class="deck__title">Operations</h3>
+            <p class="deck__lede">The administrative controls the office keeps to itself.</p>
+            <ul class="deck__list" role="list">
+              <li><span>Analytics</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Administration</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Integrations</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
+              <li><span>Settings</span><svg class="deck__chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></li>
             </ul>
           </article>
         </div>
-        <div class="reel__dots" id="reelDots">
-          <button class="reel__dot is-on" type="button" aria-label="Go to Finance"></button>
-          <button class="reel__dot" type="button" aria-label="Go to People"></button>
-          <button class="reel__dot" type="button" aria-label="Go to Procurement"></button>
-          <button class="reel__dot" type="button" aria-label="Go to Operations"></button>
+        <div class="deck__dots" id="reelDots">
+          <button class="deck__dot is-on" type="button" aria-label="Go to Finance"></button>
+          <button class="deck__dot" type="button" aria-label="Go to People"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Procurement"></button>
+          <button class="deck__dot" type="button" aria-label="Go to Operations"></button>
         </div>
       </div>
 
@@ -1066,7 +1070,7 @@
       deckTick = true;
       window.requestAnimationFrame(function () {
         var card = deck.firstElementChild;
-        var step = card ? card.offsetWidth + 14 : 1;      /* card + gap */
+        var step = card ? card.offsetWidth + 16 : 1;      /* card + gap */
         var i = Math.round(deck.scrollLeft / step);
         dotEls.forEach(function (d, n) { d.classList.toggle('is-on', n === i); });
         deckTick = false;
