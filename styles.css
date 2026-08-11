@@ -1033,20 +1033,27 @@ h1, h2, h3, h4 {
 .step__visual {
   position: relative;   /* upgraded to sticky at the breakpoint below */
   align-self: start;    /* a stretched item has no room to travel */
-  /* The pool of light. It has to reach full transparency INSIDE the box or
-     the box clips it and the light ends on four straight edges — which is
-     what a `circle` did here, since its radius ran past the panel. An
-     ellipse sized in percentages of the box cannot outrun it, and the last
-     stop lands at 78% of that, so the falloff is always interior.
-
-     The old mid-stop was a desaturated navy, which greyed the middle of the
-     wash; the ramp is cobalt the whole way down now. */
+  /* the wash below sits at z-index -1, which without a stacking context here
+     would drop it behind the SECTION's background and vanish */
+  isolation: isolate;
   padding: 3.25rem;
   margin: -3.25rem;
-  /* belt and braces: the ramp already ends inside the box, and this feathers
-     the box itself so no straight edge can ever appear at its bounds */
-  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
-          mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
+}
+
+/* The pool of light, on a pseudo-element rather than on .step__visual itself:
+   a mask on the panel applies to its children too, so putting it there
+   feathered the window mock along with the light behind it.
+
+   The ramp must also reach full transparency INSIDE the box, or the box clips
+   it and the light ends on four straight edges — which is what a `circle`
+   did, since its radius ran past the panel. An ellipse sized in percentages
+   cannot outrun its own box, and the last stop lands at 78% of that. */
+.step__visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background: radial-gradient(
     ellipse 72% 58% at 50% 88%,
     rgba(21, 87, 232, .16) 0%,
@@ -1054,6 +1061,8 @@ h1, h2, h3, h4 {
     rgba(67, 133, 255, .05) 58%,
     rgba(67, 133, 255, 0) 78%
   );
+  -webkit-mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
+          mask-image: radial-gradient(ellipse 78% 68% at 50% 84%, #000 40%, transparent 96%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
