@@ -1377,7 +1377,7 @@ h1, h2, h3, h4 {
 .card {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.75rem;
   border-radius: var(--r-lg);
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -2327,12 +2327,7 @@ p, li { letter-spacing: 0; }
 
 /* the section is sized to the viewport, so the diagram is measured against
    whatever height is left after the heading rather than a fixed 42rem */
-#modules {
-  min-height: 100svh;
-  display: grid;
-  align-content: center;
-  padding-block: clamp(2.5rem, 5vh, 4rem);
-}
+#modules { padding-block: var(--section-y); }
 
 .orbit {
   position: relative;
@@ -2603,12 +2598,12 @@ p, li { letter-spacing: 0; }
   position: absolute;
   right: -.75rem; top: -1.75rem;
   font-family: var(--ui-font);
-  font-size: 7rem;
+  font-size: 5rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -.06em;
   color: var(--accent);
-  opacity: .07;
+  opacity: .08;
   pointer-events: none;
   user-select: none;
 }
@@ -2635,9 +2630,10 @@ p, li { letter-spacing: 0; }
 
 .deck__title {
   font-family: var(--ui-font);
-  font-size: var(--title-s);
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: -.025em;
+  letter-spacing: -.03em;
+  line-height: 1.15;
   color: var(--heading);
   text-transform: none;
   margin: 0;
@@ -2645,21 +2641,21 @@ p, li { letter-spacing: 0; }
 .deck__lede {
   margin-top: .5rem;
   font-size: var(--text-m);
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--muted);
-  max-width: 34ch;
+  max-width: 32ch;
 }
 
 .deck__list {
-  margin: 1.5rem 0 0;
+  margin: 1.25rem 0 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--panel-border);
 }
 .deck__list li {
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: .75rem .125rem;
-  font-size: var(--text-m);
+  padding: .6875rem .125rem;
+  font-size: var(--text-l);
   color: var(--heading-2);
   border-bottom: 1px solid var(--panel-border);
   transition: color .25s var(--ease), padding-left .25s var(--ease);
