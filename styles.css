@@ -2695,23 +2695,36 @@ p, li { letter-spacing: 0; }
 
   /* the whole division fits one screen: heading, one card, dots — nothing
      below the fold to discover by accident */
-  /* A height budget for the division: the section is exactly one screen, the
-     heading and dots take what they need, and the deck is capped at the rest.
-     Nothing is left to overflow past the fold. */
+  /* A height budget for the division. The rows have to be declared on the
+     CONTAINER, not on the section: the section has exactly one child, so
+     grid rows there had nothing to distribute and the budget did nothing.
+
+     heading = auto, deck = whatever is left, dots = auto. minmax(0, 1fr) and
+     min-height: 0 are both required, or a grid row refuses to shrink below
+     its content and overflows anyway. */
   #modules {
     min-height: 100svh;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    align-content: center;
+    align-content: stretch;
     padding-block: clamp(1.25rem, 4vh, 2rem);
+  }
+  #modules > .container {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+  .deck {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    min-height: 0;
   }
   #modules .head { max-width: none; }
   #modules .head h2 { font-size: clamp(1.25rem, 5.2vw, 1.5rem); }
   #modules .head p { font-size: var(--text-s); line-height: 1.5; }
   #modules .plate { display: none; }   /* the frame costs height it cannot earn */
-  .deck { margin-top: 1rem; }
-  .deck__grid { align-items: stretch; }
-  /* the tallest card decides, and it may not exceed the space left over */
-  .deck__card { max-height: calc(100svh - 17rem); overflow: hidden; }
+  .deck__grid { align-items: stretch; min-height: 0; }
+  /* the card fills the space the budget leaves it; its list scrolls only if a
+     very short screen leaves too little */
+  .deck__card { min-height: 0; overflow-y: auto; }
 
   .deck__dots {
     display: flex;
