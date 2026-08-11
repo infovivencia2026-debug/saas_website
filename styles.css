@@ -679,17 +679,17 @@ h1, h2, h3, h4 {
 /* one stroke for every line in the field: the two arc families and the short
    rules were on three different colours, widths and opacities, so they read
    as three unrelated drawings rather than one */
-.flow path { stroke: var(--brand-600); stroke-width: .9; opacity: .26; }
+.flow circle { stroke: var(--brand-600); stroke-width: .9; opacity: .26; }
 
 /* each arc inks in from the edge, innermost first */
-.flow path {
-  stroke-dasharray: 3000;
-  stroke-dashoffset: 3000;
-  animation: flow-ink 1.8s var(--ease) forwards;
+.flow circle {
+  /* one full circumference of the largest ring, so every circle is covered */
+  stroke-dasharray: 8000;
+  stroke-dashoffset: 8000;
+  animation: flow-ink 2.2s var(--ease) forwards;
   animation-delay: calc(var(--i, 0) * 90ms);
 }
-.flow__tight path { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
-.flow__rules path { animation-delay: 1s; }
+.flow__tight circle { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
 @keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
 /* and the whole field breathes, very slowly */
@@ -698,7 +698,7 @@ h1, h2, h3, h4 {
    asked for; the one-shot ink above is the effect that mattered. */
 
 @media (prefers-reduced-motion: reduce) {
-  .flow path { animation: none; stroke-dashoffset: 0; }
+  .flow circle { animation: none; stroke-dashoffset: 0; }
   .flow__wide, .flow__tight { animation: none; }
 }
 
@@ -1078,9 +1078,9 @@ h1, h2, h3, h4 {
      been walked down the ramp — it now reads as the panel's shadow with a
      little colour in it, rather than as a light source:
 
-       1. a restrained --brand-700 core under the mock
-       2. a --brand-900 mid spread
-       3. a wide near-black base carrying most of the weight
+       1. a --brand-900 core under the mock
+       2. a midnight mid spread
+       3. a wide, near-black base carrying most of the weight
 
      Every centre and radius is chosen so each ramp reaches zero before it
      reaches an edge of this box. The panel's own bottom sits at ~64% of the
@@ -1088,22 +1088,22 @@ h1, h2, h3, h4 {
      off in a straight line. */
   background:
     radial-gradient(ellipse 24% 17% at 50% 64%,
-      rgba(21, 87, 232, .16) 0%,
-      rgba(21, 87, 232, .08) 40%,
-      rgba(21, 87, 232, .02) 70%,
-      rgba(21, 87, 232, 0) 94%),
-    radial-gradient(ellipse 37% 27% at 50% 65%,
-      rgba(16, 42, 140, .16) 0%,
-      rgba(16, 42, 140, .09) 34%,
-      rgba(16, 42, 140, .04) 58%,
-      rgba(16, 42, 140, .012) 76%,
+      rgba(16, 42, 140, .26) 0%,
+      rgba(16, 42, 140, .14) 40%,
+      rgba(16, 42, 140, .04) 70%,
       rgba(16, 42, 140, 0) 94%),
+    radial-gradient(ellipse 37% 27% at 50% 65%,
+      rgba(7, 21, 47, .26) 0%,
+      rgba(7, 21, 47, .16) 34%,
+      rgba(7, 21, 47, .07) 58%,
+      rgba(7, 21, 47, .02) 76%,
+      rgba(7, 21, 47, 0) 94%),
     radial-gradient(ellipse 46% 33% at 50% 63%,
-      rgba(7, 21, 47, .18) 0%,
-      rgba(7, 21, 47, .11) 30%,
-      rgba(7, 21, 47, .05) 52%,
-      rgba(7, 21, 47, .018) 72%,
-      rgba(7, 21, 47, 0) 94%);
+      rgba(4, 12, 30, .30) 0%,
+      rgba(4, 12, 30, .19) 30%,
+      rgba(4, 12, 30, .09) 52%,
+      rgba(4, 12, 30, .03) 72%,
+      rgba(4, 12, 30, 0) 94%);
 }
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
@@ -1689,7 +1689,7 @@ h1, h2, h3, h4 {
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
   /* on a phone the tight family crowds the type; the wide arcs carry it */
-  .flow__tight, .flow__rules { display: none; }
+  .flow__tight { display: none; }
   .hero h1 { max-width: none; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
@@ -2633,7 +2633,7 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .flow path { stroke: #4385ff; opacity: .30; }
+:root[data-theme="dark"] .flow circle { stroke: #4385ff; opacity: .30; }
 :root[data-theme="dark"] #how::before {
   background-image:
     radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
