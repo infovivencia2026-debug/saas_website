@@ -266,14 +266,17 @@ h1, h2, h3, h4 {
   display: block;
   position: absolute;
   pointer-events: none;
-  z-index: 0;
+  /* above the section's pool of light (::after, z-index 0), which otherwise
+     paints over the mesh and washes it out through the middle — the field
+     then reads as covering only part of the section */
+  z-index: 1;
   /* A fine dot mesh at 14px with a slightly stronger dot on every third
      crossing. It covers the section edge to edge — no mask fading it out at
      the boundaries — and it does not move: the alpha lives in the dot colour
      alone, with no layer opacity or scroll animation multiplying it down. */
   background-image:
-    radial-gradient(rgba(21, 87, 232, .30) .5px, transparent .5px),
-    radial-gradient(rgba(16, 42, 140, .20) .7px, transparent .7px);
+    radial-gradient(rgba(21, 87, 232, .38) .6px, transparent .6px),
+    radial-gradient(rgba(16, 42, 140, .26) .8px, transparent .8px);
   background-size: 14px 14px, 42px 42px;
   background-position: 0 0, 0 0;
   inset: 0;
@@ -348,6 +351,7 @@ h1, h2, h3, h4 {
 .section--tight::after, #how::after {
   content: "";
   position: absolute;
+  z-index: 0;
   left: 50%; bottom: 0;
   width: min(70rem, 92%);
   height: 26rem;
