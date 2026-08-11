@@ -674,9 +674,10 @@ h1, h2, h3, h4 {
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
 }
-.flow__wide  path { stroke: var(--brand-600); stroke-width: .9; opacity: .30; }
-.flow__tight path { stroke: var(--brand-500); stroke-width: .9; opacity: .22; }
-.flow__rules path { stroke: var(--brand-700); stroke-width: 1.4; opacity: .22; }
+/* one stroke for every line in the field: the two arc families and the short
+   rules were on three different colours, widths and opacities, so they read
+   as three unrelated drawings rather than one */
+.flow path { stroke: var(--brand-600); stroke-width: .9; opacity: .26; }
 
 /* each arc inks in from the edge, innermost first */
 .flow path {
@@ -2630,9 +2631,7 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .flow__wide path  { stroke: #4385ff; opacity: .34; }
-:root[data-theme="dark"] .flow__tight path { stroke: #72a4ff; opacity: .22; }
-:root[data-theme="dark"] .flow__rules path { stroke: #72a4ff; opacity: .26; }
+:root[data-theme="dark"] .flow path { stroke: #4385ff; opacity: .30; }
 :root[data-theme="dark"] #how::before {
   background-image:
     radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
