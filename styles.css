@@ -405,7 +405,9 @@ h1, h2, h3, h4 {
 .nav__link {
   font-size: var(--text-s);
   font-weight: 500;
-  color: var(--body);
+  /* the capsule is a dark stage, so the links take the dark-stage ramp —
+     --body is the slate meant for the light canvas and all but vanished here */
+  color: var(--on-ground);
   letter-spacing: -.005em;
   transition: color .25s var(--ease);
 }
