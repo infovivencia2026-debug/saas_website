@@ -505,37 +505,42 @@ h1, h2, h3, h4 {
   pointer-events: none;
 }
 
-/* ---- the hero photo ------------------------------------------------------
-   hero-art.png shown as itself: a full-bleed photograph of the ray fan, no
-   inversion, no blend trick, no mask cut out of the middle. It was previously
-   inverted and screen-blended so only abstract streaks survived on the dark
-   ground; now the picture is the hero and the ground sits on top of it as a
-   scrim instead of underneath it as a stage.
-
-   The convergence point is measured at 99% across and 16% down, so the image
-   is anchored right: `cover` will crop the empty left of the frame at narrow
-   aspect ratios and keep the focal point on screen.
+/* ---- the abstract cloud --------------------------------------------------
+   No photograph. The hero's ground is a cobalt cloudbank built from two SVG
+   fractalNoise fields — a slow, wide-banded one for the mass and a faster,
+   horizontally-stretched one for the wisps — plus three soft blooms. All of
+   it is inline data URIs and gradients, so the first screen costs no image
+   request at all, and it is drawn in the site's own ramp rather than tinted
+   into it after the fact.
    ----------------------------------------------------------------------- */
 .hero__art {
   position: absolute;
-  inset: 0;
-  background:
-    image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
-    right 18% / cover no-repeat;
-  background: -webkit-image-set(url("hero-art.webp") type("image/webp"), url("hero-art.png") type("image/png"))
-    right 18% / cover no-repeat;
-  animation: art-float 16s ease-in-out infinite;
+  inset: -8%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%271100%27%20height%3D%27700%27%3E%3Cfilter%20id%3D%27c%27%20x%3D%27-10%25%27%20y%3D%27-10%25%27%20width%3D%27120%25%27%20height%3D%27120%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.006%200.013%27%20numOctaves%3D%276%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.09%20%200%200%200%200%200.34%20%200%200%200%200%200.91%20%200%200%200%20-1.35%201.02%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%2714%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%271100%27%20height%3D%27700%27%20filter%3D%27url%28%23c%29%27%2F%3E%3C%2Fsvg%3E"),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27800%27%20height%3D%27520%27%3E%3Cfilter%20id%3D%27w%27%20x%3D%27-10%25%27%20y%3D%27-10%25%27%20width%3D%27120%25%27%20height%3D%27120%25%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.017%200.006%27%20numOctaves%3D%274%27%20seed%3D%2723%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200.26%20%200%200%200%200%200.52%20%200%200%200%200%201%20%200%200%200%20-1.15%200.82%27%2F%3E%3CfeGaussianBlur%20stdDeviation%3D%277%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27800%27%20height%3D%27520%27%20filter%3D%27url%28%23w%29%27%2F%3E%3C%2Fsvg%3E");
+  background-size: 130% 120%, 90% 80%;
+  background-position: 62% 30%, 12% 78%;
+  background-repeat: no-repeat, no-repeat;
+  opacity: .92;
+  animation: cloud-drift 48s ease-in-out infinite alternate;
   will-change: transform;
 }
 
-/* No scrim: the photo is shown clean. Which means the hero is now a LIGHT
-   stage — see the token remap on .hero — because the artwork is blue on
-   near-white and light type over it was only ever legible thanks to the
-   overlay that used to sit here. */
+/* the blooms the cloud sits in */
+.hero__atmos::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 52% 46% at 74% 22%, rgba(36, 107, 253, .22), transparent 70%),
+    radial-gradient(ellipse 46% 40% at 16% 76%, rgba(67, 133, 255, .18), transparent 72%),
+    radial-gradient(ellipse 70% 52% at 50% 108%, rgba(21, 87, 232, .16), transparent 68%);
+}
 
-@keyframes art-float {
-  0%, 100% { transform: scale(1.02) translateY(3px); }
-  50%      { transform: scale(1.02) translateY(-3px); }
+@keyframes cloud-drift {
+  from { transform: scale(1.02) translate3d(-1.2%, .6%, 0); }
+  to   { transform: scale(1.10) translate3d(1.2%, -.6%, 0); }
 }
 
 /* environmental bloom, sitting in the air rather than on the planet */
@@ -1448,9 +1453,9 @@ h1, h2, h3, h4 {
 
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
-  /* on a tall narrow screen `cover` crops the fan hard; pull the anchor
-     back toward centre so more than one ray survives */
-  .hero__art { background-position: 72% 20%; }
+  /* a tall narrow frame needs the cloud stretched and re-anchored, or the
+     mass sits off-screen and only flat tint is left */
+  .hero__art { background-position: 70% 26%, 8% 82%; background-size: 170% 120%, 120% 80%; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }
