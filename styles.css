@@ -1007,7 +1007,56 @@ h1, h2, h3, h4 {
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+/* ---- the card schematic --------------------------------------------------
+   Four cards of icon-plus-two-lines left a lot of white inside each box, so
+   each one now carries a small wireframe of the thing it describes: the table
+   with a selected row, three role rails with the active item in a different
+   slot, a config block feeding a rendered view, and the three breakpoints.
+   Drawn as inline SVG with the strokes coloured here, so they follow the
+   palette and cost no requests.
+   ------------------------------------------------------------------------ */
+.card__viz {
+  margin-top: auto;      /* pinned to the floor, so all four line up */
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8f0fd;
+}
+.card__viz svg { display: block; width: 100%; height: auto; }
+
+.card__viz [class^="v-"] { transition: opacity .35s var(--ease), stroke .35s var(--ease); }
+
+/* strokes */
+.v-td, .v-th, .v-key, .v-val, .v-rule, .v-gutter, .v-tick, .v-arrow {
+  stroke-linecap: round;
+}
+.v-td     { stroke: #bcd0f2; stroke-width: 2.5; }
+.v-th     { stroke: #8fb0e8; stroke-width: 2.5; }
+.v-key    { stroke: #9dbcf0; stroke-width: 2.5; }
+.v-val    { stroke: var(--brand-500); stroke-width: 2.5; opacity: .75; }
+.v-rule   { stroke: #e0eafb; stroke-width: 1; }
+.v-gutter { stroke: #d6e3fa; stroke-width: 2.5; }
+.v-arrow  { stroke: var(--brand); stroke-width: 1.4; opacity: .8; }
+.v-tick   { stroke: #ffffff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* fills */
+.v-head { fill: #f2f7ff; stroke: #e0eafb; }
+.v-sel  { fill: rgba(36, 107, 253, .09); }
+.v-box  { fill: #ffffff; stroke: #c3d5f5; }
+.v-box--on { fill: var(--brand); stroke: var(--brand); }
+.v-out  { fill: none; stroke: #dbe6fa; }
+.v-out--on { stroke: var(--brand-500); }
+.v-rail { fill: #f7faff; stroke: #e3ecfc; }
+.v-rail--on { fill: rgba(36, 107, 253, .05); stroke: rgba(36, 107, 253, .28); }
+.v-chip { fill: var(--brand); opacity: .18; }
+
+/* the wireframe wakes up with the card */
+.card:hover .v-val   { opacity: 1; }
+.card:hover .v-chip  { opacity: .32; }
+.card:hover .v-sel   { fill: rgba(36, 107, 253, .16); }
+.card:hover .v-out--on, .card:hover .v-rail--on { stroke: var(--brand); }
+
 .card {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
   border-radius: var(--r-lg);
   background: rgba(255, 255, 255, .90);
