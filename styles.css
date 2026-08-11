@@ -3195,13 +3195,13 @@ p, li { letter-spacing: 0; }
 /* ==========================================================================
    Narrative components
    --------------------------------------------------------------------------
-   The new copy argues rather than lists: a scattered-information trail, a
-   chain of consequences from one record, capability chips, the questions
-   leadership asks, and what disappears. All of them are built from the same
-   surface and line recipes as everything else.
+   Built from the page's existing vocabulary rather than a new one: the panel
+   surface, the mono index badge, hairline rows with a chevron, and the tag
+   family. Nothing here introduces a shape, a weight or a colour that is not
+   already used by the cards, the deck or the product mocks.
    ========================================================================== */
 
-/* ---- the trail: four departments checking four places ---- */
+/* ---- the trail: four departments, as domain cards ---- */
 .trail {
   margin: clamp(2rem, 4vw, 3rem) 0 0;
   padding: 0;
@@ -3213,158 +3213,181 @@ p, li { letter-spacing: 0; }
 }
 .trail li {
   position: relative;
+  overflow: hidden;
   counter-increment: trail;
-  padding: 1.25rem 1.25rem 1.375rem;
+  padding: 1.75rem;
   border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
   background: var(--panel);
+  transition: border-color .35s var(--ease);
 }
-.trail li::before {
+.trail li:hover { border-color: var(--panel-border-2); }
+/* the same oversized cropped numeral the domain cards carry */
+.trail li::after {
   content: counter(trail, decimal-leading-zero);
-  display: block;
-  margin-bottom: .625rem;
+  position: absolute;
+  right: -.5rem; top: -1rem;
+  font-family: var(--ui-font);
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: -.06em;
+  color: var(--brand);
+  opacity: .08;
+  pointer-events: none;
+}
+/* and the same mono index badge */
+.trail li::before {
+  content: counter(trail, decimal-leading-zero) " / 04";
+  display: inline-block;
+  margin-bottom: .875rem;
+  padding: .1875rem .4375rem;
+  border-radius: var(--r-sm);
+  background: rgba(21, 87, 232, .12);
   font-family: var(--mono);
   font-size: var(--label);
   letter-spacing: .14em;
+  text-transform: uppercase;
   color: var(--brand);
 }
 .trail__who {
   display: block;
   font-family: var(--ui-font);
-  font-weight: 600;
-  font-size: var(--text-l);
+  font-size: var(--title-xs);
+  font-weight: 700;
+  letter-spacing: -.025em;
   color: var(--heading);
-  letter-spacing: -.015em;
 }
-.trail__what { display: block; margin-top: .25rem; font-size: var(--text-m); color: var(--muted); }
+.trail__what { display: block; margin-top: .375rem; font-size: var(--text-m); color: var(--muted); }
 
-/* ---- the chain: one entry, eight consequences ---- */
-.chain {
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
-  padding: 0;
+/* ---- the chain, the questions and the disappearing list ------------------
+   All three are the module-row pattern from the domain cards: one panel, rows
+   separated by hairlines, a mono index on the left, a chevron on the right. */
+.chain, .asks, .gone {
+  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  padding: 0 1.75rem;
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .75rem 2rem;
+  max-width: 52rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  box-shadow: var(--panel-shadow);
 }
-.chain li {
+.chain li, .asks li, .gone li {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: .875rem;
-  padding: .875rem .25rem;
+  padding: .875rem .125rem;
   font-size: var(--text-l);
   color: var(--heading-2);
   border-bottom: 1px solid var(--panel-border);
+  transition: color .25s var(--ease), padding-left .25s var(--ease);
 }
+.chain li:last-child, .asks li:last-child, .gone li:last-child { border-bottom: 0; }
+.chain li:hover, .asks li:hover, .gone li:hover { color: var(--heading); padding-left: .375rem; }
+
 .chain__i {
   flex: none;
+  min-width: 1.75rem;
   font-family: var(--mono);
   font-size: var(--label);
   letter-spacing: .12em;
   color: var(--brand);
 }
-.chain--wide { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .75rem; }
-.chain--wide li {
-  display: block;
-  border-bottom: 0;
-  border-left: 2px solid var(--brand);
-  padding: .5rem 0 .5rem .875rem;
-  font-family: var(--ui-font);
-  font-weight: 600;
-}
-.chain--wide .chain__i { display: block; margin-bottom: .25rem; }
 
-/* ---- capability chips ---- */
-.chips {
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4375rem;
-}
-.chips li {
-  padding: .375rem .625rem;
-  border-radius: var(--r-sm);
-  border: 1px solid var(--panel-border);
-  background: rgba(21, 87, 232, .05);
-  font-size: var(--text-s);
-  color: var(--heading-2);
-  white-space: nowrap;
-}
-.chips--center { justify-content: center; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
-
-/* ---- the questions leadership asks ---- */
-.asks {
-  margin: clamp(2rem, 4vw, 3rem) auto 0;
-  padding: 0;
-  list-style: none;
-  max-width: 52rem;
-  display: grid;
-  gap: .5rem;
-}
-.asks li {
-  padding: .875rem 1.125rem;
-  border-radius: var(--r-md);
-  border: 1px solid var(--panel-border);
-  background: var(--panel);
-  font-size: var(--text-l);
-  color: var(--heading-2);
+/* the questions carry a marker, the way the module rows do */
+.asks li::before, .gone li::before {
+  content: "";
+  flex: none;
+  width: .375rem; height: .375rem;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: .55;
 }
 .asks__title {
   font-family: var(--ui-font);
   font-size: var(--title-s);
-  letter-spacing: -.02em;
+  font-weight: 700;
+  letter-spacing: -.025em;
   color: var(--heading);
 }
 
-/* ---- what disappears ---- */
-.gone {
-  margin: clamp(2rem, 4vw, 3rem) auto 0;
+/* what disappears: struck through, and the last line is the one that stays */
+.gone li { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+.gone li::before { background: var(--muted); opacity: .4; }
+.gone--last {
+  color: var(--heading) !important;
+  font-family: var(--ui-font);
+  font-weight: 600;
+  text-decoration: none !important;
+}
+.gone--last::before { background: var(--brand) !important; opacity: 1 !important; }
+
+/* ---- the workflow chain: five stages across ---- */
+.chain--wide {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  padding: 1.25rem 1.75rem;
+}
+.chain--wide li {
+  display: block;
+  border-bottom: 0;
+  border-left: 1px solid var(--panel-border);
+  padding: .25rem 0 .25rem 1rem;
+  font-family: var(--ui-font);
+  font-weight: 600;
+  color: var(--heading);
+}
+.chain--wide li:first-child { border-left: 0; padding-left: 0; }
+.chain--wide li:hover { padding-left: 1rem; }
+.chain--wide li:first-child:hover { padding-left: 0; }
+.chain--wide .chain__i { display: block; margin-bottom: .375rem; }
+
+/* ---- capability chips: the tag family, at list size ---- */
+.chips {
+  margin: 1.25rem 0 0;
   padding: 0;
   list-style: none;
-  max-width: 46rem;
-  display: grid;
-  gap: .25rem;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .375rem;
 }
-.gone li {
-  padding: .625rem 0;
-  font-family: var(--ui-font);
-  font-size: var(--title-s);
-  font-weight: 500;
-  letter-spacing: -.02em;
-  color: var(--muted);
-  text-decoration: line-through;
-  text-decoration-color: rgba(21, 87, 232, .38);
-  text-decoration-thickness: 1px;
+.chips li {
+  padding: .3125rem .5rem;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(21, 87, 232, .17);
+  background: rgba(21, 87, 232, .06);
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--brand-800);
+  white-space: nowrap;
 }
-.gone--last {
-  margin-top: .75rem;
-  color: var(--heading);
-  font-size: var(--title-m);
-  text-decoration: none;
-}
+.chips--center { justify-content: center; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 
-/* ---- shared bits ---- */
 .pull--center { max-width: 44rem; margin-inline: auto; text-align: center; }
 .cta__coda { margin-top: 1.75rem; font-size: var(--text-l); }
 .cta__coda strong { font-size: var(--title-s); color: var(--on-ground-hi); }
 
 @media (max-width: 1100px) {
   .trail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .chain--wide { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .chain--wide { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem 0; }
 }
 @media (max-width: 720px) {
-  .trail, .chain, .chain--wide { grid-template-columns: 1fr; gap: .5rem; }
-  .chain li { padding: .625rem .25rem; font-size: var(--text-m); }
-  .asks li { font-size: var(--text-m); padding: .75rem .875rem; }
-  .gone li { font-size: var(--text-l); }
-  .gone--last { font-size: var(--title-s); }
-  .chips li { font-size: var(--text-s); }
+  .trail { grid-template-columns: 1fr; gap: .75rem; }
+  .trail li { padding: 1.25rem; }
+  .trail li::after { font-size: 3.5rem; }
+  .chain, .asks, .gone { padding: 0 1.25rem; }
+  .chain li, .asks li, .gone li { font-size: var(--text-m); padding: .75rem .125rem; }
+  .chain--wide { grid-template-columns: 1fr; padding: 1rem 1.25rem; }
+  .chain--wide li { border-left: 0; padding-left: 0; border-bottom: 1px solid var(--panel-border); padding-block: .625rem; }
+  .chain--wide li:last-child { border-bottom: 0; }
 }
 
-/* dark: the narrative surfaces follow the panel recipe, but the chips and the
-   struck-through list need their own tints */
-:root[data-theme="dark"] .chips li { background: rgba(122, 160, 224, .08); }
-:root[data-theme="dark"] .gone li { text-decoration-color: rgba(114, 164, 255, .45); }
+:root[data-theme="dark"] .chips li {
+  background: rgba(122, 160, 224, .09);
+  border-color: rgba(122, 160, 224, .2);
+  color: #a8c6ff;
+}
+:root[data-theme="dark"] .trail li::before { background: rgba(114, 164, 255, .16); color: #72a4ff; }
