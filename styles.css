@@ -2579,6 +2579,8 @@ p, li { letter-spacing: 0; }
 
 .deck__card {
   --accent: var(--brand);
+  --accent-soft: rgba(21, 87, 232, .12);
+  --accent-edge: rgba(21, 87, 232, .45);
   position: relative;
   overflow: hidden;
   display: flex;
@@ -2589,16 +2591,26 @@ p, li { letter-spacing: 0; }
   background: var(--panel);
   transition: border-color .35s var(--ease), background-color .35s var(--ease);
 }
-.deck__card[data-domain="finance"] { --accent: #0f8f6b; }
-.deck__card[data-domain="people"]  { --accent: var(--brand); }
-.deck__card[data-domain="procure"] { --accent: #b07514; }
+/* Each domain declares its accent AND the two derived tints explicitly.
+   These were computed with color-mix(), which a phone browser a version or
+   two behind drops entirely — taking the badge fill and the hover edge with
+   it, so the card rendered as a bare list. */
+.deck__card[data-domain="finance"] {
+  --accent: #0f8f6b; --accent-soft: rgba(15, 143, 107, .12); --accent-edge: rgba(15, 143, 107, .45);
+}
+.deck__card[data-domain="people"] {
+  --accent: #1557e8; --accent-soft: rgba(21, 87, 232, .12); --accent-edge: rgba(21, 87, 232, .45);
+}
+.deck__card[data-domain="procure"] {
+  --accent: #b07514; --accent-soft: rgba(176, 117, 20, .12); --accent-edge: rgba(176, 117, 20, .45);
+}
 /* Operations holds the administrative controls, so it sits apart: graphite
    rather than a hue, on a slightly cooler surface */
 .deck__card[data-domain="ops"] {
-  --accent: #4a5a75;
+  --accent: #4a5a75; --accent-soft: rgba(74, 90, 117, .12); --accent-edge: rgba(74, 90, 117, .45);
   background: rgba(21, 87, 232, .035);
 }
-.deck__card:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.deck__card:hover { border-color: var(--accent-edge); }
 
 /* the numeral as a device: oversized, faded, cropped by the card's corner */
 .deck__ghost {
@@ -2630,7 +2642,7 @@ p, li { letter-spacing: 0; }
   color: var(--accent);
   padding: .1875rem .4375rem;
   border-radius: var(--r-sm);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  background: var(--accent-soft);
 }
 .deck__count { color: var(--muted); }
 .deck__count::before { content: "·"; margin-right: .625rem; opacity: .5; }
@@ -3021,9 +3033,18 @@ p, li { letter-spacing: 0; }
 }
 :root[data-theme="dark"] .deck__card { background: rgba(16, 32, 64, .55); }
 :root[data-theme="dark"] .deck__card[data-domain="ops"] { background: rgba(122, 160, 224, .07); }
-:root[data-theme="dark"] .deck__card[data-domain="finance"] { --accent: #35c99b; }
-:root[data-theme="dark"] .deck__card[data-domain="procure"] { --accent: #e0a442; }
-:root[data-theme="dark"] .deck__card[data-domain="ops"] { --accent: #9fb3d6; }
+:root[data-theme="dark"] .deck__card[data-domain="finance"] {
+  --accent: #35c99b; --accent-soft: rgba(53, 201, 155, .16); --accent-edge: rgba(53, 201, 155, .45);
+}
+:root[data-theme="dark"] .deck__card[data-domain="people"] {
+  --accent: #72a4ff; --accent-soft: rgba(114, 164, 255, .16); --accent-edge: rgba(114, 164, 255, .45);
+}
+:root[data-theme="dark"] .deck__card[data-domain="procure"] {
+  --accent: #e0a442; --accent-soft: rgba(224, 164, 66, .16); --accent-edge: rgba(224, 164, 66, .45);
+}
+:root[data-theme="dark"] .deck__card[data-domain="ops"] {
+  --accent: #9fb3d6; --accent-soft: rgba(159, 179, 214, .14); --accent-edge: rgba(159, 179, 214, .45);
+}
 :root[data-theme="dark"] .deck__title { color: var(--heading); }
 :root[data-theme="dark"] .deck__list li { color: var(--heading-2); }
 
