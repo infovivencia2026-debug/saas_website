@@ -523,9 +523,9 @@ h1, h2, h3, h4 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 78% 62% at 46% 44%, rgba(7, 21, 47, .90), rgba(7, 21, 47, .58) 58%, transparent 82%),
-    linear-gradient(180deg, rgba(7, 21, 47, .86) 0%, rgba(10, 29, 66, .62) 42%, rgba(7, 21, 47, .88) 100%),
-    linear-gradient(90deg, rgba(7, 21, 47, .70) 0%, rgba(7, 21, 47, .34) 55%, rgba(7, 21, 47, .52) 100%);
+    radial-gradient(ellipse 70% 56% at 46% 44%, rgba(7, 21, 47, .72), rgba(7, 21, 47, .34) 60%, transparent 84%),
+    linear-gradient(180deg, rgba(7, 21, 47, .60) 0%, rgba(10, 29, 66, .28) 44%, rgba(7, 21, 47, .62) 100%),
+    linear-gradient(90deg, rgba(7, 21, 47, .46) 0%, rgba(7, 21, 47, .12) 58%, rgba(7, 21, 47, .30) 100%);
 }
 
 @keyframes art-float {
@@ -1111,6 +1111,48 @@ h1, h2, h3, h4 {
 
 
 /* --------------------------------------------------------------------- faq */
+/* ---- the curve field -----------------------------------------------------
+   Long bezier sweeps behind the questions, in two directions so they cross
+   rather than run parallel. The section is otherwise a single column of text
+   on a flat surface, and the crossings give it some depth without putting
+   anything behind the words themselves — the mask fades the whole field out
+   through the middle, where the FAQ column sits.
+   ------------------------------------------------------------------------ */
+.curves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  fill: none;
+  stroke: rgba(21, 87, 232, .22);
+  stroke-width: 1.25;
+  -webkit-mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
+          mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
+}
+.curves__counter { stroke: rgba(36, 107, 253, .14); }
+
+/* the curves draw themselves in when the section arrives */
+.curves path {
+  stroke-dasharray: 2600;
+  stroke-dashoffset: 2600;
+  animation: curve-draw 2.6s var(--ease) forwards;
+}
+.curves path:nth-child(2) { animation-delay: .12s; }
+.curves path:nth-child(3) { animation-delay: .24s; }
+.curves path:nth-child(4) { animation-delay: .36s; }
+.curves path:nth-child(5) { animation-delay: .48s; }
+.curves path:nth-child(6) { animation-delay: .60s; }
+.curves path:nth-child(7) { animation-delay: .72s; }
+@keyframes curve-draw { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .curves path { animation: none; stroke-dashoffset: 0; }
+}
+
+#faq .container { position: relative; z-index: 1; }
+
 .faq {
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
   max-width: 52rem;
