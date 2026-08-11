@@ -1821,17 +1821,17 @@ h1, h2, h3, h4 {
   .nav--open .nav__link { padding-block: .375rem; }
   .footer li a { padding-block: .25rem; }
 
-  /* On a phone the panel runs the full width of the screen. Both side edges
-     touch the viewport, so every corner sits on a squared edge — all four go
-     to 0 and the left and right borders come off. A radius there would read
-     as the panel stopping short of the edge instead of running to it. */
+  /* On a phone the panel runs off the right edge only. That edge is squared
+     and loses its border, because a radius there would read as the panel
+     stopping short of the screen rather than continuing past it. The left
+     side stays inside the gutter, so it keeps its border and its corners. */
   .screen {
-    margin-inline: calc(-1 * var(--gutter));
-    border-left: 0;
+    margin-right: calc(-1 * var(--gutter));
     border-right: 0;
-    border-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
-  .screen__bar { border-radius: 0; }
+  .screen__bar { border-top-right-radius: 0; }
 
   /* the window mocks are the widest thing on the page */
   .screen__body { padding: .75rem; gap: .375rem; }
