@@ -2664,14 +2664,17 @@ p, li { letter-spacing: 0; }
      inside a scrollport one card wide. */
   .deck__grid {
     display: flex;
-    gap: 0;
+    gap: .75rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
+    /* the scrollport runs edge to edge, but its padding holds each card
+       inside the gutter so all four corners are visible */
     margin-inline: calc(-1 * var(--gutter));
-    padding: 0;
+    padding: .25rem var(--gutter);
+    scroll-padding-inline: var(--gutter);
   }
   .deck__grid::-webkit-scrollbar { display: none; }
   .deck__card {
@@ -2680,10 +2683,8 @@ p, li { letter-spacing: 0; }
     flex: 0 0 100%;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding: 1.125rem var(--gutter) 1.25rem;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
+    padding: 1.125rem 1.25rem 1.25rem;
+    border-radius: var(--r-lg);
   }
   .deck__meta { margin-bottom: .625rem; }
   .deck__title { font-size: 1.1875rem; }
