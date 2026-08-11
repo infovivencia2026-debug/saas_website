@@ -1050,7 +1050,12 @@
   });
 
   /* --------------------------------------- scroll-driven: progress + parallax */
-  var screens = Array.prototype.slice.call(document.querySelectorAll('.screen'));
+  /* If the browser drives the panel parallax off a scroll timeline, the CSS
+     animation wins over this transform anyway — so computing it per frame is
+     pure main-thread cost for nothing. */
+  var cssTimelines = window.CSS && CSS.supports && CSS.supports('animation-timeline: view()');
+  var screens = cssTimelines ? [] :
+    Array.prototype.slice.call(document.querySelectorAll('.screen'));
   var steps = document.querySelector('.steps');
   var ticking = false;
 
@@ -1090,24 +1095,47 @@
   var how = document.getElementById('how');
   var lens = how && how.querySelector('.dotlens');
   if (lens && window.matchMedia('(hover: hover)').matches && !reduced) {
-    var lx = 0, ly = 0, lensTick = false;
+    /* The lens eases toward the pointer rather than being pinned to it: a
+       fixed fraction of the remaining distance each frame, which gives a smooth
+       trail with no timers and no easing curve to tune. The loop only runs
+       while the pointer is inside the section, and parks itself once the
+       lens has caught up. */
+    var lx = 0, ly = 0;        /* target, in section coordinates */
+    var cx = null, cy = null;  /* current */
+    var lensRaf = null, lensRect = null;
+
+    function lensStep() {
+      if (cx === null) { cx = lx; cy = ly; }
+      cx += (lx - cx) * 0.14;
+      cy += (ly - cy) * 0.14;
+      lens.style.setProperty('--mx', cx.toFixed(1) + 'px');
+      lens.style.setProperty('--my', cy.toFixed(1) + 'px');
+      /* keep going only while there is still distance to close */
+      if (Math.abs(lx - cx) > 0.4 || Math.abs(ly - cy) > 0.4) {
+        lensRaf = window.requestAnimationFrame(lensStep);
+      } else {
+        lensRaf = null;
+      }
+    }
 
     how.addEventListener('pointermove', function (e) {
-      /* offsets are read against the section, and only inside the rAF, so a
-         fast mouse cannot force a layout read per event */
-      lx = e.clientX; ly = e.clientY;
-      if (lensTick) return;
-      lensTick = true;
-      window.requestAnimationFrame(function () {
-        var r = how.getBoundingClientRect();
-        lens.style.setProperty('--mx', (lx - r.left) + 'px');
-        lens.style.setProperty('--my', (ly - r.top) + 'px');
-        lensTick = false;
-      });
+      /* the rect is cached on enter, so a fast mouse cannot force a layout
+         read on every event */
+      if (!lensRect) lensRect = how.getBoundingClientRect();
+      lx = e.clientX - lensRect.left;
+      ly = e.clientY - lensRect.top;
+      if (lensRaf == null) lensRaf = window.requestAnimationFrame(lensStep);
     }, { passive: true });
 
-    how.addEventListener('pointerenter', function () { how.classList.add('is-lit'); });
-    how.addEventListener('pointerleave', function () { how.classList.remove('is-lit'); });
+    how.addEventListener('pointerenter', function () {
+      lensRect = how.getBoundingClientRect();
+      how.classList.add('is-lit');
+    });
+    how.addEventListener('pointerleave', function () {
+      how.classList.remove('is-lit');
+      lensRect = null;
+    });
+    window.addEventListener('scroll', function () { lensRect = null; }, { passive: true });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });

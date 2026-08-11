@@ -905,7 +905,12 @@ h1, h2, h3, h4 {
   /* the travelling light */
   .steps::after {
     top: 0;
-    height: calc(var(--steps-progress) * 100%);
+    /* scaleY, not height: animating height relayouts the spine on every
+       scroll frame, while a transform is composited. transform-origin pins
+       it to the top so it still grows downward. */
+    height: 100%;
+    transform-origin: 50% 0;
+    transform: scaleY(var(--steps-progress));
     background: linear-gradient(
       180deg,
       rgba(36, 107, 253, 0) 0%,
@@ -914,7 +919,7 @@ h1, h2, h3, h4 {
       var(--brand-400) 100%
     );
     box-shadow: 0 0 14px rgba(36, 107, 253, .75), 0 0 40px rgba(21, 87, 232, .45);
-    transition: height .12s linear;
+    transition: transform .18s linear;
   }
 
   /* each chapter marks the spine where it sits */
@@ -2188,10 +2193,9 @@ p, li { letter-spacing: 0; }
 }
 
 /* the reading zone: each node peaks as it crosses the right of the orbit */
-.node__btn { animation-name: node-upright-cw, spotlight; animation-duration: var(--p), var(--sp);
-             animation-timing-function: linear, linear; animation-iteration-count: infinite, infinite;
-             animation-delay: 0s, var(--sd); }
-.ring--ccw .node__btn { animation-name: node-upright-ccw, spotlight; }
+.node__btn { animation-name: node-upright-cw; animation-duration: var(--p);
+             animation-timing-function: linear; animation-iteration-count: infinite; }
+.ring--ccw .node__btn { animation-name: node-upright-ccw; }
 /* colour is a paint property, so animating it on sixteen nodes forever cost a
    repaint per frame; the label's opacity fade already carries the reading
    zone, so the nodes just hold their colour */
