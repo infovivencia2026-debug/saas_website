@@ -671,36 +671,24 @@ h1, h2, h3, h4 {
   stroke-linecap: butt;
   vector-effect: non-scaling-stroke;
 }
-/* one stroke for every line in the field: the two arc families and the short
-   rules were on three different colours, widths and opacities, so they read
-   as three unrelated drawings rather than one */
-.flow circle { stroke: var(--brand-600); stroke-width: 1; opacity: .34; }
+.flow__wide  path { stroke: var(--brand-600); stroke-width: 1; opacity: .30; }
+.flow__tight path { stroke: var(--brand-500); stroke-width: 1; opacity: .24; }
+.flow__rules path { stroke: var(--brand-700); stroke-width: 1.4; opacity: .22; }
 
 /* each arc inks in from the edge, innermost first */
-.flow circle {
-  /* pathLength="1" on the markup normalises every circumference, so these two
-     numbers ink in a ring of any radius */
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: flow-ink 2.2s var(--ease) forwards;
+.flow path {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  animation: flow-ink 1.8s var(--ease) forwards;
   animation-delay: calc(var(--i, 0) * 90ms);
 }
-.flow__tight circle { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
+.flow__tight path { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
+.flow__rules path { animation-delay: 1s; }
 @keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
-/* The families creep outward for good. Scaling by exactly the radius ratio
-   lands every ring on its neighbour's starting position, so the loop point is
-   invisible — and because it is a transform on a group, the whole field is
-   composited rather than repainted. transform-box/-origin put the centre of
-   the scale on the circles' own centre in viewBox units, not on the SVG. */
-.flow__wide, .flow__tight {
-  transform-box: view-box;
-  will-change: transform;
-}
-.flow__wide  { transform-origin: 1455px 430px; animation: flow-out-wide  26s linear infinite; }
-.flow__tight { transform-origin: 1395px 18px;  animation: flow-out-tight 34s linear infinite; }
-@keyframes flow-out-wide  { to { transform: scale(1.22); } }
-@keyframes flow-out-tight { to { transform: scale(1.30); } }
+/* The arcs' radii are not a geometric series, so the outward drift that the
+   circle version used cannot loop seamlessly here — the field is drawn once
+   and then holds, as it did originally. */
 
 /* and the whole field breathes, very slowly */
 /* No perpetual breathing here. An infinite transform on a group of ~20
@@ -708,7 +696,7 @@ h1, h2, h3, h4 {
    asked for; the one-shot ink above is the effect that mattered. */
 
 @media (prefers-reduced-motion: reduce) {
-  .flow circle { animation: none; stroke-dashoffset: 0; }
+  .flow path { animation: none; stroke-dashoffset: 0; }
   .flow__wide, .flow__tight { animation: none; }
   .flow__wide, .flow__tight { animation: none; }
 }
@@ -1698,7 +1686,7 @@ h1, h2, h3, h4 {
   /* the horizon must stay large on phones — a small circle loses the effect */
   .hero { padding-block: 6rem 4rem; min-height: 100svh; }
   /* on a phone the tight family crowds the type; the wide arcs carry it */
-  .flow__tight { display: none; }
+  .flow__tight, .flow__rules { display: none; }
   .hero h1 { max-width: none; }
   .hero h1 { font-size: clamp(2.25rem, 10vw, 3rem); line-height: 1.04; max-width: 90vw; }
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
@@ -2648,7 +2636,7 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .hero__glow--lime {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .18), rgba(67, 133, 255, 0) 72%);
 }
-:root[data-theme="dark"] .flow circle { stroke: #4385ff; opacity: .38; }
+:root[data-theme="dark"] .flow path { stroke: #4385ff; opacity: .38; }
 :root[data-theme="dark"] #how::before {
   background-image:
     radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
