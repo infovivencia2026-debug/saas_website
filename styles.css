@@ -2313,10 +2313,11 @@ p, li { letter-spacing: 0; }
 /* ==========================================================================
    Custom cursor — Breeze
    --------------------------------------------------------------------------
-   A Breeze-style arrow in the site's colour, tail removed: three points,
-   rounded joins, a solid fill and a contrasting outline, on a soft offset
-   shadow. Drawn on a 32px canvas, which is also the size every platform
-   accepts without falling back to the system cursor. Over anything
+   The conventional arrow silhouette in the site's colour: straight left
+   edge, notch, and the tail running back down to the right. Rounded joins, a
+   solid fill and a contrasting outline, on a soft offset shadow. Drawn on a
+   32px canvas, which is also the size every platform accepts without falling
+   back to the system cursor. Over anything
    interactive the fill and outline swap — cobalt-on-white becomes
    white-on-cobalt — which is how Breeze and Breeze Snow relate to each other.
 
@@ -2326,11 +2327,11 @@ p, li { letter-spacing: 0; }
    Hotspot is the tip (5 3).
    ========================================================================== */
 @media (hover: hover) and (pointer: fine) {
-  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20fill%3D%27%25231557e8%27%20stroke%3D%27%2523ffffff%27%20stroke-width%3D%272.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, default; }
+  body { cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025L10.4%2019.9L14.1%2028.8L17.9%2027.2L14.3%2018.6L21%2018.1Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025L10.4%2019.9L14.1%2028.8L17.9%2027.2L14.3%2018.6L21%2018.1Z%27%20fill%3D%27%25231557e8%27%20stroke%3D%27%2523ffffff%27%20stroke-width%3D%272%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, default; }
 
   a, button, summary, label, [role="button"],
   .node__btn, .row, .card, .stat, input, textarea, select {
-    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025.5L20.5%2015Z%27%20fill%3D%27%2523ffffff%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%272.2%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2732%27%20height%3D%2732%27%3E%3Cpath%20d%3D%27M5%203L5%2025L10.4%2019.9L14.1%2028.8L17.9%2027.2L14.3%2018.6L21%2018.1Z%27%20transform%3D%27translate%281%201.2%29%27%20fill%3D%27%2523102a8c%27%20fill-opacity%3D%27.22%27%2F%3E%3Cpath%20d%3D%27M5%203L5%2025L10.4%2019.9L14.1%2028.8L17.9%2027.2L14.3%2018.6L21%2018.1Z%27%20fill%3D%27%2523ffffff%27%20stroke%3D%27%25231557e8%27%20stroke-width%3D%272%27%20stroke-linejoin%3D%27round%27%20stroke-linecap%3D%27round%27%20paint-order%3D%27stroke%27%2F%3E%3C%2Fsvg%3E") 5 3, pointer;
   }
 
   [disabled], .is-disabled { cursor: not-allowed; }
