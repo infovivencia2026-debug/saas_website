@@ -247,7 +247,27 @@ h1, h2, h3, h4 {
 /* the hero is an inset panel with its own rounded edge now, so the first
    light stage no longer needs a shadow to bleed out of it */
 
-#how          { background: var(--surface); }
+#how {
+  /* not a flat sheet: a tinted field with two blooms and a faint cobalt grid,
+     so the chapters travel over something */
+  background:
+    radial-gradient(ellipse 46% 38% at 88% 12%, rgba(36, 107, 253, .12), transparent 70%),
+    radial-gradient(ellipse 52% 42% at 6% 62%, rgba(114, 164, 255, .14), transparent 72%),
+    linear-gradient(180deg, #ffffff 0%, #f4f8ff 38%, #eaf2ff 72%, #f7faff 100%);
+}
+#how::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(21, 87, 232, .05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(21, 87, 232, .05) 1px, transparent 1px);
+  background-size: 5.5rem 5.5rem;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
+          mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 78%);
+  opacity: .8;
+}
 #roles        { background: var(--surface-2); }
 #faq          { background: var(--surface-2); }
 
@@ -654,13 +674,11 @@ h1, h2, h3, h4 {
   letter-spacing: .02em;
 }
 
-/* Console furniture: inside the hero the corners go square and the stats
-   take a keyline on the left, the way a status strip does in a cloud
-   console. The rest of the page keeps its rounded language. */
-.hero .btn { border-radius: .125rem; }
-.hero .stat { border-radius: .125rem; border-left: 2px solid var(--brand); }
+/* The hero keeps the page's rounded language — pill buttons and soft-cornered
+   cards, same as every other section. (An earlier pass squared these off for
+   a console look; it made the hero the odd one out.) */
 
-/* stats sit as a status strip under the type */
+/* stats sit as a strip under the type */
 .hero__stats {
   position: relative;
   margin-top: 1.25rem;
@@ -1506,6 +1524,100 @@ h1, h2, h3, h4 {
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
   .cta { border-radius: var(--r-lg); }
+}
+
+
+/* ==========================================================================
+   Scroll-driven motion for the suites
+   --------------------------------------------------------------------------
+   Real scroll timelines, not one-shot reveals: each chapter is animated
+   against its own position in the viewport, so the movement tracks the
+   scroll instead of firing once and stopping. Everything is transform and
+   opacity, and the whole block is behind @supports — browsers without
+   scroll-driven animations keep the existing IntersectionObserver reveal and
+   lose nothing but the parallax.
+   ========================================================================== */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+
+    /* the panel rises, settles and drifts back out */
+    .step__visual {
+      animation: step-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 42%;
+    }
+    @keyframes step-rise {
+      from { opacity: 0; transform: translate3d(0, 4.5rem, 0) scale(.94); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* and the mock inside it parallaxes against that, so the panel has depth */
+    .step__visual .screen {
+      animation: screen-parallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes screen-parallax {
+      from { transform: translate3d(0, 2.5rem, 0); }
+      to   { transform: translate3d(0, -2.5rem, 0); }
+    }
+
+    /* chapters lean in from the side they sit on */
+    .step:nth-child(odd)  .step__text { animation: text-in-left  linear both; }
+    .step:nth-child(even) .step__text { animation: text-in-right linear both; }
+    .step__text {
+      animation-timeline: view();
+      animation-range: entry 0% cover 38%;
+    }
+    @keyframes text-in-left {
+      from { opacity: 0; transform: translate3d(-2.5rem, 1.5rem, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes text-in-right {
+      from { opacity: 0; transform: translate3d(2.5rem, 1.5rem, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* the feature rows deal themselves out */
+    .feature {
+      animation: feature-deal linear both;
+      animation-timeline: view();
+    }
+    .feature:nth-child(1) { animation-range: entry 12% cover 34%; }
+    .feature:nth-child(2) { animation-range: entry 18% cover 40%; }
+    .feature:nth-child(3) { animation-range: entry 24% cover 46%; }
+    .feature:nth-child(4) { animation-range: entry 30% cover 52%; }
+    @keyframes feature-deal {
+      from { opacity: 0; transform: translate3d(0, 1.25rem, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* the chapter numeral turns over as it arrives */
+    .step__digits {
+      animation: digit-turn linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    @keyframes digit-turn {
+      from { opacity: 0; transform: rotate(-18deg) scale(.7); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* the section's grid drifts, which makes the whole chapter feel in motion */
+    #how::before {
+      animation: grid-drift linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes grid-drift {
+      from { background-position: 0 -3rem, 0 -3rem; opacity: .5; }
+      to   { background-position: 0 3rem, 0 3rem;   opacity: .95; }
+    }
+
+    /* a scroll-driven reveal replaces the JS one inside this section, so the
+       two never fight over the same element */
+    #how .js-reveal { opacity: 1; transform: none; transition: none; }
+  }
 }
 
 /* ==========================================================================
