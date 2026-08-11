@@ -94,6 +94,9 @@
   /* ---- shadows ---- */
   /* how far the hero panel sits off the viewport edge */
   --hero-inset:  clamp(.75rem, 1.4vw, 1.25rem);
+  /* extra air above the nav capsule; the hero starts level with it, so its
+     height has to give the same amount back */
+  --nav-gap:     1.25rem;
 
   --shadow-sm:   0 8px 30px rgba(7, 21, 47, .07);
   --shadow-md:   0 30px 80px rgba(21, 87, 232, .10), 0 8px 30px rgba(7, 21, 47, .07);
@@ -344,9 +347,9 @@ h1, h2, h3, h4 {
   top: 1rem;
   z-index: 50;
   margin-inline: auto;
-  /* at rest the capsule starts level with the hero panel's top edge, not
-     flush against the viewport */
-  margin-top: var(--hero-inset);
+  /* at rest the capsule sits a clear step below the hero panel's top edge,
+     not flush against the viewport */
+  margin-top: calc(var(--hero-inset) + var(--nav-gap));
   width: min(70rem, calc(100% - 2 * var(--gutter) - 2 * var(--hero-inset)));
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
@@ -445,8 +448,8 @@ h1, h2, h3, h4 {
      screen still ends exactly at the fold */
   margin: var(--hero-inset);
   border-radius: clamp(1.25rem, 2.6vw, 2rem);
-  min-height: calc(100vh - var(--hero-inset) * 2);
-  min-height: calc(100svh - var(--hero-inset) * 2);
+  min-height: calc(100vh - var(--hero-inset) * 2 - var(--nav-gap));
+  min-height: calc(100svh - var(--hero-inset) * 2 - var(--nav-gap));
   display: grid;
   align-content: center;
   padding-block: clamp(6rem, 10vw, 8rem) clamp(5rem, 9vw, 8rem);
@@ -1529,7 +1532,7 @@ p, li { letter-spacing: 0; }
   display: flex;
   align-items: center;
   gap: .5rem;
-  padding: .375rem .625rem;
+  padding: .5rem .75rem;
   border: 0;
   border-radius: var(--pill);
   background: transparent;
@@ -1587,19 +1590,25 @@ p, li { letter-spacing: 0; }
 @keyframes label-fade {
   0%   { opacity: 1; }
   14%  { opacity: 1; }
-  30%  { opacity: .18; }
-  70%  { opacity: .18; }
+  30%  { opacity: .45; }
+  70%  { opacity: .45; }
   86%  { opacity: 1; }
   100% { opacity: 1; }
 }
 
-/* ---- interaction: the whole system stops, one module lights ---- */
-.orbit:hover .ring,
-.orbit:hover .node__btn,
-.orbit:hover .node__label,
-.orbit:focus-within .ring,
-.orbit:focus-within .node__btn,
-.orbit:focus-within .node__label { animation-play-state: paused; }
+/* ---- interaction: the system stops only while a module is actually being
+   read. Scoping this to .orbit:hover froze everything the moment the pointer
+   entered the section — including when it was over the readout panel — so the
+   component looked static rather than orbiting. ---- */
+.orbit__stage:has(.node__btn:hover) .ring,
+.orbit__stage:has(.node__btn:hover) .node__btn,
+.orbit__stage:has(.node__btn:hover) .node__label,
+.orbit__stage:focus-within .ring,
+.orbit__stage:focus-within .node__btn,
+.orbit__stage:focus-within .node__label,
+.orbit__stage.is-pinned .ring,
+.orbit__stage.is-pinned .node__btn,
+.orbit__stage.is-pinned .node__label { animation-play-state: paused; }
 
 .node__btn:hover, .node__btn:focus-visible {
   color: var(--brand-500);
@@ -1609,6 +1618,8 @@ p, li { letter-spacing: 0; }
 .node__btn:hover .node__label,
 .node__btn:focus-visible .node__label { opacity: 1; }
 .node__btn:focus-visible { box-shadow: 0 0 0 2px var(--brand-400); }
+.node.is-active .node__btn { color: var(--brand); background: rgba(36, 107, 253, .12); }
+.node.is-active .node__label { opacity: 1; }
 .node.is-active .node__conn { opacity: 1; }
 .node.is-active .node__dot { box-shadow: 0 0 0 4px rgba(36, 107, 253, .22), 0 0 14px rgba(67, 133, 255, .9); }
 
