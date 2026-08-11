@@ -199,10 +199,13 @@ body {
   background: var(--canvas);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* NOTE: no `overflow-x: hidden` here. It computes overflow-y to `auto`,
+  /* `overflow-x: clip`, NOT `hidden`. `hidden` computes overflow-y to `auto`,
      which turns <body> into a scroll container and silently breaks
      `position: sticky` for every descendant — including the step visuals.
-     Horizontal bleed is clipped at the element that causes it instead. */
+     `clip` trims the bleed without creating a scroll container, which matters
+     on phones: the panel wash is inset -18% and the footer haze -20%, and
+     either can otherwise leave the page scrollable sideways. */
+  overflow-x: clip;
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -1741,11 +1744,56 @@ h1, h2, h3, h4 {
   .hero__sub { font-size: var(--text-l); max-width: 88vw; }
   .hero__cta .btn { min-width: 11rem; }
 
-  .grid-4, .hero__stats { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }
+  /* two up, not four stacked: four full-width figure cards push the whole
+     first screen out of reach */
+  .hero__stats { grid-template-columns: repeat(2, 1fr); gap: .625rem; }
+  .stat { padding: 1rem .875rem; }
+  .stat__num { font-size: 1.75rem; }
+  .stat__label { font-size: .8125rem; max-width: none; }
+
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
   .cta { border-radius: var(--r-lg); }
+
+  /* sections get their air back: 11vw of padding at each end of a phone
+     screen is most of a viewport spent on nothing */
+  :root { --section-y: clamp(3.5rem, 12vw, 5rem); }
+
+  /* 44px minimum on everything you tap */
+  .nav__toggle { padding: .6875rem; }
+  .nav--open .nav__link { padding-block: .375rem; }
+  .footer li a { padding-block: .25rem; }
+
+  /* the window mocks are the widest thing on the page */
+  .screen__body { padding: .75rem; gap: .375rem; }
+  .row { padding: .75rem .8125rem; gap: .625rem; }
+  .row__meta { font-size: .6875rem; }
+  .tag { font-size: .625rem; padding: .25rem .4375rem; }
+
+  .step__num { margin-bottom: 1rem; }
+  .features { gap: 1.125rem; }
+  .feature { grid-template-columns: 2.5rem 1fr; gap: .875rem; }
+  .feature__icon { width: 2.5rem; height: 2.5rem; }
+
+  .plate { inset: .625rem .75rem; border-radius: var(--r-md); }
+  .plate__c { width: 1rem; height: 1rem; }
+
+  /* clear of the home indicator on a notched phone */
+  .theme { right: max(1rem, env(safe-area-inset-right));
+           bottom: max(1rem, env(safe-area-inset-bottom)); }
+}
+
+/* ---- narrow phones -------------------------------------------------------
+   Below 420px two stat columns stop fitting and the CTA pair stops sitting
+   side by side, so both go full width rather than wrapping raggedly. */
+@media (max-width: 420px) {
+  .hero__stats { grid-template-columns: 1fr; }
+  .hero__cta { flex-direction: column; align-items: stretch; }
+  .hero__cta .btn { width: 100%; min-width: 0; }
+  .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer__bottom { flex-direction: column; gap: .5rem; }
 }
 
 
