@@ -232,6 +232,14 @@ body {
      either can otherwise leave the page scrollable sideways. */
   overflow-x: clip;
 }
+/* Safari before 16 ignores `overflow-x: clip` entirely. There the bleed has
+   to be contained at the elements that cause it, since `hidden` on <body>
+   would break every sticky panel. */
+@supports not (overflow-x: clip) {
+  /* only the footer: clipping .step__visual would cut off the very bleed the
+     mock panel is designed to have */
+  .footer { overflow-x: hidden; }
+}
 
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
@@ -1825,7 +1833,10 @@ h1, h2, h3, h4 {
   .head h2 { font-size: var(--title-l); }
   .step h3 { font-size: var(--title-m); max-width: none; }
   .step__lede { font-size: var(--text-l); max-width: none; }
-  .hero__cta .btn { min-width: 11rem; }
+  /* two 11rem buttons plus the gap exceed a 390px screen, so they wrapped to
+     two lines at half width. Stacked full width from here down instead. */
+  .hero__cta { flex-direction: column; align-items: stretch; }
+  .hero__cta .btn { width: 100%; min-width: 0; }
 
   .grid-4 { grid-template-columns: 1fr; }
   /* two up, not four stacked: four full-width figure cards push the whole
@@ -1884,7 +1895,8 @@ h1, h2, h3, h4 {
   /* the domains become a swipeable deck, one card per screen */
   /* the window mocks are the widest thing on the page */
   .screen__body { padding: .75rem; gap: .375rem; }
-  .row { padding: .75rem .8125rem; gap: .625rem; }
+  .row { padding: .75rem .8125rem; gap: .625rem; font-size: var(--text-s); }
+  .row strong { font-size: var(--text-s); }
   .row__meta { font-size: var(--label); }
   .tag { font-size: var(--label); padding: .25rem .4375rem; }
 
@@ -1912,8 +1924,6 @@ h1, h2, h3, h4 {
    side by side, so both go full width rather than wrapping raggedly. */
 @media (max-width: 420px) {
   .hero__stats { grid-template-columns: 1fr; }
-  .hero__cta { flex-direction: column; align-items: stretch; }
-  .hero__cta .btn { width: 100%; min-width: 0; }
   .footer__bottom { flex-direction: column; gap: .5rem; }
 }
 
