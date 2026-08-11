@@ -32,6 +32,5 @@ encode() {           # <source> <output> <width> <quality>
 }
 
 encode hero.png   hero.webp   1600 82
-encode footer.png footer.webp 1400 80
 
 echo "==> done"
