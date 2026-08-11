@@ -476,15 +476,17 @@ h1, h2, h3, h4 {
      a heavier blur to break it up, and saturate/brightness so what comes
      through stays colourful instead of going grey. The inset highlight is
      the lit top edge that sells it as glass rather than as a tint. */
-  background: rgba(255, 255, 255, .55);
-  border: 1px solid rgba(255, 255, 255, .65);
+  background: rgba(255, 255, 255, .34);
+  border: 1px solid rgba(255, 255, 255, .55);
   outline: 1px solid rgba(21, 87, 232, .10);
   outline-offset: -1px;
   /* 30px over a near-white hero blurred nothing — a blurred flat surface is
      the same flat surface. A shorter radius with real contrast/saturation
      lift does more work, and the frost itself is drawn in ::before. */
-  -webkit-backdrop-filter: blur(14px) saturate(180%);
-          backdrop-filter: blur(14px) saturate(180%);
+  /* thinner wash, so a heavier blur is needed to keep the links legible over
+     whatever is travelling underneath */
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+          backdrop-filter: blur(20px) saturate(180%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .85),
     inset 0 -1px 0 rgba(21, 87, 232, .06),
@@ -522,8 +524,8 @@ h1, h2, h3, h4 {
 .nav--scrolled {
   /* scrolled: a touch denser, since it now sits over content rather than the
      hero's own light ground */
-  background: rgba(255, 255, 255, .70);
-  border-color: rgba(255, 255, 255, .80);
+  background: rgba(255, 255, 255, .52);
+  border-color: rgba(255, 255, 255, .70);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .92),
     0 14px 36px rgba(16, 42, 140, .14),
@@ -2550,11 +2552,11 @@ p, li { letter-spacing: 0; }
   --on-ground-2:  var(--heading-2);
   --on-ground-3:  var(--muted);
   --on-ground-hi: var(--heading);
-  background: rgba(10, 24, 50, .62);
+  background: rgba(10, 24, 50, .40);
   border-color: rgba(122, 160, 224, .22);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 10px 30px rgba(0, 0, 0, .45);
 }
-:root[data-theme="dark"] .nav--scrolled { background: rgba(8, 20, 42, .82); }
+:root[data-theme="dark"] .nav--scrolled { background: rgba(8, 20, 42, .60); }
 :root[data-theme="dark"] .nav::before { opacity: .18; }
 :root[data-theme="dark"] .nav--open .nav__links { background: rgba(8, 20, 42, .96); }
 :root[data-theme="dark"] .nav__link { color: var(--body); }
