@@ -335,6 +335,13 @@ h1, h2, h3, h4 {
 @media (prefers-reduced-motion: reduce) { .dotlens { display: none; } }
 @media (hover: none) { .dotlens { display: none; } }
 
+/* Both the field and the lens are positioned, and the section's content is
+   not — so without this they paint OVER the chapters instead of behind them.
+   A negative z-index is not an option: .section sets position without a
+   z-index, so it makes no stacking context, and the layers would drop behind
+   the section's own background and vanish. */
+#how > .container { position: relative; z-index: 1; }
+
 #roles        { background: var(--surface-2); }
 #faq          { background: var(--surface-2); }
 
