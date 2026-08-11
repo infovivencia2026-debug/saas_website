@@ -1081,6 +1081,71 @@ h1, h2, h3, h4 {
 .i-coral, .i-blue, .i-green, .i-purple { color: var(--brand-deep); }
 
 /* ------------------------------------------------------------- modules band */
+/* ---- the drawing plate ---------------------------------------------------
+   The back office is the one division that is the same for every customer, so
+   it is drawn as a spec plate rather than a marketing band: a hairline frame
+   with corner brackets, a ruled scale down the left, and a stamp in the
+   corner. The frame is a real border on a positioned box, and the brackets
+   are two borders each on four small squares, so the whole thing is six
+   elements and no image.
+   ------------------------------------------------------------------------ */
+.plate {
+  position: absolute;
+  inset: clamp(1rem, 2.5vh, 2rem) clamp(1rem, 3vw, 2.5rem);
+  z-index: 0;
+  pointer-events: none;
+  border: 1px solid rgba(21, 87, 232, .14);
+  border-radius: 1.25rem;
+}
+.plate__c {
+  position: absolute;
+  width: 1.375rem; height: 1.375rem;
+  border: 0 solid var(--brand);
+  opacity: .55;
+}
+.plate__c--tl { left: -1px;  top: -1px;    border-left-width: 2px;  border-top-width: 2px;    border-top-left-radius: 1.25rem; }
+.plate__c--tr { right: -1px; top: -1px;    border-right-width: 2px; border-top-width: 2px;    border-top-right-radius: 1.25rem; }
+.plate__c--bl { left: -1px;  bottom: -1px; border-left-width: 2px;  border-bottom-width: 2px; border-bottom-left-radius: 1.25rem; }
+.plate__c--br { right: -1px; bottom: -1px; border-right-width: 2px; border-bottom-width: 2px; border-bottom-right-radius: 1.25rem; }
+
+/* a ruled scale: repeating-linear-gradient, so sixty ticks cost one element */
+.plate__scale {
+  position: absolute;
+  left: -1px; top: 22%; bottom: 22%;
+  width: 7px;
+  background: repeating-linear-gradient(180deg,
+    rgba(21, 87, 232, .38) 0 1px, transparent 1px 11px);
+}
+.plate__stamp {
+  position: absolute;
+  right: 1.25rem; bottom: -.6rem;
+  padding: 0 .5rem;
+  background: #e9f4ff;
+  font-family: var(--mono);
+  font-size: .625rem;
+  letter-spacing: .18em;
+  color: var(--brand);
+  opacity: .7;
+}
+
+/* the band is bounded top and bottom by a seam that fades at both ends */
+.band { position: relative; }
+.band::before, .band::after {
+  content: "";
+  position: absolute;
+  left: 6%; right: 6%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(21, 87, 232, .30), transparent);
+}
+.band::before { top: 0; }
+.band::after  { bottom: 0; }
+
+#modules .container { position: relative; z-index: 1; }
+
+@media (max-width: 900px) {
+  .plate__scale, .plate__stamp { display: none; }
+}
+
 /* the dark band is gone — a black field would break the luminous canvas.
    It becomes the page's most tinted surface instead. */
 .band {
@@ -1262,6 +1327,9 @@ h1, h2, h3, h4 {
   background: var(--ground-2);
   border-top: 1px solid rgba(114, 164, 255, .22);
   color: #c4d4f4;
+  /* the haze layer is inset -20%; without this it overflows the page and
+     leaves a strip of canvas below the footer */
+  overflow: hidden;
 }
 
 /* ---- the fractal haze ----------------------------------------------------
