@@ -297,20 +297,40 @@ h1, h2, h3, h4 {
   margin: -11rem 0 0 -11rem;
   z-index: 0;
   pointer-events: none;
-  opacity: 0;
-  transform: translate3d(var(--mx, -999px), var(--my, -999px), 0);
+  /* At rest the lens is not parked offscreen waiting for a mouse — it wanders
+     the section on its own at half strength, so the field is alive before
+     anyone touches it. The moment the pointer enters, the wander is dropped
+     and the disc snaps to following the cursor at full strength. */
+  opacity: .55;
+  transform: translate3d(50vw, 34vh, 0);
+  animation: lens-wander 32s ease-in-out infinite alternate;
   transition: opacity .4s var(--ease);
   background-image:
     radial-gradient(rgba(21, 87, 232, .85) 1.5px, transparent 1.5px),
     radial-gradient(rgba(36, 107, 253, .5) 1.2px, transparent 1.2px);
   background-size: 14px 14px, 42px 42px;
-  background-position:
-    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
-    calc(11rem - var(--mx, 0px) + 7px) calc(11rem - var(--my, 0px) + 7px);
+  background-position: 0 0, 7px 7px;
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
           mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
 }
-#how.is-lit .dotlens { opacity: 1; }
+#how.is-lit .dotlens {
+  opacity: 1;
+  animation: none;
+  /* pin the pattern to the section while the cursor drives the disc, so the
+     dots stay on the grid and only their brightness appears to travel */
+  background-position:
+    calc(11rem - var(--mx, 0px)) calc(11rem - var(--my, 0px)),
+    calc(11rem - var(--mx, 0px) + 7px) calc(11rem - var(--my, 0px) + 7px);
+  transform: translate3d(var(--mx, 50vw), var(--my, 34vh), 0);
+}
+
+@keyframes lens-wander {
+  0%   { transform: translate3d(22vw, 26vh, 0); }
+  25%  { transform: translate3d(64vw, 44vh, 0); }
+  50%  { transform: translate3d(38vw, 72vh, 0); }
+  75%  { transform: translate3d(72vw, 88vh, 0); }
+  100% { transform: translate3d(26vw, 60vh, 0); }
+}
 
 @media (prefers-reduced-motion: reduce) { .dotlens { display: none; } }
 @media (hover: none) { .dotlens { display: none; } }
