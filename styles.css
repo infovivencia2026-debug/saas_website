@@ -643,12 +643,7 @@ h1, h2, h3, h4 {
    ----------------------------------------------------------------------- */
 .hero__atmos {
   position: absolute;
-  /* The box is pushed out well past the panel on three sides. The gradient
-     below has to finish INSIDE this box — a background cannot paint beyond
-     its own bounds, so anything still opaque when it reaches an edge is cut
-     off in a straight line. Giving it room to spread is what lets the ramp
-     complete instead of being clipped. */
-  inset: -8% -18% -60%;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
 }
@@ -1081,15 +1076,13 @@ h1, h2, h3, h4 {
 .step__visual::before {
   content: "";
   position: absolute;
-  inset: 0;
+  /* Pushed out well past the panel on three sides. The gradients below have
+     to finish INSIDE this box — a background cannot paint beyond its own
+     bounds, so anything still opaque when it reaches an edge is cut off in a
+     straight line. This is the room that lets the ramps complete. */
+  inset: -8% -18% -60%;
   z-index: -1;
   pointer-events: none;
-  /* The source sits under the panel and the light spreads out from there,
-     thinning in every direction as it goes: an ellipse anchored at the bottom
-     centre, wider than the panel so its brightest part is genuinely beneath
-     the mock rather than inside it. Six stops so the falloff is gradual
-     instead of stepping, and it ends on zero-alpha cobalt rather than
-     `transparent`, which would drag the ramp through grey. */
   /* Three layers, tight to wide, painted front to back. The whole stack has
      been walked down the ramp — it now reads as the panel's shadow with a
      little colour in it, rather than as a light source:
