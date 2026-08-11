@@ -93,38 +93,40 @@
     <span class="hero__glow hero__glow--lime"></span>
     <span class="hero__art"></span>
 
-    <!-- The field: two families of concentric circles centred just off the
-         right edge, drifting outward forever.
+    <!-- The field: two families of concentric circles centred on the right
+         edge, sweeping across the hero and drifting outward forever.
 
-         The radii are a pure geometric series (x1.22 and x1.30). That is what
-         makes the motion loop invisibly: scaling the whole family by exactly
-         one ratio puts every ring where its neighbour used to be, so the
-         animation can restart with nothing to see. -->
+         Radii are a pure geometric series (x1.22 and x1.30), which is what
+         makes the drift loop invisibly: scaling a family by exactly one ratio
+         puts every ring where its neighbour was, so the restart has nothing
+         to show. pathLength="1" normalises every circumference, so one dash
+         value inks in rings of any size — a fixed dasharray is shorter than
+         the outer rings and leaves them permanently broken. -->
     <svg class="flow" viewBox="0 0 1440 720" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
       <g class="flow__wide">
-        <circle cx="1500" cy="392" r="168.0" style="--i:0"/>
-        <circle cx="1500" cy="392" r="205.0" style="--i:1"/>
-        <circle cx="1500" cy="392" r="250.1" style="--i:2"/>
-        <circle cx="1500" cy="392" r="305.1" style="--i:3"/>
-        <circle cx="1500" cy="392" r="372.2" style="--i:4"/>
-        <circle cx="1500" cy="392" r="454.1" style="--i:5"/>
-        <circle cx="1500" cy="392" r="553.9" style="--i:6"/>
-        <circle cx="1500" cy="392" r="675.8" style="--i:7"/>
-        <circle cx="1500" cy="392" r="824.5" style="--i:8"/>
-        <circle cx="1500" cy="392" r="1005.9" style="--i:9"/>
-        <circle cx="1500" cy="392" r="1227.2" style="--i:10"/>
-        <circle cx="1500" cy="392" r="1497.2" style="--i:11"/>
+        <circle cx="1455" cy="430" r="230.0" pathLength="1" style="--i:0"/>
+        <circle cx="1455" cy="430" r="280.6" pathLength="1" style="--i:1"/>
+        <circle cx="1455" cy="430" r="342.3" pathLength="1" style="--i:2"/>
+        <circle cx="1455" cy="430" r="417.6" pathLength="1" style="--i:3"/>
+        <circle cx="1455" cy="430" r="509.5" pathLength="1" style="--i:4"/>
+        <circle cx="1455" cy="430" r="621.6" pathLength="1" style="--i:5"/>
+        <circle cx="1455" cy="430" r="758.4" pathLength="1" style="--i:6"/>
+        <circle cx="1455" cy="430" r="925.2" pathLength="1" style="--i:7"/>
+        <circle cx="1455" cy="430" r="1128.8" pathLength="1" style="--i:8"/>
+        <circle cx="1455" cy="430" r="1377.1" pathLength="1" style="--i:9"/>
+        <circle cx="1455" cy="430" r="1680.1" pathLength="1" style="--i:10"/>
+        <circle cx="1455" cy="430" r="2049.7" pathLength="1" style="--i:11"/>
       </g>
       <g class="flow__tight">
-        <circle cx="1418" cy="34" r="104.0" style="--i:0"/>
-        <circle cx="1418" cy="34" r="135.2" style="--i:1"/>
-        <circle cx="1418" cy="34" r="175.8" style="--i:2"/>
-        <circle cx="1418" cy="34" r="228.5" style="--i:3"/>
-        <circle cx="1418" cy="34" r="297.0" style="--i:4"/>
-        <circle cx="1418" cy="34" r="386.1" style="--i:5"/>
-        <circle cx="1418" cy="34" r="502.0" style="--i:6"/>
-        <circle cx="1418" cy="34" r="652.6" style="--i:7"/>
-        <circle cx="1418" cy="34" r="848.4" style="--i:8"/>
+        <circle cx="1395" cy="18" r="130.0" pathLength="1" style="--i:0"/>
+        <circle cx="1395" cy="18" r="169.0" pathLength="1" style="--i:1"/>
+        <circle cx="1395" cy="18" r="219.7" pathLength="1" style="--i:2"/>
+        <circle cx="1395" cy="18" r="285.6" pathLength="1" style="--i:3"/>
+        <circle cx="1395" cy="18" r="371.3" pathLength="1" style="--i:4"/>
+        <circle cx="1395" cy="18" r="482.7" pathLength="1" style="--i:5"/>
+        <circle cx="1395" cy="18" r="627.5" pathLength="1" style="--i:6"/>
+        <circle cx="1395" cy="18" r="815.7" pathLength="1" style="--i:7"/>
+        <circle cx="1395" cy="18" r="1060.4" pathLength="1" style="--i:8"/>
       </g>
     </svg>
   </div>
