@@ -1071,20 +1071,6 @@
 
   document.querySelectorAll('.step').forEach(function (s) { chapter.observe(s); });
 
-  /* bar chart grows on entry */
-  document.querySelectorAll('.bars').forEach(function (bars) {
-    Array.prototype.forEach.call(bars.children, function (bar, i) {
-      bar.style.setProperty('--d', (i * 70) + 'ms');
-    });
-    var o = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add('is-in');
-        o.unobserve(e.target);
-      });
-    }, { threshold: 0.35 });
-    o.observe(bars);
-  });
 
   /* --------------------------------------- scroll-driven: progress + parallax */
   /* If the browser drives the panel parallax off a scroll timeline, the CSS
