@@ -267,25 +267,16 @@ h1, h2, h3, h4 {
   position: absolute;
   pointer-events: none;
   z-index: 0;
-  /* a tight dot field rather than a wide rule grid: one radial gradient
-     tiled every 14px, in cobalt, with a second sparser pass in a deeper blue
-     so the field has two densities instead of reading as flat texture */
-  /* Three multipliers used to stack here — dot alpha .30, a layer opacity of
-     .85, and the scroll animation starting at .45 — which landed the dots at
-     roughly 11% against near-white, i.e. invisible. The alpha now lives in
-     the dot colour alone. */
-  /* Dots only — no ruling. A fine mesh at 14px with a slightly stronger dot
-     on every third crossing, both kept small and low-contrast so the field
-     reads as paper texture rather than as a pattern competing with the type. */
+  /* A fine dot mesh at 14px with a slightly stronger dot on every third
+     crossing. It covers the section edge to edge — no mask fading it out at
+     the boundaries — and it does not move: the alpha lives in the dot colour
+     alone, with no layer opacity or scroll animation multiplying it down. */
   background-image:
     radial-gradient(rgba(21, 87, 232, .30) .5px, transparent .5px),
     radial-gradient(rgba(16, 42, 140, .20) .7px, transparent .7px);
   background-size: 14px 14px, 42px 42px;
   background-position: 0 0, 0 0;
-  /* oversized so it can drift without exposing an edge */
-  inset: -3rem 0;
-  -webkit-mask-image: radial-gradient(ellipse 82% 74% at 50% 44%, #000 34%, transparent 88%);
-          mask-image: radial-gradient(ellipse 82% 74% at 50% 44%, #000 34%, transparent 88%);
+  inset: 0;
 }
 /* ---- the pointer lens ----------------------------------------------------
    A disc of the same dot field, brighter and a size up, tracking the cursor.
@@ -1830,18 +1821,8 @@ h1, h2, h3, h4 {
       to   { opacity: 1; transform: none; }
     }
 
-    /* the section's grid drifts, which makes the whole chapter feel in motion */
-    #how::before {
-      animation: grid-drift linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 100%;
-    }
-    /* transform, not background-position: the latter repaints a full-viewport
-       layer on every scroll frame */
-    @keyframes grid-drift {
-      from { transform: translate3d(0, -2.5rem, 0); opacity: .85; }
-      to   { transform: translate3d(0, 2.5rem, 0);  opacity: 1; }
-    }
+    /* the dot field holds still — it is the ground the chapters travel over,
+       not something travelling itself */
 
     /* a scroll-driven reveal replaces the JS one inside this section, so the
        two never fight over the same element */
