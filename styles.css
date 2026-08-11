@@ -681,8 +681,8 @@ h1, h2, h3, h4 {
 }
 /* one weight, one colour: three families drawn at three weights read as
    three unrelated drawings sharing a frame */
-.flow path { stroke: var(--brand-700); stroke-width: 1.4; }
-.flow__tight path { opacity: .72; }
+.flow path { stroke: var(--brand-700); stroke-width: .8; opacity: .8; }
+.flow__tight path { opacity: .6; }
 
 /* each arc inks in from the edge, innermost first */
 .flow path {
