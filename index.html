@@ -93,31 +93,38 @@
     <span class="hero__glow hero__glow--lime"></span>
     <span class="hero__art"></span>
 
-    <!-- The field: two families of concentric circles, centred just off the
-         right edge. Circles rather than arc paths — an `A` command drawn
-         across a wide viewBox shows mostly its flattest stretch once the
-         canvas is cropped, which reads as a stretched pattern. A circle is
-         the same shape at every scale. -->
+    <!-- The field: two families of concentric circles centred just off the
+         right edge, drifting outward forever.
+
+         The radii are a pure geometric series (x1.22 and x1.30). That is what
+         makes the motion loop invisibly: scaling the whole family by exactly
+         one ratio puts every ring where its neighbour used to be, so the
+         animation can restart with nothing to see. -->
     <svg class="flow" viewBox="0 0 1440 720" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false">
       <g class="flow__wide">
-        <circle cx="1500" cy="392" r="210" style="--i:0"/>
-        <circle cx="1500" cy="392" r="271" style="--i:1"/>
-        <circle cx="1500" cy="392" r="344" style="--i:2"/>
-        <circle cx="1500" cy="392" r="431" style="--i:3"/>
-        <circle cx="1500" cy="392" r="534" style="--i:4"/>
-        <circle cx="1500" cy="392" r="657" style="--i:5"/>
-        <circle cx="1500" cy="392" r="803" style="--i:6"/>
-        <circle cx="1500" cy="392" r="977" style="--i:7"/>
-        <circle cx="1500" cy="392" r="1184" style="--i:8"/>
+        <circle cx="1500" cy="392" r="168.0" style="--i:0"/>
+        <circle cx="1500" cy="392" r="205.0" style="--i:1"/>
+        <circle cx="1500" cy="392" r="250.1" style="--i:2"/>
+        <circle cx="1500" cy="392" r="305.1" style="--i:3"/>
+        <circle cx="1500" cy="392" r="372.2" style="--i:4"/>
+        <circle cx="1500" cy="392" r="454.1" style="--i:5"/>
+        <circle cx="1500" cy="392" r="553.9" style="--i:6"/>
+        <circle cx="1500" cy="392" r="675.8" style="--i:7"/>
+        <circle cx="1500" cy="392" r="824.5" style="--i:8"/>
+        <circle cx="1500" cy="392" r="1005.9" style="--i:9"/>
+        <circle cx="1500" cy="392" r="1227.2" style="--i:10"/>
+        <circle cx="1500" cy="392" r="1497.2" style="--i:11"/>
       </g>
       <g class="flow__tight">
-        <circle cx="1418" cy="34" r="130" style="--i:0"/>
-        <circle cx="1418" cy="34" r="181" style="--i:1"/>
-        <circle cx="1418" cy="34" r="245" style="--i:2"/>
-        <circle cx="1418" cy="34" r="327" style="--i:3"/>
-        <circle cx="1418" cy="34" r="431" style="--i:4"/>
-        <circle cx="1418" cy="34" r="563" style="--i:5"/>
-        <circle cx="1418" cy="34" r="731" style="--i:6"/>
+        <circle cx="1418" cy="34" r="104.0" style="--i:0"/>
+        <circle cx="1418" cy="34" r="135.2" style="--i:1"/>
+        <circle cx="1418" cy="34" r="175.8" style="--i:2"/>
+        <circle cx="1418" cy="34" r="228.5" style="--i:3"/>
+        <circle cx="1418" cy="34" r="297.0" style="--i:4"/>
+        <circle cx="1418" cy="34" r="386.1" style="--i:5"/>
+        <circle cx="1418" cy="34" r="502.0" style="--i:6"/>
+        <circle cx="1418" cy="34" r="652.6" style="--i:7"/>
+        <circle cx="1418" cy="34" r="848.4" style="--i:8"/>
       </g>
     </svg>
   </div>

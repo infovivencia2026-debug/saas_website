@@ -692,6 +692,20 @@ h1, h2, h3, h4 {
 .flow__tight circle { animation-delay: calc(var(--i, 0) * 90ms + 240ms); }
 @keyframes flow-ink { to { stroke-dashoffset: 0; } }
 
+/* The families creep outward for good. Scaling by exactly the radius ratio
+   lands every ring on its neighbour's starting position, so the loop point is
+   invisible — and because it is a transform on a group, the whole field is
+   composited rather than repainted. transform-box/-origin put the centre of
+   the scale on the circles' own centre in viewBox units, not on the SVG. */
+.flow__wide, .flow__tight {
+  transform-box: view-box;
+  will-change: transform;
+}
+.flow__wide  { transform-origin: 1500px 392px; animation: flow-out-wide  26s linear infinite; }
+.flow__tight { transform-origin: 1418px 34px;  animation: flow-out-tight 34s linear infinite; }
+@keyframes flow-out-wide  { to { transform: scale(1.22); } }
+@keyframes flow-out-tight { to { transform: scale(1.30); } }
+
 /* and the whole field breathes, very slowly */
 /* No perpetual breathing here. An infinite transform on a group of ~20
    non-scaling strokes repaints the whole field every frame for motion nobody
@@ -699,6 +713,7 @@ h1, h2, h3, h4 {
 
 @media (prefers-reduced-motion: reduce) {
   .flow circle { animation: none; stroke-dashoffset: 0; }
+  .flow__wide, .flow__tight { animation: none; }
   .flow__wide, .flow__tight { animation: none; }
 }
 
