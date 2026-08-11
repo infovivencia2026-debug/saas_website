@@ -276,8 +276,8 @@ h1, h2, h3, h4 {
      on every third crossing, both kept small and low-contrast so the field
      reads as paper texture rather than as a pattern competing with the type. */
   background-image:
-    radial-gradient(rgba(21, 87, 232, .26) .8px, transparent .8px),
-    radial-gradient(rgba(16, 42, 140, .16) 1px, transparent 1px);
+    radial-gradient(rgba(21, 87, 232, .30) .5px, transparent .5px),
+    radial-gradient(rgba(16, 42, 140, .20) .7px, transparent .7px);
   background-size: 14px 14px, 42px 42px;
   background-position: 0 0, 0 0;
   /* oversized so it can drift without exposing an edge */
@@ -312,8 +312,8 @@ h1, h2, h3, h4 {
   animation: lens-wander 32s ease-in-out infinite alternate;
   transition: opacity .4s var(--ease);
   background-image:
-    radial-gradient(rgba(21, 87, 232, .62) 1px, transparent 1px),
-    radial-gradient(rgba(16, 42, 140, .42) 1.3px, transparent 1.3px);
+    radial-gradient(rgba(21, 87, 232, .70) .6px, transparent .6px),
+    radial-gradient(rgba(16, 42, 140, .50) .85px, transparent .85px);
   background-size: 14px 14px, 42px 42px;
   background-position: 0 0, 0 0;
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
