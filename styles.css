@@ -2522,36 +2522,119 @@ p, li { letter-spacing: 0; }
 }
 .orbit__detail-desc { font-size: var(--text-s); color: var(--on-ground-2); line-height: 1.55; }
 
-/* ---- the list: source of truth, and the mobile presentation ---- */
+/* ---- the module deck ------------------------------------------------------
+   On a phone the sixteen modules are a swipeable deck: one card per group,
+   snapped to the screen, paged left to right with dots underneath. Chips in a
+   hidden-scrollbar row were the previous answer and it failed twice — the
+   last chip in a group sat off the edge with nothing to say so, and a row of
+   equal chips gave no reason to read any of them.
+
+   Each card is now a small poster: where it sits in the deck, how many
+   modules it holds, what the group is for, and the modules themselves in a
+   readable list rather than a strip of tags.
+   ------------------------------------------------------------------------ */
 .reel { display: none; }
-.reel__group {
-  font-family: var(--ui-font);
-  font-size: .6875rem; font-weight: 600;
-  letter-spacing: .14em; text-transform: uppercase;
-  color: var(--brand-400);
-  margin-bottom: .625rem;
+
+.reel__deck {
+  display: flex;
+  gap: .875rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* the cards run to both screen edges, so the deck reads as continuing
+     rather than ending inside the gutter */
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  padding-block: .25rem 1.25rem;
+  overscroll-behavior-x: contain;
 }
-.reel__items {
-  /* Wrapped, not scrolled. As a horizontal scroller with a hidden scrollbar
-     the last chip in a group sat past the edge with nothing to indicate it —
-     "Settings" was invisible while the heading above promised sixteen
-     modules. Wrapping shows the whole group at once, and the drift script
-     stops on its own because it only runs when the row overflows. */
-  display: flex; flex-wrap: wrap; gap: .5rem;
-  margin: 0; padding: 0;
-  list-style: none;
-}
-.reel__chip {
-  display: inline-flex; align-items: center;
-  white-space: nowrap;
-  padding: .625rem .875rem;
-  border-radius: var(--r-md);
+.reel__deck::-webkit-scrollbar { display: none; }
+
+.reel__card {
+  flex: 0 0 min(20rem, 82%);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.25rem 1.375rem;
+  border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
   background: var(--panel);
-  color: var(--on-ground);
-  font-size: var(--text-s); font-weight: 500;
+  box-shadow: var(--panel-shadow);
 }
-.reel__track + .reel__track { margin-top: 1.25rem; }
+
+.reel__head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .875rem;
+}
+.reel__index, .reel__count {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.reel__index { color: var(--brand); }
+.reel__count { color: var(--muted); }
+
+.reel__group {
+  font-family: var(--ui-font);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--heading);
+  text-transform: none;
+  margin: 0;
+}
+.reel__lede {
+  margin-top: .375rem;
+  font-size: var(--text-s);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.reel__list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: .5rem;
+}
+.reel__list li {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .25rem;
+  font-size: var(--text-m);
+  color: var(--heading-2);
+  border-top: 1px solid var(--panel-border);
+}
+.reel__list li:first-child { border-top: 0; }
+/* a marker per row, so the list reads as items rather than as a paragraph */
+.reel__list li::before {
+  content: "";
+  flex: none;
+  width: .375rem; height: .375rem;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: .55;
+}
+
+.reel__dots {
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  margin-top: .25rem;
+}
+.reel__dot {
+  width: .5rem; height: .5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: .22;
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.reel__dot.is-on { opacity: 1; transform: scale(1.35); }
 
 @media (max-width: 1100px) {
   .orbit { grid-template-columns: 1fr; }
@@ -2892,12 +2975,8 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .node__conn {
   background: linear-gradient(90deg, rgba(36, 107, 253, 0), rgba(114, 164, 255, .9));
 }
-:root[data-theme="dark"] .reel__chip {
-  border-color: rgba(114, 164, 255, .25);
-  background: rgba(255, 255, 255, .06);
-  color: #dbe7ff;
-}
-:root[data-theme="dark"] .reel__group { color: #72a4ff; }
+:root[data-theme="dark"] .reel__group { color: var(--heading); }
+:root[data-theme="dark"] .reel__list li { color: var(--heading-2); }
 
 /* the footer is already midnight; it only needs to stop being lighter than
    the page above it */

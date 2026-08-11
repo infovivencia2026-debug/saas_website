@@ -732,6 +732,76 @@
       <!-- the complete list: the accessible source of truth, and what the
            component becomes on phones and under reduced motion -->
       <div class="reel">
+        <div class="reel__deck" id="reelDeck">
+          <article class="reel__card">
+            <div class="reel__head">
+              <span class="reel__index">01 / 04</span>
+              <span class="reel__count">5 modules</span>
+            </div>
+            <h3 class="reel__group">Finance</h3>
+            <p class="reel__lede">Fees in, salaries and suppliers out, on one set of books.</p>
+            <ul class="reel__list" role="list">
+              <li>General Ledger</li>
+              <li>Accounts Payable</li>
+              <li>Accounts Receivable</li>
+              <li>Costing &amp; Budgets</li>
+              <li>Tax &amp; Compliance</li>
+            </ul>
+          </article>
+          <article class="reel__card">
+            <div class="reel__head">
+              <span class="reel__index">02 / 04</span>
+              <span class="reel__count">4 modules</span>
+            </div>
+            <h3 class="reel__group">People</h3>
+            <p class="reel__lede">Every teacher and staff record, from joining to increment.</p>
+            <ul class="reel__list" role="list">
+              <li>Workforce</li>
+              <li>Time &amp; Attendance</li>
+              <li>Payroll &amp; Benefits</li>
+              <li>Talent</li>
+            </ul>
+          </article>
+          <article class="reel__card">
+            <div class="reel__head">
+              <span class="reel__index">03 / 04</span>
+              <span class="reel__count">3 modules</span>
+            </div>
+            <h3 class="reel__group">Procurement</h3>
+            <p class="reel__lede">Books, uniforms, lab equipment — requested, approved, received.</p>
+            <ul class="reel__list" role="list">
+              <li>Sourcing</li>
+              <li>Purchasing</li>
+              <li>Orders &amp; Quotations</li>
+            </ul>
+          </article>
+          <article class="reel__card">
+            <div class="reel__head">
+              <span class="reel__index">04 / 04</span>
+              <span class="reel__count">4 modules</span>
+            </div>
+            <h3 class="reel__group">Operations</h3>
+            <p class="reel__lede">The controls the office keeps to itself.</p>
+            <ul class="reel__list" role="list">
+              <li>Analytics</li>
+              <li>Administration</li>
+              <li>Integrations</li>
+              <li>Settings</li>
+            </ul>
+          </article>
+        </div>
+        <div class="reel__dots" id="reelDots">
+          <button class="reel__dot is-on" type="button" aria-label="Go to Finance"></button>
+          <button class="reel__dot" type="button" aria-label="Go to People"></button>
+          <button class="reel__dot" type="button" aria-label="Go to Procurement"></button>
+          <button class="reel__dot" type="button" aria-label="Go to Operations"></button>
+        </div>
+      </div>
+      </div>
+
+      <!-- the complete list: the accessible source of truth, and what the
+           component becomes on phones and under reduced motion -->
+      <div class="reel">
         <div class="reel__track" data-speed="26">
           <h3 class="reel__group">Finance</h3>
           <ul class="reel__items" role="list">
@@ -1022,45 +1092,35 @@
     });
   }
 
-  /* the mobile reel drifts at a different slow speed per track, and yields
-     the moment the user touches it — auto-motion that fights a swipe is
-     worse than none */
-  document.querySelectorAll('.reel__track').forEach(function (track) {
-    var list = track.querySelector('.reel__items');
-    var pxPerSec = 1000 / Number(track.dataset.speed || 30);
-    var paused = false, last = null;
+  /* ------------------------------------------------- the module deck (phone) */
+  var deck = document.getElementById('reelDeck');
+  var dots = document.getElementById('reelDots');
+  if (deck && dots) {
+    var dotEls = Array.prototype.slice.call(dots.children);
 
-    ['pointerdown', 'wheel', 'touchstart'].forEach(function (evt) {
-      list.addEventListener(evt, function () { paused = true; }, { passive: true });
+    /* which card is under the snap point, derived from scroll position rather
+       than from an observer per card — four cards is not worth four observers */
+    var deckTick = false;
+    deck.addEventListener('scroll', function () {
+      if (deckTick) return;
+      deckTick = true;
+      window.requestAnimationFrame(function () {
+        var card = deck.firstElementChild;
+        var step = card ? card.offsetWidth + 14 : 1;      /* card + gap */
+        var i = Math.round(deck.scrollLeft / step);
+        dotEls.forEach(function (d, n) { d.classList.toggle('is-on', n === i); });
+        deckTick = false;
+      });
+    }, { passive: true });
+
+    /* the dots are buttons, so they page the deck as well as report it */
+    dotEls.forEach(function (d, n) {
+      d.addEventListener('click', function () {
+        var card = deck.children[n];
+        if (card) deck.scrollTo({ left: card.offsetLeft - deck.offsetLeft, behavior: 'smooth' });
+      });
     });
-
-    /* The reel only exists under 720px. This loop used to run at 60fps on
-       every screen size, doing layout reads against a display:none element
-       forever — pure main-thread cost on desktop, where the reel is never
-       seen. It is now started and stopped by the same media query that shows
-       it, and it also stops whenever the tab is hidden. */
-    var phone = window.matchMedia('(max-width: 720px)');
-    var raf = null;
-
-    function step(ts) {
-      if (last != null && !paused && list.scrollWidth > list.clientWidth + 4) {
-        list.scrollLeft += pxPerSec * (ts - last) / 1000;
-        if (list.scrollLeft >= list.scrollWidth - list.clientWidth - 1) list.scrollLeft = 0;
-      }
-      last = ts;
-      raf = window.requestAnimationFrame(step);
-    }
-
-    function sync() {
-      var run = phone.matches && !reduced && !document.hidden;
-      if (run && raf == null) { last = null; raf = window.requestAnimationFrame(step); }
-      if (!run && raf != null) { window.cancelAnimationFrame(raf); raf = null; }
-    }
-
-    phone.addEventListener('change', sync);
-    document.addEventListener('visibilitychange', sync);
-    sync();
-  });
+  }
 
   /* the oversized numeral inks in while its chapter holds the viewport */
   var chapter = new IntersectionObserver(function (entries) {
