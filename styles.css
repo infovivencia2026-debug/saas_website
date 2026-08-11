@@ -1861,8 +1861,14 @@ h1, h2, h3, h4 {
   .feature { grid-template-columns: 2.5rem 1fr; gap: .875rem; }
   .feature__icon { width: 2.5rem; height: 2.5rem; }
 
-  .plate { inset: .625rem .75rem; border-radius: var(--r-md); }
-  .plate__c { width: 1rem; height: 1rem; }
+  /* the drawing frame stays on a phone: it is absolutely positioned, so it
+     costs no height at all — only its insets and bracket size come down */
+  .plate { inset: .5rem .625rem; border-radius: var(--r-md); }
+  .plate__c { width: .875rem; height: .875rem; border-width: 0; }
+  .plate__c--tl { border-left-width: 2px; border-top-width: 2px;    border-top-left-radius: var(--r-md); }
+  .plate__c--tr { border-right-width: 2px; border-top-width: 2px;   border-top-right-radius: var(--r-md); }
+  .plate__c--bl { border-left-width: 2px; border-bottom-width: 2px; border-bottom-left-radius: var(--r-md); }
+  .plate__c--br { border-right-width: 2px; border-bottom-width: 2px; border-bottom-right-radius: var(--r-md); }
 
   /* clear of the home indicator on a notched phone */
   .theme { right: max(1rem, env(safe-area-inset-right));
@@ -2740,7 +2746,6 @@ p, li { letter-spacing: 0; }
      the same thing one level up. */
   #modules .head p { display: none; }
   #modules .eyebrow { height: 1.75rem; padding: 0 .625rem; font-size: .6875rem; }
-  #modules .plate { display: none; }   /* the frame costs height it cannot earn */
   .deck__grid { align-items: stretch; min-height: 0; min-width: 0; }
   /* the card fills the space the budget leaves it; its list scrolls only if a
      very short screen leaves too little */
