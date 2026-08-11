@@ -863,16 +863,17 @@ h1, h2, h3, h4 {
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
   padding: .875rem 1.125rem;
-  /* the window chrome is cobalt, so the mock reads as one of ours rather
-     than a generic grey desktop window */
-  border-bottom: 1px solid rgba(16, 42, 140, .35);
-  background: linear-gradient(180deg, var(--brand-700), var(--brand-900));
+  /* Cobalt chrome, but soft: a translucent wash rather than a solid slab, so
+     the panel's own glass shows through, and only a few points of gradient
+     from top to bottom — just enough to give the bar a light source. */
+  border-bottom: 1px solid rgba(21, 87, 232, .22);
+  background: linear-gradient(180deg, rgba(67, 133, 255, .80), rgba(36, 107, 253, .86));
 }
-.screen__dot { width: .4375rem; height: .4375rem; border-radius: 50%; background: rgba(255, 255, 255, .34); }
-.screen__dot:nth-child(1) { background: rgba(255, 255, 255, .90); }
-.screen__dot:nth-child(2) { background: rgba(255, 255, 255, .62); }
-.screen__dot:nth-child(3) { background: rgba(255, 255, 255, .40); }
-.screen__title { margin-left: .75rem; color: rgba(232, 240, 255, .88); text-transform: none; letter-spacing: .04em; }
+.screen__dot { width: .4375rem; height: .4375rem; border-radius: 50%; background: rgba(255, 255, 255, .40); }
+.screen__dot:nth-child(1) { background: rgba(255, 255, 255, .95); }
+.screen__dot:nth-child(2) { background: rgba(255, 255, 255, .72); }
+.screen__dot:nth-child(3) { background: rgba(255, 255, 255, .52); }
+.screen__title { margin-left: .75rem; color: rgba(255, 255, 255, .92); text-transform: none; letter-spacing: .04em; }
 .screen__body { padding: 1rem; display: grid; gap: .5rem; }
 
 .row {
