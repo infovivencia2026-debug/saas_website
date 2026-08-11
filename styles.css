@@ -1742,6 +1742,28 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 720px) {
+  /* ---- the phone type scale ---------------------------------------------
+     Set on the tokens, not on a dozen components. The desktop scale is built
+     from vw clamps that assume a wide measure: at 390px they collapse to
+     their minimums, which left body copy at 15px, meta at 11px and captions
+     at 10px — small, and small in a way no rule controlled, because every
+     component had drifted to its own hardcoded value.
+
+     Everything below is a real ratio: 26 / 20 / 18 / 17 / 16 / 15 / 14 / 12.
+     -------------------------------------------------------------------- */
+  :root {
+    --display:  clamp(1.625rem, 7vw, 2.125rem);   /* Michroma, hero + CTA   */
+    --title-l:  1.375rem;                         /* section headings       */
+    --title-m:  1.25rem;                          /* chapter headings       */
+    --title-s:  1.125rem;
+    --title-xs: 1.0625rem;                        /* pull quotes            */
+    --text-xl:  1.0625rem;                        /* hero sub               */
+    --text-l:   1rem;                             /* ledes, FAQ questions   */
+    --text-m:   .9375rem;                         /* body                   */
+    --text-s:   .875rem;                          /* meta, labels           */
+    --label:    .75rem;                           /* mono micro-labels      */
+  }
+
   .nav { top: .625rem; height: 3.25rem; border-radius: .875rem;
          margin-bottom: calc(-3.25rem - var(--hero-inset) - var(--nav-gap)); }
   .nav__links { display: none; }
@@ -1785,16 +1807,16 @@ h1, h2, h3, h4 {
     letter-spacing: 0;
   }
   .cta h2 {
-    font-size: clamp(1.5rem, 6.4vw, 2rem);
+    font-size: clamp(1.5rem, 6.2vw, 1.875rem);
     line-height: 1.24;
     max-width: none;
     -webkit-text-stroke-width: .018em;
     letter-spacing: 0;
   }
-  .hero__sub { font-size: var(--text-m); max-width: none; }
-  .head h2 { font-size: clamp(1.375rem, 5.6vw, 1.75rem); }
-  .step h3 { font-size: clamp(1.25rem, 5.2vw, 1.5rem); max-width: none; }
-  .step__lede { font-size: var(--text-m); max-width: none; }
+  .hero__sub { font-size: var(--text-xl); max-width: none; }
+  .head h2 { font-size: var(--title-l); }
+  .step h3 { font-size: var(--title-m); max-width: none; }
+  .step__lede { font-size: var(--text-l); max-width: none; }
   .hero__cta .btn { min-width: 11rem; }
 
   .grid-4 { grid-template-columns: 1fr; }
@@ -1802,14 +1824,16 @@ h1, h2, h3, h4 {
      first screen out of reach */
   .hero__stats { grid-template-columns: repeat(2, 1fr); gap: .625rem; }
   .stat { padding: 1rem .875rem; }
-  .stat__num { font-size: 1.75rem; }
-  .stat__label { font-size: .8125rem; max-width: none; }
+  /* the figures are the one deliberate exception: they are the point of the
+     card, so they sit a full step above the scale */
+  .stat__num { font-size: 2rem; }
+  .stat__label { font-size: var(--text-s); max-width: none; }
 
   .faq { padding-inline: 1.25rem; }
   .faq summary { font-size: var(--text-l); padding-right: 2.5rem; }
   .faq p { padding-right: 0; font-size: var(--text-m); }
   /* the registry example is one long unbroken token */
-  .faq code { overflow-wrap: anywhere; font-size: .8125rem; }
+  .faq code { overflow-wrap: anywhere; font-size: var(--text-s); }
   .cta { border-radius: var(--r-lg); }
 
   /* sections get their air back: 11vw of padding at each end of a phone
@@ -1853,8 +1877,8 @@ h1, h2, h3, h4 {
   /* the window mocks are the widest thing on the page */
   .screen__body { padding: .75rem; gap: .375rem; }
   .row { padding: .75rem .8125rem; gap: .625rem; }
-  .row__meta { font-size: .6875rem; }
-  .tag { font-size: .625rem; padding: .25rem .4375rem; }
+  .row__meta { font-size: var(--label); }
+  .tag { font-size: var(--label); padding: .25rem .4375rem; }
 
   .step__num { margin-bottom: 1rem; }
   .features { gap: 1.125rem; }
@@ -2693,11 +2717,11 @@ p, li { letter-spacing: 0; }
     border-radius: var(--r-lg);
   }
   .deck__meta { margin-bottom: .375rem; }
-  .deck__title { font-size: 1rem; }
+  .deck__title { font-size: var(--title-xs); }
   .deck__lede {
     margin-top: .1875rem;
-    font-size: .75rem;
-    line-height: 1.35;
+    font-size: var(--text-s);
+    line-height: 1.4;
     max-width: none;
     /* two lines at most, so a long description cannot push the rows down */
     display: -webkit-box;
@@ -2708,7 +2732,7 @@ p, li { letter-spacing: 0; }
   /* the rows sit against the bottom of the square, so three modules and five
      both look deliberate rather than top-heavy */
   .deck__list { margin-top: auto; }
-  .deck__list li { padding: .3125rem .125rem; font-size: .8125rem; }
+  .deck__list li { padding: .3125rem .125rem; font-size: var(--text-m); }
   .deck__card { padding: .875rem 1rem 1rem; }
   .deck__ghost { font-size: 3.5rem; right: -.25rem; top: -.75rem; }
 
@@ -2746,12 +2770,12 @@ p, li { letter-spacing: 0; }
      without this the section title starts 16px to the left of every line
      inside the card below it. */
   #modules .head { max-width: none; padding-inline: 1rem; }
-  #modules .head h2 { font-size: clamp(1.125rem, 4.6vw, 1.375rem); }
+  #modules .head h2 { font-size: var(--title-l); }
   /* The section lede goes. Each card already carries its own one-line
      description, so this paragraph was three lines of screen height saying
      the same thing one level up. */
   #modules .head p { display: none; }
-  #modules .eyebrow { height: 1.75rem; padding: 0 .625rem; font-size: .6875rem; }
+  #modules .eyebrow { height: 1.75rem; padding: 0 .625rem; }
   /* start, not stretch: stretched cards take the whole deck row and stop
      being square */
   .deck__grid { align-items: start; min-height: 0; min-width: 0; }
