@@ -2675,20 +2675,22 @@ p, li { letter-spacing: 0; }
   }
   .deck__grid::-webkit-scrollbar { display: none; }
   .deck__card {
-    /* one full-bleed card per swipe, in a post's 4:5 portrait */
+    /* one card per swipe, sized by its content — the fixed 4:5 portrait made
+       every card a full screen tall for three or four short rows */
     flex: 0 0 100%;
-    aspect-ratio: 4 / 5;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding: 1.75rem var(--gutter);
+    padding: 1.125rem var(--gutter) 1.25rem;
     border-radius: 0;
     border-left: 0;
     border-right: 0;
   }
-  /* the list takes whatever height the card has left, so every card fills its
-     frame instead of leaving a gap under the shorter domains */
-  .deck__list { margin-top: auto; }
-  .deck__ghost { font-size: 7.5rem; right: -.5rem; top: -1.25rem; }
+  .deck__meta { margin-bottom: .625rem; }
+  .deck__title { font-size: 1.1875rem; }
+  .deck__lede { margin-top: .25rem; font-size: var(--text-s); line-height: 1.45; max-width: none; }
+  .deck__list { margin-top: .875rem; }
+  .deck__list li { padding: .4375rem .125rem; font-size: var(--text-m); }
+  .deck__ghost { font-size: 3.5rem; right: -.25rem; top: -.75rem; }
 
   .deck__dots {
     display: flex;
