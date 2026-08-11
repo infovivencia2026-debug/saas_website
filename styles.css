@@ -804,7 +804,9 @@ h1, h2, h3, h4 {
   background: rgba(255, 255, 255, .86);
   border: 1px solid rgba(21, 87, 232, .16);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .90), 0 14px 40px rgba(16, 42, 140, .10);
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+  /* slower than the page's default: a card this size lifting in .35s reads
+     as a pop, in .55s as a settle */
+  transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s var(--ease);
 }
 /* one coherent internal illumination anchored to the bottom — alternating
    lime and cyan, never a random colour per card */
@@ -817,11 +819,17 @@ h1, h2, h3, h4 {
 .stat:nth-child(even)::after {
   background: linear-gradient(180deg, rgba(255,255,255,0) 38%, rgba(67, 133, 255, .09) 100%);
 }
+/* It grows very slightly in place rather than jumping upward. 1.5% is under
+   two pixels on a card this size — enough to register as a response, not
+   enough to read as an effect. No colour change, no extra glow: the shadow
+   deepens by a hair because something nearer the viewer casts a longer one,
+   and that is all. */
 .stat:hover {
-  transform: translateY(-3px);
-  border-color: rgba(21, 87, 232, .32);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), 0 20px 55px rgba(16, 42, 140, .14);
+  transform: scale(1.015);
+  border-color: rgba(21, 87, 232, .24);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.92), 0 16px 44px rgba(16, 42, 140, .11);
 }
+@media (prefers-reduced-motion: reduce) { .stat:hover { transform: none; } }
 .stat__num {
   position: relative; z-index: 1;
   font-size: clamp(2rem, 3vw, 2.75rem);
