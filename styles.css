@@ -1102,18 +1102,7 @@ h1, h2, h3, h4 {
 
    Not on the first chapter: there is nothing above it to divide from. */
 .step { position: relative; }
-.step + .step::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  /* out of the container and across the full width of the section */
-  left: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  height: 1px;
-  background: var(--line);
-  pointer-events: none;
-}
+.step + .step::after { display: none; }
 
 @media (min-width: 1101px) {
   .steps::before,
