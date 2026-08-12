@@ -1631,24 +1631,14 @@ h1, h2, h3, h4 {
 }
 .faq details + details { border-top: 1px solid var(--border); }
 
-/* Open and close on a real transition rather than a jump. `interpolate-size`
-   lets a height animate to `auto`, and `allow-discrete` carries
-   content-visibility across the same 450ms — without both, the panel snaps
-   open and the page shifts under the pointer. Browsers without support get
-   the ordinary instant disclosure, which is correct, just not animated. */
-@supports (interpolate-size: allow-keywords) {
-  :root { interpolate-size: allow-keywords; }
-  .faq details::details-content {
-    block-size: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition:
-      block-size .45s var(--ease),
-      opacity .3s var(--ease),
-      content-visibility .45s allow-discrete;
-  }
-  .faq details[open]::details-content { block-size: auto; opacity: 1; }
-}
+/* The open/close animation is driven in JS (see the script): the CSS-only
+   route needs `interpolate-size` + `::details-content`, which only Chrome
+   131+ honours — everywhere else the panel snapped. These two rules are what
+   the script animates against. */
+.faq details { overflow: hidden; }
+.faq details p { transition: opacity .28s var(--ease); }
+.faq details:not([open]) p { opacity: 0; }
+
 .faq summary {
   list-style: none;
   cursor: pointer;

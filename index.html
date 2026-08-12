@@ -1314,6 +1314,47 @@
     });
   }
 
+  /* --------------------------------------------------- the FAQ, animated */
+  /* <details> has no transition of its own: the element jumps between two
+     heights. This measures both and animates between them with the Web
+     Animations API, which behaves the same in every browser — unlike the
+     CSS-only route, which needs interpolate-size and silently snaps
+     elsewhere. */
+  document.querySelectorAll('.faq details').forEach(function (d) {
+    var summary = d.querySelector('summary');
+    if (!summary) return;
+    var anim = null;
+
+    function height(el) { return el.getBoundingClientRect().height; }
+
+    function run(from, to, opening) {
+      if (anim) anim.cancel();
+      d.style.overflow = 'hidden';
+      anim = d.animate(
+        [{ height: from + 'px' }, { height: to + 'px' }],
+        { duration: reduced ? 0 : 420, easing: 'cubic-bezier(.2,.7,.2,1)' }
+      );
+      anim.onfinish = function () {
+        d.style.height = '';
+        d.style.overflow = '';
+        if (!opening) d.open = false;
+        anim = null;
+      };
+    }
+
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+      var start = height(d);
+      if (!d.open) {
+        d.open = true;                 /* measure the open height, then grow */
+        run(start, height(d), true);
+      } else {
+        var closed = height(summary) + 2;   /* the summary plus its hairline */
+        run(start, closed, false);
+      }
+    });
+  });
+
   /* ------------------------------------------------------- the solar system */
   var sol = document.getElementById('sol');
   if (sol) {
