@@ -3988,13 +3988,15 @@ p, li { letter-spacing: 0; }
   .split2__r .head, .split2__r .asks, .split2__r .chips { margin-inline: 0; }
   .split2 .head h2 { font-size: var(--title-m); }
 
-  /* Two divisions' worth of content now shares one screen, so everything in
-     here is measured against the viewport's HEIGHT rather than set in rem.
-     Two headings, an orbit, a readout, seven questions and ten chips do not
-     fit at the sizes each was designed at on its own. */
+  /* Two divisions share one screen, so the space is bought back from what
+     repeats rather than from the type. The right half drops its lede — the
+     heading above it already says the same thing — and the orbit's readout
+     loses its fixed 11.5-14rem frame. Everything that is read stays at the
+     size it is meant to be read at. */
   .split2 { gap: clamp(1.5rem, 3vw, 2.75rem); }
   .split2 .head p { font-size: var(--text-m); margin-top: .5rem; }
-  .split2 .head h2 { font-size: clamp(1.375rem, 2.6svh, 1.875rem); }
+  .split2 .head h2 { font-size: clamp(1.625rem, 3svh, 2rem); }
+  .split2__r .head p { display: none; }
 
   .split2 .sol { margin-top: clamp(.25rem, 1svh, .75rem); }
   .split2 .sol__stage { --size: min(32rem, 30vw, 62svh); }
@@ -4002,21 +4004,15 @@ p, li { letter-spacing: 0; }
   .split2 .sol__detail {
     height: auto;
     min-height: 0;
-    gap: .4375rem;
-    padding: .875rem 1.125rem;
+    gap: .5rem;
+    padding: 1rem 1.25rem;
   }
   .split2 .sol__d-mods { -webkit-line-clamp: 2; }
 
-  .split2__r .asks {
-    margin-top: clamp(.75rem, 2svh, 1.25rem);
-    padding: .125rem 1.125rem;
-  }
-  .split2__r .asks li {
-    padding: clamp(.25rem, .9svh, .5rem) .125rem;
-    font-size: var(--text-m);
-  }
-  .split2__r .asks__foot { margin-top: clamp(.625rem, 1.6svh, 1rem); }
-  .split2__r .chips { margin-top: .625rem; gap: .3125rem; }
+  .split2__r .asks { margin-top: clamp(1rem, 2.5svh, 1.5rem); }
+  .split2__r .asks li { padding: .5rem .125rem; }
+  .split2__r .asks__foot { margin-top: clamp(.875rem, 2svh, 1.25rem); }
+  .split2__r .chips { margin-top: .75rem; }
 }
 
 @media (max-width: 1100px) {
@@ -4112,7 +4108,10 @@ p, li { letter-spacing: 0; }
 }
 
 /* --- the abstract map on the transport tile --- */
-.bento__viz--map { padding-top: 1.25rem; }
+/* the widest tile, so the map is given the room rather than letterboxed
+   inside the space the copy leaves */
+.bento__viz--map { padding-top: .5rem; }
+.m-route, .m-route-lit { stroke-linejoin: round; }
 .m-block { fill: var(--surface-2); stroke: var(--border); }
 .m-roads path { stroke: var(--border); stroke-width: 6; stroke-linecap: round; opacity: .7; }
 .m-water { stroke: rgba(18, 165, 148, .35); stroke-width: 7; stroke-linecap: round; }
@@ -4123,10 +4122,11 @@ p, li { letter-spacing: 0; }
   stroke: var(--brand);
   stroke-width: 3;
   stroke-linecap: round;
-  stroke-dasharray: 90 620;
+  /* the lit run and its reset are both in user units on a 502-unit path */
+  stroke-dasharray: 70 432;
   animation: m-run 14s linear infinite;
 }
-@keyframes m-run { to { stroke-dashoffset: -710; } }
+@keyframes m-run { to { stroke-dashoffset: -502; } }
 
 .m-stops circle { fill: var(--surface); stroke: var(--brand); stroke-width: 2; }
 .m-school rect { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 1.5; }
@@ -4135,7 +4135,8 @@ p, li { letter-spacing: 0; }
 /* the vehicle runs the same geometry as a motion path, so it can never
    drift off the road the way hand-keyed coordinates would */
 .m-bus {
-  offset-path: path("M24 196C64 196 78 150 122 150s58 44 104 44 66-52 106-52 44 26 44 26");
+  /* the same geometry as .m-route, so the vehicle can never leave the road */
+  offset-path: path("M20 170H100V70H230V140H352");
   offset-rotate: 0deg;
   animation: m-drive 14s linear infinite;
 }
