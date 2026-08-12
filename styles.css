@@ -220,6 +220,24 @@ html {
   scroll-padding-top: 6rem;
 }
 
+/* ---- one division at a time ----------------------------------------------
+   The page settles on whichever division is most on screen. `proximity`, not
+   `mandatory`: mandatory hijacks every scroll and traps anyone reading a long
+   chapter, while proximity only takes over once you are already close to a
+   boundary — a flick still travels, it just lands somewhere deliberate.
+
+   Only above 861px. On a phone the divisions are content-height rather than
+   viewport-height, so there is no consistent edge to land on, and snapping
+   fights touch momentum.
+   ------------------------------------------------------------------------ */
+@media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
+  html { scroll-snap-type: y proximity; }
+  .hero, .section, .footer { scroll-snap-align: start; scroll-snap-stop: normal; }
+  /* the chapters are the snap targets inside their own division */
+  #how { scroll-snap-align: none; }
+  .step { scroll-snap-align: start; }
+}
+
 body {
   margin: 0;
   font-family: var(--font);
