@@ -449,11 +449,7 @@ h1, h2, h3, h4 {
 }
 #roles .head h2 { color: #ffffff; }
 #roles .head p { color: #a9bfe6; }
-#roles .eyebrow {
-  background: rgba(255, 255, 255, .10);
-  border-color: rgba(255, 255, 255, .22);
-  color: #cfe0fd;
-}
+#roles .eyebrow { color: #cfe0fd; }
 
 /* the cards become glass on the blue rather than white slabs punched into it */
 /* White tiles on the cobalt stage. They are white in both themes, so every
@@ -945,30 +941,41 @@ h1, h2, h3, h4 {
   background: radial-gradient(closest-side, rgba(67, 133, 255, .12), rgba(67, 133, 255, 0) 72%);
 }
 
-/* ---- announcement pill ---- */
+/* ---- section marker ------------------------------------------------------
+   Was a pill with a glowing dot: a floating object with its own surface,
+   border and shadow, sitting above every heading on the page and repeating
+   the same chrome eighteen times. This is a marker instead — a short rule
+   running into a tracked-out label, in the brand, with no box at all.
+
+   It reads as part of the heading rather than as a badge stuck to it, it
+   costs a third of the height, and the rule ties it to the hairlines the
+   rest of the page is drawn with. */
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: .5rem;
-  height: 2.125rem;
-  padding: 0 .875rem;
-  border-radius: var(--pill);
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  color: var(--body);
-  letter-spacing: .04em;
-  text-transform: none;
-  font-size: .75rem;
-  box-shadow: var(--panel-shadow);
+  gap: .625rem;
+  color: var(--brand);
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
 .eyebrow::before {
   content: "";
   display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--brand);
-  box-shadow: 0 0 6px var(--brand);
+  width: 1.75rem;
+  height: 1px;
+  flex: 0 0 auto;
+  background: currentColor;
+  opacity: .5;
+}
+/* centred heads read better with the rule on both sides */
+.head--center .eyebrow::after {
+  content: "";
+  display: inline-block;
+  width: 1.75rem;
+  height: 1px;
+  flex: 0 0 auto;
+  background: currentColor;
+  opacity: .5;
 }
 
 /* This headline is a sentence, not a two-word lockup: uppercase at 72px on a
@@ -1091,7 +1098,7 @@ h1, h2, h3, h4 {
   text-wrap: pretty;
 }
 .head--center p { margin-inline: auto; }
-.head .eyebrow { letter-spacing: .09em; text-transform: uppercase; font-size: var(--label); }
+.head .eyebrow { letter-spacing: .16em; text-transform: uppercase; font-size: var(--label); }
 
 /* ------------------------------------------------------------------ steps */
 /* ---- the spine ------------------------------------------------------------
@@ -2366,7 +2373,7 @@ h2, h3, h4 {
 /* micro-labels: Space Grotesk tracked out, not the mono */
 .eyebrow, .step__label, .pull__attr, .footer h3 {
   font-weight: 600;
-  letter-spacing: .13em;
+  letter-spacing: .16em;
   text-transform: uppercase;
 }
 
@@ -3004,7 +3011,6 @@ p, li { letter-spacing: 0; }
      description, so this paragraph was three lines of screen height saying
      the same thing one level up. */
   #modules .head p { display: none; }
-  #modules .eyebrow { height: 1.75rem; padding: 0 .625rem; }
   /* start, not stretch: stretched cards take the whole deck row and stop
      being square */
   .deck__grid { align-items: start; min-height: 0; min-width: 0; }
@@ -3274,11 +3280,7 @@ p, li { letter-spacing: 0; }
 }
 :root[data-theme="dark"] .row strong { color: var(--heading); }
 :root[data-theme="dark"] .screen__body { background: transparent; }
-:root[data-theme="dark"] .eyebrow {
-  background: rgba(36, 107, 253, .14);
-  border-color: rgba(114, 164, 255, .28);
-  color: var(--heading-2);
-}
+:root[data-theme="dark"] .eyebrow { color: #72a4ff; }
 :root[data-theme="dark"] .btn--ghost {
   background: rgba(36, 107, 253, .12);
   color: var(--heading-2);
@@ -4217,11 +4219,7 @@ p, li { letter-spacing: 0; }
 }
 .stage-dark .head h2 { color: #ffffff; }
 .stage-dark .head p { color: #9fb0c4; }
-.stage-dark .eyebrow {
-  background: rgba(143, 180, 251, .10);
-  border-color: rgba(143, 180, 251, .22);
-  color: #8fb4fb;
-}
+.stage-dark .eyebrow { color: #8fb4fb; }
 
 .ladder {
   margin-top: clamp(1.25rem, 3svh, 2.25rem);
