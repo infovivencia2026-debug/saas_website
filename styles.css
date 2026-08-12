@@ -4383,9 +4383,11 @@ p, li { letter-spacing: 0; }
 /* ==========================================================================
    Institutional Time Savings Calculator (.calc-box)
    ========================================================================== */
+/* it is the division now, not a block appended to one */
 .calc-box {
-  margin-top: 3rem;
-  padding: 2.25rem;
+  margin: clamp(1.5rem, 4svh, 2.75rem) auto 0;
+  max-width: 56rem;
+  padding: clamp(1.5rem, 4svh, 2.25rem);
   border-radius: var(--r-xl, 1rem);
   background: var(--panel, rgba(255, 255, 255, 0.05));
   border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.12));

@@ -221,12 +221,20 @@
       <div class="pull__attr">One student · One record · Every department</div>
     </div>
 
-    <!-- Interactive Hours Saved Calculator -->
+  </div>
+</section>
+
+
+<section class="section section--tight" id="savings" aria-labelledby="savings-title">
+  <div class="container">
+    <div class="head head--center">
+      <span class="eyebrow">What it is worth</span>
+      <h2 id="savings-title">The cost of scattered information is measured in hours.</h2>
+      <p>Estimate the weekly hours admissions, accounts, attendance and administration
+         spend rebuilding the same answer — and what one record gives back.</p>
+    </div>
+
     <div class="calc-box">
-      <div class="calc-box__head">
-        <h3>Institutional Time Savings Calculator</h3>
-        <p>Estimate weekly hours saved across admissions, accounts, attendance, and administration when switching to one record.</p>
-      </div>
       <div class="calc-box__grid">
         <div class="calc-box__controls">
           <div class="calc-box__field">
@@ -1449,7 +1457,18 @@
          chapter towards whichever edge happened to be closer. */
       if (!win || won.share < .5) return;
 
-      var top = win.getBoundingClientRect().top;
+      var rect = win.getBoundingClientRect();
+
+      /* A division taller than the screen cannot be "brought fully into
+         view", and aligning its top scrolls its bottom back off — which makes
+         anything down there unreachable, because every attempt to scroll to
+         it gets undone. Leave tall divisions alone and let them scroll. This
+         is the same exemption #how gets, arrived at by measurement rather
+         than by name, so a division that outgrows the screen later is covered
+         without anyone remembering to add it. */
+      if (rect.height > window.innerHeight + 4) return;
+
+      var top = rect.top;
       if (Math.abs(top) < 2) return;          /* already aligned */
 
       isAutoScrolling = true;
