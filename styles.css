@@ -3858,7 +3858,37 @@ p, li { letter-spacing: 0; }
   gap: clamp(2rem, 4vw, 3.5rem);
   align-items: center;
 }
-.split2__l, .split2__r { min-width: 0; }
+.split2__l, .split2__r { min-width: 0; position: relative; }
+
+/* The seam between the halves, drawn the same way as the one between
+   chapters: it touches the edges of the division rather than stopping at the
+   content, so it reads as the boundary between two halves and not as a border
+   around a box. Vertical while they sit side by side, horizontal once they
+   stack. */
+.split2__r::before {
+  content: "";
+  position: absolute;
+  background: var(--line);
+  pointer-events: none;
+}
+@media (min-width: 1101px) {
+  .split2__r::before {
+    top: 50%;
+    left: calc(-1 * clamp(2rem, 4vw, 3.5rem) / 2);
+    width: 1px;
+    height: 100svh;
+    margin-top: -50svh;
+  }
+}
+@media (max-width: 1100px) {
+  .split2__r::before {
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    top: calc(-1 * clamp(2rem, 4vw, 3.5rem) / 2);
+    height: 1px;
+  }
+}
 
 /* In half a column the orbit cannot also sit beside its readout, so the
    readout drops underneath it and the stage is measured against the half
