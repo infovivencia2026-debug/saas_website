@@ -26,23 +26,22 @@
 
 :root {
   /* ---- canvas & surfaces ---- */
-  --canvas:      #f2f6ff;   /* ice */
+  /* ---- premium institutional palette ------------------------------------
+     Warm off-white ground rather than a blue-tinted one, near-black navy ink,
+     a single deep blue for brand, a restrained teal as the only second hue,
+     and #0C1724 for the dark stages instead of pure black.
+     -------------------------------------------------------------------- */
+  --canvas:      #f7f8f5;   /* warm off-white */
   --surface:     #ffffff;
-  --surface-2:   #f2f6ff;
-  --surface-3:   #e7f0ff;
-  --tint:        #f2f6ff;
+  --surface-2:   #f2f3f0;
 
-  /* ---- text: light stages ---- */
-  --heading:     #0a1d42;
-  --heading-2:   #29466f;
-  --body:        #435679;
-  --muted:       #607294;
+  --heading:     #101820;   /* near-black navy */
+  --heading-2:   #1e2a36;
+  --body:        #47535f;
+  --muted:       #6b7885;
 
-  /* ---- borders ---- */
-  --border:       #dee8fa;
-  --border-2:     rgba(21, 87, 232, .13);
-  --border-glass: rgba(21, 87, 232, .13);
-  --border-live:  rgba(21, 87, 232, .32);
+  --teal:        #12a594;   /* the only second hue, used sparingly */
+  --lime-tick:   #b6e14a;   /* highlight, in tiny amounts only */
 
   /* ---- the cobalt ramp ----------------------------------------------------
        900 #102A8C   800 #123DB5   700 #1557E8   600 #246BFD
@@ -53,27 +52,27 @@
      against midnight. The cyan endpoint (#55D7FF) is reserved for gradients
      and illumination — it never becomes a second brand colour.
      -------------------------------------------------------------------- */
-  --brand-900:   #102a8c;
-  --brand-800:   #123db5;
-  --brand-700:   #1557e8;
-  --brand-600:   #246bfd;
-  --brand-500:   #4385ff;
-  --brand-400:   #72a4ff;
-  --brand-300:   #a8c6ff;
+  --brand-900:   #0b2f7a;
+  --brand-800:   #0f42ab;
+  --brand-700:   #155eef;   /* the brand */
+  --brand-600:   #2f74f5;
+  --brand-500:   #5b92f8;
+  --brand-400:   #8fb4fb;
+  --brand-300:   #c2d6fd;
 
-  --brand:       #1557e8;   /* accent on light */
-  --brand-deep:  #123db5;
-  --brand-dark:  #0a1d42;
-  --brand-lit:   #246bfd;   /* emissive on dark */
-  --brand-hot:   #72a4ff;
-  --brand-soft:  #edf4ff;
-  --brand-tint:  #dce9ff;
+  --brand:       #155eef;
+  --brand-deep:  #0f42ab;
+  --brand-dark:  #0c1724;
+  --brand-lit:   #2f74f5;
+  --brand-hot:   #8fb4fb;
+  --brand-soft:  #eef3fe;
+  --brand-tint:  #dde8fd;
   --on-brand:    #ffffff;
 
   /* ---- dark stages ---- */
-  --ground:      #0a1d42;   /* dark 900 */
-  --ground-2:    #07152f;   /* midnight */
-  --ground-3:    #10295a;   /* dark 800 */
+  --ground:      #0c1724;   /* the dark stage */
+  --ground-2:    #0a1420;
+  --ground-3:    #142334;
   --on-ground:   #e4edff;
   --on-ground-2: #c4d4f4;
   --on-ground-3: #91a6cf;
@@ -143,26 +142,32 @@
      Michroma's letterforms together.
      -------------------------------------------------------------------- */
   --font:         "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  --ui-font:      "Space Grotesk", "Inter", sans-serif;
-  --display-font: "Michroma", "Space Grotesk", sans-serif;
+  --ui-font:      "Manrope", "Inter", sans-serif;
+  --display-font: "Manrope", "Inter", sans-serif;
   --mono:         "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --display:  clamp(1.5rem, 3.1vw, 2.75rem);    /* Michroma sets very wide */
-  --title-l:  clamp(1.5rem, 2.6vw, 2.125rem);
-  --title-m:  clamp(1.375rem, 2vw, 1.75rem);
-  --title-s:  1.375rem;
-  --title-xs: 1.1875rem;
+  /* ---- the enterprise scale -----------------------------------------------
+     Michroma is gone. It set very wide, forced a text-stroke to look bold and
+     capped the headline at 44px — which is why the hero never read as
+     institutional. Manrope carries real weights (500–800), so hierarchy comes
+     from weight and size rather than from tricks.
+     -------------------------------------------------------------------- */
+  --display:  clamp(2.75rem, 5.4vw, 4.5rem);    /* 44 → 72 */
+  --title-l:  clamp(2rem, 3.6vw, 3.5rem);       /* 32 → 56 */
+  --title-m:  clamp(1.5rem, 2.2vw, 2rem);       /* 24 → 32 */
+  --title-s:  1.5rem;
+  --title-xs: 1.25rem;
 
-  --text-xl: 1.125rem;
-  --text-l:  1.0625rem;
-  --text-m:  .9375rem;
-  --text-s:  .8125rem;
-  --label:   .6875rem;
+  --text-xl: 1.25rem;    /* 20 — body large */
+  --text-l:  1.125rem;   /* 18 */
+  --text-m:  1rem;       /* 16 — body */
+  --text-s:  .875rem;    /* 14 */
+  --label:   .75rem;     /* 12 — eyebrows, .12em tracking */
 
   /* ---- metrics ---- */
   --container: 82.5rem;                    /* 1320px */
   --gutter: clamp(1.25rem, 4vw, 4.5rem);
-  --section-y: clamp(5rem, 11vw, 8.75rem);
+  --section-y: clamp(3.25rem, 6vw, 5.5rem);   /* a division is one screen */
 
   --r-sm: .5rem;
   --r-md: 1rem;
@@ -212,7 +217,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -268,8 +273,28 @@ h1, h2, h3, h4 {
   z-index: 1;
 }
 
-.section { padding-block: var(--section-y); }
-.section--tight { padding-block: calc(var(--section-y) * .68); }
+/* Every division is one screen, measured against the viewport rather than
+   guessed in rem: min-height keeps it a full panel, align-content centres
+   whatever it holds, and the padding is a share of the screen's own height.
+   A short laptop and a tall monitor both get a division that fills once. */
+.section {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  /* The capsule floats over the top ~5rem of whatever is on screen. With the
+     content centred in a full-height division, that means it lands over the
+     heading. The extra top padding pushes the optical centre down by half the
+     bar, so nothing sits under it — and scroll-margin does the same for an
+     anchor jump. */
+  padding-block: calc(clamp(2.5rem, 7svh, 5.5rem) + 3rem) clamp(2.5rem, 7svh, 5.5rem);
+  scroll-margin-top: 5.5rem;
+}
+.section--tight { padding-block: calc(clamp(2rem, 5svh, 4rem) + 3rem) clamp(2rem, 5svh, 4rem); }
+
+/* The chapters are the exception: the division holds five of them, so each
+   CHAPTER is the screen and the section grows to suit. */
+#how { min-height: 0; display: block; }
+#how > .container { display: block; }
 
 /* ---- stages ------------------------------------------------------------
    Each section is its own stage, separated by background tone, spacing and a
@@ -314,10 +339,13 @@ h1, h2, h3, h4 {
      crossing. It covers the section edge to edge — no mask fading it out at
      the boundaries — and it does not move: the alpha lives in the dot colour
      alone, with no layer opacity or scroll animation multiplying it down. */
+  /* denser: 9px between dots instead of 14, with the heavier accent every
+     third crossing at 27px. Finer dots at the tighter pitch, or the field
+     turns into a grey wash rather than reading as a mesh. */
   background-image:
-    radial-gradient(rgba(21, 87, 232, .38) .6px, transparent .6px),
-    radial-gradient(rgba(16, 42, 140, .26) .8px, transparent .8px);
-  background-size: 14px 14px, 42px 42px;
+    radial-gradient(rgba(21, 94, 239, .34) .55px, transparent .55px),
+    radial-gradient(rgba(11, 47, 122, .26) .75px, transparent .75px);
+  background-size: 9px 9px, 27px 27px;
   background-position: 0 0, 0 0;
   inset: 0;
 }
@@ -348,9 +376,9 @@ h1, h2, h3, h4 {
   animation: lens-wander 32s ease-in-out infinite alternate;
   transition: opacity .4s var(--ease);
   background-image:
-    radial-gradient(rgba(21, 87, 232, .70) .6px, transparent .6px),
-    radial-gradient(rgba(16, 42, 140, .50) .85px, transparent .85px);
-  background-size: 14px 14px, 42px 42px;
+    radial-gradient(rgba(21, 94, 239, .75) .6px, transparent .6px),
+    radial-gradient(rgba(11, 47, 122, .55) .8px, transparent .8px);
+  background-size: 9px 9px, 27px 27px;
   background-position: 0 0, 0 0;
   -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
           mask-image: radial-gradient(circle at 50% 50%, #000 0%, rgba(0,0,0,.5) 44%, transparent 72%);
@@ -494,7 +522,11 @@ h1, h2, h3, h4 {
   /* at rest the capsule sits a clear step below the hero panel's top edge,
      not flush against the viewport */
   margin-top: calc(var(--hero-inset) + var(--nav-gap));
-  width: min(70rem, calc(100% - 2 * var(--gutter)));
+  /* The capsule is as wide as what it holds. It was pinned to 70rem, which
+     left the brand and the links marooned at opposite ends of a mostly empty
+     bar; now the bar ends where the button does. */
+  width: fit-content;
+  max-width: calc(100% - 2 * var(--gutter));
   height: 3.5rem;
   /* a soft-cornered bar, not a capsule */
   border-radius: var(--r-md);
@@ -559,10 +591,11 @@ h1, h2, h3, h4 {
 .nav__inner { position: relative; z-index: 1; }
 
 .nav--scrolled {
-  /* scrolled: a touch denser, since it now sits over content rather than the
-     hero's own light ground */
-  background: rgba(255, 255, 255, .52);
-  border-color: rgba(255, 255, 255, .70);
+  /* Scrolled, the capsule sits over live content — at .52 the text behind it
+     showed through as unreadable ghosting rather than being masked. Dense
+     enough to read as a surface, still glass. */
+  background: rgba(255, 255, 255, .86);
+  border-color: rgba(21, 94, 239, .14);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, .92),
     0 14px 36px rgba(16, 42, 140, .14),
@@ -571,9 +604,11 @@ h1, h2, h3, h4 {
 .nav__inner {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: 1.5rem;
   height: 100%;
-  padding-inline: .5rem;
+  /* the container's gutter would reintroduce the empty ends */
+  padding-inline: .875rem;
+  width: auto;
   max-width: none;
 }
 
@@ -594,7 +629,7 @@ h1, h2, h3, h4 {
   font-size: .5625rem; font-weight: 500; letter-spacing: 0;
 }
 
-.nav__links { display: flex; align-items: center; gap: 1.75rem; margin-left: auto; }
+.nav__links { display: flex; align-items: center; gap: 1.5rem; margin-left: 0; }
 .nav__link {
   font-size: var(--text-s);
   font-weight: 500;
@@ -603,7 +638,7 @@ h1, h2, h3, h4 {
   transition: color .25s var(--ease);
 }
 .nav__link:hover { color: var(--heading); }
-.nav__actions { display: flex; align-items: center; gap: .5rem; }
+.nav__actions { display: flex; align-items: center; gap: .5rem; margin-left: .25rem; }
 
 /* the outlined pill, then the cobalt CTA */
 .nav__actions .btn--ghost {
@@ -653,7 +688,7 @@ h1, h2, h3, h4 {
   min-height: 100svh;
   display: grid;
   align-content: center;
-  padding-block: clamp(6rem, 10vw, 8rem) clamp(5rem, 9vw, 8rem);
+  padding-block: clamp(6rem, 9vw, 7.5rem) clamp(3rem, 5vw, 4.5rem);
   /* left-aligned, console style: the type is a column on the left and the
      geometry runs off the right, rather than everything centred */
   text-align: left;
@@ -725,23 +760,40 @@ h1, h2, h3, h4 {
    concentric, so translating or rotating them would either look static or
    break their geometry. Two passes at different speeds and offsets keep it
    from reading as a metronome. */
+/* Three passes at three unrelated speeds. The durations are deliberately
+   coprime-ish (23s / 37s / 53s) and the dash gaps differ, so the passes only
+   realign after several minutes — long enough that the movement never reads
+   as a loop. Slow, too: a dash that crosses an arc in seven seconds reads as
+   a scanning effect; one that takes half a minute reads as drift. */
 .flow__pulse {
   stroke: var(--brand-500);
-  stroke-width: 1.5;
+  stroke-width: 1.4;
   stroke-linecap: round;
-  opacity: .85;
-  stroke-dasharray: 70 1100;
-  animation: flow-run 7s linear infinite;
+  opacity: .8;
+  stroke-dasharray: 60 1180;
+  animation: flow-run-a 23s linear infinite;
 }
 .flow__pulse--b {
   stroke: var(--brand-400);
-  stroke-width: 1.2;
-  opacity: .6;
-  stroke-dasharray: 40 1130;
-  animation-duration: 11s;
-  animation-delay: -3.5s;
+  stroke-width: 1.1;
+  opacity: .55;
+  stroke-dasharray: 34 1310;
+  animation: flow-run-b 37s linear infinite;
+  animation-delay: -11s;
 }
-@keyframes flow-run { to { stroke-dashoffset: -1170; } }
+.flow__pulse--c {
+  stroke: var(--brand-600);
+  stroke-width: 1.2;
+  opacity: .45;
+  stroke-dasharray: 22 990;
+  animation: flow-run-c 53s linear infinite;
+  animation-delay: -29s;
+}
+/* each travels its own distance as well as its own duration, which is what
+   stops the three from ever pacing each other */
+@keyframes flow-run-a { to { stroke-dashoffset: -1240; } }
+@keyframes flow-run-b { to { stroke-dashoffset: -1344; } }
+@keyframes flow-run-c { to { stroke-dashoffset: -1012; } }
 
 /* the field still inks itself in once on arrival */
 .flow__lines {
@@ -814,18 +866,22 @@ h1, h2, h3, h4 {
   font-size: .75rem;
 }
 
+/* This headline is a sentence, not a two-word lockup: uppercase at 72px on a
+   13ch measure ran it to six lines and pushed the stats off the screen. */
 .hero h1 {
-  margin: 2rem 0 0;
-  max-width: 20ch;
-  font-size: var(--display);
-  /* The hero ground is deep navy, so the heading has to live in the
-     #DDE3FF-to-white luminance band. It was inheriting the near-black
-     heading token and disappearing into the background. */
-  color: var(--on-ground-hi);
+  margin: 1.75rem 0 0;
+  max-width: 22ch;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -.032em;
+  color: var(--heading);
+  text-transform: none;
 }
+.hero__accent { display: block; color: var(--brand); }
 .hero__sub {
   margin: 1.5rem 0 0;
-  max-width: 34rem;
+  max-width: 30rem;
   font-size: var(--text-xl);
   line-height: 1.6;
   color: var(--on-ground-2);
@@ -833,6 +889,7 @@ h1, h2, h3, h4 {
   text-wrap: pretty;
 }
 .hero__cta { margin-top: 2rem; display: flex; gap: .75rem; justify-content: flex-start; flex-wrap: wrap; }
+.hero__cta--center { justify-content: center; }
 .hero__note {
   margin-top: 3rem;
   font-size: .75rem;
@@ -898,7 +955,7 @@ h1, h2, h3, h4 {
 }
 .stat__label {
   position: relative; z-index: 1;
-  margin-top: .75rem;
+  margin-top: .625rem;
   font-size: var(--text-s);
   color: var(--on-ground-2);
   line-height: 1.5;
@@ -906,7 +963,10 @@ h1, h2, h3, h4 {
 }
 
 /* ------------------------------------------------------------ section head */
-.head { max-width: 46rem; }
+/* Every division opens with the same block, so its height is charged twelve
+   times over. Capped tighter and given less air beneath. */
+.head { max-width: 44rem; }
+.head p { margin-top: .75rem; max-width: 62ch; }
 .head--center { margin-inline: auto; text-align: center; }
 .head h2 {
   margin-top: 1.25rem;
@@ -939,9 +999,11 @@ h1, h2, h3, h4 {
    ------------------------------------------------------------------------ */
 .steps {
   position: relative;
-  margin-top: clamp(3.5rem, 7vw, 6rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
   display: grid;
-  gap: clamp(4rem, 8vw, 7.5rem);
+  /* the five chapters are the one division that is deliberately longer than a
+     screen — but each CHAPTER is sized to one */
+  gap: clamp(3rem, 6vw, 5rem);
   --steps-progress: 0;
 }
 
@@ -1183,20 +1245,17 @@ h1, h2, h3, h4 {
 .screen__bar {
   display: flex; align-items: center; gap: .375rem;
   padding: .8125rem 1rem;
-  /* A header strip, not window chrome: the same surface family as the panel,
-     one step down in tone, separated by a hairline. The mac traffic lights
-     are gone — they framed the mock as somebody's desktop screenshot rather
-     than as the product itself. */
+  /* Solid brand blue with white type — the product's own title bar. */
   border-radius: calc(var(--screen-radius) - var(--screen-border))
                  calc(var(--screen-radius) - var(--screen-border)) 0 0;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-2);
+  border-bottom: 1px solid var(--brand-deep);
+  background: linear-gradient(180deg, var(--brand-600), var(--brand));
 }
 /* the dots stay in the markup but are not drawn */
 .screen__dot { display: none; }
 .screen__title {
   margin-left: 0;
-  color: var(--muted);
+  color: #ffffff;
   text-transform: none;
   letter-spacing: .02em;
   font-size: var(--label);
@@ -1330,7 +1389,7 @@ h1, h2, h3, h4 {
 .grid-4 {
   position: relative;
   z-index: 1;
-  margin-top: clamp(3rem, 5vw, 4rem);
+  margin-top: clamp(1.5rem, 3.5svh, 3rem);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
@@ -1531,11 +1590,14 @@ h1, h2, h3, h4 {
   pointer-events: none;
   fill: none;
   stroke: var(--line-soft);
-  stroke-width: var(--line-w);
+  /* heavier than the other drawn fields: this section is a single list on an
+     otherwise empty plane, so the curves are carrying it rather than sitting
+     behind something */
+  stroke-width: 2.25;
   -webkit-mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
           mask-image: radial-gradient(ellipse 46% 60% at 50% 50%, transparent 42%, #000 88%);
 }
-.curves__counter { stroke: var(--line-soft); opacity: .6; }
+.curves__counter { stroke: var(--line); opacity: .75; stroke-width: 1.6; }
 
 /* the curves draw themselves in when the section arrives */
 .curves path {
@@ -1558,7 +1620,7 @@ h1, h2, h3, h4 {
 #faq .container { position: relative; z-index: 1; }
 
 .faq {
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  margin-top: clamp(1.5rem, 3.5svh, 3rem);
   max-width: 52rem;
   margin-inline: auto;
   border-radius: var(--r-xl);
@@ -1568,10 +1630,29 @@ h1, h2, h3, h4 {
   padding-inline: 2rem;
 }
 .faq details + details { border-top: 1px solid var(--border); }
+
+/* Open and close on a real transition rather than a jump. `interpolate-size`
+   lets a height animate to `auto`, and `allow-discrete` carries
+   content-visibility across the same 450ms — without both, the panel snaps
+   open and the page shifts under the pointer. Browsers without support get
+   the ordinary instant disclosure, which is correct, just not animated. */
+@supports (interpolate-size: allow-keywords) {
+  :root { interpolate-size: allow-keywords; }
+  .faq details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size .45s var(--ease),
+      opacity .3s var(--ease),
+      content-visibility .45s allow-discrete;
+  }
+  .faq details[open]::details-content { block-size: auto; opacity: 1; }
+}
 .faq summary {
   list-style: none;
   cursor: pointer;
-  padding: 1.625rem 3rem 1.625rem 0;
+  padding: 1.25rem 3rem 1.25rem 0;
   font-size: var(--title-xs);
   font-weight: 500;
   color: var(--heading);
@@ -1583,6 +1664,7 @@ h1, h2, h3, h4 {
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after {
   content: "+";
+  transition: transform .45s var(--ease), background-color .3s var(--ease), border-color .3s var(--ease);
   position: absolute;
   right: 0; top: 50%;
   transform: translateY(-50%);
@@ -1598,6 +1680,7 @@ h1, h2, h3, h4 {
 }
 .faq details[open] summary::after {
   content: "–";
+  transform: translateY(-50%) rotate(180deg);
   background: var(--brand-soft);
   border-color: var(--border-live);
   color: var(--brand-deep);
@@ -1623,7 +1706,7 @@ h1, h2, h3, h4 {
 .cta {
   position: relative;
   overflow: hidden;
-  padding: clamp(4rem, 8vw, 7rem) 2rem;
+  padding: clamp(3rem, 6vw, 5rem) 2rem;
   border-radius: var(--r-xl);
   text-align: center;
   color: var(--on-ground);
@@ -1781,7 +1864,10 @@ h1, h2, h3, h4 {
   }
 
   .nav { top: .625rem; height: 3.25rem; border-radius: .875rem;
+         /* the dropdown needs the full width to open into */
+         width: calc(100% - 2 * var(--gutter));
          margin-bottom: calc(-3.25rem - var(--hero-inset) - var(--nav-gap)); }
+  .nav__toggle { margin-left: auto; }
   .nav__links { display: none; }
   .nav__toggle { display: block; margin-left: auto; }
   .nav--open .nav__links {
@@ -1819,15 +1905,13 @@ h1, h2, h3, h4 {
     font-size: clamp(1.75rem, 7.6vw, 2.375rem);
     line-height: 1.22;
     max-width: none;
-    -webkit-text-stroke-width: .018em;
-    letter-spacing: 0;
+    letter-spacing: -.02em;
   }
   .cta h2 {
     font-size: clamp(1.5rem, 6.2vw, 1.875rem);
     line-height: 1.24;
     max-width: none;
-    -webkit-text-stroke-width: .018em;
-    letter-spacing: 0;
+    letter-spacing: -.02em;
   }
   .hero__sub { font-size: var(--text-xl); max-width: none; }
   .head h2 { font-size: var(--title-l); }
@@ -1857,7 +1941,10 @@ h1, h2, h3, h4 {
 
   /* sections get their air back: 11vw of padding at each end of a phone
      screen is most of a viewport spent on nothing */
-  :root { --section-y: clamp(3.5rem, 12vw, 5rem); }
+  /* phones: a division still fills the screen, but content that cannot fit
+     is allowed to run rather than be clipped */
+  .section { min-height: 0; padding-block: calc(clamp(2.5rem, 6svh, 4rem) + 2rem) clamp(2.5rem, 6svh, 4rem); }
+  .section--tight { padding-block: calc(clamp(2rem, 5svh, 3.25rem) + 2rem) clamp(2rem, 5svh, 3.25rem); }
 
   /* 44px minimum on everything you tap */
   .nav__toggle { padding: .6875rem; }
@@ -2037,7 +2124,7 @@ h1, h2, h3, h4 {
    scale: the change was being overridden here. */
 /* Restated at this specificity, or `.js-reveal.is-in { transform: none }`
    beats them — it ties on specificity and wins on order. */
-.stat.js-reveal.is-in:hover { transform: scale(1.015); }
+.stat.js-reveal.is-in:hover { transform: scale(1.04); }
 .card.js-reveal.is-in:hover { transform: scale(1.015); }
 @media (prefers-reduced-motion: reduce) {
   .stat.js-reveal.is-in:hover,
@@ -2100,19 +2187,17 @@ h1, h2, h3, h4 {
      letterforms unevenly. Stroking the glyphs in their own colour thickens
      every stem by the same amount instead — a real weight increase, not a
      simulated one. */
-  font-weight: 400;
-  -webkit-text-stroke: .026em currentColor;
-  paint-order: stroke fill;
-  letter-spacing: .004em;        /* the stroke eats into the sidebearings */
-  line-height: 1.34;
+  font-weight: 800;              /* Manrope has real weights; no stroke hack */
+  letter-spacing: -.03em;
+  line-height: 1.06;
   text-transform: none;
-  max-width: 24ch;
+  max-width: 22ch;
 }
 
 /* The accent line is gradient-filled, so its fill is transparent and a
    currentColor stroke would outline nothing. It takes the deep end of the
    ramp instead, which keeps the gradient inside a solid cobalt letterform. */
-.hero__accent { -webkit-text-stroke: .026em var(--brand-700); }
+.hero__accent { -webkit-text-stroke: 0; }
 
 /* ---- Space Grotesk: every other heading, and anything you click ---- */
 h2, h3, h4,
@@ -2211,7 +2296,10 @@ p, li { letter-spacing: 0; }
 }
 
 /* ---- the rest of the type on the dark stages ---- */
-.hero__sub, .cta p { color: var(--on-ground-2); }
+.cta p { color: var(--on-ground-2); }
+.hero__sub { color: var(--body); }
+/* the second sentence is the claim, so it carries the weight and the ink */
+.hero__sub strong { color: var(--heading); font-weight: 600; }
 /* the band is light, so its lede takes the cobalt accent, not the dark ramp */
 .band .head p { color: var(--brand-deep); }
 .hero__note { color: var(--on-ground-3); }
@@ -2909,11 +2997,15 @@ p, li { letter-spacing: 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: .5rem;
+  /* One geometry for both states. Track 76px, rail padding 5px, knob 28px —
+     so the knob travels 76 - 10 - 28 = 38px, and each icon sits in its own
+     28px square at the same padding. Both ends line up by construction
+     rather than by two separately guessed offsets. */
+  gap: 0;
   width: 4.75rem; height: 2.375rem;
-  padding: 0 .5rem;
+  padding: 0 .3125rem;
   border-radius: var(--pill);
-  border: 1px solid rgba(21, 87, 232, .20);
+  border: 1px solid var(--border-live);
   background: rgba(255, 255, 255, .72);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
           backdrop-filter: blur(14px) saturate(180%);
@@ -2923,6 +3015,8 @@ p, li { letter-spacing: 0; }
 }
 .theme__sun, .theme__moon {
   position: relative; z-index: 1;
+  width: 1.75rem; height: 1.75rem;
+  display: grid; place-items: center;
   transition: opacity .35s var(--ease), color .35s var(--ease);
 }
 /* whichever icon the knob is sitting under goes white — cobalt on cobalt is
@@ -2936,21 +3030,27 @@ p, li { letter-spacing: 0; }
   position: absolute;
   left: .3125rem; top: 50%;
   width: 1.75rem; height: 1.75rem;
-  margin-top: -.875rem;
+  margin-top: -.875rem;   /* half the knob, so it centres on the rail */
   border-radius: 50%;
   background: linear-gradient(180deg, var(--brand-lit), var(--brand));
   box-shadow: 0 3px 10px rgba(21, 87, 232, .38);
   transition: transform .45s var(--ease), background .45s var(--ease);
 }
-.theme:hover .theme__track { border-color: rgba(21, 87, 232, .38); }
+.theme:hover .theme__track { border-color: var(--brand); }
 .theme:focus-visible { outline: none; }
 .theme:focus-visible .theme__track { box-shadow: 0 0 0 3px rgba(36, 107, 253, .35); }
 
-.theme[aria-pressed="true"] .theme__knob { transform: translateX(2.125rem); }
+.theme[aria-pressed="true"] .theme__knob { transform: translateX(2.375rem); }
 .theme[aria-pressed="true"] .theme__sun  { opacity: .55; }
 .theme[aria-pressed="true"] .theme__moon { opacity: 1; }
 
-@media (max-width: 720px) { .theme__track { width: 4.25rem; height: 2.125rem; } }
+@media (max-width: 720px) {
+  /* same construction, one size down: 68 - 10 - 24 = 34px of travel */
+  .theme__track { width: 4.25rem; height: 2.125rem; }
+  .theme__sun, .theme__moon, .theme__knob { width: 1.5rem; height: 1.5rem; }
+  .theme__knob { margin-top: -.75rem; }
+  .theme[aria-pressed="true"] .theme__knob { transform: translateX(2.125rem); }
+}
 
 /* ---- the dark palette --------------------------------------------------- */
 :root[data-theme="dark"] {
@@ -3032,7 +3132,7 @@ p, li { letter-spacing: 0; }
   border-color: rgba(122, 160, 224, .22);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 10px 30px rgba(0, 0, 0, .45);
 }
-:root[data-theme="dark"] .nav--scrolled { background: rgba(8, 20, 42, .60); }
+:root[data-theme="dark"] .nav--scrolled { background: rgba(12, 23, 36, .90); }
 :root[data-theme="dark"] .nav::before { opacity: .18; }
 :root[data-theme="dark"] .nav--open .nav__links { background: rgba(8, 20, 42, .96); }
 :root[data-theme="dark"] .nav__link { color: var(--body); }
@@ -3097,8 +3197,9 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .flow__pulse--b { stroke: #a8c6ff; }
 :root[data-theme="dark"] #how::before {
   background-image:
-    radial-gradient(rgba(122, 160, 224, .34) .5px, transparent .5px),
-    radial-gradient(rgba(114, 164, 255, .24) .7px, transparent .7px);
+    radial-gradient(rgba(143, 180, 251, .30) .55px, transparent .55px),
+    radial-gradient(rgba(143, 180, 251, .20) .75px, transparent .75px);
+  background-size: 9px 9px, 27px 27px;
 }
 :root[data-theme="dark"] .dotlens {
   background-image:
@@ -3138,9 +3239,10 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .step__label { color: #72a4ff; }
 :root[data-theme="dark"] .screen__title { color: var(--muted); }
 :root[data-theme="dark"] .screen__bar {
-  background: rgba(122, 160, 224, .07);
-  border-bottom-color: rgba(122, 160, 224, .16);
+  background: linear-gradient(180deg, var(--brand-700), var(--brand-800));
+  border-bottom-color: var(--brand-900);
 }
+:root[data-theme="dark"] .screen__title { color: #ffffff; }
 
 /* ---- the orbit -----------------------------------------------------------
    Its core, readout, tracks and chips were repainted as light glass when the
@@ -3203,7 +3305,7 @@ p, li { letter-spacing: 0; }
 
 /* ---- the trail: four departments, as domain cards ---- */
 .trail {
-  margin: clamp(2rem, 4vw, 3rem) 0 0;
+  margin: clamp(1.25rem, 3svh, 2.25rem) 0 0;
   padding: 0;
   list-style: none;
   display: grid;
@@ -3215,7 +3317,7 @@ p, li { letter-spacing: 0; }
   position: relative;
   overflow: hidden;
   counter-increment: trail;
-  padding: 1.75rem;
+  padding: 1.375rem 1.5rem;
   border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
   background: var(--panel);
@@ -3262,9 +3364,11 @@ p, li { letter-spacing: 0; }
 /* ---- the chain, the questions and the disappearing list ------------------
    All three are the module-row pattern from the domain cards: one panel, rows
    separated by hairlines, a mono index on the left, a chevron on the right. */
-.chain, .asks, .gone {
-  margin: clamp(2rem, 4vw, 3rem) auto 0;
-  padding: 0 1.75rem;
+/* the panel centres in the column; the rows inside stay left-aligned, since
+   a list of consequences is read down its left edge, not from its middle */
+.chain, .gone {
+  margin: clamp(1.25rem, 3svh, 2.25rem) auto 0;
+  padding: .25rem 1.75rem;
   list-style: none;
   max-width: 52rem;
   border-radius: var(--r-lg);
@@ -3272,11 +3376,12 @@ p, li { letter-spacing: 0; }
   background: var(--panel);
   box-shadow: var(--panel-shadow);
 }
+.asks li:nth-last-child(2) { border-bottom: 0; }   /* both columns end clean */
 .chain li, .asks li, .gone li {
   display: flex;
   align-items: center;
   gap: .875rem;
-  padding: .875rem .125rem;
+  padding: .6875rem .125rem;
   font-size: var(--text-l);
   color: var(--heading-2);
   border-bottom: 1px solid var(--panel-border);
@@ -3305,7 +3410,7 @@ p, li { letter-spacing: 0; }
 }
 .asks__title {
   font-family: var(--ui-font);
-  font-size: var(--title-s);
+  font-size: var(--title-xs);
   font-weight: 700;
   letter-spacing: -.025em;
   color: var(--heading);
@@ -3322,26 +3427,16 @@ p, li { letter-spacing: 0; }
 }
 .gone--last::before { background: var(--brand) !important; opacity: 1 !important; }
 
-/* ---- the workflow chain: five stages across ---- */
-.chain--wide {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0;
-  padding: 1.25rem 1.75rem;
+
+/* the campus cards state their size the way the domain cards do */
+.card__count {
+  margin-top: .25rem;
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
-.chain--wide li {
-  display: block;
-  border-bottom: 0;
-  border-left: 1px solid var(--panel-border);
-  padding: .25rem 0 .25rem 1rem;
-  font-family: var(--ui-font);
-  font-weight: 600;
-  color: var(--heading);
-}
-.chain--wide li:first-child { border-left: 0; padding-left: 0; }
-.chain--wide li:hover { padding-left: 1rem; }
-.chain--wide li:first-child:hover { padding-left: 0; }
-.chain--wide .chain__i { display: block; margin-bottom: .375rem; }
 
 /* ---- capability chips: the tag family, at list size ---- */
 .chips {
@@ -3364,7 +3459,8 @@ p, li { letter-spacing: 0; }
   color: var(--brand-800);
   white-space: nowrap;
 }
-.chips--center { justify-content: center; margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+.asks__foot { margin-top: clamp(1rem, 2.5svh, 1.75rem); }
+.chips--center { justify-content: center; margin-top: clamp(.75rem, 2svh, 1.25rem); }
 
 .pull--center { max-width: 44rem; margin-inline: auto; text-align: center; }
 .cta__coda { margin-top: 1.75rem; font-size: var(--text-l); }
@@ -3372,7 +3468,6 @@ p, li { letter-spacing: 0; }
 
 @media (max-width: 1100px) {
   .trail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .chain--wide { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem 0; }
 }
 @media (max-width: 720px) {
   .trail { grid-template-columns: 1fr; gap: .75rem; }
@@ -3380,9 +3475,6 @@ p, li { letter-spacing: 0; }
   .trail li::after { font-size: 3.5rem; }
   .chain, .asks, .gone { padding: 0 1.25rem; }
   .chain li, .asks li, .gone li { font-size: var(--text-m); padding: .75rem .125rem; }
-  .chain--wide { grid-template-columns: 1fr; padding: 1rem 1.25rem; }
-  .chain--wide li { border-left: 0; padding-left: 0; border-bottom: 1px solid var(--panel-border); padding-block: .625rem; }
-  .chain--wide li:last-child { border-bottom: 0; }
 }
 
 :root[data-theme="dark"] .chips li {
@@ -3391,3 +3483,540 @@ p, li { letter-spacing: 0; }
   color: #a8c6ff;
 }
 :root[data-theme="dark"] .trail li::before { background: rgba(114, 164, 255, .16); color: #72a4ff; }
+
+/* ==========================================================================
+   The solar system
+   --------------------------------------------------------------------------
+   Nine domains orbiting one record. Geometry is in em with the stage's
+   font-size derived from its own width, so every radius scales together
+   rather than the nodes flying off a shrunken stage.
+
+   Each node counter-rotates against its ring, and the counter-rotation
+   carries the centring translate in every keyframe — animating a bare
+   rotate() drops the translate and matrix-interpolates the label off its dot.
+   ========================================================================== */
+.sol {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 18rem;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  margin-top: clamp(1rem, 2.5svh, 2rem);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 40rem;
+}
+.sol__stage {
+  --size: min(34rem, 52svh, 46vw);
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  font-size: calc(var(--size) / 42);
+  margin-inline: auto;
+}
+.sol__orbit {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  /* hairlines: at 1px the three rings read as drawn tubes around the type */
+  border: .5px solid var(--border);
+}
+.sol__orbit--1 { width: 13em; height: 13em; opacity: .4; }
+.sol__orbit--2 { width: 22em; height: 22em; opacity: .5; }
+/* the third circle is the path the nine actually sit on */
+.sol__orbit--3 { width: 31em; height: 31em; border-style: dashed; border-color: var(--border-live); opacity: .35; }
+
+.sol__core {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 11em; height: 11em;
+  border-radius: 50%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  border: 1px solid var(--brand-300);
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(16,24,32,.05), 0 20px 50px rgba(21, 94, 239, .14);
+}
+.sol__core-n {
+  font-family: var(--ui-font);
+  font-size: 2.25rem; font-weight: 800;
+  letter-spacing: -.04em;
+  color: var(--brand);
+  line-height: 1;
+}
+.sol__core-l {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sol__ring {
+  position: absolute; inset: 0;
+  margin: 0; padding: 0;
+  list-style: none;
+  pointer-events: none;      /* rings are full-size boxes; only nodes are hit */
+  animation: sol-spin var(--p) linear infinite;
+}
+@keyframes sol-spin { to { transform: rotate(360deg); } }
+
+.sol__node {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  transform: rotate(var(--a)) translate(var(--r));
+}
+.sol__spoke {
+  position: absolute;
+  right: 0; top: 0;
+  width: var(--r); height: .5px;
+  transform-origin: 100% 50%;
+  background: linear-gradient(90deg, rgba(21, 94, 239, 0), var(--brand));
+  opacity: 0;
+  transition: opacity .35s var(--ease);
+}
+.sol__btn {
+  /* Every node is the same box, and the DOT is what sits on the circle. As
+     pills of differing widths they each straddled the ring by a different
+     amount, so nine dots never lined up on one path. Fixed width, dot on
+     top, label centred beneath: identical geometry at all nine positions. */
+  position: absolute;
+  left: 0; top: 0;
+  display: grid;
+  justify-items: center;
+  gap: .3125rem;
+  width: 8.5em;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--heading-2);
+  cursor: pointer;
+  pointer-events: auto;
+  text-align: center;
+  font-family: var(--ui-font);
+  font-size: .8125rem; font-weight: 600; letter-spacing: -.012em;
+  line-height: 1.2;
+  /* -50% across, but only the dot's own half-height up: that puts the dot
+     centre exactly on the ring and hangs the label below it */
+  transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a)));
+  transform-origin: 50% .28em;
+  animation-name: sol-upright-cw;
+  animation-duration: var(--p);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease), color .25s var(--ease);
+}
+@keyframes sol-upright-cw {
+  from { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a))); }
+  to   { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a) - 360deg)); }
+}
+.sol__dot {
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid var(--brand);
+  box-sizing: border-box;
+  transition: background-color .25s var(--ease), transform .25s var(--ease);
+}
+/* the nine run in order from twelve o'clock, so each one states its place */
+.sol__idx {
+  font-family: var(--mono);
+  font-size: .5625rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+.sol__btn:hover, .sol__btn:focus-visible { color: var(--brand); outline: none; }
+.sol__btn:hover .sol__dot, .sol__btn:focus-visible .sol__dot {
+  background: var(--brand);
+  transform: scale(1.3);
+}
+/* the whole system holds still while one domain is being read */
+.sol__stage:has(.sol__btn:hover) .sol__ring,
+.sol__stage:has(.sol__btn:hover) .sol__btn,
+.sol__stage:focus-within .sol__ring,
+.sol__stage:focus-within .sol__btn,
+.sol__stage.is-pinned .sol__ring,
+.sol__stage.is-pinned .sol__btn { animation-play-state: paused; }
+.sol__node.is-active .sol__spoke { opacity: 1; }
+.sol__node.is-active .sol__btn { color: var(--brand); }
+.sol__node.is-active .sol__dot { background: var(--brand); transform: scale(1.3); }
+
+.sol__detail {
+  display: grid;
+  gap: .5rem;
+  max-height: 60svh;
+  align-content: center;
+  padding: 1.75rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  box-shadow: var(--panel-shadow);
+  min-height: 11rem;
+}
+.sol__detail-count {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--brand);
+}
+.sol__detail-name {
+  font-family: var(--ui-font);
+  font-size: var(--title-xs); font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--heading);
+}
+.sol__detail-mods { font-size: var(--text-s); line-height: 1.6; color: var(--muted); }
+
+@media (max-width: 1100px) { .sol { grid-template-columns: 1fr; } }
+/* phones get the swipe deck instead */
+@media (max-width: 720px) { .sol { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .sol__ring, .sol__btn { animation: none; }
+}
+:root[data-theme="dark"] .sol__orbit { border-color: rgba(143, 180, 251, .16); }
+:root[data-theme="dark"] .sol__core { background: var(--panel-solid); }
+:root[data-theme="dark"] .sol__btn { color: var(--heading-2); }
+:root[data-theme="dark"] .sol__dot { background: var(--panel-solid); }
+
+/* ==========================================================================
+   The campus bento
+   --------------------------------------------------------------------------
+   Eight tiles at three different sizes rather than eight identical cards, and
+   each one carries a small picture of the thing it describes — a route with a
+   bus part-way along it, a bed grid with occupancy, a booking calendar, an
+   alert row that is lit. The chip lists are gone: a tile that shows you the
+   interface does not need to list its nouns.
+   ========================================================================== */
+.bento {
+  margin-top: clamp(1.25rem, 3svh, 2.5rem);
+  display: grid;
+  /* Five tiles now the duplicated three are gone: the wide one plus one on
+     the top row, three beneath. Two rows, no empty cells. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+  gap: .875rem;
+}
+.bento__tile {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.375rem;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  box-shadow: var(--panel-shadow);
+  transition: border-color .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease);
+}
+.bento__tile:hover {
+  transform: scale(1.01);
+  border-color: var(--panel-border-2);
+  box-shadow: var(--panel-shadow-2);
+}
+.bento__tile--lg { grid-column: span 2; }
+
+.bento__count {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--brand);
+}
+.bento__tile h3 {
+  margin-top: .5rem;
+  font-family: var(--ui-font);
+  font-size: var(--title-xs);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--heading);
+}
+.bento__tile p {
+  margin-top: .375rem;
+  font-size: var(--text-s);
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 34ch;
+}
+/* the picture takes the space the copy leaves, pinned to the floor */
+.bento__viz { margin-top: auto; padding-top: .875rem; width: 100%; height: auto; display: block;
+              max-height: clamp(4.5rem, 13svh, 9rem); }
+
+/* --- the abstract map on the transport tile --- */
+.bento__viz--map { padding-top: 1.25rem; }
+.m-block { fill: var(--surface-2); stroke: var(--border); }
+.m-roads path { stroke: var(--border); stroke-width: 6; stroke-linecap: round; opacity: .7; }
+.m-water { stroke: rgba(18, 165, 148, .35); stroke-width: 7; stroke-linecap: round; }
+
+/* the route: a faint full line with a lit dash travelling along it */
+.m-route { stroke: var(--brand-300); stroke-width: 3; stroke-linecap: round; }
+.m-route-lit {
+  stroke: var(--brand);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 90 620;
+  animation: m-run 14s linear infinite;
+}
+@keyframes m-run { to { stroke-dashoffset: -710; } }
+
+.m-stops circle { fill: var(--surface); stroke: var(--brand); stroke-width: 2; }
+.m-school rect { fill: var(--brand-soft); stroke: var(--brand); stroke-width: 1.5; }
+.m-school path { fill: var(--brand); }
+
+/* the vehicle runs the same geometry as a motion path, so it can never
+   drift off the road the way hand-keyed coordinates would */
+.m-bus {
+  offset-path: path("M24 196C64 196 78 150 122 150s58 44 104 44 66-52 106-52 44 26 44 26");
+  offset-rotate: 0deg;
+  animation: m-drive 14s linear infinite;
+}
+.m-bus circle { fill: var(--brand); }
+.m-bus-halo { fill: var(--brand); opacity: .18; }
+@keyframes m-drive { to { offset-distance: 100%; } }
+
+.m-badge rect { fill: var(--surface); stroke: var(--border); }
+.m-badge-pip { fill: var(--teal); }
+.m-badge-t { stroke: var(--border-live); stroke-width: 2.5; stroke-linecap: round; opacity: .6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .m-route-lit, .m-bus { animation: none; }
+  .m-bus { offset-distance: 46%; }
+}
+:root[data-theme="dark"] .m-block { fill: rgba(143,180,251,.06); stroke: rgba(143,180,251,.14); }
+:root[data-theme="dark"] .m-roads path { stroke: rgba(143,180,251,.14); }
+:root[data-theme="dark"] .m-stops circle,
+:root[data-theme="dark"] .m-badge rect { fill: var(--panel-solid); }
+:root[data-theme="dark"] .m-school rect { fill: rgba(21,94,239,.25); }
+
+/* --- the shared vocabulary of the little pictures --- */
+.b-line   { stroke: var(--border-live); stroke-width: 1.5; stroke-linecap: round; }
+.b-stops circle { fill: var(--surface); stroke: var(--brand); stroke-width: 1.5; }
+.b-bus    { fill: var(--brand); }
+.b-chip   { fill: var(--brand-soft); stroke: var(--brand-300); }
+.b-chip-t { stroke: var(--brand); stroke-width: 1.5; stroke-linecap: round; }
+.b-bed    { fill: var(--surface-2); stroke: var(--border); }
+.b-bed--on{ fill: var(--brand-soft); stroke: var(--brand-300); }
+.b-panel  { fill: var(--surface-2); stroke: var(--border); }
+.b-panel--on { fill: var(--brand-soft); stroke: var(--brand-300); }
+.b-td     { stroke: var(--border-live); stroke-width: 2.5; stroke-linecap: round; opacity: .5; }
+.b-td--alert { stroke: var(--teal); opacity: .9; }
+.b-pip    { fill: var(--surface); stroke: var(--border); }
+.b-pip--on{ fill: var(--brand); stroke: var(--brand); }
+.b-row    { fill: var(--surface-2); stroke: var(--border); }
+.b-row--alert { fill: rgba(18, 165, 148, .10); stroke: rgba(18, 165, 148, .40); }
+.b-dot-alert { fill: var(--teal); }
+.b-slot   { fill: var(--surface-2); stroke: var(--border); }
+.b-slot--on { fill: var(--brand-soft); stroke: var(--brand-300); }
+.b-bar    { fill: var(--brand-soft); }
+.b-bar--on{ fill: var(--brand); }
+.b-axis   { stroke: var(--border); stroke-width: 1; }
+.b-stage  { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+.b-stage--on { fill: var(--brand); stroke: var(--brand); }
+
+@media (max-width: 1100px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .bento { grid-template-columns: 1fr; gap: .75rem; }
+  .bento__tile--lg { grid-column: span 1; }
+  .bento__tile { padding: 1.25rem; }
+}
+:root[data-theme="dark"] .b-bed, :root[data-theme="dark"] .b-panel,
+:root[data-theme="dark"] .b-row, :root[data-theme="dark"] .b-slot {
+  fill: rgba(143, 180, 251, .07); stroke: rgba(143, 180, 251, .16);
+}
+:root[data-theme="dark"] .b-bed--on, :root[data-theme="dark"] .b-panel--on,
+:root[data-theme="dark"] .b-slot--on { fill: rgba(21, 94, 239, .28); stroke: rgba(143, 180, 251, .4); }
+:root[data-theme="dark"] .b-stops circle, :root[data-theme="dark"] .b-pip,
+:root[data-theme="dark"] .b-stage { fill: var(--panel-solid); }
+
+/* ==========================================================================
+   The security ladder
+   --------------------------------------------------------------------------
+   A dark stage and an access path, not another row of chips. Every request
+   descends the same six steps; the capabilities sit either side of the spine
+   rather than being listed as twelve equal labels.
+   ========================================================================== */
+.stage-dark {
+  background: var(--ground);
+  color: #c8d3e0;
+  --on-ground:    #c8d3e0;
+  --on-ground-2:  #9fb0c4;
+  --on-ground-hi: #ffffff;
+}
+.stage-dark .head h2 { color: #ffffff; }
+.stage-dark .head p { color: #9fb0c4; }
+.stage-dark .eyebrow {
+  background: rgba(143, 180, 251, .10);
+  border-color: rgba(143, 180, 251, .22);
+  color: #8fb4fb;
+}
+
+.ladder {
+  margin-top: clamp(1.25rem, 3svh, 2.25rem);
+  display: grid;
+  gap: clamp(.875rem, 2.5svh, 1.5rem);
+}
+
+/* the path runs left to right: six steps in a row, joined by the rule that
+   passes behind them */
+.ladder__spine {
+  position: relative;
+  margin: 0; padding: 0;
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: .625rem;
+}
+.ladder__step {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: .1875rem;
+  padding: .875rem .875rem 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid rgba(143, 180, 251, .18);
+  background: rgba(143, 180, 251, .05);
+}
+/* the connector now runs across, from one step into the next */
+.ladder__step + .ladder__step::before {
+  content: "";
+  position: absolute;
+  left: -.625rem; top: 1.75rem;
+  width: .625rem; height: 1px;
+  background: rgba(143, 180, 251, .35);
+}
+.ladder__i {
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .1em;
+  color: #8fb4fb;
+}
+.ladder__t {
+  font-family: var(--ui-font);
+  font-weight: 700;
+  font-size: var(--text-s);
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  color: #ffffff;
+}
+.ladder__m {
+  font-family: var(--mono);
+  font-size: .625rem;
+  line-height: 1.45;
+  letter-spacing: .03em;
+  color: #7d8fa5;
+}
+
+/* the request travelling along the path */
+.ladder__step { animation: rung 7.5s ease-in-out infinite; }
+.ladder__step:nth-child(2) { animation-delay: .5s; }
+.ladder__step:nth-child(3) { animation-delay: 1s; }
+.ladder__step:nth-child(4) { animation-delay: 1.5s; }
+.ladder__step:nth-child(5) { animation-delay: 2s; }
+.ladder__step:nth-child(6) { animation-delay: 2.5s; }
+@keyframes rung {
+  0%, 6%   { border-color: var(--brand-500); background: rgba(21, 94, 239, .16); }
+  16%, 100%{ border-color: rgba(143, 180, 251, .18); background: rgba(143, 180, 251, .05); }
+}
+
+/* the capabilities sit above and below the path rather than either side */
+.ladder__flank {
+  margin: 0; padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .375rem .5rem;
+}
+.ladder__flank li {
+  padding: .3125rem .5625rem;
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(143, 180, 251, .18);
+  background: rgba(143, 180, 251, .05);
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #8a9cb2;
+}
+
+@media (prefers-reduced-motion: reduce) { .ladder__step { animation: none; } }
+@media (max-width: 900px) {
+  /* six across is unreadable on a phone; the path turns back down the page */
+  .ladder__spine { grid-auto-flow: row; }
+  .ladder__step + .ladder__step::before {
+    left: 1.75rem; top: -.625rem;
+    width: 1px; height: .625rem;
+  }
+  .ladder__flank { justify-content: flex-start; }
+}
+
+/* ---- the affordance ------------------------------------------------------
+   Nine buttons drifting on a circle look like a diagram, not a control. Three
+   things say otherwise: a standing instruction beside the readout, a slow
+   pulse on the dots so they read as live, and a ring that expands off the
+   hint the way a tap indicator does.
+   ------------------------------------------------------------------------ */
+.sol__side { display: grid; gap: .75rem; }
+.sol__hint {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  font-family: var(--mono);
+  font-size: var(--label);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.sol__hint-ring {
+  position: relative;
+  flex: none;
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.sol__hint-ring::after {
+  content: "";
+  position: absolute;
+  inset: -.3125rem;
+  border-radius: 50%;
+  border: 1px solid var(--brand);
+  animation: hint-ping 2.4s ease-out infinite;
+}
+@keyframes hint-ping {
+  0%   { transform: scale(.6); opacity: .9; }
+  70%  { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+/* one instruction or the other, never both */
+.sol__hint-tap { display: none; }
+@media (hover: none) {
+  .sol__hint-hover { display: none; }
+  .sol__hint-tap { display: inline; }
+}
+
+/* the dots breathe, so the ring reads as live rather than printed */
+.sol__dot { animation: dot-live 3.6s ease-in-out infinite; }
+.sol__node:nth-child(2) .sol__dot { animation-delay: -.4s; }
+.sol__node:nth-child(3) .sol__dot { animation-delay: -.8s; }
+.sol__node:nth-child(4) .sol__dot { animation-delay: -1.2s; }
+.sol__node:nth-child(5) .sol__dot { animation-delay: -1.6s; }
+.sol__node:nth-child(6) .sol__dot { animation-delay: -2s; }
+.sol__node:nth-child(7) .sol__dot { animation-delay: -2.4s; }
+.sol__node:nth-child(8) .sol__dot { animation-delay: -2.8s; }
+.sol__node:nth-child(9) .sol__dot { animation-delay: -3.2s; }
+@keyframes dot-live {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(21, 94, 239, .35); }
+  50%      { box-shadow: 0 0 0 .25rem rgba(21, 94, 239, 0); }
+}
+
+/* and the label says it is a control when you reach it */
+.sol__btn:hover .sol__label, .sol__btn:focus-visible .sol__label {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sol__hint-ring::after, .sol__dot { animation: none; }
+}

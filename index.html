@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <!-- Applied before first paint: reading this after the stylesheet would show
@@ -66,8 +66,8 @@
     </button>
 
     <nav class="nav__links" aria-label="Primary">
-      <a class="nav__link" href="#scale">Modules</a>
-      <a class="nav__link" href="#how">Workflows</a>
+      <a class="nav__link" href="#scale">Platform</a>
+      <a class="nav__link" href="#how">Modules</a>
       <a class="nav__link" href="#campus">Campus</a>
       <a class="nav__link" href="#security">Security</a>
     </nav>
@@ -119,6 +119,7 @@
            as travelling rather than sitting still -->
       <use href="#arcset" class="flow__pulse"/>
       <use href="#arcset" class="flow__pulse flow__pulse--b"/>
+      <use href="#arcset" class="flow__pulse flow__pulse--c"/>
   </svg>
 
   <div class="container">
@@ -126,14 +127,12 @@
       <span class="hero__accent">Without asking five people.</span></h1>
 
     <p class="hero__sub">
-      Admissions knows one thing. Accounts knows another. Teachers have their own records.
-      Administration has another spreadsheet. Vivencia brings it together — from the first
-      admission enquiry to the final certificate.
+      Admissions, accounts, teachers and administration each keep their own version.
+      <strong>Vivencia keeps one.</strong>
     </p>
 
     <div class="hero__cta">
       <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">See Vivencia in action</a>
-      <a class="btn btn--ghost" href="#scale">Explore all modules</a>
     </div>
 
     <p class="hero__note">No card. No install. Open it in your browser.</p>
@@ -195,7 +194,7 @@
     <span class="plate__stamp">1 / 1</span>
   </div>
   <div class="container">
-    <div class="head">
+    <div class="head head--center">
       <span class="eyebrow">The moment it clicks</span>
       <h2 id="record-title">Enter it once. Let the institution use it everywhere.</h2>
       <p>An applicant becomes a student — and the student does not have to be rebuilt at
@@ -488,8 +487,118 @@
     <div class="head">
       <span class="eyebrow">The scale</span>
       <h2 id="scale-title">How much of your institution can Vivencia run?</h2>
-      <p>Fifty-four modules and four hundred and ninety-six capabilities — and they are not
-         496 disconnected tools. They are one connected system.</p>
+      <p>Not a suite of disconnected tools. Nine domains, declared once and sharing one
+         record.</p>
+    </div>
+
+    <!-- the system, drawn as one: nine domains orbiting a single record. Each
+         is a real button; the readout beside it names what the domain holds. -->
+    <div class="sol" id="sol">
+      <div class="sol__stage">
+        <span class="sol__orbit sol__orbit--1" aria-hidden="true"></span>
+        <span class="sol__orbit sol__orbit--2" aria-hidden="true"></span>
+        <span class="sol__orbit sol__orbit--3" aria-hidden="true"></span>
+      <ul class="sol__ring" style="--p:240s" role="list">
+        <li class="sol__node" style="--a:-90.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Admissions &amp; Students" data-count="9 modules" data-mods="CRM · Applications · Enrollment · Student 360 · Guardians · Documents · Promotions · Transfers · Certificates">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">01</span>
+            <span class="sol__label">Admissions &amp; Students</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:-50.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Teaching &amp; Academics" data-count="8 modules" data-mods="Curriculum · Timetable · Attendance · LMS · Homework · Examinations · Report Cards · OBE">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">02</span>
+            <span class="sol__label">Teaching &amp; Academics</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:-10.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Money &amp; Administration" data-count="7 modules" data-mods="Fees · Finance · Scholarships · Payroll · Procurement · Inventory · Assets">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">03</span>
+            <span class="sol__label">Money &amp; Administration</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:30.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="People" data-count="7 modules" data-mods="HR · Faculty · Recruitment · Workload · Leave · Performance · Payroll">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">04</span>
+            <span class="sol__label">People</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:70.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Campus" data-count="8 modules" data-mods="Transport · Hostel · Library · Clinic · Facilities · Front Office · Cafeteria · Events">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">05</span>
+            <span class="sol__label">Campus</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:110.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Student Life" data-count="6 modules" data-mods="Counseling · Discipline · Health · Sports · Clubs · Activities">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">06</span>
+            <span class="sol__label">Student Life</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:150.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Institutional Growth" data-count="5 modules" data-mods="Placements · Alumni · Research · Accreditation · Quality">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">07</span>
+            <span class="sol__label">Institutional Growth</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:190.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Operations" data-count="6 modules" data-mods="Communication · Forms · Helpdesk · Approvals · Documents · Analytics">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">08</span>
+            <span class="sol__label">Operations</span>
+          </button>
+        </li>
+        <li class="sol__node" style="--a:230.00deg;--r:15.5em">
+          <span class="sol__spoke" aria-hidden="true"></span>
+          <button class="sol__btn" type="button"
+                  data-name="Platform &amp; Control" data-count="5 modules" data-mods="Security · Integrations · Configuration · Multi-campus · Data Management">
+            <span class="sol__dot" aria-hidden="true"></span>
+            <span class="sol__idx">09</span>
+            <span class="sol__label">Platform &amp; Control</span>
+          </button>
+        </li>
+      </ul>
+        <div class="sol__core">
+          <span class="sol__core-n">54</span>
+          <span class="sol__core-l">modules</span>
+        </div>
+      </div>
+
+      <div class="sol__side">
+        <p class="sol__hint">
+          <span class="sol__hint-ring" aria-hidden="true"></span>
+          <span class="sol__hint-hover">Hover a domain to see what it carries</span>
+          <span class="sol__hint-tap">Tap a domain to see what it carries</span>
+        </p>
+        <div class="sol__detail" id="solDetail" aria-live="polite">
+        <span class="sol__detail-count">496 capabilities</span>
+        <span class="sol__detail-name">One connected system</span>
+        <span class="sol__detail-mods">Nine domains on one institutional record.</span>
+        </div>
+      </div>
     </div>
 
     <div class="deck">
@@ -697,7 +806,7 @@
       <li>What's happening across campuses?</li>
     </ul>
 
-    <div class="head head--center" style="margin-top:2.5rem">
+    <div class="head head--center asks__foot">
       <h3 class="asks__title">Reports &amp; analytics</h3>
     </div>
     <ul class="chips" role="list"><li>Student Performance</li><li>Academic Risk</li><li>Subject Performance</li><li>Faculty Performance</li><li>Admission Funnel</li><li>Fee Collection</li><li>Outstanding Fees</li><li>Transport Usage</li><li>Hostel Occupancy</li><li>Library Usage</li></ul>
@@ -709,10 +818,6 @@
     <div class="head head--center">
       <span class="eyebrow">For the people using it</span>
       <h2 id="roles-title">Powerful software is useless if people avoid using it.</h2>
-      <p>Vivencia doesn't make every department learn a different product. Search, tables,
-         filters, forms and approvals behave the same way wherever you are — so someone
-         collecting a fee, marking attendance or receiving inventory is doing the same
-         four things in a different vocabulary.</p>
     </div>
 
     <div class="grid-4">
@@ -721,24 +826,77 @@
         <h3>Learn it once</h3>
         <p>One table engine, one drawer, one form pattern. Identical in a fee register, an
            attendance sheet and a stock receipt.</p>
+        <div class="card__viz" aria-hidden="true">
+          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+            <rect x=".5" y=".5" width="219" height="15" rx="3" class="v-head"/>
+            <path d="M96 4.5v7M150 4.5v7" class="v-rule"/>
+            <path d="M8 8h18M104 8h30M158 8h14" class="v-th"/>
+            <rect x="0" y="20" width="220" height="15" rx="3" class="v-sel"/>
+            <rect x="7" y="24" width="7" height="7" rx="1.5" class="v-box v-box--on"/>
+            <path d="M8.6 27.6l1.6 1.6 3-3.2" class="v-tick"/>
+            <path d="M20 27.5h44M104 27.5h22M158 27.5h34" class="v-td"/>
+            <rect x="7" y="43" width="7" height="7" rx="1.5" class="v-box"/>
+            <path d="M20 46.5h52M104 46.5h30M158 46.5h26" class="v-td"/>
+            <rect x="7" y="61" width="7" height="7" rx="1.5" class="v-box"/>
+            <path d="M20 64.5h38M104 64.5h18M158 64.5h40" class="v-td"/>
+          </svg>
+        </div>
       </div>
       <div class="card">
         <div class="card__icon i-coral" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
         <h3>Nobody sees all 496</h3>
         <p>A teacher sees what a teacher needs. Accounts sees finance. HR sees employees.
            One platform does not mean one screen for everyone.</p>
+        <div class="card__viz" aria-hidden="true">
+          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+            <rect x=".5" y=".5" width="63" height="71" rx="4" class="v-rail v-rail--on"/>
+            <path d="M10 13h30M10 26h38M10 39h24M10 52h34" class="v-td"/>
+            <rect x="6" y="21.5" width="46" height="9" rx="2" class="v-chip"/>
+            <rect x="78.5" y=".5" width="63" height="71" rx="4" class="v-rail"/>
+            <path d="M88 13h36M88 26h22M88 39h34M88 52h28" class="v-td"/>
+            <rect x="84" y="47.5" width="46" height="9" rx="2" class="v-chip"/>
+            <rect x="156.5" y=".5" width="63" height="71" rx="4" class="v-rail"/>
+            <path d="M166 13h24M166 26h34M166 39h30M166 52h20" class="v-td"/>
+            <rect x="162" y="8.5" width="46" height="9" rx="2" class="v-chip"/>
+          </svg>
+        </div>
       </div>
       <div class="card">
         <div class="card__icon i-green" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
         <h3>Parents and students</h3>
         <p>A controlled view of attendance, progress, communication and meetings — from the
            same system staff use, not yesterday's export.</p>
+        <div class="card__viz" aria-hidden="true">
+          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+            <path d="M6 8h4M6 22h4M6 36h4M6 50h4M6 64h4" class="v-gutter"/>
+            <path d="M20 8h34" class="v-key"/><path d="M60 8h26" class="v-val"/>
+            <path d="M28 22h30" class="v-key"/><path d="M64 22h44" class="v-val"/>
+            <path d="M28 36h24" class="v-key"/><path d="M58 36h34" class="v-val"/>
+            <path d="M28 50h38" class="v-key"/><path d="M72 50h20" class="v-val"/>
+            <path d="M20 64h28" class="v-key"/>
+            <rect x="130.5" y="12.5" width="82" height="47" rx="5" class="v-out"/>
+            <path d="M140 26h30M140 36h50M140 46h38" class="v-td"/>
+            <path d="M104 36h20m0 0l-5-4m5 4l-5 4" class="v-arrow"/>
+          </svg>
+        </div>
       </div>
       <div class="card">
         <div class="card__icon i-purple" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
         <h3>Desk, tablet or phone</h3>
         <p>Fixed sidebar and wide tables in the office; a drawer and stacked cards for a
            teacher marking attendance in the corridor.</p>
+        <div class="card__viz" aria-hidden="true">
+          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+            <rect x=".5" y="4.5" width="118" height="60" rx="4" class="v-out"/>
+            <path d="M28.5 5v59" class="v-rule"/>
+            <path d="M8 16h13M8 26h13M8 36h13" class="v-td"/>
+            <path d="M38 18h70M38 30h56M38 42h70M38 54h44" class="v-td"/>
+            <rect x="130.5" y="8.5" width="46" height="56" rx="4" class="v-out"/>
+            <path d="M138 20h31M138 32h31M138 44h20" class="v-td"/>
+            <rect x="188.5" y="14.5" width="30" height="50" rx="4" class="v-out v-out--on"/>
+            <path d="M195 26h17M195 36h17M195 46h11" class="v-td"/>
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -749,63 +907,152 @@
     <div class="head">
       <span class="eyebrow">Campus</span>
       <h2 id="campus-title">The institution doesn't stop outside the classroom.</h2>
-      <p>Transport, hostel, library, health and facilities — with the same student identity
-         following them through all of it.</p>
+      <p>Transport, hostel, library, health and facilities — all reading the same student
+         identity as the classroom does.</p>
     </div>
 
-    <div class="grid-4">
-      <div class="card"><h3>Transport</h3><ul class="chips" role="list"><li>Routes</li><li>Stops</li><li>Vehicles</li><li>Drivers</li><li>Attendants</li><li>Students</li><li>GPS</li><li>Maintenance</li></ul></div>
-      <div class="card"><h3>Hostel</h3><ul class="chips" role="list"><li>Buildings</li><li>Rooms</li><li>Beds</li><li>Allocation</li><li>Attendance</li><li>Visitors</li><li>Mess</li><li>Fees</li></ul></div>
-      <div class="card"><h3>Library</h3><ul class="chips" role="list"><li>Catalog</li><li>Members</li><li>Issue/Return</li><li>Reservations</li><li>Renewals</li><li>Fines</li><li>Digital</li></ul></div>
-      <div class="card"><h3>Health</h3><ul class="chips" role="list"><li>Medical Profiles</li><li>Allergies</li><li>Visits</li><li>Medicines</li><li>Vaccinations</li><li>Incidents</li><li>Alerts</li></ul></div>
-    </div>
-    <div class="grid-4" style="margin-top:1rem">
-      <div class="card"><h3>Facilities</h3><ul class="chips" role="list"><li>Buildings</li><li>Labs</li><li>Auditoriums</li><li>Bookings</li><li>Maintenance</li><li>Utilities</li><li>Inspections</li></ul></div>
-      <div class="card"><h3>People</h3><ul class="chips" role="list"><li>Recruitment</li><li>Records</li><li>Faculty</li><li>Leave</li><li>Payroll</li><li>Performance</li><li>Workload</li><li>Clearance</li></ul></div>
-      <div class="card"><h3>Workflows</h3><ul class="chips" role="list"><li>Forms</li><li>Requests</li><li>Approvals</li><li>Helpdesk</li><li>Escalations</li><li>History</li></ul></div>
-      <div class="card"><h3>Security</h3><ul class="chips" role="list"><li>Roles</li><li>Permissions</li><li>Audit Logs</li><li>SSO</li><li>MFA</li><li>IP Rules</li><li>Consent</li></ul></div>
+    <div class="bento">
+        <article class="bento__tile bento__tile--lg" data-tile="transport">
+          <span class="bento__count">8 capabilities</span>
+          <h3>Transport</h3>
+          <p>Routes, stops, vehicles and the students on them — live.</p>
+
+          <!-- an abstract map: blocks, roads, one route with its stops, and a
+               vehicle running the route on a motion path -->
+          <svg class="bento__viz bento__viz--map" viewBox="0 0 400 240" fill="none"
+               preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g class="m-blocks"><rect x="30" y="40" width="70" height="44" rx="4" class="m-block"/><rect x="118" y="30" width="58" height="54" rx="4" class="m-block"/><rect x="196" y="44" width="64" height="40" rx="4" class="m-block"/><rect x="276" y="34" width="72" height="50" rx="4" class="m-block"/><rect x="36" y="110" width="54" height="40" rx="4" class="m-block"/><rect x="112" y="182" width="60" height="34" rx="4" class="m-block"/><rect x="206" y="110" width="52" height="44" rx="4" class="m-block"/><rect x="272" y="120" width="70" height="38" rx="4" class="m-block"/><rect x="150" y="96" width="34" height="30" rx="4" class="m-block"/></g>
+            <g class="m-roads">
+              <path d="M0 92h400M0 168h400M96 0v240M232 0v240M320 0v240"/>
+            </g>
+            <path d="M0 214C70 214 96 232 168 232s120-18 232-18" class="m-water"/>
+
+            <path d="M24 196C64 196 78 150 122 150s58 44 104 44 66-52 106-52 44 26 44 26" class="m-route"/>
+            <path d="M24 196C64 196 78 150 122 150s58 44 104 44 66-52 106-52 44 26 44 26" class="m-route-lit"/>
+
+            <g class="m-stops">
+              <circle cx="24" cy="196" r="5"/><circle cx="122" cy="150" r="5"/>
+              <circle cx="226" cy="194" r="5"/><circle cx="332" cy="142" r="5"/>
+            </g>
+
+            <g class="m-bus"><circle r="7"/><circle r="12" class="m-bus-halo"/></g>
+
+            <g class="m-school">
+              <rect x="356" y="150" width="30" height="24" rx="4"/>
+              <path d="M371 142l12 8h-24z"/>
+            </g>
+
+            <g class="m-badge">
+              <rect x="238" y="26" width="112" height="26" rx="6"/>
+              <circle cx="254" cy="39" r="4" class="m-badge-pip"/>
+              <path d="M266 39h58" class="m-badge-t"/>
+            </g>
+          </svg>
+        </article>
+        <article class="bento__tile " data-tile="hostel">
+          <span class="bento__count">8 capabilities</span>
+          <h3>Hostel</h3>
+          <p>Blocks, rooms and beds, with occupancy visible at a glance.</p>
+          <svg class="bento__viz" viewBox="0 0 248 88" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="8" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="32" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="56" y="10" width="16" height="16" rx="3" class="b-bed"/><rect x="80" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="104" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="128" y="10" width="16" height="16" rx="3" class="b-bed"/><rect x="152" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="176" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="200" y="10" width="16" height="16" rx="3" class="b-bed"/><rect x="224" y="10" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="8" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="32" y="34" width="16" height="16" rx="3" class="b-bed"/><rect x="56" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="80" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="104" y="34" width="16" height="16" rx="3" class="b-bed"/><rect x="128" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="152" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="176" y="34" width="16" height="16" rx="3" class="b-bed"/><rect x="200" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="224" y="34" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="8" y="58" width="16" height="16" rx="3" class="b-bed"/><rect x="32" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="56" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="80" y="58" width="16" height="16" rx="3" class="b-bed"/><rect x="104" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="128" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="152" y="58" width="16" height="16" rx="3" class="b-bed"/><rect x="176" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="200" y="58" width="16" height="16" rx="3" class="b-bed b-bed--on"/><rect x="224" y="58" width="16" height="16" rx="3" class="b-bed"/></svg>
+        </article>
+        
+        <article class="bento__tile " data-tile="library">
+          <span class="bento__count">7 capabilities</span>
+          <h3>Library</h3>
+          <p>Issued and returned, reserved and overdue.</p>
+          <svg class="bento__viz" viewBox="0 0 240 88" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <rect x="6" y="10" width="106" height="68" rx="6" class="b-panel"/>
+  <rect x="128" y="10" width="106" height="68" rx="6" class="b-panel"/>
+  <path d="M22 30h40M22 42h62M22 54h30" class="b-td"/>
+  <path d="M144 30h40M144 42h58M144 54h34" class="b-td"/>
+  <circle cx="98" cy="26" r="6" class="b-pip b-pip--on"/>
+  <circle cx="220" cy="26" r="6" class="b-pip"/>
+</svg>
+        </article>
+        
+        <article class="bento__tile " data-tile="health">
+          <span class="bento__count">7 capabilities</span>
+          <h3>Health</h3>
+          <p>Profiles, visits and the alerts a parent must hear about.</p>
+          <svg class="bento__viz" viewBox="0 0 240 88" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <rect x="6" y="8" width="228" height="22" rx="5" class="b-row"/>
+  <rect x="6" y="34" width="228" height="22" rx="5" class="b-row b-row--alert"/>
+  <rect x="6" y="60" width="228" height="22" rx="5" class="b-row"/>
+  <path d="M20 19h70M20 71h58" class="b-td"/>
+  <path d="M20 45h84" class="b-td b-td--alert"/>
+  <circle cx="222" cy="45" r="4" class="b-dot-alert"/>
+</svg>
+        </article>
+        <article class="bento__tile " data-tile="facilities">
+          <span class="bento__count">7 capabilities</span>
+          <h3>Facilities</h3>
+          <p>Labs, halls and bookings against a real calendar.</p>
+          <svg class="bento__viz" viewBox="0 0 240 88" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect x="8" y="10" width="34" height="20" rx="3" class="b-slot"/><rect x="46" y="10" width="34" height="20" rx="3" class="b-slot"/><rect x="84" y="10" width="34" height="20" rx="3" class="b-slot b-slot--on"/><rect x="122" y="10" width="34" height="20" rx="3" class="b-slot"/><rect x="160" y="10" width="34" height="20" rx="3" class="b-slot"/><rect x="198" y="10" width="34" height="20" rx="3" class="b-slot"/><rect x="8" y="36" width="34" height="20" rx="3" class="b-slot"/><rect x="46" y="36" width="34" height="20" rx="3" class="b-slot"/><rect x="84" y="36" width="34" height="20" rx="3" class="b-slot"/><rect x="122" y="36" width="34" height="20" rx="3" class="b-slot"/><rect x="160" y="36" width="34" height="20" rx="3" class="b-slot b-slot--on"/><rect x="198" y="36" width="34" height="20" rx="3" class="b-slot"/><rect x="8" y="62" width="34" height="20" rx="3" class="b-slot"/><rect x="46" y="62" width="34" height="20" rx="3" class="b-slot b-slot--on"/><rect x="84" y="62" width="34" height="20" rx="3" class="b-slot"/><rect x="122" y="62" width="34" height="20" rx="3" class="b-slot"/><rect x="160" y="62" width="34" height="20" rx="3" class="b-slot"/><rect x="198" y="62" width="34" height="20" rx="3" class="b-slot"/></svg>
+        </article>
+        
     </div>
   </div>
 </section>
 
-<section class="section band" id="workflows" aria-labelledby="wf-title">
-  <div class="container">
-    <div class="head">
-      <span class="eyebrow">Workflows</span>
-      <h2 id="wf-title">&ldquo;Who has this?&rdquo; should not be a workflow.</h2>
-      <p>Requests have owners. Approvals have stages. Escalations have rules. Actions leave
-         history. Forms, requests, approvals, helpdesk tickets and communication run as one
-         structured flow rather than as five inboxes.</p>
-    </div>
 
-    <ol class="chain chain--wide" role="list">
-      <li><span class="chain__i">01</span>Request</li>
-      <li><span class="chain__i">02</span>Review</li>
-      <li><span class="chain__i">03</span>Approve</li>
-      <li><span class="chain__i">04</span>Act</li>
-      <li><span class="chain__i">05</span>Record</li>
-    </ol>
 
-    <div class="pull pull--center">
-      Everyone knows what happens next — and afterwards, what happened.
-      <div class="pull__attr">Vivencia · Approvals · Full audit trail</div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--tight" id="security" aria-labelledby="sec-title">
+<section class="section section--tight stage-dark" id="security" aria-labelledby="sec-title">
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">Security</span>
-      <h2 id="sec-title">One system should create more control. Not more access.</h2>
-      <p>Vivencia is built around role-based access and institutional governance: the right
-         person, the right information, the right level of access.</p>
+      <h2 id="sec-title">Institutional data deserves institutional-grade control.</h2>
+      <p>One system should create more control, not more access. Every request passes the
+         same ladder: who you are, what your role may see, and what the record keeps of it.</p>
     </div>
-    <ul class="chips chips--center" role="list">
-      <li>Roles</li><li>Permission Matrix</li><li>Login History</li><li>Active Sessions</li>
-      <li>Audit Logs</li><li>SSO</li><li>MFA</li><li>IP Restrictions</li>
-      <li>Data Access Policies</li><li>Data Masking</li><li>Consent</li><li>Privacy Requests</li>
-    </ul>
+
+    <div class="ladder">
+      <ul class="ladder__flank" role="list">
+        <li>Role-based access</li>
+        <li>Permission matrix</li>
+        <li>Single sign-on</li>
+        <li>Multi-factor auth</li>
+      </ul>
+
+      <ol class="ladder__spine" role="list">
+          <li class="ladder__step">
+            <span class="ladder__i">01</span>
+            <span class="ladder__t">Users</span>
+            <span class="ladder__m">Staff · Students · Parents</span>
+          </li>
+          <li class="ladder__step">
+            <span class="ladder__i">02</span>
+            <span class="ladder__t">Identity &amp; access</span>
+            <span class="ladder__m">SSO · MFA · Login history</span>
+          </li>
+          <li class="ladder__step">
+            <span class="ladder__i">03</span>
+            <span class="ladder__t">Role permissions</span>
+            <span class="ladder__m">Roles · Permission matrix</span>
+          </li>
+          <li class="ladder__step">
+            <span class="ladder__i">04</span>
+            <span class="ladder__t">Vivencia platform</span>
+            <span class="ladder__m">Sessions · IP restrictions</span>
+          </li>
+          <li class="ladder__step">
+            <span class="ladder__i">05</span>
+            <span class="ladder__t">Institutional data</span>
+            <span class="ladder__m">Encryption · Data masking</span>
+          </li>
+          <li class="ladder__step">
+            <span class="ladder__i">06</span>
+            <span class="ladder__t">Audit &amp; recovery</span>
+            <span class="ladder__m">Audit logs · Backups · Privacy requests</span>
+          </li>
+      </ol>
+
+      <ul class="ladder__flank ladder__flank--r" role="list">
+        <li>Audit logs</li>
+        <li>Login history</li>
+        <li>Data masking</li>
+        <li>Consent &amp; privacy</li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -876,9 +1123,8 @@
       <h2 id="cta-title">You already run one institution. Your software should too.</h2>
       <p>See what happens when admissions, students, academics, examinations, finance,
          people and campus operations stop behaving like separate systems.</p>
-      <div class="hero__cta">
+      <div class="hero__cta hero__cta--center">
         <a class="btn btn--primary" href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Book a Vivencia walkthrough</a>
-        <a class="btn btn--ghost" href="#scale">See the 54 modules</a>
       </div>
       <p class="cta__coda"><strong>1 institution. 1 system.</strong><br>
          Ten minutes. No card. No install.</p>
@@ -908,7 +1154,7 @@
         <h4>Platform</h4>
         <ul>
           <li><a href="#insight">Reports</a></li>
-          <li><a href="#workflows">Workflows</a></li>
+          <li><a href="#campus">Campus</a></li>
           <li><a href="#security">Security</a></li>
           <li><a href="#truth">Product truth</a></li>
           <li><a href="mailto:infovivencia2026@gmail.com?subject=Vivencia%20walkthrough&body=Institution%3A%0ARole%3A%0ANumber%20of%20students%3A%0ABoard%20%2F%20curriculum%3A%0A%0AWhat%20would%20you%20like%20to%20see%20first%3F%0A">Contact</a></li>
@@ -918,7 +1164,6 @@
 
     <div class="footer__bottom">
       <span>© 2026 Vivencia</span>
-      <span>54 modules · 496 capabilities · 1 institutional record</span>
     </div>
   </div>
 </footer>
@@ -1046,6 +1291,50 @@
     orbit.addEventListener('mouseleave', function () { if (!pinned) show(null); });
     orbit.addEventListener('focusout', function (e) {
       if (!pinned && !orbit.contains(e.relatedTarget)) show(null);
+    });
+  }
+
+  /* ------------------------------------------------------- the solar system */
+  var sol = document.getElementById('sol');
+  if (sol) {
+    var solDetail = document.getElementById('solDetail');
+    var sName = solDetail.querySelector('.sol__detail-name');
+    var sCount = solDetail.querySelector('.sol__detail-count');
+    var sMods = solDetail.querySelector('.sol__detail-mods');
+    var solStage = sol.querySelector('.sol__stage');
+    var REST = {
+      name: 'One connected system',
+      count: '496 capabilities',
+      mods: 'Nine domains, declared once, sharing one institutional record.'
+    };
+    var solPinned = null;
+
+    function solShow(btn) {
+      var node = btn ? btn.closest('.sol__node') : null;
+      sol.querySelectorAll('.sol__node.is-active').forEach(function (n) { n.classList.remove('is-active'); });
+      if (node) node.classList.add('is-active');
+      sName.textContent  = btn ? btn.dataset.name  : REST.name;
+      sCount.textContent = btn ? btn.dataset.count : REST.count;
+      sMods.textContent  = btn ? btn.dataset.mods  : REST.mods;
+    }
+    function solPin(btn) {
+      solPinned = btn;
+      solStage.classList.toggle('is-pinned', !!btn);
+      sol.querySelectorAll('.sol__btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b === btn));
+      });
+      solShow(btn);
+    }
+
+    sol.querySelectorAll('.sol__btn').forEach(function (btn) {
+      btn.setAttribute('aria-pressed', 'false');
+      btn.addEventListener('mouseenter', function () { if (!solPinned) solShow(btn); });
+      btn.addEventListener('focus', function () { if (!solPinned) solShow(btn); });
+      btn.addEventListener('click', function () { solPin(solPinned === btn ? null : btn); });
+    });
+    sol.addEventListener('mouseleave', function () { if (!solPinned) solShow(null); });
+    sol.addEventListener('focusout', function (e) {
+      if (!solPinned && !sol.contains(e.relatedTarget)) solShow(null);
     });
   }
 
