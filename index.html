@@ -482,6 +482,9 @@
     <span class="plate__stamp">54 / 54</span>
   </div>
   <div class="container">
+   <div class="split2">
+    <!-- left half: the system drawn as one -->
+    <div class="split2__l">
     <div class="head">
       <span class="eyebrow">The scale</span>
       <h2 id="scale-title">How much of your institution can Vivencia run?</h2>
@@ -794,40 +797,32 @@
           <button class="deck__dot" type="button" aria-label="Go to Platform and Control"></button>
         </div>
     </div>
-  </div>
-</section>
-
-<section class="section section--tight" id="insight" aria-labelledby="insight-title">
-  <div class="shapes" aria-hidden="true">
-    <span class="shapes__ring shapes__ring--lg"></span>
-    <span class="shapes__ring shapes__ring--sm"></span>
-    <span class="shapes__square"></span>
-    <span class="shapes__dots shapes__dots--l"></span>
-    <span class="shapes__dots shapes__dots--r"></span>
-    <span class="shapes__blob"></span>
-    <span class="shapes__arc"></span>
-  </div>
-  <div class="container">
-    <div class="head head--center">
-      <span class="eyebrow">The principal's view</span>
-      <h2 id="insight-title">Stop managing through updates. Start managing through visibility.</h2>
-      <p>Everyday institutional activity, turned into the answers leadership actually asks for.</p>
     </div>
 
-    <ul class="asks" role="list">
-      <li>How many admissions converted?</li>
-      <li>Who was absent today?</li>
-      <li>Which fees are overdue?</li>
-      <li>Which subjects are underperforming?</li>
-      <li>Which faculty are overloaded?</li>
-      <li>Which approvals are waiting?</li>
-      <li>What's happening across campuses?</li>
-    </ul>
+    <!-- right half: what that scale is FOR — the reporting it makes possible -->
+    <div class="split2__r" id="insight">
+      <div class="head">
+        <span class="eyebrow">The principal's view</span>
+        <h2 id="insight-title">Stop managing through updates. Start managing through visibility.</h2>
+        <p>Everyday institutional activity, turned into the answers leadership actually asks for.</p>
+      </div>
 
-    <div class="head head--center asks__foot">
-      <h3 class="asks__title">Reports &amp; analytics</h3>
+      <ul class="asks" role="list">
+        <li>How many admissions converted?</li>
+        <li>Who was absent today?</li>
+        <li>Which fees are overdue?</li>
+        <li>Which subjects are underperforming?</li>
+        <li>Which faculty are overloaded?</li>
+        <li>Which approvals are waiting?</li>
+        <li>What's happening across campuses?</li>
+      </ul>
+
+      <div class="head asks__foot">
+        <h3 class="asks__title">Reports &amp; analytics</h3>
+      </div>
+      <ul class="chips" role="list"><li>Student Performance</li><li>Academic Risk</li><li>Subject Performance</li><li>Faculty Performance</li><li>Admission Funnel</li><li>Fee Collection</li><li>Outstanding Fees</li><li>Transport Usage</li><li>Hostel Occupancy</li><li>Library Usage</li></ul>
     </div>
-    <ul class="chips" role="list"><li>Student Performance</li><li>Academic Risk</li><li>Subject Performance</li><li>Faculty Performance</li><li>Admission Funnel</li><li>Fee Collection</li><li>Outstanding Fees</li><li>Transport Usage</li><li>Hostel Occupancy</li><li>Library Usage</li></ul>
+   </div>
   </div>
 </section>
 
@@ -1171,7 +1166,7 @@
       <div>
         <h4>Platform</h4>
         <ul>
-          <li><a href="#insight">Reports</a></li>
+          <li><a href="#scale">Reports</a></li>
           <li><a href="#campus">Campus</a></li>
           <li><a href="#security">Security</a></li>
           <li><a href="#truth">Product truth</a></li>
@@ -1313,97 +1308,75 @@
   }
 
   /* ------------------------------------------------------- one view at a time
-     CSS does all of it: `scroll-snap-type: y proximity` on the scroller and
-     `scroll-snap-align: start` on each target. Proximity, not mandatory, and
-     no `scroll-snap-stop` — those two together make every wheel gesture a
-     fight, because the browser re-grabs the scroll on each notch and a flick
-     cannot travel past one screen. Proximity still parks the page on a
-     division edge whenever the visitor stops near one, so a division is never
-     left half on screen; it just does not resist the scroll on the way.
+     Whichever division has the largest visible area becomes the full screen.
+     Measure how much of each target is inside the viewport, wait until the
+     scroll stops, then move fully to the winner.
 
-     There is deliberately no JavaScript here. An observer that re-scrolls to
-     the dominant division double-corrects against the browser's own snap, and
-     that is what made scrolling feel heavy.
+     #how is exempt outright. The chapters division is not a target and
+     neither are its chapters: it scrolls freely, with nothing moving the page
+     under the reader. The exemption is done by choosing the targets rather
+     than by special-casing the maths.
 
-     Targets are the hero, every division, each of the five chapters (the
-     chapters division is the known exception — its CHAPTERS are the targets)
-     and the footer.
-     ------------------------------------------------------------------------ */
+     No CSS scroll snap. The two mechanisms correct the same scroll position
+     against each other, which is what made the wheel feel heavy.
 
-  /* ------------------------------------------------ fit a division to the screen
-     Every division is one screen, but its content is written by hand and a
-     long heading or a wide component can still overrun on a short laptop.
-     This measures each one and scales it to FILL the screen: down when the
-     content overruns, up when it leaves the division half empty. Bounded
-     either way — below .74 the type stops being readable, above 1.25 a short
-     division starts to look zoomed rather than composed.
+     Desktop only, and off under reduced motion: on a phone the divisions are
+     content-height, so there is no consistent edge to land on, and moving the
+     page fights touch momentum. */
+  var oneView = window.matchMedia('(min-width: 861px) and (pointer: fine)');
 
-     The chapters are excluded: that division scrolls by design, and it holds
-     a `position: sticky` panel, which a transform on an ancestor would break
-     by creating a new containing block. */
-  var fitSections = Array.prototype.slice.call(
-    document.querySelectorAll('.section:not(#how)')
-  );
-  var fitSteps = Array.prototype.slice.call(document.querySelectorAll('.step'));
-  var stepFitQuery = window.matchMedia('(min-width: 861px)');
+  if (!reduced) {
+    var targets = Array.prototype.slice.call(
+      document.querySelectorAll('.hero, .section:not(#how), .footer')
+    );
 
-  function fitDivisions() {
-    fitSections.forEach(function (sec) {
-      var box = sec.querySelector(':scope > .container');
-      if (!box) return;
+    var scrollTimer = null;
+    var isAutoScrolling = false;
+    var autoRelease = null;
 
-      box.style.setProperty('--fit', '1');          /* measure unscaled */
-      var cs = window.getComputedStyle(sec);
-      var avail = window.innerHeight
-                - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-      var need = box.scrollHeight;
+    function mostVisible() {
+      var best = null, bestShare = 0;
+      var h = window.innerHeight;
 
-      var scale = need > 0 ? avail / need : 1;
-      scale = Math.min(1.25, Math.max(.74, scale));
-      /* a hair under the measurement, so a rounding error cannot overflow */
-      scale *= .985;
-      box.style.setProperty('--fit', scale.toFixed(4));
-      sec.classList.toggle('is-squeezed', scale < 1);
-    });
+      targets.forEach(function (el) {
+        var rect = el.getBoundingClientRect();
+        var visible = Math.max(0, Math.min(rect.bottom, h) - Math.max(rect.top, 0));
+        var share = visible / h;
+        if (share > bestShare) { bestShare = share; best = el; }
+      });
 
-    /* The chapters are the exception to "one section per screen", not to
-       "one view at a time": the division scrolls, but each chapter inside it
-       still has to land in exactly one screen. They are fitted with `zoom`
-       rather than `transform`, because a transform on the chapter would
-       create a containing block and break the sticky panel inside it. */
-    fitSteps.forEach(function (step) {
-      step.style.zoom = '';
-      step.style.height = '';
-      if (!stepFitQuery.matches) return;
-      var cs = window.getComputedStyle(step);
-      var avail = window.innerHeight
-                - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-      var need = step.scrollHeight
-               - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
-      if (need <= 0 || avail <= 0) return;
-      var z = Math.max(.74, Math.min(1, (avail / need) * .985));
-      if (z < 1) {
-        step.style.zoom = z.toFixed(4);
-        /* zoom shrinks the box as well as its contents, so the chapter would
-           stop being a full screen and the snap edge would drift. Give back
-           exactly what the zoom takes. */
-        step.style.height = (window.innerHeight / z) + 'px';
-      }
-    });
+      return { section: best, share: bestShare };
+    }
+
+    function settle() {
+      if (isAutoScrolling || !oneView.matches) return;
+
+      var won = mostVisible();
+      var win = won.section;
+      /* Nothing wins on less than half the screen. Inside the chapters — the
+         one exempt division — the neighbouring divisions can still show a
+         sliver, and without this the page would drag the reader out of a
+         chapter towards whichever edge happened to be closer. */
+      if (!win || won.share < .5) return;
+
+      var top = win.getBoundingClientRect().top;
+      if (Math.abs(top) < 2) return;          /* already aligned */
+
+      isAutoScrolling = true;
+      window.scrollTo({ top: window.scrollY + top, behavior: 'smooth' });
+
+      /* the guard has to outlast the smooth scroll, or its own scroll events
+         would re-enter this and the page would chase itself */
+      window.clearTimeout(autoRelease);
+      autoRelease = window.setTimeout(function () { isAutoScrolling = false; }, 700);
+    }
+
+    window.addEventListener('scroll', function () {
+      if (isAutoScrolling) return;
+      window.clearTimeout(scrollTimer);
+      scrollTimer = window.setTimeout(settle, 120);
+    }, { passive: true });
   }
-
-  var fitTick = false;
-  function queueFit() {
-    if (fitTick) return;
-    fitTick = true;
-    window.requestAnimationFrame(function () { fitDivisions(); fitTick = false; });
-  }
-
-  window.addEventListener('resize', queueFit, { passive: true });
-  window.addEventListener('load', queueFit);
-  /* webfonts land after first paint and change every measurement */
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
-  queueFit();
 
   /* --------------------------------------------------- the FAQ, animated */
   /* <details> has no transition of its own: the element jumps between two
