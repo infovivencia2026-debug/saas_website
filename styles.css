@@ -163,6 +163,7 @@
   --text-m:  1rem;       /* 16 — body */
   --text-s:  .875rem;    /* 14 */
   --label:   .75rem;     /* 12 — eyebrows, .12em tracking */
+  --text-xs: .8125rem;   /* 13 — the smallest text that still reads */
 
   /* ---- metrics ---- */
   --container: 82.5rem;                    /* 1320px */
@@ -523,7 +524,7 @@ h1, h2, h3, h4 {
 }
 
 /* the mono voice, now reserved for micro-labels only */
-.eyebrow, .step__label, .screen__title, .tag, .pull__attr, .footer h4 {
+.eyebrow, .step__label, .screen__title, .tag, .pull__attr, .footer h3 {
   font-family: var(--mono);
   font-size: var(--label);
   font-weight: 500;
@@ -1916,7 +1917,7 @@ h1, h2, h3, h4 {
 .footer__grid { display: grid; grid-template-columns: 1.8fr repeat(2, 1fr); gap: clamp(3rem, 5vw, 4.5rem); }
 .footer .brand { font-size: 1.375rem; }
 .footer__blurb { margin-top: 1.125rem; font-size: 1rem; color: rgba(255, 255, 255, .82); max-width: 36ch; line-height: 1.65; }
-.footer h4 { color: rgba(255, 255, 255, .64); font-weight: 500; font-size: .9375rem; letter-spacing: .02em; }
+.footer h3 { color: rgba(255, 255, 255, .64); font-weight: 500; font-size: .9375rem; letter-spacing: .02em; }
 .footer ul { list-style: none; margin: 1.375rem 0 0; padding: 0; display: grid; gap: 1rem; }
 .footer li a { font-size: 1.0625rem; color: #ffffff; transition: color .25s var(--ease); }
 .footer li a:hover { color: #ffffff; }
@@ -2330,7 +2331,7 @@ h2, h3, h4,
 .stat__num,
 .step__digits,
 .feature__title,
-.eyebrow, .step__label, .pull__attr, .footer h4 {
+.eyebrow, .step__label, .pull__attr, .footer h3 {
   font-family: var(--ui-font);
 }
 
@@ -2363,7 +2364,7 @@ h2, h3, h4 {
 }
 
 /* micro-labels: Space Grotesk tracked out, not the mono */
-.eyebrow, .step__label, .pull__attr, .footer h4 {
+.eyebrow, .step__label, .pull__attr, .footer h3 {
   font-weight: 600;
   letter-spacing: .13em;
   text-transform: uppercase;

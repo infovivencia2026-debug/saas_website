@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Vivencia</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f6fb">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232F2FE4'/%3E%3Cpath d='M8 10l8 13 8-13' fill='none' stroke='%23FFFFFF' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<!-- Self-contained on purpose. A 404 that depends on styles.css is a second
+     request that can fail for the same reason the first one did, and it would
+     be cached under the release the visitor already has. -->
+<style>
+  :root {
+    color-scheme: light dark;
+    --canvas: #f4f6fb;
+    --heading: #0b1220;
+    --body: #46536b;
+    --brand: #155eef;
+    --line: rgba(21, 94, 239, .2);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --canvas: #080f1f;
+      --heading: #eaf0fb;
+      --body: #a9bfe6;
+      --brand: #6a9bff;
+      --line: rgba(122, 160, 224, .22);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: grid;
+    place-content: center;
+    justify-items: start;
+    gap: 1rem;
+    padding: 2rem clamp(1.25rem, 6vw, 5rem);
+    background: var(--canvas);
+    color: var(--body);
+    font: 400 1rem/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .code {
+    font: 500 .75rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+  }
+  h1 {
+    margin: 0;
+    max-width: 18ch;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    color: var(--heading);
+  }
+  p { margin: 0; max-width: 46ch; }
+  a.home {
+    margin-top: .5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .6875rem 1.125rem;
+    border-radius: .625rem;
+    background: var(--brand);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  a.home:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+  hr { width: 100%; max-width: 32rem; margin: 1rem 0 0; border: 0; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <span class="code">Error 404</span>
+  <h1>That page isn't part of the system.</h1>
+  <p>The link may be out of date, or the address may have a typo in it. Everything about
+     Vivencia lives on one page.</p>
+  <a class="home" href="/">Back to Vivencia</a>
+  <hr>
+</body>
+</html>

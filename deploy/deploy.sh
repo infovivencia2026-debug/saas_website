@@ -19,8 +19,8 @@ cd "$(dirname "$0")/.."
 # server, which has ffmpeg. Both are shipped:
 # styles.css uses image-set() so a browser takes the 24KB WebP when it can and
 # the PNG when it cannot — which means BOTH must exist on the server.
-for img in hero-art.png hero-art.webp; do
-  [ -f "$img" ] || { echo "!!! $img missing"; exit 1; }
+for f in hero-art.png hero-art.webp 404.html robots.txt sitemap.xml; do
+  [ -f "$f" ] || { echo "!!! $f missing"; exit 1; }
 done
 
 echo "==> Packing"
@@ -30,12 +30,14 @@ echo "==> Packing"
 # worse than either alone. The href is rewritten in the shipped copy only; the
 # file in the repo keeps its plain name.
 STAGE="$(mktemp -d)"
-cp index.html styles.css hero-art.png hero-art.webp "$STAGE/"
+cp index.html 404.html styles.css robots.txt sitemap.xml \
+   hero-art.png hero-art.webp "$STAGE/"
 sed -i "s|href=\"styles.css\"|href=\"styles.css?v=$RELEASE\"|" "$STAGE/index.html"
 grep -q "styles.css?v=$RELEASE" "$STAGE/index.html" || { echo "!!! cache-bust rewrite failed"; exit 1; }
 
 TARBALL="$(mktemp -t vivencia-XXXXXX.tar.gz)"
-tar -czf "$TARBALL" -C "$STAGE" index.html styles.css hero-art.png hero-art.webp
+tar -czf "$TARBALL" -C "$STAGE" index.html 404.html styles.css robots.txt \
+    sitemap.xml hero-art.png hero-art.webp
 rm -rf "$STAGE"
 
 echo "==> Uploading to $TARGET"
@@ -65,12 +67,19 @@ echo "==> Verifying"
 ssh "$TARGET" bash -s <<'REMOTE'
 set -euo pipefail
 fail=0
-for path in "" styles.css hero-art.png hero-art.webp; do
+for path in "" styles.css robots.txt sitemap.xml hero-art.png hero-art.webp; do
   code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
           "https://vivencia.187-127-178-100.sslip.io/$path")"
   printf '    %s  /%s\n' "$code" "$path"
   [ "$code" = "200" ] || fail=1
 done
+
+# the 404 page is only correct if it is actually served WITH a 404 status: a
+# soft 404 that answers 200 gets the missing page indexed
+code="$(curl -sS --max-time 20 -o /dev/null -w '%{http_code}' \
+        "https://vivencia.187-127-178-100.sslip.io/this-page-does-not-exist")"
+printf '    %s  /this-page-does-not-exist (expect 404)\n' "$code"
+[ "$code" = "404" ] || fail=1
 exit $fail
 REMOTE
 

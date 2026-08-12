@@ -6,7 +6,10 @@
 <title>Vivencia — one institutional system: 54 modules, 496 capabilities</title>
 <meta name="description" content="54 connected modules and 496 capabilities on one institutional record — admissions, academics, attendance, examinations, fees, people and campus operations, connected rather than separate.">
 <link rel="canonical" href="https://vivencia.187-127-178-100.sslip.io/">
-<meta name="theme-color" content="#14123f">
+<!-- the toggle sets data-theme on <html>; these tell the browser chrome which
+     ground it is painting against, so the address bar matches the page -->
+<meta name="theme-color" content="#f4f6fb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#080f1f" media="(prefers-color-scheme: dark)">
 
 <!-- shared links render as a card rather than a grey box -->
 <meta property="og:type" content="website">
@@ -35,6 +38,43 @@
     document.documentElement.setAttribute('data-theme', t);
   })();
 </script>
+
+<!-- Structured data: what the product is and who publishes it, in the form a
+     search engine can read. Kept in step with the copy above by hand — the
+     module and capability counts appear in three places on this page. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://vivencia.187-127-178-100.sslip.io/#org",
+      "name": "Vivencia",
+      "url": "https://vivencia.187-127-178-100.sslip.io/",
+      "email": "infovivencia2026@gmail.com",
+      "description": "One institutional system for schools and colleges: 54 connected modules and 496 capabilities on a single institutional record."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vivencia.187-127-178-100.sslip.io/#site",
+      "url": "https://vivencia.187-127-178-100.sslip.io/",
+      "name": "Vivencia",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://vivencia.187-127-178-100.sslip.io/#org" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Vivencia",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Education Management / School ERP",
+      "operatingSystem": "Web",
+      "url": "https://vivencia.187-127-178-100.sslip.io/",
+      "publisher": { "@id": "https://vivencia.187-127-178-100.sslip.io/#org" },
+      "description": "Admissions, academics, attendance, examinations, fees, people and campus operations on one record rather than in separate systems."
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#top">Skip to content</a>
@@ -42,12 +82,12 @@
 <button class="theme" id="themeToggle" type="button" aria-pressed="false"
         aria-label="Switch to dark mode" title="Dark mode">
   <span class="theme__track" aria-hidden="true">
-    <svg class="theme__sun" width="15" height="15" viewBox="0 0 24 24" fill="none"
+    <svg aria-hidden="true" focusable="false" class="theme__sun" width="15" height="15" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <circle cx="12" cy="12" r="4.2"/>
       <path d="M12 1.8v2.4M12 19.8v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M1.8 12h2.4M19.8 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/>
     </svg>
-    <svg class="theme__moon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+    <svg aria-hidden="true" focusable="false" class="theme__moon" width="15" height="15" viewBox="0 0 24 24" fill="none"
          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>
     </svg>
@@ -60,7 +100,7 @@
     <a class="brand" href="#top"><span class="brand__mark">V</span>Vivencia</a>
 
     <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
         <path d="M3 6h18M3 12h18M3 18h18"/>
       </svg>
     </button>
@@ -268,21 +308,21 @@
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
               <div>
                 <div class="feature__title">Leads and applications</div>
                 <p class="feature__body"><strong>Walk-ins, calls &amp; online forms</strong> captured in one automated funnel without lost leads.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
               <div>
                 <div class="feature__title">Tests, interviews, offers</div>
                 <p class="feature__body"><strong>Entrance scores &amp; panels</strong> logged directly against the single applicant profile.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               <div>
                 <div class="feature__title">Documents and enrollment</div>
                 <p class="feature__body"><strong>Automated checklists</strong> converting accepted offers into roll numbers and fee plans.</p>
@@ -317,21 +357,21 @@
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
               <div>
                 <div class="feature__title">Timetable and allocation</div>
                 <p class="feature__body"><strong>Master class grid</strong> displaying faculty workloads and room clash detection in real time.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
               <div>
                 <div class="feature__title">Curriculum and lesson plans</div>
                 <p class="feature__body"><strong>Syllabus coverage &amp; calendar</strong> synced directly across all section timetables.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               <div>
                 <div class="feature__title">Electives and substitutions</div>
                 <p class="feature__body"><strong>Instant teacher coverage</strong> handled directly from the master timetable screen.</p>
@@ -366,21 +406,21 @@
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
               <div>
                 <div class="feature__title">Period and daily marking</div>
                 <p class="feature__body"><strong>Period &amp; daily marking</strong> right where the teacher already is, reducing manual entry.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/></svg></span>
               <div>
                 <div class="feature__title">Devices and corrections</div>
                 <p class="feature__body"><strong>Biometric &amp; RFID sync</strong> backed by an immutable correction audit trail.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
               <div>
                 <div class="feature__title">Patterns, not totals</div>
                 <p class="feature__body"><strong>Early pattern alerts</strong> for late arrivals and absences before they turn critical.</p>
@@ -415,21 +455,21 @@
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
               <div>
                 <div class="feature__title">Schemes and question banks</div>
                 <p class="feature__body"><strong>Weightings &amp; grade bands</strong> configured once per term and program structure.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
               <div>
                 <div class="feature__title">Halls, seating, invigilation</div>
                 <p class="feature__body"><strong>Automated hall tickets</strong>, seating allocation &amp; invigilator rosters.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
               <div>
                 <div class="feature__title">Results and transcripts</div>
                 <p class="feature__body"><strong>Instant SGPA/CGPA</strong> calculation, revaluation trails &amp; transcript generation.</p>
@@ -464,21 +504,21 @@
 
           <ul class="features">
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
               <div>
                 <div class="feature__title">Demand and collection</div>
                 <p class="feature__body"><strong>Omnichannel collection</strong> (Counter, UPI, Gateway) auto-reconciled on one ledger.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
               <div>
                 <div class="feature__title">Discounts and scholarships</div>
                 <p class="feature__body"><strong>Automated waiver rules</strong> for sibling, staff, and merit aid without manual math.</p>
               </div>
             </li>
             <li class="feature">
-              <span class="feature__icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+              <span class="feature__icon" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
               <div>
                 <div class="feature__title">Dues and reminders</div>
                 <p class="feature__body"><strong>Real-time ageing by class</strong> with integrated automated multi-channel reminders.</p>
@@ -877,12 +917,12 @@
 
     <div class="grid-4">
       <div class="card">
-        <div class="card__icon i-blue" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <div class="card__icon i-blue" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
         <h3>Learn it once</h3>
         <p>One table engine, one drawer, one form pattern. Identical in a fee register, an
            attendance sheet and a stock receipt.</p>
         <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
             <rect x=".5" y=".5" width="219" height="15" rx="3" class="v-head"/>
             <path d="M96 4.5v7M150 4.5v7" class="v-rule"/>
             <path d="M8 8h18M104 8h30M158 8h14" class="v-th"/>
@@ -898,12 +938,12 @@
         </div>
       </div>
       <div class="card">
-        <div class="card__icon i-coral" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <div class="card__icon i-coral" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
         <h3>Nobody sees all 496</h3>
         <p>A teacher sees what a teacher needs. Accounts sees finance. HR sees employees.
            One platform does not mean one screen for everyone.</p>
         <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
             <rect x=".5" y=".5" width="63" height="71" rx="4" class="v-rail v-rail--on"/>
             <path d="M10 13h30M10 26h38M10 39h24M10 52h34" class="v-td"/>
             <rect x="6" y="21.5" width="46" height="9" rx="2" class="v-chip"/>
@@ -917,12 +957,12 @@
         </div>
       </div>
       <div class="card">
-        <div class="card__icon i-green" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <div class="card__icon i-green" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
         <h3>Parents and students</h3>
         <p>A controlled view of attendance, progress, communication and meetings — from the
            same system staff use, not yesterday's export.</p>
         <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
             <path d="M6 8h4M6 22h4M6 36h4M6 50h4M6 64h4" class="v-gutter"/>
             <path d="M20 8h34" class="v-key"/><path d="M60 8h26" class="v-val"/>
             <path d="M28 22h30" class="v-key"/><path d="M64 22h44" class="v-val"/>
@@ -936,12 +976,12 @@
         </div>
       </div>
       <div class="card">
-        <div class="card__icon i-purple" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <div class="card__icon i-purple" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
         <h3>Desk, tablet or phone</h3>
         <p>Fixed sidebar and wide tables in the office; a drawer and stacked cards for a
            teacher marking attendance in the corridor.</p>
         <div class="card__viz" aria-hidden="true">
-          <svg viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 220 72" fill="none" preserveAspectRatio="xMinYMid meet">
             <rect x=".5" y="4.5" width="118" height="60" rx="4" class="v-out"/>
             <path d="M28.5 5v59" class="v-rule"/>
             <path d="M8 16h13M8 26h13M8 36h13" class="v-td"/>
@@ -1196,7 +1236,7 @@
            institutional record — from the first admission enquiry to alumni history.</p>
       </div>
       <div>
-        <h4>Modules</h4>
+        <h3>Modules</h3>
         <ul>
           <li><a href="#scale">Admissions &amp; Students</a></li>
           <li><a href="#scale">Teaching &amp; Academics</a></li>
@@ -1206,7 +1246,7 @@
         </ul>
       </div>
       <div>
-        <h4>Platform</h4>
+        <h3>Platform</h3>
         <ul>
           <li><a href="#scale">Reports</a></li>
           <li><a href="#campus">Campus</a></li>
@@ -1231,33 +1271,42 @@
   var toggle = document.getElementById('navToggle');
 
   /* ------------------------------------------------------------- mobile nav */
-  toggle.addEventListener('click', function (e) {
-    e.stopPropagation();
-    var open = nav.classList.toggle('nav--open');
-    toggle.setAttribute('aria-expanded', String(open));
-  });
-  document.addEventListener('click', function (e) {
-    if (nav.classList.contains('nav--open') && !nav.contains(e.target)) {
-      nav.classList.remove('nav--open');
-      toggle.setAttribute('aria-expanded', 'false');
-    }
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('nav--open')) {
-      nav.classList.remove('nav--open');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.focus();
-    }
-  });
-  nav.querySelectorAll('.nav__link').forEach(function (a) {
-    a.addEventListener('click', function () {
-      nav.classList.remove('nav--open');
-      toggle.setAttribute('aria-expanded', 'false');
+  /* Guarded, and not out of superstition: this runs first, and an exception
+     here would take every feature below it down with it. */
+  if (nav && toggle) {
+    toggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = nav.classList.toggle('nav--open');
+      toggle.setAttribute('aria-expanded', String(open));
     });
-  });
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('nav--open') && !nav.contains(e.target)) {
+        nav.classList.remove('nav--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('nav--open')) {
+        nav.classList.remove('nav--open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    nav.querySelectorAll('.nav__link').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('nav--open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced || !('IntersectionObserver' in window)) return;
+  /* Scoped to the reveals ONLY. This used to `return` out of the whole
+     script, which meant a visitor who asks for reduced motion — or any
+     browser without IntersectionObserver — lost the theme toggle, the
+     calculator, the orbit readout, the FAQ and the module deck along with
+     the animation they actually opted out of. */
+  var canReveal = !reduced && 'IntersectionObserver' in window;
 
   /* ------------------------------------------------------------- reveals */
   /* [selector, variant, stagger in ms] — applied at runtime so a
@@ -1283,7 +1332,8 @@
   var calcCallsSaved = document.getElementById('calcCallsSaved');
 
   function updateCalc() {
-    if (!calcStudents || !calcDepts) return;
+    if (!calcStudents || !calcDepts || !calcStudentsVal || !calcDeptsVal
+        || !calcHoursSaved || !calcCallsSaved) return;
     var s = parseInt(calcStudents.value, 10);
     var d = parseInt(calcDepts.value, 10);
     calcStudentsVal.textContent = s.toLocaleString();
@@ -1300,47 +1350,50 @@
     updateCalc();
   }
 
-  GROUPS.forEach(function (group) {
-    var nodes = document.querySelectorAll(group[0]);
-    var variant = group[1];
-    var stagger = group[2];
+  if (canReveal) {
+    GROUPS.forEach(function (group) {
+      var nodes = document.querySelectorAll(group[0]);
+      var variant = group[1];
+      var stagger = group[2];
 
-    /* stagger restarts per parent, so the second step doesn't inherit
-       the first step's accumulated delay */
-    var lastParent = null;
-    var i = 0;
+      /* stagger restarts per parent, so the second step doesn't inherit
+         the first step's accumulated delay */
+      var lastParent = null;
+      var i = 0;
 
-    nodes.forEach(function (el) {
-      if (el.parentElement !== lastParent) { lastParent = el.parentElement; i = 0; }
+      nodes.forEach(function (el) {
+        if (el.parentElement !== lastParent) { lastParent = el.parentElement; i = 0; }
 
-      if (variant === 'side') {
-        /* even steps put the visual on the left, so it enters from the left */
-        var step = el.closest('.step');
-        var steps = step ? Array.prototype.indexOf.call(step.parentElement.children, step) : 0;
-        el.setAttribute('data-reveal', steps % 2 === 1 ? 'left' : 'right');
-      } else if (variant !== 'up') {
-        el.setAttribute('data-reveal', variant);
-      }
+        if (variant === 'side') {
+          /* even steps put the visual on the left, so it enters from the left */
+          var step = el.closest('.step');
+          var steps = step ? Array.prototype.indexOf.call(step.parentElement.children, step) : 0;
+          el.setAttribute('data-reveal', steps % 2 === 1 ? 'left' : 'right');
+        } else if (variant !== 'up') {
+          el.setAttribute('data-reveal', variant);
+        }
 
-      el.style.setProperty('--d', (i * stagger) + 'ms');
-      el.classList.add('js-reveal');
-      i++;
+        el.style.setProperty('--d', (i * stagger) + 'ms');
+        el.classList.add('js-reveal');
+        i++;
+      });
     });
-  });
 
-  var revealer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      var el = entry.target;
-      el.classList.add('is-in');
-      revealer.unobserve(el);
-      /* drop the delay and will-change once it has landed, so hover
-         transitions on the same element stay instant */
-      window.setTimeout(function () { el.classList.add('is-settled'); }, 1200);
-    });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+    var revealer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        el.classList.add('is-in');
+        revealer.unobserve(el);
+        /* drop the delay and will-change once it has landed, so hover
+           transitions on the same element stay instant */
+        window.setTimeout(function () { el.classList.add('is-settled'); }, 1200);
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
 
-  document.querySelectorAll('.js-reveal').forEach(function (el) { revealer.observe(el); });
+    document.querySelectorAll('.js-reveal').forEach(function (el) { revealer.observe(el); });
+  }
+
 
 
 
@@ -1545,13 +1598,15 @@
   }
 
   /* the oversized numeral inks in while its chapter holds the viewport */
-  var chapter = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      e.target.classList.toggle('is-active', e.isIntersecting);
-    });
-  }, { rootMargin: '-35% 0px -45% 0px' });
+  if ('IntersectionObserver' in window) {
+    var chapter = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        e.target.classList.toggle('is-active', e.isIntersecting);
+      });
+    }, { rootMargin: '-35% 0px -45% 0px' });
 
-  document.querySelectorAll('.step').forEach(function (s) { chapter.observe(s); });
+    document.querySelectorAll('.step').forEach(function (s) { chapter.observe(s); });
+  }
 
 
   /* --------------------------------------- scroll-driven: progress + parallax */
