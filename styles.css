@@ -3555,6 +3555,56 @@ p, li { letter-spacing: 0; }
   color: var(--brand-800);
   white-space: nowrap;
 }
+/* ---- the report rack -----------------------------------------------------
+   Ten report names as ten plain tags said nothing about what a report IS. Each
+   one now carries its own four-bar silhouette — a different shape per report,
+   so the row reads as ten different charts rather than ten identical labels —
+   and the bars rise once, in sequence, the way a dashboard fills in.
+
+   The shapes are data, not decoration, so they live on the elements as --h;
+   the stagger is --d. Both are set in the markup. */
+.chips--reports li {
+  display: inline-flex;
+  align-items: center;
+  gap: .4375rem;
+  padding-left: .4375rem;
+  text-transform: none;
+  letter-spacing: .01em;
+  font-family: var(--ui-font);
+  font-weight: 600;
+  font-size: var(--text-s);
+  transition: border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.chips--reports li:hover {
+  border-color: rgba(21, 87, 232, .38);
+  background: rgba(21, 87, 232, .11);
+}
+.chip__spark {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: .75rem;
+}
+.chip__spark s {
+  display: block;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--brand);
+  opacity: .55;
+  /* --h is 1-10; the tallest bar fills the glyph */
+  height: calc(var(--h) * 10%);
+  transform-origin: 50% 100%;
+}
+.chips--reports li:hover .chip__spark s { opacity: 1; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .chip__spark s {
+    animation: chip-rise .5s var(--ease) both;
+    animation-delay: calc(var(--d, 0ms) + var(--h) * 12ms);
+  }
+}
+@keyframes chip-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
 .asks__foot { margin-top: clamp(1rem, 2.5svh, 1.75rem); }
 .chips--center { justify-content: center; margin-top: clamp(.75rem, 2svh, 1.25rem); }
 
@@ -4035,7 +4085,6 @@ p, li { letter-spacing: 0; }
   color: var(--muted);
   max-width: 34ch;
 }
-/* the picture takes the space the copy leaves, pinned to the floor */
 /* the picture takes whatever the copy leaves and scales inside it — height
    in px would either overflow the tile or leave it half empty */
 .bento__viz {
