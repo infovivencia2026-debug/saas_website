@@ -291,10 +291,20 @@ h1, h2, h3, h4 {
 }
 .section--tight { padding-block: calc(clamp(2rem, 5svh, 4rem) + 3rem) clamp(2rem, 5svh, 4rem); }
 
-/* The chapters are the exception: the division holds five of them, so each
-   CHAPTER is the screen and the section grows to suit. */
+/* The chapters are the one exception: the division holds five of them, so it
+   is longer than a screen by design — but each CHAPTER is a screen, so a
+   scroll lands on one chapter at a time rather than mid-way between two. */
 #how { min-height: 0; display: block; }
 #how > .container { display: block; }
+@media (min-width: 861px) {
+  .step {
+    min-height: 100svh;
+    align-content: center;
+    padding-block: clamp(2rem, 5svh, 4rem);
+  }
+  /* each chapter now carries its own air, so the gap between them goes */
+  .steps { gap: 0; }
+}
 
 /* ---- stages ------------------------------------------------------------
    Each section is its own stage, separated by background tone, spacing and a
