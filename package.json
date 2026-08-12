@@ -1,0 +1,16 @@
+{
+  "name": "saas_website",
+  "version": "1.0.0",
+  "description": "Vivencia EduCloud — Institutional System Landing Page",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve . -p 8080",
+    "dev": "serve . -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}
