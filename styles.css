@@ -3634,6 +3634,28 @@ p, li { letter-spacing: 0; }
   letter-spacing: .12em;
   color: var(--muted);
 }
+/* each planet states its own weight: the modules it carries */
+.sol__n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.375rem;
+  padding: .0625rem .3125rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-live);
+  background: var(--brand-soft);
+  font-family: var(--mono);
+  font-size: .5625rem;
+  letter-spacing: .06em;
+  color: var(--brand-deep);
+  transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+.sol__btn:hover .sol__n,
+.sol__btn:focus-visible .sol__n,
+.sol__node.is-active .sol__n {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #ffffff;
+}
 .sol__btn:hover, .sol__btn:focus-visible { color: var(--brand); outline: none; }
 .sol__btn:hover .sol__dot, .sol__btn:focus-visible .sol__dot {
   background: var(--brand);
@@ -3733,6 +3755,7 @@ p, li { letter-spacing: 0; }
 :root[data-theme="dark"] .sol__core { background: var(--panel-solid); }
 :root[data-theme="dark"] .sol__btn { color: var(--heading-2); }
 :root[data-theme="dark"] .sol__dot { background: var(--panel-solid); }
+:root[data-theme="dark"] .sol__n { background: rgba(21, 94, 239, .22); color: #8fb4fb; }
 
 /* ==========================================================================
    The campus bento
