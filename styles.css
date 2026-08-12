@@ -448,43 +448,45 @@ h1, h2, h3, h4 {
 }
 
 /* the cards become glass on the blue rather than white slabs punched into it */
+/* White tiles on the cobalt stage. They are white in both themes, so every
+   token that would otherwise follow the theme is pinned here: the text, the
+   icon and the whole wireframe palette. */
 #roles .card {
-  background: rgba(255, 255, 255, .07);
-  border-color: rgba(255, 255, 255, .16);
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, .55);
   box-shadow: 0 1px 2px rgba(4, 14, 40, .25), 0 18px 44px rgba(4, 14, 40, .30);
 }
 #roles .card:hover {
-  background: rgba(255, 255, 255, .11);
-  border-color: rgba(255, 255, 255, .34);
+  background: #ffffff;
+  border-color: rgba(255, 255, 255, .9);
 }
-#roles .card h3 { color: #ffffff; }
-#roles .card p { color: #ffffff; }
+#roles .card h3 { color: #0b1220; }
+#roles .card p  { color: #46536b; }
 #roles .card__icon {
-  background: rgba(255, 255, 255, .10);
-  border-color: rgba(255, 255, 255, .20);
-  color: #cfe0fd;
+  background: rgba(21, 87, 232, .08);
+  border-color: rgba(21, 87, 232, .16);
+  color: var(--brand-deep);
 }
-#roles .card__viz { border-top-color: rgba(255, 255, 255, .14); }
+#roles .card__viz { border-top-color: #e6eefb; }
 
-/* the wireframes were mixed for a white card */
-#roles .v-td     { stroke: rgba(207, 220, 245, .45); }
-#roles .v-th     { stroke: rgba(207, 220, 245, .70); }
-#roles .v-key    { stroke: rgba(207, 220, 245, .55); }
-#roles .v-val    { stroke: #8fb4fb; opacity: .9; }
-#roles .v-rule   { stroke: rgba(255, 255, 255, .18); }
-#roles .v-gutter { stroke: rgba(255, 255, 255, .28); }
-#roles .v-head   { fill: rgba(255, 255, 255, .10); stroke: rgba(255, 255, 255, .20); }
-#roles .v-sel    { fill: rgba(143, 180, 251, .22); }
-#roles .v-box    { fill: rgba(8, 24, 60, .8); stroke: rgba(255, 255, 255, .35); }
-#roles .v-box--on{ fill: #8fb4fb; stroke: #8fb4fb; }
-#roles .v-tick   { stroke: #0c2461; }
-#roles .v-out    { stroke: rgba(255, 255, 255, .28); }
-#roles .v-out--on{ stroke: #8fb4fb; }
-#roles .v-rail   { fill: rgba(255, 255, 255, .06); stroke: rgba(255, 255, 255, .18); }
-#roles .v-rail--on { fill: rgba(143, 180, 251, .14); stroke: rgba(143, 180, 251, .40); }
-#roles .v-chip   { fill: #8fb4fb; opacity: .28; }
+/* the wireframes, pinned to their light values on the white tile */
+#roles .v-td     { stroke: #bcd0f2; }
+#roles .v-th     { stroke: #8fb0e8; }
+#roles .v-key    { stroke: #9dbcf0; }
+#roles .v-val    { stroke: var(--brand-500); opacity: .75; }
+#roles .v-rule   { stroke: #e0eafb; }
+#roles .v-gutter { stroke: #d6e3fa; }
+#roles .v-head   { fill: #f2f7ff; stroke: #e0eafb; }
+#roles .v-sel    { fill: rgba(36, 107, 253, .09); }
+#roles .v-box    { fill: #ffffff; stroke: #c3d5f5; }
+#roles .v-box--on{ fill: var(--brand); stroke: var(--brand); }
+#roles .v-tick   { stroke: #ffffff; }
+#roles .v-out    { stroke: #dbe6fa; }
+#roles .v-out--on{ stroke: var(--brand-500); }
+#roles .v-rail   { fill: #f7faff; stroke: #e3ecfc; }
+#roles .v-rail--on { fill: rgba(36, 107, 253, .05); stroke: rgba(36, 107, 253, .28); }
+#roles .v-chip   { fill: var(--brand); opacity: .18; }
 
-/* the abstract field behind them, restated for the dark ground */
 #roles .shapes__ring,
 #roles .shapes__square,
 #roles .shapes__arc { border-color: rgba(255, 255, 255, .14); }
@@ -3979,8 +3981,13 @@ p, li { letter-spacing: 0; }
    alert row that is lit. The chip lists are gone: a tile that shows you the
    interface does not need to list its nouns.
    ========================================================================== */
+/* The bento is given a share of the SCREEN rather than being left to size to
+   its content: five tiles, each with a count, a heading, a line of copy and a
+   picture, add up past the fold otherwise. The tiles shrink into the height
+   they are given and their pictures scale down with them. */
 .bento {
-  margin-top: clamp(1.25rem, 3svh, 2.5rem);
+  margin-top: clamp(1rem, 2.5svh, 2rem);
+  height: min(54svh, 32rem);
   display: grid;
   /* Five tiles now the duplicated three are gone: the wide one plus one on
      the top row, three beneath. Two rows, no empty cells. */
@@ -3991,7 +3998,9 @@ p, li { letter-spacing: 0; }
 .bento__tile {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem 1.375rem;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(.875rem, 2svh, 1.25rem) 1.375rem;
   border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
   background: var(--panel);
@@ -4027,8 +4036,17 @@ p, li { letter-spacing: 0; }
   max-width: 34ch;
 }
 /* the picture takes the space the copy leaves, pinned to the floor */
-.bento__viz { margin-top: auto; padding-top: .875rem; width: 100%; height: auto; display: block;
-              max-height: clamp(4.5rem, 13svh, 9rem); }
+/* the picture takes whatever the copy leaves and scales inside it — height
+   in px would either overflow the tile or leave it half empty */
+.bento__viz {
+  margin-top: auto;
+  padding-top: .75rem;
+  display: block;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+}
 
 /* --- the abstract map on the transport tile --- */
 .bento__viz--map { padding-top: 1.25rem; }
