@@ -1,5 +1,21 @@
-# Vivencia EduCloud — marketing site (static, two files)
+# Vivencia EduCloud — marketing site (static)
 # Separate root and hostname from the ERP app at college.187-127-178-100.sslip.io.
+#
+# One rule governs the whole file: `add_header` inside a location REPLACES
+# every add_header inherited from the server block — it does not add to them.
+# Caching used to be set in a `location = /index.html`, and since / is served
+# through that location, the page itself was answering with no security
+# headers at all while every other path had them.
+#
+# So the cache policy is chosen by response type in this map and emitted once,
+# beside the security headers, at server level. No location below sets a
+# header, which is what keeps them all inherited.
+
+map $sent_http_content_type $vivencia_cache {
+    default                      "public, max-age=604800";   # 7d — assets
+    ~*^text/html                 "no-cache, must-revalidate"; # the page itself
+    ~*^(text/plain|application/xml|text/xml) "public, max-age=3600";  # robots, sitemap
+}
 
 server {
     server_name vivencia.187-127-178-100.sslip.io;
@@ -15,22 +31,10 @@ server {
     error_page 404 /404.html;
     location = /404.html { internal; }
 
-    location = /index.html {
-        add_header Cache-Control "no-cache, must-revalidate";
-    }
-    location ~* \.(css|js|svg|png|jpe?g|webp|avif|woff2?)$ {
-        # deploy.sh stamps styles.css with ?v=<release>, so a long cache here
-        # can never strand a visitor on a stale stylesheet
-        expires 7d;
-        add_header Cache-Control "public";
-        access_log off;
-    }
-    # crawler files change with the content, so they are not cached hard
-    location ~* ^/(robots\.txt|sitemap\.xml)$ {
-        expires 1h;
-        add_header Cache-Control "public";
-        access_log off;
-    }
+    # deploy.sh stamps styles.css with ?v=<release>, so the long asset cache
+    # in the map above can never strand a visitor on a stale stylesheet
+    location ~* \.(css|js|svg|png|jpe?g|webp|avif|woff2?)$ { access_log off; }
+    location ~* ^/(robots\.txt|sitemap\.xml)$ { access_log off; }
 
     gzip on;
     gzip_vary on;
@@ -38,6 +42,7 @@ server {
     gzip_types text/plain text/css application/javascript application/json
                application/ld+json application/xml image/svg+xml;
 
+    add_header Cache-Control $vivencia_cache always;
     add_header X-Content-Type-Options "nosniff" always;
     add_header X-Frame-Options "SAMEORIGIN" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
