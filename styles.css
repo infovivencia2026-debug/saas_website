@@ -35,10 +35,10 @@
   --surface:     #ffffff;
   --surface-2:   #eaeff8;
 
-  --heading:     #0b1220;
-  --heading-2:   #17222f;
-  --body:        #3d4a5a;
-  --muted:       #5c6b7d;
+  --heading:     #0b1326;
+  --heading-2:   #152033;
+  --body:        #2c384e;
+  --muted:       #4b596e;
 
   --teal:        #12a594;   /* the only second hue, used sparingly */
   --lime-tick:   #b6e14a;   /* highlight, in tiny amounts only */
@@ -3163,10 +3163,10 @@ p, li { letter-spacing: 0; }
   --surface:     #0a1832;
   --surface-2:   #08142a;
 
-  --heading:     #f2f7ff;
-  --heading-2:   #dbe7ff;
-  --body:        #b3c6e8;
-  --muted:       #8ba1c8;
+  --heading:     #f8fafc;
+  --heading-2:   #e2e8f0;
+  --body:        #cbd5e1;
+  --muted:       #94a3b8;
 
   --border:      rgba(122, 160, 224, .18);
   --border-2:    rgba(122, 160, 224, .14);
