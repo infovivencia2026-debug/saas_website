@@ -495,14 +495,19 @@
          is a real button; the readout beside it names what the domain holds. -->
     <div class="sol" id="sol">
       <div class="sol__stage">
-        <span class="sol__orbit sol__orbit--1" aria-hidden="true"></span>
-        <span class="sol__orbit sol__orbit--2" aria-hidden="true"></span>
-        <span class="sol__orbit sol__orbit--3" aria-hidden="true"></span>
+        <!-- the tracks, drawn rather than bordered: a CSS dashed border
+             cannot go under one device pixel and its dash pattern is fixed,
+             which is what made the ring read as heavy -->
+        <svg class="sol__rings" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="15.5" class="sol__track"/>
+          <circle cx="50" cy="50" r="26.2" class="sol__track"/>
+          <circle cx="50" cy="50" r="36.9" class="sol__track sol__track--path"/>
+        </svg>
       <ul class="sol__ring" style="--p:240s" role="list">
         <li class="sol__node" style="--a:-90.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Admissions &amp; Students" data-count="9 modules" data-mods="CRM · Applications · Enrollment · Student 360 · Guardians · Documents · Promotions · Transfers · Certificates">
+                  data-i="01" data-name="Admissions &amp; Students" data-count="9 modules" data-mods="CRM · Applications · Enrollment · Student 360 · Guardians · Documents · Promotions · Transfers · Certificates">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">01</span>
             <span class="sol__label">Admissions &amp; Students</span>
@@ -511,7 +516,7 @@
         <li class="sol__node" style="--a:-50.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Teaching &amp; Academics" data-count="8 modules" data-mods="Curriculum · Timetable · Attendance · LMS · Homework · Examinations · Report Cards · OBE">
+                  data-i="02" data-name="Teaching &amp; Academics" data-count="8 modules" data-mods="Curriculum · Timetable · Attendance · LMS · Homework · Examinations · Report Cards · OBE">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">02</span>
             <span class="sol__label">Teaching &amp; Academics</span>
@@ -520,7 +525,7 @@
         <li class="sol__node" style="--a:-10.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Money &amp; Administration" data-count="7 modules" data-mods="Fees · Finance · Scholarships · Payroll · Procurement · Inventory · Assets">
+                  data-i="03" data-name="Money &amp; Administration" data-count="7 modules" data-mods="Fees · Finance · Scholarships · Payroll · Procurement · Inventory · Assets">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">03</span>
             <span class="sol__label">Money &amp; Administration</span>
@@ -529,7 +534,7 @@
         <li class="sol__node" style="--a:30.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="People" data-count="7 modules" data-mods="HR · Faculty · Recruitment · Workload · Leave · Performance · Payroll">
+                  data-i="04" data-name="People" data-count="7 modules" data-mods="HR · Faculty · Recruitment · Workload · Leave · Performance · Payroll">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">04</span>
             <span class="sol__label">People</span>
@@ -538,7 +543,7 @@
         <li class="sol__node" style="--a:70.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Campus" data-count="8 modules" data-mods="Transport · Hostel · Library · Clinic · Facilities · Front Office · Cafeteria · Events">
+                  data-i="05" data-name="Campus" data-count="8 modules" data-mods="Transport · Hostel · Library · Clinic · Facilities · Front Office · Cafeteria · Events">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">05</span>
             <span class="sol__label">Campus</span>
@@ -547,7 +552,7 @@
         <li class="sol__node" style="--a:110.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Student Life" data-count="6 modules" data-mods="Counseling · Discipline · Health · Sports · Clubs · Activities">
+                  data-i="06" data-name="Student Life" data-count="6 modules" data-mods="Counseling · Discipline · Health · Sports · Clubs · Activities">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">06</span>
             <span class="sol__label">Student Life</span>
@@ -556,7 +561,7 @@
         <li class="sol__node" style="--a:150.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Institutional Growth" data-count="5 modules" data-mods="Placements · Alumni · Research · Accreditation · Quality">
+                  data-i="07" data-name="Institutional Growth" data-count="5 modules" data-mods="Placements · Alumni · Research · Accreditation · Quality">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">07</span>
             <span class="sol__label">Institutional Growth</span>
@@ -565,7 +570,7 @@
         <li class="sol__node" style="--a:190.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Operations" data-count="6 modules" data-mods="Communication · Forms · Helpdesk · Approvals · Documents · Analytics">
+                  data-i="08" data-name="Operations" data-count="6 modules" data-mods="Communication · Forms · Helpdesk · Approvals · Documents · Analytics">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">08</span>
             <span class="sol__label">Operations</span>
@@ -574,7 +579,7 @@
         <li class="sol__node" style="--a:230.00deg;--r:15.5em">
           <span class="sol__spoke" aria-hidden="true"></span>
           <button class="sol__btn" type="button"
-                  data-name="Platform &amp; Control" data-count="5 modules" data-mods="Security · Integrations · Configuration · Multi-campus · Data Management">
+                  data-i="09" data-name="Platform &amp; Control" data-count="5 modules" data-mods="Security · Integrations · Configuration · Multi-campus · Data Management">
             <span class="sol__dot" aria-hidden="true"></span>
             <span class="sol__idx">09</span>
             <span class="sol__label">Platform &amp; Control</span>
@@ -594,9 +599,15 @@
           <span class="sol__hint-tap">Tap a domain to see what it carries</span>
         </p>
         <div class="sol__detail" id="solDetail" aria-live="polite">
-        <span class="sol__detail-count">496 capabilities</span>
-        <span class="sol__detail-name">One connected system</span>
-        <span class="sol__detail-mods">Nine domains on one institutional record.</span>
+          <div class="sol__d-top">
+            <span class="sol__d-idx">00 / 09</span>
+            <span class="sol__d-count">496 capabilities</span>
+          </div>
+          <span class="sol__d-name">One connected system</span>
+          <!-- one segment per module in the domain, so the readout shows its
+               size as well as naming it -->
+          <div class="sol__d-bars" id="solBars" aria-hidden="true"></div>
+          <span class="sol__d-mods">Nine domains, declared once, sharing one institutional record.</span>
         </div>
       </div>
     </div>
@@ -1298,24 +1309,37 @@
   var sol = document.getElementById('sol');
   if (sol) {
     var solDetail = document.getElementById('solDetail');
-    var sName = solDetail.querySelector('.sol__detail-name');
-    var sCount = solDetail.querySelector('.sol__detail-count');
-    var sMods = solDetail.querySelector('.sol__detail-mods');
+    var sName  = solDetail.querySelector('.sol__d-name');
+    var sCount = solDetail.querySelector('.sol__d-count');
+    var sIdx   = solDetail.querySelector('.sol__d-idx');
+    var sMods  = solDetail.querySelector('.sol__d-mods');
+    var sBars  = document.getElementById('solBars');
     var solStage = sol.querySelector('.sol__stage');
     var REST = {
+      i: '00 / 09',
       name: 'One connected system',
       count: '496 capabilities',
-      mods: 'Nine domains, declared once, sharing one institutional record.'
+      mods: 'Nine domains, declared once, sharing one institutional record.',
+      n: 9
     };
     var solPinned = null;
+
+    /* one segment per module, rebuilt on each change. The panel's height is
+       fixed in CSS, so nothing here can resize it. */
+    function solBars(n) {
+      sBars.textContent = '';
+      for (var k = 0; k < n; k++) sBars.appendChild(document.createElement('i'));
+    }
 
     function solShow(btn) {
       var node = btn ? btn.closest('.sol__node') : null;
       sol.querySelectorAll('.sol__node.is-active').forEach(function (n) { n.classList.remove('is-active'); });
       if (node) node.classList.add('is-active');
+      sIdx.textContent   = btn ? btn.dataset.i + ' / 09' : REST.i;
       sName.textContent  = btn ? btn.dataset.name  : REST.name;
       sCount.textContent = btn ? btn.dataset.count : REST.count;
       sMods.textContent  = btn ? btn.dataset.mods  : REST.mods;
+      solBars(btn ? (parseInt(btn.dataset.count, 10) || REST.n) : REST.n);
     }
     function solPin(btn) {
       solPinned = btn;
@@ -1325,6 +1349,7 @@
       });
       solShow(btn);
     }
+    solBars(REST.n);
 
     sol.querySelectorAll('.sol__btn').forEach(function (btn) {
       btn.setAttribute('aria-pressed', 'false');
