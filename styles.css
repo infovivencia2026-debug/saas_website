@@ -31,14 +31,14 @@
      a single deep blue for brand, a restrained teal as the only second hue,
      and #0C1724 for the dark stages instead of pure black.
      -------------------------------------------------------------------- */
-  --canvas:      #f7f8f5;   /* warm off-white */
+  --canvas:      #f4f6fb;   /* a cooler, bluer ground so cobalt sits on it */
   --surface:     #ffffff;
-  --surface-2:   #f2f3f0;
+  --surface-2:   #eaeff8;
 
-  --heading:     #101820;   /* near-black navy */
-  --heading-2:   #1e2a36;
-  --body:        #47535f;
-  --muted:       #6b7885;
+  --heading:     #0b1220;
+  --heading-2:   #17222f;
+  --body:        #3d4a5a;
+  --muted:       #5c6b7d;
 
   --teal:        #12a594;   /* the only second hue, used sparingly */
   --lime-tick:   #b6e14a;   /* highlight, in tiny amounts only */
@@ -65,8 +65,8 @@
   --brand-dark:  #0c1724;
   --brand-lit:   #2f74f5;
   --brand-hot:   #8fb4fb;
-  --brand-soft:  #eef3fe;
-  --brand-tint:  #dde8fd;
+  --brand-soft:  #e6eefe;
+  --brand-tint:  #cfe0fd;
   --on-brand:    #ffffff;
 
   /* ---- dark stages ---- */
@@ -100,10 +100,10 @@
      Shadows are neutral, not blue: a tinted shadow reads as a glow, and only
      the deliberate light pools should glow.
      -------------------------------------------------------------------- */
-  --panel:         rgba(255, 255, 255, .88);
+  --panel:         rgba(255, 255, 255, .94);
   --panel-solid:   #ffffff;
-  --panel-border:  rgba(21, 87, 232, .14);
-  --panel-border-2:rgba(21, 87, 232, .28);
+  --panel-border:  rgba(21, 94, 239, .22);
+  --panel-border-2:rgba(21, 94, 239, .48);
   --panel-shadow:  0 1px 2px rgba(16, 42, 140, .05), 0 14px 40px rgba(16, 42, 140, .09);
   --panel-shadow-2:0 1px 2px rgba(16, 42, 140, .06), 0 20px 52px rgba(16, 42, 140, .13);
 
@@ -111,8 +111,8 @@
      The arcs, the abstract shapes, the FAQ curves, the spec plate and the
      orbit tracks are all hairlines in the same cobalt at the same weight.
      -------------------------------------------------------------------- */
-  --line:          rgba(21, 87, 232, .30);
-  --line-soft:     rgba(21, 87, 232, .16);
+  --line:          rgba(21, 94, 239, .45);
+  --line-soft:     rgba(21, 94, 239, .26);
   --line-w:        .8px;
 
   /* ---- shadows ---- */
@@ -359,9 +359,9 @@ h1, h2, h3, h4 {
   /* not a flat sheet: a tinted field with two blooms and a faint cobalt grid,
      so the chapters travel over something */
   background:
-    radial-gradient(ellipse 46% 38% at 88% 12%, rgba(36, 107, 253, .12), rgba(36, 107, 253, 0) 70%),
-    radial-gradient(ellipse 52% 42% at 6% 62%, rgba(114, 164, 255, .14), rgba(114, 164, 255, 0) 72%),
-    linear-gradient(180deg, #ffffff 0%, #f4f8ff 38%, #eaf2ff 72%, #f7faff 100%);
+    radial-gradient(ellipse 46% 38% at 88% 12%, rgba(21, 94, 239, .18), rgba(21, 94, 239, 0) 70%),
+    radial-gradient(ellipse 52% 42% at 6% 62%, rgba(47, 116, 245, .20), rgba(47, 116, 245, 0) 72%),
+    linear-gradient(180deg, #ffffff 0%, #eef4ff 38%, #e2ecfd 72%, #f2f6ff 100%);
 }
 #how::before {
   content: "";
@@ -383,8 +383,8 @@ h1, h2, h3, h4 {
      third crossing at 27px. Finer dots at the tighter pitch, or the field
      turns into a grey wash rather than reading as a mesh. */
   background-image:
-    radial-gradient(rgba(21, 94, 239, .34) .55px, transparent .55px),
-    radial-gradient(rgba(11, 47, 122, .26) .75px, transparent .75px);
+    radial-gradient(rgba(21, 94, 239, .48) .55px, transparent .55px),
+    radial-gradient(rgba(11, 47, 122, .38) .75px, transparent .75px);
   background-size: 9px 9px, 27px 27px;
   background-position: 0 0, 0 0;
   inset: 0;
@@ -3552,14 +3552,14 @@ p, li { letter-spacing: 0; }
 .sol__track {
   /* --border is a surface hairline; against the section's own tint it was
      effectively invisible. The tracks need the live blue to read at all. */
-  stroke: rgba(21, 94, 239, .16);
+  stroke: rgba(21, 94, 239, .26);
   stroke-width: .2;
   fill: none;
 }
 /* the path the nine sit on: dashed, and the dash is fine because it is set
    in user units rather than left to the border painter */
 .sol__track--path {
-  stroke: rgba(21, 94, 239, .45);
+  stroke: rgba(21, 94, 239, .6);
   stroke-width: .22;
   stroke-dasharray: 1 1.9;
 }
