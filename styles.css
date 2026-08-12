@@ -231,11 +231,23 @@ html {
    fights touch momentum.
    ------------------------------------------------------------------------ */
 @media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
-  html { scroll-snap-type: y proximity; }
-  .hero, .section, .footer { scroll-snap-align: start; scroll-snap-stop: normal; }
+  /* mandatory, not proximity: one division occupies the screen and a scroll
+     moves to the next one. `scroll-snap-stop: always` stops a fast flick
+     skipping past a division entirely. */
+  html { scroll-snap-type: y mandatory; }
+  .hero, .section, .footer {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
   /* the chapters are the snap targets inside their own division */
-  #how { scroll-snap-align: none; }
-  .step { scroll-snap-align: start; }
+  #how { scroll-snap-align: none; scroll-snap-stop: normal; }
+  .step { scroll-snap-align: start; scroll-snap-stop: always; }
+
+  /* Nothing from one division may show inside the next. The decorative
+     layers (the plate, the shape field, the orbit labels) all sit inside
+     their section, so clipping the section contains them without touching
+     the chapters, whose panel wash is deliberately wider than its column. */
+  .section:not(#how) { overflow: clip; }
 }
 
 body {
