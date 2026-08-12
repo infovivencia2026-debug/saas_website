@@ -231,17 +231,14 @@ html {
    fights touch momentum.
    ------------------------------------------------------------------------ */
 @media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
-  /* mandatory, not proximity: one division occupies the screen and a scroll
-     moves to the next one. `scroll-snap-stop: always` stops a fast flick
-     skipping past a division entirely. */
-  html { scroll-snap-type: y mandatory; }
-  .hero, .section, .footer {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-  }
+  /* The snapping itself: proximity on the scroller and every full-height
+     target aligned to its start. No `scroll-snap-stop` — that is what makes
+     the wheel feel like it is being caught one notch at a time. */
+  html { scroll-snap-type: y proximity; }
+  .hero, .section, .footer { scroll-snap-align: start; }
   /* the chapters are the snap targets inside their own division */
-  #how { scroll-snap-align: none; scroll-snap-stop: normal; }
-  .step { scroll-snap-align: start; scroll-snap-stop: always; }
+  #how { scroll-snap-align: none; }
+  .step { scroll-snap-align: start; }
 
   /* Nothing from one division may show inside the next. The decorative
      layers (the plate, the shape field, the orbit labels) all sit inside
@@ -308,6 +305,8 @@ h1, h2, h3, h4 {
    whatever it holds, and the padding is a share of the screen's own height.
    A short laptop and a tall monitor both get a division that fills once. */
 .section {
+  /* exactly one screen, not merely at least one */
+  height: 100svh;
   min-height: 100svh;
   display: grid;
   align-content: center;
@@ -324,13 +323,27 @@ h1, h2, h3, h4 {
 /* The chapters are the one exception: the division holds five of them, so it
    is longer than a screen by design — but each CHAPTER is a screen, so a
    scroll lands on one chapter at a time rather than mid-way between two. */
-#how { min-height: 0; display: block; }
+#how { height: auto; min-height: 0; display: block; }
 #how > .container { display: block; }
+
+/* The measured fit. `--fit` is written by the script; the default of 1 means
+   a division that already fits is untouched, and the transform never runs. */
+.section > .container {
+  --fit: 1;
+  transform: scale(var(--fit));
+  transform-origin: center center;
+  transition: transform .2s var(--ease);
+}
+#how > .container { transform: none; margin-bottom: 0; }
 @media (min-width: 861px) {
   .step {
+    /* one chapter = one screen, exactly. The division scrolls, but never
+       shows two chapters or a fraction of one. */
+    height: 100svh;
     min-height: 100svh;
     align-content: center;
     padding-block: clamp(2rem, 5svh, 4rem);
+    overflow: clip;
   }
   /* each chapter now carries its own air, so the gap between them goes */
   .steps { gap: 0; }
@@ -452,7 +465,66 @@ h1, h2, h3, h4 {
    the section's own background and vanish. */
 #how > .container { position: relative; z-index: 1; }
 
-#roles        { background: var(--surface-2); }
+/* the people division is cobalt: it is the argument that everyone uses the
+   same product, so it gets the brand rather than another light surface */
+#roles {
+  background:
+    radial-gradient(ellipse 60% 55% at 12% 8%, rgba(21, 94, 239, .30), rgba(21, 94, 239, 0) 68%),
+    radial-gradient(ellipse 55% 50% at 92% 92%, rgba(18, 165, 148, .16), rgba(18, 165, 148, 0) 70%),
+    linear-gradient(165deg, #123a8f 0%, #0f2f7a 45%, #0c2461 100%);
+  color: #cfdcf5;
+}
+#roles .head h2 { color: #ffffff; }
+#roles .head p { color: #a9bfe6; }
+#roles .eyebrow {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .22);
+  color: #cfe0fd;
+}
+
+/* the cards become glass on the blue rather than white slabs punched into it */
+#roles .card {
+  background: rgba(255, 255, 255, .07);
+  border-color: rgba(255, 255, 255, .16);
+  box-shadow: 0 1px 2px rgba(4, 14, 40, .25), 0 18px 44px rgba(4, 14, 40, .30);
+}
+#roles .card:hover {
+  background: rgba(255, 255, 255, .11);
+  border-color: rgba(255, 255, 255, .34);
+}
+#roles .card h3 { color: #ffffff; }
+#roles .card p { color: #a9bfe6; }
+#roles .card__icon {
+  background: rgba(255, 255, 255, .10);
+  border-color: rgba(255, 255, 255, .20);
+  color: #cfe0fd;
+}
+#roles .card__viz { border-top-color: rgba(255, 255, 255, .14); }
+
+/* the wireframes were mixed for a white card */
+#roles .v-td     { stroke: rgba(207, 220, 245, .45); }
+#roles .v-th     { stroke: rgba(207, 220, 245, .70); }
+#roles .v-key    { stroke: rgba(207, 220, 245, .55); }
+#roles .v-val    { stroke: #8fb4fb; opacity: .9; }
+#roles .v-rule   { stroke: rgba(255, 255, 255, .18); }
+#roles .v-gutter { stroke: rgba(255, 255, 255, .28); }
+#roles .v-head   { fill: rgba(255, 255, 255, .10); stroke: rgba(255, 255, 255, .20); }
+#roles .v-sel    { fill: rgba(143, 180, 251, .22); }
+#roles .v-box    { fill: rgba(8, 24, 60, .8); stroke: rgba(255, 255, 255, .35); }
+#roles .v-box--on{ fill: #8fb4fb; stroke: #8fb4fb; }
+#roles .v-tick   { stroke: #0c2461; }
+#roles .v-out    { stroke: rgba(255, 255, 255, .28); }
+#roles .v-out--on{ stroke: #8fb4fb; }
+#roles .v-rail   { fill: rgba(255, 255, 255, .06); stroke: rgba(255, 255, 255, .18); }
+#roles .v-rail--on { fill: rgba(143, 180, 251, .14); stroke: rgba(143, 180, 251, .40); }
+#roles .v-chip   { fill: #8fb4fb; opacity: .28; }
+
+/* the abstract field behind them, restated for the dark ground */
+#roles .shapes__ring,
+#roles .shapes__square,
+#roles .shapes__arc { border-color: rgba(255, 255, 255, .14); }
+#roles .shapes__dots { background-image: radial-gradient(rgba(255, 255, 255, .22) 1px, transparent 1px); }
+#roles .shapes__blob { background: radial-gradient(circle, rgba(143, 180, 251, .18), rgba(143, 180, 251, 0) 72%); }
 #faq          { background: var(--surface-2); }
 
 /* every stage gets ONE concentrated pool of light behind its main visual */
@@ -1774,6 +1846,9 @@ h1, h2, h3, h4 {
 .footer {
   position: relative;
   isolation: isolate;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
   padding-block: clamp(4rem, 7vw, 6rem) 2.5rem;
   /* plain ground: the streak artwork is gone, and a single hairline is the
      only thing separating the footer from the section above it */
@@ -1973,7 +2048,7 @@ h1, h2, h3, h4 {
      screen is most of a viewport spent on nothing */
   /* phones: a division still fills the screen, but content that cannot fit
      is allowed to run rather than be clipped */
-  .section { min-height: 0; padding-block: calc(clamp(2.5rem, 6svh, 4rem) + 2rem) clamp(2.5rem, 6svh, 4rem); }
+  .section { height: auto; min-height: 0; padding-block: calc(clamp(2.5rem, 6svh, 4rem) + 2rem) clamp(2.5rem, 6svh, 4rem); }
   .section--tight { padding-block: calc(clamp(2rem, 5svh, 3.25rem) + 2rem) clamp(2rem, 5svh, 3.25rem); }
 
   /* 44px minimum on everything you tap */

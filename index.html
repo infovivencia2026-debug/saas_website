@@ -1312,6 +1312,99 @@
     });
   }
 
+  /* ------------------------------------------------------- one view at a time
+     CSS does all of it: `scroll-snap-type: y proximity` on the scroller and
+     `scroll-snap-align: start` on each target. Proximity, not mandatory, and
+     no `scroll-snap-stop` — those two together make every wheel gesture a
+     fight, because the browser re-grabs the scroll on each notch and a flick
+     cannot travel past one screen. Proximity still parks the page on a
+     division edge whenever the visitor stops near one, so a division is never
+     left half on screen; it just does not resist the scroll on the way.
+
+     There is deliberately no JavaScript here. An observer that re-scrolls to
+     the dominant division double-corrects against the browser's own snap, and
+     that is what made scrolling feel heavy.
+
+     Targets are the hero, every division, each of the five chapters (the
+     chapters division is the known exception — its CHAPTERS are the targets)
+     and the footer.
+     ------------------------------------------------------------------------ */
+
+  /* ------------------------------------------------ fit a division to the screen
+     Every division is one screen, but its content is written by hand and a
+     long heading or a wide component can still overrun on a short laptop.
+     This measures each one and scales it to FILL the screen: down when the
+     content overruns, up when it leaves the division half empty. Bounded
+     either way — below .74 the type stops being readable, above 1.25 a short
+     division starts to look zoomed rather than composed.
+
+     The chapters are excluded: that division scrolls by design, and it holds
+     a `position: sticky` panel, which a transform on an ancestor would break
+     by creating a new containing block. */
+  var fitSections = Array.prototype.slice.call(
+    document.querySelectorAll('.section:not(#how)')
+  );
+  var fitSteps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var stepFitQuery = window.matchMedia('(min-width: 861px)');
+
+  function fitDivisions() {
+    fitSections.forEach(function (sec) {
+      var box = sec.querySelector(':scope > .container');
+      if (!box) return;
+
+      box.style.setProperty('--fit', '1');          /* measure unscaled */
+      var cs = window.getComputedStyle(sec);
+      var avail = window.innerHeight
+                - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var need = box.scrollHeight;
+
+      var scale = need > 0 ? avail / need : 1;
+      scale = Math.min(1.25, Math.max(.74, scale));
+      /* a hair under the measurement, so a rounding error cannot overflow */
+      scale *= .985;
+      box.style.setProperty('--fit', scale.toFixed(4));
+      sec.classList.toggle('is-squeezed', scale < 1);
+    });
+
+    /* The chapters are the exception to "one section per screen", not to
+       "one view at a time": the division scrolls, but each chapter inside it
+       still has to land in exactly one screen. They are fitted with `zoom`
+       rather than `transform`, because a transform on the chapter would
+       create a containing block and break the sticky panel inside it. */
+    fitSteps.forEach(function (step) {
+      step.style.zoom = '';
+      step.style.height = '';
+      if (!stepFitQuery.matches) return;
+      var cs = window.getComputedStyle(step);
+      var avail = window.innerHeight
+                - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      var need = step.scrollHeight
+               - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      if (need <= 0 || avail <= 0) return;
+      var z = Math.max(.74, Math.min(1, (avail / need) * .985));
+      if (z < 1) {
+        step.style.zoom = z.toFixed(4);
+        /* zoom shrinks the box as well as its contents, so the chapter would
+           stop being a full screen and the snap edge would drift. Give back
+           exactly what the zoom takes. */
+        step.style.height = (window.innerHeight / z) + 'px';
+      }
+    });
+  }
+
+  var fitTick = false;
+  function queueFit() {
+    if (fitTick) return;
+    fitTick = true;
+    window.requestAnimationFrame(function () { fitDivisions(); fitTick = false; });
+  }
+
+  window.addEventListener('resize', queueFit, { passive: true });
+  window.addEventListener('load', queueFit);
+  /* webfonts land after first paint and change every measurement */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
+  queueFit();
+
   /* --------------------------------------------------- the FAQ, animated */
   /* <details> has no transition of its own: the element jumps between two
      heights. This measures both and animates between them with the Web
