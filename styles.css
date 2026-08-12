@@ -1084,6 +1084,28 @@ h1, h2, h3, h4 {
   --steps-progress: 0;
 }
 
+/* ---- the seam between chapters -------------------------------------------
+   Each chapter is its own screen, so the eye needs to be told where one ends
+   and the next begins. A single hairline, edge to edge across the whole
+   division rather than only across the text column — a rule that stops at the
+   container reads as a decoration inside the chapter; one that touches both
+   sides reads as the boundary it is.
+
+   Not on the first chapter: there is nothing above it to divide from. */
+.step { position: relative; }
+.step + .step::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  /* out of the container and across the full width of the section */
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  height: 1px;
+  background: var(--line);
+  pointer-events: none;
+}
+
 @media (min-width: 1101px) {
   .steps::before,
   .steps::after {
