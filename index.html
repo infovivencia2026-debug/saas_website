@@ -1149,85 +1149,8 @@
   <div class="container">
     <div class="head head--center">
       <span class="eyebrow">Product truth</span>
-      <h2 id="truth-title">See the product as it exists today.</h2>
-    <!-- Interactive Prototype Sandbox -->
-    <div class="sandbox">
-      <div class="sandbox__bar">
-        <div class="sandbox__dots">
-          <span class="s-dot s-dot--r"></span>
-          <span class="s-dot s-dot--y"></span>
-          <span class="s-dot s-dot--g"></span>
-        </div>
-        <div class="sandbox__title">Vivencia Workflows — Live Prototype Sandbox</div>
-        <div class="sandbox__status"><span class="s-pulse"></span>PROTOTYPE ONLINE</div>
-      </div>
-      <div class="sandbox__nav" role="tablist">
-        <button class="sandbox__tab is-active" type="button" role="tab" data-tab="admissions">Admissions Funnel</button>
-        <button class="sandbox__tab" type="button" role="tab" data-tab="attendance">Attendance & Roll</button>
-        <button class="sandbox__tab" type="button" role="tab" data-tab="fees">Fee Ledger</button>
-        <button class="sandbox__tab" type="button" role="tab" data-tab="timetable">Timetable & Subs</button>
-      </div>
-      <div class="sandbox__body">
-        <div class="sandbox__panel is-active" id="tab-admissions">
-          <div class="sb-card">
-            <div class="sb-card__head">
-              <h4>Admissions Pipeline (2026 Academic Year)</h4>
-              <span class="sb-badge sb-badge--blue">Live Browser State</span>
-            </div>
-            <div class="sb-stats">
-              <div class="sb-stat"><strong>482</strong><span>Enquiries</span></div>
-              <div class="sb-stat"><strong>310</strong><span>Applications</span></div>
-              <div class="sb-stat"><strong>214</strong><span>Offers Issued</span></div>
-              <div class="sb-stat"><strong>186</strong><span>Enrolled</span></div>
-            </div>
-            <div class="sb-progress"><div class="sb-progress__bar" style="width: 60%;"></div></div>
-          </div>
-        </div>
-
-        <div class="sandbox__panel" id="tab-attendance">
-          <div class="sb-card">
-            <div class="sb-card__head">
-              <h4>Class 10-A Daily Roll Call</h4>
-              <span class="sb-badge sb-badge--green">96.4% Present</span>
-            </div>
-            <ul class="sb-list">
-              <li><span>Aarav Sharma (Roll #01)</span><span class="sb-pill sb-pill--present">Present</span></li>
-              <li><span>Ananya Patel (Roll #02)</span><span class="sb-pill sb-pill--present">Present</span></li>
-              <li><span>Devansh Verma (Roll #03)</span><span class="sb-pill sb-pill--absent">Absent (Notified)</span></li>
-              <li><span>Isha Gupta (Roll #04)</span><span class="sb-pill sb-pill--present">Present</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="sandbox__panel" id="tab-fees">
-          <div class="sb-card">
-            <div class="sb-card__head">
-              <h4>Term II Fee Collection Status</h4>
-              <span class="sb-badge sb-badge--purple">Instant Audit</span>
-            </div>
-            <div class="sb-fee-grid">
-              <div class="sb-fee-item"><span>Collected</span><strong>$142,500</strong></div>
-              <div class="sb-fee-item"><span>Outstanding</span><strong>$12,400</strong></div>
-              <div class="sb-fee-item"><span>Concessions</span><strong>$4,200</strong></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="sandbox__panel" id="tab-timetable">
-          <div class="sb-card">
-            <div class="sb-card__head">
-              <h4>Faculty Substitutions & Rooms</h4>
-              <span class="sb-badge sb-badge--blue">Zero Collisions</span>
-            </div>
-            <div class="sb-grid-table">
-              <div class="sb-row sb-row--head"><span>Period</span><span>Subject</span><span>Teacher</span><span>Room</span></div>
-              <div class="sb-row"><span>P1 (09:00)</span><span>Physics</span><span>Dr. Mehta</span><span>Lab 2</span></div>
-              <div class="sb-row"><span>P2 (10:00)</span><span>Mathematics</span><span>Prof. Rao (Sub)</span><span>Room 104</span></div>
-              <div class="sb-row"><span>P3 (11:00)</span><span>Chemistry</span><span>Ms. Kapoor</span><span>Lab 1</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <p>Vivencia is currently a fully navigable front-end prototype. The workflows and the
+         interface can be explored end to end, with data generated in the browser.</p>
     </div>
 
     <div class="faq">
@@ -1366,21 +1289,6 @@
     calcDepts.addEventListener('input', updateCalc);
     updateCalc();
   }
-
-  /* ------------------------------------------------ Prototype Sandbox Tabs */
-  var sandboxTabs = document.querySelectorAll('.sandbox__tab');
-  var sandboxPanels = document.querySelectorAll('.sandbox__panel');
-
-  sandboxTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var targetId = 'tab-' + tab.getAttribute('data-tab');
-      sandboxTabs.forEach(function (t) { t.classList.remove('is-active'); });
-      sandboxPanels.forEach(function (p) { p.classList.remove('is-active'); });
-      tab.classList.add('is-active');
-      var panel = document.getElementById(targetId);
-      if (panel) panel.classList.add('is-active');
-    });
-  });
 
   GROUPS.forEach(function (group) {
     var nodes = document.querySelectorAll(group[0]);
