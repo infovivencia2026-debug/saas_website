@@ -3515,15 +3515,15 @@ p, li { letter-spacing: 0; }
    ========================================================================== */
 .sol {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 18rem;
-  gap: clamp(1.5rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1fr) 17rem;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: center;
-  margin-top: clamp(1rem, 2.5svh, 2rem);
+  margin-top: clamp(.5rem, 1.5svh, 1.25rem);
   content-visibility: auto;
   contain-intrinsic-size: auto 40rem;
 }
 .sol__stage {
-  --size: min(34rem, 52svh, 46vw);
+  --size: min(28rem, 44svh, 38vw);
   position: relative;
   width: var(--size);
   height: var(--size);
@@ -3698,7 +3698,7 @@ p, li { letter-spacing: 0; }
   display: grid;
   align-content: start;
   gap: .625rem;
-  height: clamp(13rem, 26svh, 15.5rem);
+  height: clamp(11.5rem, 23svh, 14rem);
   padding: 1.375rem 1.5rem;
   border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
@@ -4046,6 +4046,11 @@ p, li { letter-spacing: 0; }
   }
   .ladder__flank { justify-content: flex-start; }
 }
+
+/* the scale division carries the largest single component on the page, so
+   its heading gives back what the diagram needs */
+#scale .head p { margin-top: .5rem; max-width: 52ch; }
+#scale .sol__hint { margin-bottom: .125rem; }
 
 /* ---- the affordance ------------------------------------------------------
    Nine buttons drifting on a circle look like a diagram, not a control. Three
