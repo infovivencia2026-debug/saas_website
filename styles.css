@@ -3537,17 +3537,18 @@ p, li { letter-spacing: 0; }
   overflow: visible;
 }
 .sol__track {
-  stroke: var(--border);
-  stroke-width: .18;          /* ~0.9px on a 500px stage */
+  /* --border is a surface hairline; against the section's own tint it was
+     effectively invisible. The tracks need the live blue to read at all. */
+  stroke: rgba(21, 94, 239, .16);
+  stroke-width: .2;
   fill: none;
 }
 /* the path the nine sit on: dashed, and the dash is fine because it is set
    in user units rather than left to the border painter */
 .sol__track--path {
-  stroke: var(--border-live);
-  stroke-width: .16;
-  stroke-dasharray: .9 1.8;
-  opacity: .75;
+  stroke: rgba(21, 94, 239, .45);
+  stroke-width: .22;
+  stroke-dasharray: 1 1.9;
 }
 
 .sol__core {
