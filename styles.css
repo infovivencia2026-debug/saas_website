@@ -3655,7 +3655,7 @@ p, li { letter-spacing: 0; }
      --k is applied in three places that have to agree: the stage's own
      height, the scaleY on the rotating ring, and preserveAspectRatio="none"
      on the track SVG. */
-  --size: min(34rem, 62vw, 46svh);
+  --size: min(34rem, 62vw, clamp(23rem, 52vh, 34rem));
   --k: .66;
   position: relative;
   overflow: visible;
@@ -3800,9 +3800,10 @@ p, li { letter-spacing: 0; }
 /* the nine run in order from twelve o'clock, so each one states its place */
 .sol__idx {
   font-family: var(--mono);
-  font-size: .72em;
-  letter-spacing: .12em;
-  color: var(--muted);
+  font-size: .8em;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--body);
 }
 /* each planet states its own weight: the modules it carries */
 .sol__n {
@@ -3814,7 +3815,8 @@ p, li { letter-spacing: 0; }
   border: 1px solid var(--border-live);
   background: var(--brand-soft);
   font-family: var(--mono);
-  font-size: .72em;
+  font-size: .75em;
+  font-weight: 600;
   letter-spacing: .06em;
   color: var(--brand-deep);
   transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
@@ -3842,30 +3844,28 @@ p, li { letter-spacing: 0; }
 .sol__node.is-active .sol__btn { color: var(--brand); }
 .sol__node.is-active .sol__dot { background: var(--brand); transform: scale(1.3); }
 
-/* A fixed frame. The panel used to size to its text, so moving between a
-   nine-module domain and a five-module one resized it and shunted the
-   diagram — the readout has to be the one thing that never moves. */
+/* A fixed frame with sufficient min-height to prevent text truncation */
 .sol__detail {
   display: grid;
   align-content: start;
   gap: .625rem;
-  height: clamp(11.5rem, 23svh, 14rem);
+  min-height: 12.5rem;
   padding: 1.375rem 1.5rem;
   border-radius: var(--r-lg);
   border: 1px solid var(--panel-border);
   background: var(--panel);
   box-shadow: var(--panel-shadow);
-  overflow: hidden;
 }
 .sol__d-top { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
 .sol__d-idx, .sol__d-count {
   font-family: var(--mono);
   font-size: var(--label);
+  font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
 .sol__d-idx { color: var(--brand); }
-.sol__d-count { color: var(--muted); }
+.sol__d-count { color: var(--body); }
 .sol__d-name {
   font-family: var(--ui-font);
   font-size: var(--title-xs);
@@ -3873,7 +3873,6 @@ p, li { letter-spacing: 0; }
   letter-spacing: -.025em;
   line-height: 1.15;
   color: var(--heading);
-  /* two lines maximum, so the longest domain name cannot push the rest down */
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   overflow: hidden;
   min-height: 2.3em;
@@ -3895,9 +3894,7 @@ p, li { letter-spacing: 0; }
 .sol__d-mods {
   font-size: var(--text-s);
   line-height: 1.55;
-  color: var(--muted);
-  display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;
-  overflow: hidden;
+  color: var(--body);
 }
 @media (prefers-reduced-motion: reduce) { .sol__d-bars i { animation: none; } }
 .sol__detail-count-unused {
