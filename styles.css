@@ -3599,11 +3599,20 @@ p, li { letter-spacing: 0; }
   contain-intrinsic-size: auto 40rem;
 }
 .sol__stage {
-  --size: min(28rem, 44svh, 38vw);
+  /* An ellipse, not a circle: nine labels around a circle need as much height
+     as width, which caps how big the whole thing can be on a screen that is
+     wider than it is tall. Flattening it to --k of its width buys back the
+     vertical room and spends it on size, so the labels are readable.
+
+     --k is applied in three places that have to agree: the stage's own
+     height, the scaleY on the rotating ring, and preserveAspectRatio="none"
+     on the track SVG. */
+  --size: min(34rem, 62vw, 46svh);
+  --k: .66;
   position: relative;
   overflow: visible;
   width: var(--size);
-  height: var(--size);
+  height: calc(var(--size) * var(--k));
   font-size: calc(var(--size) / 42);
   margin-inline: auto;
 }
@@ -3613,6 +3622,10 @@ p, li { letter-spacing: 0; }
   width: 100%; height: 100%;
   overflow: visible;
 }
+/* the SVG is stretched to the flattened box, so the stroke has to be told
+   not to stretch with it — otherwise the ellipse is thin at the sides and
+   thick at the top */
+.sol__track { vector-effect: non-scaling-stroke; }
 .sol__track {
   /* --border is a surface hairline; against the section's own tint it was
      effectively invisible. The tracks need the live blue to read at all. */
@@ -3660,9 +3673,16 @@ p, li { letter-spacing: 0; }
   margin: 0; padding: 0;
   list-style: none;
   pointer-events: none;      /* rings are full-size boxes; only nodes are hit */
+  transform: scaleY(var(--k));
   animation: sol-spin var(--p) linear infinite;
 }
-@keyframes sol-spin { to { transform: rotate(360deg); } }
+/* the squash rides in every frame: dropping it from the keyframes would make
+   the browser interpolate towards a bare rotate and the orbit would breathe
+   between circle and ellipse once per revolution */
+@keyframes sol-spin {
+  from { transform: scaleY(var(--k)) rotate(0deg); }
+  to   { transform: scaleY(var(--k)) rotate(360deg); }
+}
 
 .sol__node {
   position: absolute;
@@ -3706,7 +3726,10 @@ p, li { letter-spacing: 0; }
   line-height: 1.18;
   /* -50% across, but only the dot's own half-height up: that puts the dot
      centre exactly on the ring and hangs the label below it */
-  transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a)));
+  /* undo the ring's squash so the label is round again. The rotation before
+     it cancels the ring's, leaving a pure translation between the two scales,
+     so they multiply out to identity on the box itself. */
+  transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a))) scaleY(calc(1 / var(--k)));
   transform-origin: 50% .28em;
   animation-name: sol-upright-cw;
   animation-duration: var(--p);
@@ -3715,8 +3738,8 @@ p, li { letter-spacing: 0; }
   transition: border-color .25s var(--ease), box-shadow .25s var(--ease), color .25s var(--ease);
 }
 @keyframes sol-upright-cw {
-  from { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a))); }
-  to   { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a) - 360deg)); }
+  from { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a))) scaleY(calc(1 / var(--k))); }
+  to   { transform: translate(-50%, -.28em) rotate(calc(-1 * var(--a) - 360deg)) scaleY(calc(1 / var(--k))); }
 }
 .sol__dot {
   width: .5rem; height: .5rem;
@@ -3909,7 +3932,7 @@ p, li { letter-spacing: 0; }
   .split2 .head h2 { font-size: clamp(1.375rem, 2.6svh, 1.875rem); }
 
   .split2 .sol { margin-top: clamp(.25rem, 1svh, .75rem); }
-  .split2 .sol__stage { --size: min(21rem, 30svh, 23vw); }
+  .split2 .sol__stage { --size: min(32rem, 30vw, 62svh); }
   .split2 .sol__side { gap: .5rem; }
   .split2 .sol__detail {
     height: auto;
