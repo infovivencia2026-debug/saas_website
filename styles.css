@@ -3895,11 +3895,40 @@ p, li { letter-spacing: 0; }
    rather than the whole. */
 @media (min-width: 1101px) {
   .split2 .sol { grid-template-columns: minmax(0, 1fr); }
-  .split2 .sol__stage { --size: min(24rem, 38svh, 26vw); }
   .split2 .sol__side { width: 100%; max-width: 30rem; margin-inline: auto; }
   /* the halves are read down their own left edge, not across the middle */
   .split2__r .head, .split2__r .asks, .split2__r .chips { margin-inline: 0; }
   .split2 .head h2 { font-size: var(--title-m); }
+
+  /* Two divisions' worth of content now shares one screen, so everything in
+     here is measured against the viewport's HEIGHT rather than set in rem.
+     Two headings, an orbit, a readout, seven questions and ten chips do not
+     fit at the sizes each was designed at on its own. */
+  .split2 { gap: clamp(1.5rem, 3vw, 2.75rem); }
+  .split2 .head p { font-size: var(--text-m); margin-top: .5rem; }
+  .split2 .head h2 { font-size: clamp(1.375rem, 2.6svh, 1.875rem); }
+
+  .split2 .sol { margin-top: clamp(.25rem, 1svh, .75rem); }
+  .split2 .sol__stage { --size: min(21rem, 30svh, 23vw); }
+  .split2 .sol__side { gap: .5rem; }
+  .split2 .sol__detail {
+    height: auto;
+    min-height: 0;
+    gap: .4375rem;
+    padding: .875rem 1.125rem;
+  }
+  .split2 .sol__d-mods { -webkit-line-clamp: 2; }
+
+  .split2__r .asks {
+    margin-top: clamp(.75rem, 2svh, 1.25rem);
+    padding: .125rem 1.125rem;
+  }
+  .split2__r .asks li {
+    padding: clamp(.25rem, .9svh, .5rem) .125rem;
+    font-size: var(--text-m);
+  }
+  .split2__r .asks__foot { margin-top: clamp(.625rem, 1.6svh, 1rem); }
+  .split2__r .chips { margin-top: .625rem; gap: .3125rem; }
 }
 
 @media (max-width: 1100px) {
