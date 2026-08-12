@@ -296,6 +296,13 @@ h1, h2, h3, h4 {
 }
 .section--tight { padding-block: calc(clamp(1.75rem, 4svh, 3.25rem) + 3rem) clamp(1.75rem, 4svh, 3.25rem); }
 
+/* The 3rem on the top is nav clearance: it pushes the optical centre down so
+   the heading does not land under the floating capsule. On a division whose
+   content is comfortably shorter than the screen there is already room for
+   the capsule above it, so the bias only makes the whole block sit low.
+   #campus is one of those — a head and five tiles bounded at 54svh. */
+#campus { padding-block: clamp(2rem, 5svh, 4rem); }
+
 /* The chapters division holds five steps; each step is a snap target. */
 #how { height: auto; min-height: 0; display: block; }
 #how > .container { display: block; }
